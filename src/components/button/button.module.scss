@@ -1,0 +1,117 @@
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 22px;
+  font-weight: bold;
+  font-family: Montserrat;
+  font-size: 12px;
+  text-transform: uppercase;
+  transition: 0.5s;
+  user-select: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #bc9cff;
+  text-decoration: none;
+  line-height: 1;
+
+  &[type='submit'] {
+    &::before {
+      // font-family: 'Material Icons';
+      // font-weight: normal;
+      // font-style: normal;
+      // font-size: 1.71rem; /* Preferred icon size */
+      // display: inline-block;
+      // line-height: 1;
+      // text-transform: none;
+      // letter-spacing: normal;
+      // word-wrap: normal;
+      // white-space: nowrap;
+      // direction: ltr;
+
+      // /* Support for all WebKit browsers. */
+      // -webkit-font-smoothing: antialiased;
+      // /* Support for Safari and Chrome. */
+      // text-rendering: optimizeLegibility;
+      // /* Support for Firefox. */
+      // -moz-osx-font-smoothing: grayscale;
+      // /* Support for IE. */
+      // font-feature-settings: 'liga';
+
+      // @include material-icon;
+      content: 'arrow_forward';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #ffffff;
+    }
+  }
+
+  &:disabled {
+    opacity: 50%;
+  }
+
+  &_theme {
+    &_filled {
+      padding: 15px 20px;
+      background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+      color: #ffffff;
+    }
+
+    &_bordered {
+      padding: 13px 18px;
+      border: 2px solid transparent;
+      background-image: linear-gradient(white, white),
+        linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+
+      &:disabled {
+        opacity: 100%;
+        background-image: linear-gradient(white, white),
+          linear-gradient(
+            180deg,
+            rgba(188, 156, 255, 0.5) 0%,
+            rgba(139, 164, 249, 0.5) 100%
+          );
+      }
+    }
+  }
+
+  &_color {
+    &_darkest_gray {
+      color: #1f2041;
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  &:active {
+    transition: none;
+    opacity: 1;
+  }
+
+  &_size {
+    &_small {
+      height: 34px;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
