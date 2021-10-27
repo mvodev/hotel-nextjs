@@ -26,8 +26,4 @@ const Layout = ({
   </>
 );
 
-Layout.defaultProps = {
-  title: 'toxin page',
-};
-
 export default Layout;

@@ -34,7 +34,8 @@ module.exports = {
     "@typescript-eslint"
   ],
   "rules": {
-     "react/react-in-jsx-scope": "off",
-     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "react/require-default-props": "off"
   },
 };
