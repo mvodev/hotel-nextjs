@@ -1,8 +1,8 @@
-import '../styles/globals.sass';
-
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+
+import '../styles/globals.sass';
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
