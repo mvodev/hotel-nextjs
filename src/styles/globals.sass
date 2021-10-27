@@ -1,8 +1,8 @@
 @use 'font-face'
 @import 'vars'
 
-@include font-face.font-face(woff eot ttf svg, Montserrat, montserrat-regular)
-@include font-face.font-face(woff eot ttf svg, Montserrat, montserrat-bold, bold)
+@include font-face.font-face(woff woff2, Montserrat, montserrat-regular)
+@include font-face.font-face(woff woff2, Montserrat, montserrat-bold, bold)
 
 *
   box-sizing: border-box
@@ -11,4 +11,3 @@ html
   font-family: $main-font-family
   font-size: 14px
   scroll-behavior: smooth
-
