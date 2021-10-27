@@ -1,7 +1,9 @@
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 
 const Index = () => {
-  return <h1>hihe</h1>;
+  return (
+    <h1>hihe</h1>
+  );
 }
 
 Index.getLayout = (page: React.ReactElement) => {
