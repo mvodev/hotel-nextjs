@@ -12,11 +12,10 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 };
 
-function MyApp({ Component, pageProps }: AppPropsWithLayout): ReactNode {
+function MyApp({ Component }: AppPropsWithLayout): ReactNode {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  /* eslint-disable react/jsx-props-no-spreading */
-  return getLayout(<Component {...pageProps} />);
+  return getLayout(<Component />);
 }
 
 export default MyApp;
