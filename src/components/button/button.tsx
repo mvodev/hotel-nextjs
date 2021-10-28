@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './button.module.scss';
 
 interface IButton {
@@ -39,9 +40,11 @@ const Button = ({
 
   if (link) {
     return (
-      <a className={classesString} href={link}>
-        {text}
-      </a>
+      <Link href={link}>
+        <a className={classesString}>
+          {text}
+        </a>
+      </Link>
     );
   }
 
