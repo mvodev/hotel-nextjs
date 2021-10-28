@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   box-sizing: border-box;
   border-radius: 22px;
   font-weight: bold;
@@ -43,12 +42,14 @@
 
   &_theme {
     &_filled {
+      width: 100%;
       padding: 15px 20px;
       background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%);
       color: #ffffff;
     }
 
     &_bordered {
+      width: 100%;
       padding: 13px 18px;
       border: 2px solid transparent;
       background-image: linear-gradient(white, white),
@@ -93,9 +94,8 @@
 
   &_size {
     &_small {
-      height: 34px;
-      padding-top: 0;
-      padding-bottom: 0;
+      padding-top: 11px;
+      padding-bottom: 11px;
     }
     &_fixed {
       width: fit-content;
