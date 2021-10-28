@@ -28,7 +28,10 @@ const Button = ({
     bordered: styles.button_theme_bordered,
   };
   const colors: IModifiers = { darkestGray: styles.button_color_darkest_gray };
-  const sizes: IModifiers = { small: styles.button_size_small };
+  const sizes: IModifiers = {
+    small: styles.button_size_small,
+    fixed: styles.button_size_fixed,
+  };
   const modifiedType = type === 'submit' ? 'submit' : 'button';
 
   const classes = [styles.button, themes[theme], colors[color], sizes[size]];
