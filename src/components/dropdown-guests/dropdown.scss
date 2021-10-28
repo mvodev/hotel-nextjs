@@ -1,0 +1,126 @@
+@import '../dropdown-counter/dropdown-counter.scss';
+@import './button.scss';
+
+.dropdown {
+  position: relative;
+  font-family: inherit;
+  line-height: 14.63px;
+  height: 44px;
+  background: $white;
+  box-sizing: border-box;
+  font-family: $font-family-main,$fallback-font;
+
+  &_guests {
+    max-width: 320px;
+    width: 100%;
+    border: 1px solid $darkShade50;
+    border-radius: 2px;
+  }
+
+  &_room {
+    width: 266px;
+    border: 1px solid $darkShade25;
+    border-radius: 2px 2px 0 0;
+    cursor: pointer;
+  }
+
+  &_room.dropdown_is-opened {
+    border: 1px solid $darkShade50;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    height: 24px;
+    padding-left: 15px;
+    margin-top: 8px;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.16rem;
+    line-height: 2rem;
+    cursor: pointer;
+    color: $darkShade75;
+  }
+
+  &_guests .dropdown__input {
+    max-width: 260px;
+    overflow: hidden;
+  }
+
+  &__input::placeholder {
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.16rem;
+    line-height: 2rem;
+    height: 18px;
+    color: $darkShade75;
+  }
+
+  &__arrow {
+    width: 44px;
+    height: 44px;
+    font-family: Material Icons;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: $darkShade50;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &__body {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: none;
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    background: $white;
+    border: 1px solid $darkShade50;
+    box-sizing: border-box;
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 10px 20px rgba(31, 32, 65, 0.05);
+  }
+
+  &_room .dropdown__body {
+    width: 266px;
+    margin-left: -1px;
+  }
+
+  &_is-opened {
+    display: block;
+  }
+
+  &__body-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: $purple;
+    margin: 20px 7px 12px 14px;
+  }
+
+  .buttons-dropdown_hidden {
+    visibility: hidden;
+    cursor: none;
+  }
+  
+}
