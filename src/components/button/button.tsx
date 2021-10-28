@@ -9,6 +9,7 @@ interface IButton {
   size?: string;
   color?: string;
   link?: string;
+  callback?: () => void;
 }
 
 interface IModifiers {
@@ -23,6 +24,7 @@ const Button = ({
   size = '',
   color = '',
   link,
+  callback,
 }: IButton): JSX.Element => {
   const themes: IModifiers = {
     filled: styles.button_theme_filled,
@@ -38,18 +40,27 @@ const Button = ({
   const classes = [styles.button, themes[theme], colors[color], sizes[size]];
   const classesString = classes.filter((classItem) => classItem).join(' ');
 
+  const handleButtonClick = (): void => {
+    if (callback) {
+      callback();
+    }
+  };
+
   if (link) {
     return (
       <Link href={link}>
-        <a className={classesString}>
-          {text}
-        </a>
+        <a className={classesString}>{text}</a>
       </Link>
     );
   }
 
   return (
-    <button className={classesString} type={modifiedType} disabled={isDisabled}>
+    <button
+      className={classesString}
+      type={modifiedType}
+      disabled={isDisabled}
+      onClick={handleButtonClick}
+    >
       {text}
     </button>
   );
