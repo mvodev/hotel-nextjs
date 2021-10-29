@@ -29,6 +29,7 @@ const Button = ({
   const themes: IModifiers = {
     filled: styles.button_theme_filled,
     bordered: styles.button_theme_bordered,
+    rounded: styles.button_theme_rounded,
   };
   const colors: IModifiers = { darkestGray: styles.button_color_darkest_gray };
   const sizes: IModifiers = {

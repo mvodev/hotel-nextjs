@@ -67,6 +67,20 @@
           );
       }
     }
+    &_rounded {
+      border: 1px solid rgba(31, 32, 65, 0.25);
+      color: 1px solid rgba(31, 32, 65, 0.5);
+      line-height: 22px;
+      font-size: 18px;
+      font-weight: normal;
+      min-width: 30px;
+
+      &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }
+    }
   }
 
   &_color {
@@ -84,6 +98,10 @@
 
     &:hover {
       opacity: 0.5;
+    }
+
+    &:active {
+      opacity: 1;
     }
   }
 
