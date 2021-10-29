@@ -1,49 +1,45 @@
 import Link from 'next/link';
 import styles from './button.module.scss';
 
-interface IButton {
-  type?: string;
+type ButtonType  = {
+  type: 'button' | 'submit';
   text?: string;
   isDisabled?: boolean;
   theme?: string;
   size?: string;
   color?: string;
   link?: string;
-  callback?: () => void;
+  onClick?: () => void;
 }
-
-interface IModifiers {
-  [key: string]: string;
-}
+type Modifiers = Record<string, string>
 
 const Button = ({
-  type = '',
+  type,
   text = 'click me',
   isDisabled = false,
   theme = '',
   size = '',
   color = '',
   link,
-  callback,
-}: IButton): JSX.Element => {
-  const themes: IModifiers = {
+  onClick,
+}: ButtonType): JSX.Element => {
+  const themes: Modifiers = {
     filled: styles.button_theme_filled,
     bordered: styles.button_theme_bordered,
     rounded: styles.button_theme_rounded,
   };
-  const colors: IModifiers = { darkestGray: styles.button_color_darkest_gray };
-  const sizes: IModifiers = {
+  const colors: Modifiers = { darkestGray: styles.button_color_darkest_gray };
+  const sizes: Modifiers = {
     small: styles.button_size_small,
     fixed: styles.button_size_fixed,
   };
-  const modifiedType = type === 'submit' ? 'submit' : 'button';
 
   const classes = [styles.button, themes[theme], colors[color], sizes[size]];
   const classesString = classes.filter((classItem) => classItem).join(' ');
 
   const handleButtonClick = (): void => {
-    if (callback) {
-      callback();
+    if (onClick) {
+      onClick();
     }
   };
 
@@ -58,7 +54,7 @@ const Button = ({
   return (
     <button
       className={classesString}
-      type={modifiedType}
+      type={type}
       disabled={isDisabled}
       onClick={handleButtonClick}
     >
