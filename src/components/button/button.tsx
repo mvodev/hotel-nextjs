@@ -28,7 +28,7 @@ const Button = ({
     bordered: styles.button_theme_bordered,
     rounded: styles.button_theme_rounded,
   };
-  const colors: Modifiers = { darkestGray: styles.button_color_darkest_gray };
+  const colors: Modifiers = { darkestGray: styles['button_color_darkest-gray'] };
   const sizes: Modifiers = {
     small: styles.button_size_small,
     fixed: styles.button_size_fixed,
