@@ -1,25 +1,25 @@
 import Link from 'next/link';
 import styles from './button.module.scss';
 
-type ButtonType  = {
-  type: 'button' | 'submit';
+type ButtonType = {
+  type?: 'button' | 'submit';
   text?: string;
   isDisabled?: boolean;
-  theme?: string;
-  size?: string;
-  color?: string;
+  theme?: 'filled' | 'bordered' | 'rounded';
+  size?: 'small' | 'fixed';
+  color?: 'darkestGray';
   link?: string;
   onClick?: () => void;
-}
-type Modifiers = Record<string, string>
+};
+type Modifiers = Record<string, string>;
 
 const Button = ({
   type,
   text = 'click me',
   isDisabled = false,
-  theme = '',
-  size = '',
-  color = '',
+  theme,
+  size,
+  color,
   link,
   onClick,
 }: ButtonType): JSX.Element => {
@@ -28,13 +28,20 @@ const Button = ({
     bordered: styles.button_theme_bordered,
     rounded: styles.button_theme_rounded,
   };
-  const colors: Modifiers = { darkestGray: styles['button_color_darkest-gray'] };
+  const colors: Modifiers = {
+    darkestGray: styles['button_color_darkest-gray'],
+  };
   const sizes: Modifiers = {
     small: styles.button_size_small,
     fixed: styles.button_size_fixed,
   };
 
-  const classes = [styles.button, themes[theme], colors[color], sizes[size]];
+  const classes = [
+    styles.button,
+    themes[theme || ''],
+    colors[color || ''],
+    sizes[size || ''],
+  ];
   const classesString = classes.filter((classItem) => classItem).join(' ');
 
   const handleButtonClick = (): void => {
