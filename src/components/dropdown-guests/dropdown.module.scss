@@ -1,0 +1,105 @@
+.dropdown-guests {
+  position: relative;
+  font-family: inherit;
+  line-height: 14.63px;
+  height: 44px;
+  background: #ffffff;
+  box-sizing: border-box;
+  font-family: Montserrat,sans-serif;
+  max-width: 320px;
+  width: 100%;
+  border: 1px solid rgba(31, 32, 65, 0.5);
+  border-radius: 2px;
+
+  &__input-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    height: 24px;
+    padding-left: 15px;
+    margin-top: 8px;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.16rem;
+    line-height: 2rem;
+    cursor: pointer;
+    color: rgba(31, 32, 65, 0.75);
+  }
+
+  &_guests .dropdown__input {
+    max-width: 260px;
+    overflow: hidden;
+  }
+
+  &__input::placeholder {
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.16rem;
+    line-height: 2rem;
+    height: 18px;
+    color: rgba(31, 32, 65, 0.75);
+  }
+
+  &__arrow {
+    width: 44px;
+    height: 44px;
+    font-family: Material Icons;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: rgba(31, 32, 65, 0.5);
+    position: absolute;
+    right: 0;
+    top: 0;
+    user-select: none;
+  }
+
+  &__body {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: none;
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid rgba(31, 32, 65, 0.75);
+    box-sizing: border-box;
+    border-radius: 0 0 2px 2px;
+    box-shadow: 0 10px 20px rgba(31, 32, 65, 0.05);
+  }
+
+  &_is-opened {
+    display: block;
+  }
+
+  &__body-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #bc9cff;
+    margin: 20px 7px 12px 14px;
+  }
+
+  .buttons-dropdown_hidden {
+    visibility: hidden;
+    cursor: none;
+  }
+  
+}
