@@ -41,6 +41,10 @@
   flex-direction: row;
   cursor: pointer;
 }
+.container-dropdown__value{
+  font-size: 12px;
+  line-height: 15px;
+}
 
 .container-dropdown__increase{
   border: 1px solid rgba(31, 32, 65, 0.5);
