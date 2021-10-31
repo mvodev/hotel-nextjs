@@ -9,15 +9,21 @@ type NavbarListItem = {
   hiddenItems: string[];
 };
 
-const Navbar = (): React.ReactElement => {
+type navbarProps = {
+  navbarIsOpened?: boolean;
+};
+
+const Navbar = ({ ...props }: navbarProps): React.ReactElement => {
   const items = config.items.map((firstLevelItem: NavbarListItem) => {
     const hiddenItems = firstLevelItem.hiddenItems
       ? firstLevelItem.hiddenItems
       : [];
+
     const arrow =
       hiddenItems.length > 0 ? (
         <span className={styles.navbar__arrow}>expand_more</span>
       ) : null;
+
     const secondLevelItems = hiddenItems.map((hiddenItem) => {
       return (
         <li className={styles.navbar__item}>
@@ -25,6 +31,7 @@ const Navbar = (): React.ReactElement => {
         </li>
       );
     });
+
     const hiddenMenu =
       secondLevelItems.length > 0 ? (
         <ul className={styles['navbar__hidden-menu']}>{secondLevelItems}</ul>
@@ -43,8 +50,11 @@ const Navbar = (): React.ReactElement => {
     );
   });
 
+  let navbarClasses = styles.navbar;
+  navbarClasses += props.navbarIsOpened ? ` ${styles.navbar_opened}` : '';
+
   return (
-    <nav className={styles.navbar}>
+    <nav className={navbarClasses}>
       {items}
       <li className={styles.navbar__item}>
         <Button link='/' theme='bordered' size='small' text='Войти' />

@@ -153,9 +153,15 @@ $navbar: '.navbar';
     opacity: 80%;
     flex-direction: column;
     overflow: auto;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s ease;
 
     #{$navbar}__link:hover {
       text-decoration: underline;
+    }
+
+    &_opened {
+      transform: translate(0%, 0);
     }
 
     // &__item {
