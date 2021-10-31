@@ -1,6 +1,9 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Button from '../button/button';
 import styles from './navbar.module.scss';
+
+const PHONE_SCREEN_WIDTH = 950;
 
 type NavbarProps = {
   items?: NavbarListItem[];
@@ -19,6 +22,15 @@ const Navbar = ({
   user,
   navbarIsOpened,
 }: NavbarProps): React.ReactElement => {
+  const [screenWidth, setWidth] = useState(window.innerWidth);
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  };
+  useEffect(() => {
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
   const itemsCollections = items !== undefined ? items : [];
   const itemsElements = itemsCollections.map(
     (firstLevelItem: NavbarListItem) => {
@@ -66,32 +78,33 @@ const Navbar = ({
 
   const separatorItemClasses = `${styles.navbar__item} ${styles.navbar__item_theme_stretched}`;
 
-  const buttons = navbarIsOpened
-    ? [
-        <li className={styles.navbar__item}>
-          <Link href='/'>
-            <a className={styles.navbar__link}>Войти</a>
-          </Link>
-        </li>,
-        <li className={styles.navbar__item}>
-          <Link href='/'>
-            <a className={styles.navbar__link}>Зарегистрироваться</a>
-          </Link>
-        </li>,
-      ]
-    : [
-        <li className={styles.navbar__item}>
-          <Button link='/' theme='bordered' size='small' text='Войти' />
-        </li>,
-        <li className={styles.navbar__item}>
-          <Button
-            link='/'
-            theme='filled'
-            size='small'
-            text='Зарегистрироваться'
-          />
-        </li>,
-      ];
+  const buttons =
+    screenWidth <= PHONE_SCREEN_WIDTH
+      ? [
+          <li className={styles.navbar__item}>
+            <Link href='/'>
+              <a className={styles.navbar__link}>Войти</a>
+            </Link>
+          </li>,
+          <li className={styles.navbar__item}>
+            <Link href='/'>
+              <a className={styles.navbar__link}>Зарегистрироваться</a>
+            </Link>
+          </li>,
+        ]
+      : [
+          <li className={styles.navbar__item}>
+            <Button link='/' theme='bordered' size='small' text='Войти' />
+          </li>,
+          <li className={styles.navbar__item}>
+            <Button
+              link='/'
+              theme='filled'
+              size='small'
+              text='Зарегистрироваться'
+            />
+          </li>,
+        ];
 
   const userSection = user
     ? [

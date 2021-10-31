@@ -3,10 +3,16 @@ import Link from 'next/link';
 import Navbar from '../navbar/Navbar';
 import styles from './header.module.scss';
 
+type NavbarListItem = {
+  id: number;
+  item: string;
+  hiddenItems?: NavbarListItem[];
+};
+
 type HeaderProps = {
   logo: string;
   user?: string;
-  navbarItems?: Record<string, string | string[]>;
+  navbarItems?: NavbarListItem[];
 };
 
 const Header = ({
