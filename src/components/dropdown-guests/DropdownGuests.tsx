@@ -39,7 +39,7 @@ class DropdownGuests extends React.Component<
   private dropdownOpenedStyle = {
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
-    border: '1px solid rgba(31, 32, 65, 0.75)',
+    border: '1px solid rgba(31, 32, 65, 0.5)',
   };
 
   private dropdownBodyOpenedStyle = { display: 'block' };
