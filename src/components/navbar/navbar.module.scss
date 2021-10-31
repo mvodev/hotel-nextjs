@@ -80,6 +80,10 @@ $navbar: '.navbar';
         margin: 0;
       }
     }
+
+    @media screen and (max-width: 450px) {
+      font-size: 5vw;
+    }
   }
 
   &__link-section {
