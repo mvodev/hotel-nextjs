@@ -20,9 +20,7 @@ const DatePicker = (props: IDatePicker): JSX.Element => {
     dateObject.getDate()
   );
   
-  const formate = (locale: string, date: Date) => {
-    date.toLocaleString('ru', options as Intl.DateTimeFormatOptions).slice(0, -3);
-  };
+  const formate = (locale: string, date: Date) => date.toLocaleString('ru', options as Intl.DateTimeFormatOptions).slice(0, -3);
 
   const handleCleanButtonClick = () => onControlPanelUsed('clean');
   const handleApplyButtonClick = () => onControlPanelUsed('apply');
