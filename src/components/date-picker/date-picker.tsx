@@ -1,44 +1,52 @@
-import React from 'react'
+import React from 'react';
 import Calendar from 'react-calendar';
+import Button from '../button/button';
 import 'react-calendar/dist/Calendar.css';
 
-interface IDate { year: number, month: number, day: number }
-interface IInitDates { from: IDate, to: IDate }
-interface IDatePicker { initDates: Date[], onChangeDate: (dates: Date[]) => void }
+interface IDatePicker {
+  initDates: Date[];
+  onChangeDate: (dates: Date[]) => void;
+  onControlPanelUsed: (buttonType: string) => void;
+}
 
 const DatePicker = (props: IDatePicker): JSX.Element => {
-  const initDates = props.initDates;
-  //const onChangeDate = props.onChangeDate;
-  const onChangeDate = (dates) => console.log(dates);
-  const date = new Date();
-  const minDate = new Date(date.getFullYear(), date.getMonth() + 1, date.getDate())
-  const options = {
-    year: 'numeric',
-    month: 'long'
+  const { initDates, onChangeDate, onControlPanelUsed } = props;
+  const dateObject = new Date();
+  const options = { year: 'numeric', month: 'long' };
+  
+  const minDate = new Date(
+    dateObject.getFullYear(),
+    dateObject.getMonth(),
+    dateObject.getDate()
+  );
+  
+  const formate = (locale: string, date: Date) => {
+    date.toLocaleString('ru', options as Intl.DateTimeFormatOptions).slice(0, -3);
   };
-  const formate = (locale, date) => date.toLocaleString("ru", options).slice(0, -3)
+
+  const handleCleanButtonClick = () => onControlPanelUsed('clean');
+  const handleApplyButtonClick = () => onControlPanelUsed('apply');
 
   return (
-    <div className="date-picker">
-      <div className="date-picker__calendar">
+    <div className='date-picker'>
+      <div className='date-picker__calendar'>
         <Calendar
-          locale="ru"
+          locale='ru'
           defaultValue={initDates}
-          selectRange={ true }
+          selectRange
           onChange={onChangeDate}
-          prevLabel=""
-          nextLabel=""
+          prevLabel=''
+          nextLabel=''
           formatMonthYear={formate}
           minDate={minDate}
         />
       </div>
-      <div className="date-picker__control-panel">
-        <botton> очистить </botton>
-        <botton>причинить</botton>
+      <div className='date-picker__control-panel'>
+        <Button text='очистить' onClick={handleCleanButtonClick} />
+        <Button text='применить' onClick={handleApplyButtonClick} />
       </div>
     </div>
-    
   );
-}
+};
 
 export default DatePicker;
