@@ -1,0 +1,233 @@
+@import '../../styles/vars'
+@import '../../styles/mixins'
+  
+.date-picker
+  max-width: 320px
+  width: 100%
+  box-sizing: border-box
+
+  & .react-calendar
+    width: 100%
+    box-sizing: border-box
+    padding: 20px
+
+    &__tile
+      &:disabled
+        background-color: #fff
+        color: rgba(31, 32, 65, 0.35)
+
+      &--range
+        background: #fff
+        position: relative
+
+        &:before
+          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          opacity: 25%
+          content: ""
+
+      &--rangeStart
+        abbr
+          color: #fff
+          z-index: 3
+          position: relative
+
+        &:before
+          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          position: absolute
+          top: 0
+          left: 50%
+          z-index: 0
+          width: 50%
+          height: 100%
+          opacity: 25%
+          content: ""
+
+        &:after
+          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          content: ""
+          border-radius: 50%
+
+      &--rangeEnd
+        abbr
+          color: #fff
+          z-index: 3
+          position: relative
+
+        &:before
+          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 0
+          width: 50%
+          height: 100%
+          opacity: 25%
+          content: ""
+
+        &:after
+          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          content: ""
+          border-radius: 50%
+
+      &--rangeStart.react-calendar__tile--rangeEnd.react-calendar__tile--rangeBothEnds
+        &:before
+          display: none
+
+        &:after
+          background: linear-gradient(180deg, #6fcf97 0%, #66d2ea 100%)
+
+
+      &--active:enabled:focus
+        background: #fff
+
+      &:enabled:hover
+        background: #fff
+        position: relative
+
+        &:before
+          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          opacity: 25%
+          content: ""
+          border-radius: 50%
+
+    &__navigation
+      padding: 0
+      margin: 0
+      height: fit-content
+      background-color: #fff
+
+      &__arrow.react-calendar__navigation__prev2-button,
+      &__arrow.react-calendar__navigation__next2-button
+        display: none
+
+      &__arrow.react-calendar__navigation__prev-button
+        width: fit-content
+        min-width: unset
+        padding: 0
+
+        &::before
+          content: 'arrow_back'
+          +material-icon
+          font-size: 24px
+          line-height: 20px
+          color: #BC9CFF
+          width: fit-content
+
+      &__arrow.react-calendar__navigation__next-button
+        width: fit-content
+        min-width: unset
+        padding: 0
+
+        &::before
+          content: 'arrow_forward'
+          +material-icon
+          font-size: 24px
+          line-height: 20px
+          color: #BC9CFF
+          width: fit-content
+
+      &__label
+        font-family: Montserrat
+        font-weight: bold
+        font-size: 19px
+        line-height: 23px
+        color: #1F2041
+        flex-direction: row-reverse
+        text-transform: capitalize 
+        padding: 0
+
+        & .header-date--year
+          margin-left: 5px
+
+        & .header-date--month
+          margin-left: 0
+
+    &__month-view 
+      font-family: $main-font-family
+      font-size: 12px
+      font-weight: normal
+      color: rgb(31 32 65 / 50%)
+
+      &__weekdays
+        padding-top: 29px
+
+        &__weekday
+          height: 37px
+          width: 40px
+          padding: 0
+          display: flex
+          justify-content: center
+          align-items: center
+          font-weight: bold
+          color: #bc9cff
+          font-size: 12px
+          text-transform: capitalize
+
+          & abbr
+            text-decoration: none
+        
+      &__days
+        padding-top: 1px
+
+        &__day
+          width: 40px
+          height: 40px
+          padding: 0
+          color: rgba(31, 32, 65, 0.5)
+
+          &--weekend
+            color: rgba(31, 32, 65, 0.5)
+
+          &--neighboringMonth
+            color: rgba(31, 32, 65, 0.25)
+
+
+    & .daysList
+      padding: 33px 0 0 0
+      
+
+      & .daysList-day
+        width: 40px
+        height: 40px
+        font-family: $main-font-family
+        font-size: 12px
+        font-weight: normal
+        color: rgb(31 32 65 / 50%)
+        margin: 0
+        box-sizing: border-box
+      
+      
+      & .daysList-day.is-week-days
+        font-weight: bold
+        color: #bc9cff
+        height: 37px
+
+      & .daysList-day.is-disabled
+        background-color: unset
+
+      & .daysList-day.is-disabled.is-next-month
+        pointer-events: auto
