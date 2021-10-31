@@ -6,6 +6,7 @@ import styles from './header.module.scss';
 type NavbarListItem = {
   id: number;
   item: string;
+  link: string;
   hiddenItems?: NavbarListItem[];
 };
 

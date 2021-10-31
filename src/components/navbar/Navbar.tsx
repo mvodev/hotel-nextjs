@@ -14,6 +14,7 @@ type NavbarProps = {
 type NavbarListItem = {
   id: number;
   item: string;
+  link: string;
   hiddenItems?: NavbarListItem[];
 };
 
@@ -22,13 +23,13 @@ const Navbar = ({
   user,
   navbarIsOpened,
 }: NavbarProps): React.ReactElement => {
-  const [screenWidth, setWidth] = useState(window.innerWidth);
+  const [screenWidth, setWidth] = useState(0);
   const updateWidth = () => {
     setWidth(window.innerWidth);
   };
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
-    return () => window.removeEventListener('resize', updateWidth);
+    updateWidth();
   }, []);
 
   const itemsCollections = items !== undefined ? items : [];
@@ -46,7 +47,7 @@ const Navbar = ({
       const secondLevelItems = hiddenItems.map((hiddenItem) => {
         const item = (
           <li key={hiddenItem.id} className={styles.navbar__item}>
-            <Link href='/'>
+            <Link href={hiddenItem.link}>
               <a className={styles.navbar__link}>{hiddenItem.item}</a>
             </Link>
           </li>
@@ -62,7 +63,7 @@ const Navbar = ({
       return (
         <li key={firstLevelItem.id} className={styles.navbar__item}>
           <div className={styles['navbar__link-section']}>
-            <Link href='/'>
+            <Link href={firstLevelItem.link}>
               <a className={styles.navbar__link}>{firstLevelItem.item}</a>
             </Link>
             {arrow}
@@ -113,7 +114,7 @@ const Navbar = ({
         </li>,
         <li className={styles.navbar__item}>
           <Link href='/'>
-            <a className={styles.navbar__link}>{props.user}</a>
+            <a className={styles.navbar__link}>{user}</a>
           </Link>
         </li>,
       ]
