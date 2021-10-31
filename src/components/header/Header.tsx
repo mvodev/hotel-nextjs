@@ -1,10 +1,19 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import Navbar from '../navbar/Navbar';
 import styles from './header.module.scss';
 
-const config = require('./config.json');
+type HeaderProps = {
+  logo: string;
+  user?: string;
+  navbarItems?: Record<string, string | string[]>;
+};
 
-const Header = (): React.ReactElement => {
+const Header = ({
+  logo,
+  user,
+  navbarItems,
+}: HeaderProps): React.ReactElement => {
   const [hamburgerIsActive, setHamburger] = useState(false);
   const handleBurgerClick = (): void => {
     setHamburger(!hamburgerIsActive);
@@ -14,17 +23,27 @@ const Header = (): React.ReactElement => {
   burgerClasses += hamburgerIsActive ? ` ${styles.header__burger_active}` : '';
 
   return (
-    <div className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.header__content}>
-        <a href='/'>
-          <img className={styles.header__logo} src={config.logo}></img>
-        </a>
-        <Navbar navbarIsOpened={hamburgerIsActive} />
-        <div className={burgerClasses} onClick={handleBurgerClick}>
-          <div className={styles['header__burger-image']}></div>
-        </div>
+        <Link href='/'>
+          <a>
+            <img className={styles.header__logo} src={logo} alt='logo' />
+          </a>
+        </Link>
+        <Navbar
+          items={navbarItems}
+          user={user}
+          navbarIsOpened={hamburgerIsActive}
+        />
+        <button
+          type='button'
+          className={burgerClasses}
+          onClick={handleBurgerClick}
+        >
+          <div className={styles['header__burger-image']} />
+        </button>
       </div>
-    </div>
+    </header>
   );
 };
 
