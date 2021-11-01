@@ -1,11 +1,10 @@
-import Utils from "../../utils/Utils";
-import DropdownCounter, {
-  IDropdownCounterProps,
-} from '../dropdown-counter/DropdownCounter';
+import React from 'react';
+import DropdownCounter from '../dropdown-counter/DropdownCounter';
 import Button from '../button/button';
 import styles from './dropdown.module.scss';
+import Utils from '../../utils/Utils';
 
-interface IDropdownGuestsState {
+type DropdownGuestsState = {
   value: {
     adult: number;
     child: number;
@@ -14,11 +13,9 @@ interface IDropdownGuestsState {
   total: string;
   placeholder: string;
   opened: boolean;
-  clearButtonMustBeShown: boolean;
-  reset: boolean;
 }
 
-interface IDropdownGuestsProps {
+type DropdownGuestsProps = {
   placeholder: string;
   opened: boolean;
   value: {
@@ -29,8 +26,8 @@ interface IDropdownGuestsProps {
 }
 
 class DropdownGuests extends React.Component<
-  IDropdownGuestsProps,
-  IDropdownGuestsState
+  DropdownGuestsProps,
+  DropdownGuestsState
 > {
   private spellCases = {
     guests: ['гость', 'гостя', 'гостей'],
@@ -47,7 +44,7 @@ class DropdownGuests extends React.Component<
 
   private dropdownBodyClosedStyle = { display: 'none' };
 
-  constructor(props: IDropdownGuestsProps) {
+  constructor(props: DropdownGuestsProps) {
     super(props);
     this.state = {
       value: {
@@ -57,11 +54,61 @@ class DropdownGuests extends React.Component<
       },
       placeholder: props.placeholder,
       opened: props.opened,
-      clearButtonMustBeShown: false,
       total: '',
-      reset: false,
     };
     this.bindEvents();
+  }
+
+  private handleApplyButton() {
+    this.setState({ total: this.getValueForInputField() });
+  }
+
+  private handleClearButton() {
+    this.setState({ 
+      total: '',
+      value: {
+        adult: 0,
+        infants: 0,
+        child: 0,
+      }
+
+    });
+  }
+
+  private handleDropdownClick() {
+    const { opened } = this.state;
+    this.setState({ opened: !opened });
+  }
+
+  private onChange(data: number, type: string): void {
+    const { value } = this.state;
+    const { adult, child, infants } = value;
+    if (type === 'adult') {
+      this.setState({ value: { adult: data, child, infants } });
+    } else if (type === 'child') {
+      this.setState({ value: { adult, child: data, infants } });
+    } else {
+      this.setState({ value: { adult, child, infants: data } });
+    }
+  }
+
+  private getValueForInputField(): string {
+    const { value } = this.state;
+    const { adult, child, infants } = value;
+    let result = '';
+    const total = adult + child;
+    result = `${total} ${
+      this.spellCases.guests[Utils.getPosInSpellCasesArray(total)]
+    }`;
+    if (infants > 0) {
+      result += `,  ${infants} ${
+        this.spellCases.infants[Utils.getPosInSpellCasesArray(infants)]
+      }`;
+    }
+    if (total === 0) {
+      result = '';
+    }
+    return result;
   }
 
   private bindEvents() {
@@ -71,74 +118,29 @@ class DropdownGuests extends React.Component<
     this.onChange = this.onChange.bind(this);
   }
 
-  private onChange(data: number, type: string): void {
-    const value = this.state.value;
-    const { adult, child, infants} = value;
-    if(type==='adult'){
-      this.setState({ value: { adult: data, child, infants } });
-    }
-    else if (type === 'child') {
-      this.setState({ value: { adult, child: data, infants } });
-    }
-    else {
-      this.setState({ value: { adult, child, infants: data } });
-    }
-  }
-
-  private handleApplyButton() {
-    this.setState({ total: this.getValueForInputField() });
-    this.setState({ reset: false });
-  }
-
-  private handleClearButton() {
-    this.setState({ total: '' });
-    this.setState({ reset: true });
-  }
-
-  private getValueForInputField(): string {
-    let result = '';
-    let total = this.state.value.adult + this.state.value.child;
-    result =
-      total +
-      ' ' +
-      this.spellCases.guests[Utils.getPosInSpellCasesArray(total)];
-    if (this.state.value.infants > 0) {
-      result +=
-        ',  ' +
-        this.state.value.infants +
-        ' ' +
-        this.spellCases.infants[
-          Utils.getPosInSpellCasesArray(this.state.value.infants)
-        ];
-    }
-    if (total === 0) {
-      result = '';
-    }
-    return result;
-  }
-
-  private handleDropdownClick() {
-    this.setState({ opened: !this.state.opened });
-  }
-
-  render() {
-    const showClearButton = this.state.total.length > 0 ? true : false;
-    const isDropdownOpen = this.state.opened;
+  render(): JSX.Element {
+    const { opened, placeholder, total } = this.state;
+    const { value } = this.state;
+    const { child, adult, infants } = value;
+    const showClearButton = total.length > 0;
     return (
       <div
         className={styles['dropdown-guests']}
-        style={isDropdownOpen ? this.dropdownOpenedStyle : {}}
+        style={opened ? this.dropdownOpenedStyle : {}}
       >
         <div
           className={styles['dropdown-guests__input-wrapper']}
           onClick={this.handleDropdownClick}
+          onKeyDown={this.handleDropdownClick}
+          role='textbox'
+          tabIndex={0}
         >
           <input
-            type="text"
+            type='text'
             readOnly
             className={styles['dropdown-guests__input']}
-            placeholder={this.state.placeholder}
-            value={this.state.total}
+            placeholder={placeholder}
+            value={total}
           />
           <div className={styles['dropdown-guests__arrow']}>
             keyboard_arrow_down
@@ -147,47 +149,36 @@ class DropdownGuests extends React.Component<
         <div
           className={styles['dropdown-guests__body']}
           style={
-            this.state.opened
-              ? this.dropdownBodyOpenedStyle
-              : this.dropdownBodyClosedStyle
+            opened ? this.dropdownBodyOpenedStyle : this.dropdownBodyClosedStyle
           }
         >
           <DropdownCounter
-            text={'Взрослые'}
-            number={this.state.value.adult}
+            text='Взрослые'
+            number={adult}
             onChange={this.onChange}
-            reset={this.state.reset}
-            type={'adult'}
-          ></DropdownCounter>
+            type='adult'
+          />
           <DropdownCounter
-            text={'Дети'}
-            number={this.state.value.child}
+            text='Дети'
+            number={child}
             onChange={this.onChange}
-            reset={this.state.reset}
-            type={'child'}
-          ></DropdownCounter>
+            type='child'
+          />
           <DropdownCounter
-            text={'Младенцы'}
-            number={this.state.value.infants}
+            text='Младенцы'
+            number={infants}
             onChange={this.onChange}
-            reset={this.state.reset}
-            type={'infants'}
-          ></DropdownCounter>
+            type='infants'
+          />
           <div className={styles['dropdown-guests__body-buttons']}>
             <div
               style={
                 showClearButton ? {} : { visibility: 'hidden', cursor: 'none' }
               }
             >
-              <Button
-                text={'очистить'}
-                onClick={this.handleClearButton}
-              ></Button>
+              <Button text='очистить' onClick={this.handleClearButton} />
             </div>
-            <Button
-              text={'применить'}
-              onClick={this.handleApplyButton}
-            ></Button>
+            <Button text='применить' onClick={this.handleApplyButton} />
           </div>
         </div>
       </div>
