@@ -24,7 +24,10 @@ const DatePicker = (props: IDatePicker): JSX.Element => {
     date.toLocaleString('ru', options as Intl.DateTimeFormatOptions).slice(0, -3);
   };
 
-  const handleCleanButtonClick = () => onControlPanelUsed('clean');
+  const handleCleanButtonClick = () => {
+    onControlPanelUsed('clean');
+    
+  }
   const handleApplyButtonClick = () => onControlPanelUsed('apply');
 
   return (
@@ -32,7 +35,7 @@ const DatePicker = (props: IDatePicker): JSX.Element => {
       <div className='date-picker__calendar'>
         <Calendar
           locale='ru'
-          defaultValue={initDates}
+          value={initDates}
           selectRange
           onChange={onChangeDate}
           prevLabel=''
