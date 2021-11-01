@@ -4,7 +4,7 @@ import Button from '../button/button';
 import styles from './dropdown.module.scss';
 import Utils from '../../utils/Utils';
 
-interface IDropdownGuestsState {
+type DropdownGuestsState = {
   value: {
     adult: number;
     child: number;
@@ -15,7 +15,7 @@ interface IDropdownGuestsState {
   opened: boolean;
 }
 
-interface IDropdownGuestsProps {
+type DropdownGuestsProps = {
   placeholder: string;
   opened: boolean;
   value: {
@@ -26,8 +26,8 @@ interface IDropdownGuestsProps {
 }
 
 class DropdownGuests extends React.Component<
-  IDropdownGuestsProps,
-  IDropdownGuestsState
+  DropdownGuestsProps,
+  DropdownGuestsState
 > {
   private spellCases = {
     guests: ['гость', 'гостя', 'гостей'],
@@ -44,7 +44,7 @@ class DropdownGuests extends React.Component<
 
   private dropdownBodyClosedStyle = { display: 'none' };
 
-  constructor(props: IDropdownGuestsProps) {
+  constructor(props: DropdownGuestsProps) {
     super(props);
     this.state = {
       value: {

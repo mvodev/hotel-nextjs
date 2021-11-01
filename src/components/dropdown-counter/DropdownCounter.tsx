@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './dropdown-counter.module.scss';
 
-export interface IDropdownCounterProps {
+type DropdownCounterProps = {
   text: string;
   number: number;
   onChange: (counter: number, type: string) => void;
   type: string;
-}
+};
 
-interface IDropdownCounterState {
+type DropdownCounterState = {
   text: string;
   counter: number;
   onChange: (counter: number, type: string) => void;
@@ -16,10 +16,10 @@ interface IDropdownCounterState {
 }
 
 class DropdownCounter extends React.Component<
-  IDropdownCounterProps,
-  IDropdownCounterState
+  DropdownCounterProps,
+  DropdownCounterState
 > {
-  constructor(props: IDropdownCounterProps) {
+  constructor(props: DropdownCounterProps) {
     super(props);
     this.state = {
       text: props.text,
