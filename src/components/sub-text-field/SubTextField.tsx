@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  ChangeEvent,
-  MouseEventHandler,
-  FormEventHandler,
-} from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 import TextField from '../text-field/TextField';
 import styles from './sub-text-field.module.sass';
