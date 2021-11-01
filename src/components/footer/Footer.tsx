@@ -15,7 +15,11 @@ const Footer = ({
         <div className={styles.footer__column}>
           <Link href='/'>
             <a className={styles.footer__link} title='домашняя страница'>
-              <img className={styles.footer__logo} src='./img/logo.svg' alt='toxin logo' />
+              <img
+                className={styles.footer__logo}
+                src='./img/logo.svg'
+                alt='toxin logo'
+              />
             </a>
           </Link>
           <p className={styles.footer__chapter}>
@@ -57,7 +61,7 @@ const Footer = ({
           <div className={styles.footer__social}>
             {['twitter', 'facebook', 'instagram'].map((i) => (
               <Link key={i} href={`https://${i}.com`}>
-                <a 
+                <a
                   className={styles['footer__social-link']}
                   title={i}
                   target='_blank'
