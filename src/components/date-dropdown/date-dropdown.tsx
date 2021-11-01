@@ -30,11 +30,13 @@ class DateDropdown extends Component {
   }
 
   private getValueForSingleField = (date: [Date, Date]): string => {
-    if (date[0] === null) return ''
+    if (date[0] === null) return '';
     const options = { day: '2-digit', month: 'short' };
+
     const dateInString = date.map((item) => (
       item.toLocaleString('ru', options as Intl.DateTimeFormatOptions).slice(0, -1))
     );
+
     return `${dateInString[0]} - ${dateInString[1]}`;
   }
 
@@ -68,14 +70,14 @@ class DateDropdown extends Component {
   private handleFieldClick = () => {
     this.setState((state) => ({ isOpen: !state.isOpen }));
     if (!this.state.isOpen) {
-      console.log(123)
       window.addEventListener('click', this.handleOutsideClick);
     }
   }
 
-  private handleOutsideClick = (event) => {
-    console.log(event.target.closest('.date-dropdown_date-dropdown__h9gkE'))
-    if (!event.target.closest('.date-dropdown_date-dropdown__h9gkE')) {
+  private handleOutsideClick = (event: MouseEvent) => {
+    const { target } = event
+
+    if (!(target as EventTarget).closest('.date-dropdown_date-dropdown__h9gkE')) {
       this.setState({ isOpen: false });
       window.removeEventListener('click', this.handleOutsideClick);
     }
