@@ -77,13 +77,13 @@ class DateDropdown extends Component {
   private handleOutsideClick = (event: MouseEvent) => {
     const { target } = event
 
-    if (!(target as EventTarget).closest('.date-dropdown_date-dropdown__h9gkE')) {
+    if (!(target as EventTarget).closest(`.${ style['date-dropdown'] }`)) {
       this.setState({ isOpen: false });
       window.removeEventListener('click', this.handleOutsideClick);
     }
   }
 
-  render() {
+  render(): JSX.Element {
     const { value, isOpen } = this.state;
     const { titles, modifier } = this;
 
