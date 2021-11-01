@@ -10,6 +10,11 @@ type DateDropdownType = {
   initDate: [Date, Date] | [null, null],
 }
 
+type StateType = {
+  value: [Date, Date] | [null, null],
+  isOpen: boolean
+}
+
 class DateDropdown extends Component {
   private titles: [string] | [string, string];
 
@@ -68,8 +73,10 @@ class DateDropdown extends Component {
   }
 
   private handleFieldClick = () => {
-    this.setState((state) => ({ isOpen: !state.isOpen }));
-    if (!this.state.isOpen) {
+    this.setState((state: StateType) => ({ isOpen: !state.isOpen }));
+
+    const { isOpen } = (this.state as StateType)
+    if (!isOpen) {
       window.addEventListener('click', this.handleOutsideClick);
     }
   }
@@ -77,14 +84,14 @@ class DateDropdown extends Component {
   private handleOutsideClick = (event: MouseEvent) => {
     const { target } = event
 
-    if (!(target as EventTarget).closest(`.${ style['date-dropdown'] }`)) {
+    if (!(target as Element).closest(`.${ style['date-dropdown'] }`)) {
       this.setState({ isOpen: false });
       window.removeEventListener('click', this.handleOutsideClick);
     }
   }
 
   render(): JSX.Element {
-    const { value, isOpen } = this.state;
+    const { value, isOpen } = (this.state as StateType);
     const { titles, modifier } = this;
 
     const dropdownClass = `${style['date-dropdown']} ${(modifier === 'single') 
@@ -101,19 +108,19 @@ class DateDropdown extends Component {
       <div className={dropdownClass}>
         { 
           (modifier === 'double') 
-            ? this.getContainer(titles[0], value[0], modifier)
-            : this.getContainer(titles[0], value, modifier)
+            ? this.getContainer(titles[0], (value[0] as Date), modifier)
+            : this.getContainer(titles[0], (value as [Date, Date]), modifier)
         }
 
         { 
           (modifier === 'double') 
-            ? this.getContainer((titles as [string, string])[1], value[1], modifier) 
+            ? this.getContainer((titles[1] as string), (value[1] as Date), modifier) 
             : ''
         }
 
         <div className = { datePickerClass }>
           <DatePicker 
-            initDates = { value }
+            initDates = { (value as Date[]) }
             onChangeDate = { this.handleChangeDate }
             onControlPanelUsed = { this.handleControlPanelUsed }
           />
