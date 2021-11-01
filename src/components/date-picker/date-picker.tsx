@@ -30,7 +30,7 @@ const DatePicker = (props: IDatePicker): JSX.Element => {
       <div className='date-picker__calendar'>
         <Calendar
           locale='ru'
-          defaultValue={initDates}
+          value={initDates}
           selectRange
           onChange={onChangeDate}
           prevLabel=''
