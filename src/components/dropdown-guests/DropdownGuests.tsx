@@ -48,11 +48,6 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
     setInfants(0);
   }
 
-  const handleDropdownClick = ()=> {
-    setOpened(!opened);
-    window.addEventListener('click', handleOutsideClick);
-  }
-
   const handleOutsideClick = (event: Event)=> {
     const { target } = event;
     if (!(target as Element).closest(`.${styles['dropdown-guests']}`)) {
@@ -60,6 +55,11 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
       window.removeEventListener('click', handleOutsideClick);
     }
   };
+
+  const handleDropdownClick = ()=> {
+    setOpened(!opened);
+    window.addEventListener('click', handleOutsideClick);
+  }
 
   const onChange = (data: number, type: string): void => {
     if (type === 'adult') {
