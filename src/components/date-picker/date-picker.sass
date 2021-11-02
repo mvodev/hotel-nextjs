@@ -6,8 +6,9 @@
   width: 100%
   box-sizing: border-box
   padding: 20px
-  border: 1px solid rgba(31, 32, 65, 0.25)
+  border: 1px solid $color-unclaimed-fg
   border-radius: 4px
+  background-color: $color-main-bg
 
   & .react-calendar
     width: 100%
@@ -18,7 +19,7 @@
       padding: 0
       margin: 0
       height: fit-content
-      background-color: #fff
+      background-color: $color-main-bg
 
       &__arrow.react-calendar__navigation__prev2-button,
       &__arrow.react-calendar__navigation__next2-button
@@ -31,7 +32,7 @@
         transition: 0.5s
 
         &:disabled
-          background-color: #fff
+          background-color: $color-main-bg
           opacity: 0.5
 
         &::before
@@ -39,16 +40,16 @@
           +material-icon
           font-size: 24px
           line-height: 20px
-          color: #BC9CFF
+          color: $color-primary
           width: fit-content
           transition: 0.25s
 
         &:focus,
         &:hover
-          background-color: #fff
+          background-color: $color-main-bg
 
           &::before
-              color: rgba(31, 32, 65, 0.5)
+              color: $color-additional-fg
 
       &__arrow.react-calendar__navigation__next-button
         width: fit-content
@@ -56,7 +57,7 @@
         padding: 0
 
         &:disabled
-          background-color: #fff
+          background-color: $color-main-bg
           opacity: 0.5
           transition: 0.5s
 
@@ -65,23 +66,23 @@
           +material-icon
           font-size: 24px
           line-height: 20px
-          color: #BC9CFF
+          color: $color-primary
           width: fit-content
           transition: 0.25s
 
         &:focus,
         &:hover
-          background-color: #fff
+          background-color: $color-main-bg
 
           &::before
-              color: rgba(31, 32, 65, 0.5)
+              color: $color-additional-fg
 
       &__label
         font-family: Montserrat
         font-weight: bold
         font-size: 19px
         line-height: 23px
-        color: #1F2041
+        color: $color-title-fg
         flex-direction: row-reverse
         text-transform: capitalize 
         padding: 0
@@ -92,7 +93,7 @@
       font-family: $main-font-family
       font-size: 12px
       font-weight: normal
-      color: rgb(31 32 65 / 50%)
+      color: $color-additional-fg
 
       &__weekdays
         padding-top: 29px
@@ -105,7 +106,7 @@
           justify-content: center
           align-items: center
           font-weight: bold
-          color: #bc9cff
+          color: $color-primary
           font-size: 12px
           text-transform: capitalize
 
@@ -119,28 +120,28 @@
           width: 40px
           height: 40px
           padding: 0
-          color: rgba(31, 32, 65, 0.5)
+          color: $color-additional-fg
 
           &--weekend
-            color: rgba(31, 32, 65, 0.5)
+            color: $color-additional-fg
 
           &--neighboringMonth
-            color: rgba(31, 32, 65, 0.25)
+            color: $color-unclaimed-fg
 
     &__tile
       &:disabled
-        background-color: #fff
+        background-color: $color-main-bg
         color: rgba(31, 32, 65, 0.35)
 
       &--now
-        background: #fff 
+        background: $color-main-bg 
 
       &--range
-        background: #fff
+        background: $color-main-bg
         position: relative
 
         &:before
-          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          background: $gradient-primary
           position: absolute
           top: 0
           left: 0
@@ -157,7 +158,7 @@
           position: relative
 
         &:before
-          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          background: $gradient-primary
           position: absolute
           top: 0
           left: 50%
@@ -168,7 +169,7 @@
           content: ""
 
         &:after
-          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          background: $gradient-primary
           position: absolute
           top: 0
           left: 0
@@ -185,7 +186,7 @@
           position: relative
 
         &:before
-          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          background: $gradient-primary
           position: absolute
           top: 0
           left: 0
@@ -196,7 +197,7 @@
           content: ""
 
         &:after
-          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          background: $gradient-primary
           position: absolute
           top: 0
           left: 0
@@ -206,23 +207,23 @@
           content: ""
           border-radius: 50%
 
-      &--rangeStart.react-calendar__tile--rangeEnd.react-calendar__tile--rangeBothEnds
+      &--rangeStart.react-calendar__tile--rangeEnd
         &:before
           display: none
 
         &:after
-          background: linear-gradient(180deg, #6fcf97 0%, #66d2ea 100%)
+          background: $gradient-secondary
 
 
       &--active:enabled:focus
-        background: #fff
+        background: $color-main-bg
 
       &:enabled:hover
-        background: #fff
+        background: $color-main-bg
         position: relative
 
         &:before
-          background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+          background: $gradient-primary
           position: absolute
           top: 0
           left: 0
@@ -243,14 +244,14 @@
         display: none
 
       &:after
-        background: linear-gradient(180deg, #bc9cff 0%, #8ba4f9 100%)
+        background: $gradient-primary
     
     & .react-calendar__tile--hover
       position: relative
-      background: #fff 
+      background: $color-main-bg 
 
       &:before
-        background: linear-gradient(180deg, #BC9CFF 0%, #8BA4F9 100%)
+        background: $gradient-primary
         position: absolute
         top: 0
         left: 0
