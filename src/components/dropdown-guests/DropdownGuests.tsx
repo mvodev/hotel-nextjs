@@ -78,7 +78,16 @@ class DropdownGuests extends React.Component<
   private handleDropdownClick() {
     const { opened } = this.state;
     this.setState({ opened: !opened });
+    window.addEventListener('click', this.handleOutsideClick);
   }
+
+  private handleOutsideClick(event: Event) {
+    const { target } = event;
+    if (!(target as Element).closest(`.${styles['dropdown-guests']}`)) {
+      this.setState({ opened: false });
+      window.removeEventListener('click', this.handleOutsideClick);
+    }
+  };
 
   private onChange(data: number, type: string): void {
     const { value } = this.state;
@@ -115,6 +124,7 @@ class DropdownGuests extends React.Component<
     this.handleDropdownClick = this.handleDropdownClick.bind(this);
     this.handleApplyButton = this.handleApplyButton.bind(this);
     this.handleClearButton = this.handleClearButton.bind(this);
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
