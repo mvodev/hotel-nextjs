@@ -4,7 +4,7 @@ import 'react-calendar/dist/Calendar.css';
 
 type DatePickerType = {
   initDates: Date[];
-  onChangeDate: (dates: Date[]) => void;
+  onChangeDate: (dates: [Date, Date]) => void;
   onControlPanelUsed: (buttonType: string) => void;
 }
 
