@@ -4,6 +4,8 @@ import Head from 'next/head';
 import Header from './header/Header';
 import Footer from './footer/Footer';
 
+const temporaryHeaderProps = require('../components/header/config.json');
+
 interface ILayoutProps {
   pageClass: string;
   title?: string;
@@ -22,7 +24,7 @@ const Layout = ({
       <link rel='icon' type='image/jpg' href='/favicons/favicon-32x32.png' />
       <link rel='icon' type='image/jpg' href='/favicons/favicon-16x16.png' />
     </Head>
-    <Header />
+    <Header {...temporaryHeaderProps} />
     <main className={pageClass}>{children}</main>
     <Footer />
   </>
