@@ -1,15 +1,14 @@
-import React from 'react';
 import Calendar from 'react-calendar';
 import Button from '../button/button';
 import 'react-calendar/dist/Calendar.css';
 
-interface IDatePicker {
+type DatePickerType = {
   initDates: Date[];
   onChangeDate: (dates: Date[]) => void;
   onControlPanelUsed: (buttonType: string) => void;
 }
 
-const DatePicker = (props: IDatePicker): JSX.Element => {
+const DatePicker = (props: DatePickerType): JSX.Element => {
   const { initDates, onChangeDate, onControlPanelUsed } = props;
   const dateObject = new Date();
   const options = { year: 'numeric', month: 'long' };
