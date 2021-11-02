@@ -14,7 +14,7 @@ type DropdownGuestsProps = {
   };
 }
 
-const DropdownGuests = (props : DropdownGuestsProps): JSX.Element => {
+const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
 
   const { value, placeholder } = props;
 
@@ -22,10 +22,10 @@ const DropdownGuests = (props : DropdownGuestsProps): JSX.Element => {
     guests: ['гость', 'гостя', 'гостей'],
     infants: ['младенец', 'младенца', 'младенцев'],
   };
-  const [ opened, setOpened ] = useState(props.opened);
-  const [ adult, setAdult ] = useState(value.adult);
-  const [ infants, setInfants ] = useState(value.infants);
-  const [ child, setChild ] = useState(value.child);
+  const [ opened, setOpened ] = useState( props.opened );
+  const [ adult, setAdult ] = useState( value.adult );
+  const [ infants, setInfants ] = useState( value.infants );
+  const [ child, setChild ] = useState( value.child );
 
   const dropdownOpenedStyle = {
     borderBottomLeftRadius: 0,
@@ -90,60 +90,60 @@ const DropdownGuests = (props : DropdownGuestsProps): JSX.Element => {
 
   return (
     <div
-      className={styles['dropdown-guests']}
-      style={opened ? dropdownOpenedStyle : {}}
+      className = { styles['dropdown-guests'] }
+      style = { opened ? dropdownOpenedStyle : {} }
     >
       <div
-        className={styles['dropdown-guests__input-wrapper']}
-        onClick={handleDropdownClick}
-        onKeyDown={handleDropdownClick}
-        role='textbox'
-        tabIndex={0}
+        className = { styles['dropdown-guests__input-wrapper'] }
+        onClick = { handleDropdownClick }
+        onKeyDown = { handleDropdownClick }
+        role = 'textbox'
+        tabIndex = {0}
       >
         <input
-          type='text'
+          type = 'text'
           readOnly
-          className={styles['dropdown-guests__input']}
-          placeholder={placeholder}
-          value={getValueForInputField()}
+          className = { styles['dropdown-guests__input'] }
+          placeholder = { placeholder }
+          value = { getValueForInputField() }
         />
-        <div className={styles['dropdown-guests__arrow']}>
+        <div className = { styles['dropdown-guests__arrow'] }>
           keyboard_arrow_down
         </div>
       </div>
       <div
-        className={styles['dropdown-guests__body']}
+        className = { styles['dropdown-guests__body'] }
         style={
           opened ? dropdownBodyOpenedStyle : dropdownBodyClosedStyle
         }
       >
         <DropdownCounter
-          text='Взрослые'
-          number={adult}
-          onChange={onChange}
-          type='adult'
+          text = 'Взрослые'
+          number = { adult }
+          onChange = { onChange }
+          type = 'adult'
         />
         <DropdownCounter
-          text='Дети'
-          number={child}
-          onChange={onChange}
-          type='child'
+          text = 'Дети'
+          number = { child }
+          onChange = { onChange }
+          type = 'child'
         />
         <DropdownCounter
-          text='Младенцы'
-          number={infants}
-          onChange={onChange}
-          type='infants'
+          text = 'Младенцы'
+          number = { infants }
+          onChange = { onChange }
+          type = 'infants'
         />
-        <div className={styles['dropdown-guests__body-buttons']}>
+        <div className = { styles['dropdown-guests__body-buttons'] }>
           <div
-            style={
+            style = {
               (child + adult + infants) > 0 ? {} : { visibility: 'hidden', cursor: 'none' }
             }
           >
-            <Button text='очистить' onClick={handleClearButton} />
+            <Button text = 'очистить' onClick = { handleClearButton } />
           </div>
-          <Button text='применить' onClick={handleApplyButton} />
+          <Button text = 'применить' onClick = { handleApplyButton } />
         </div>
       </div>
     </div>
