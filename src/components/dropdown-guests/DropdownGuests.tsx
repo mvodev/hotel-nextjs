@@ -10,8 +10,6 @@ type DropdownGuestsState = {
     child: number;
     infants: number;
   };
-  total: string;
-  placeholder: string;
   opened: boolean;
 }
 
@@ -44,6 +42,8 @@ class DropdownGuests extends React.Component<
 
   private dropdownBodyClosedStyle = { display: 'none' };
 
+  private placeholder: string;
+
   constructor(props: DropdownGuestsProps) {
     super(props);
     this.state = {
@@ -52,26 +52,25 @@ class DropdownGuests extends React.Component<
         infants: props.value.infants,
         child: props.value.child,
       },
-      placeholder: props.placeholder,
       opened: props.opened,
-      total: '',
     };
+
+    this.placeholder = props.placeholder
     this.bindEvents();
   }
 
   private handleApplyButton() {
-    this.setState({ total: this.getValueForInputField() });
+    this.setState({ opened: false });
   }
 
   private handleClearButton() {
     this.setState({ 
-      total: '',
+      opened: false,
       value: {
         adult: 0,
         infants: 0,
         child: 0,
       }
-
     });
   }
 
@@ -129,10 +128,11 @@ class DropdownGuests extends React.Component<
   }
 
   render(): JSX.Element {
-    const { opened, placeholder, total } = this.state;
-    const { value } = this.state;
+    const { opened, value } = this.state;
     const { child, adult, infants } = value;
-    const showClearButton = total.length > 0;
+    const { placeholder } = this;
+    const showClearButton = (child + adult + infants) > 0;
+
     return (
       <div
         className={styles['dropdown-guests']}
@@ -150,7 +150,7 @@ class DropdownGuests extends React.Component<
             readOnly
             className={styles['dropdown-guests__input']}
             placeholder={placeholder}
-            value={total}
+            value={this.getValueForInputField()}
           />
           <div className={styles['dropdown-guests__arrow']}>
             keyboard_arrow_down
