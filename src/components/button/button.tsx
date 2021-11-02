@@ -7,7 +7,6 @@ type ButtonType = {
   isDisabled?: boolean;
   theme?: 'filled' | 'bordered' | 'rounded';
   size?: 'small' | 'fixed';
-  color?: 'darkestGray';
   link?: string;
   onClick?: () => void;
 };
@@ -19,7 +18,6 @@ const Button = ({
   isDisabled = false,
   theme,
   size,
-  color,
   link,
   onClick,
 }: ButtonType): JSX.Element => {
@@ -27,9 +25,6 @@ const Button = ({
     filled: styles.button_theme_filled,
     bordered: styles.button_theme_bordered,
     rounded: styles.button_theme_rounded,
-  };
-  const colors: Modifiers = {
-    darkestGray: styles['button_color_darkest-gray'],
   };
   const sizes: Modifiers = {
     small: styles.button_size_small,
@@ -39,7 +34,6 @@ const Button = ({
   const classes = [
     styles.button,
     themes[theme || ''],
-    colors[color || ''],
     sizes[size || ''],
   ];
   const classesString = classes.filter((classItem) => classItem).join(' ');
