@@ -51,7 +51,7 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
 
   const handleOutsideClick = (event: Event)=> {
     const { target } = event;
-    if (!(target as Element).closest(`.${styles['dropdown-guests']}`)) {
+    if (!(target as Element).closest(`.${styles.dropdownGuests}`)) {
       setOpened(false);
       window.removeEventListener('click', handleOutsideClick);
     }
@@ -91,11 +91,11 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
 
   return (
     <div
-      className = { styles['dropdown-guests'] }
+      className = { styles.dropdownGuests }
       style = { isOpened ? dropdownOpenedStyle : {} }
     >
       <div
-        className = { styles['dropdown-guests__input-wrapper'] }
+        className = { styles.dropdownGuestsInputWrapper }
         onClick = { handleDropdownClick }
         onKeyDown = { handleDropdownClick }
         role = 'textbox'
@@ -104,16 +104,16 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
         <input
           type = 'text'
           readOnly
-          className = { styles['dropdown-guests__input'] }
+          className = { styles.dropdownGuestsInput }
           placeholder = { placeholder }
           value = { getValueForInputField() }
         />
-        <div className = { styles['dropdown-guests__arrow'] }>
+        <div className = { styles.dropdownGuestsArrow }>
           keyboard_arrow_down
         </div>
       </div>
       <div
-        className = { styles['dropdown-guests__body'] }
+        className = { styles.dropdownGuestsBody }
         style={
           isOpened ? dropdownBodyOpenedStyle : dropdownBodyClosedStyle
         }
@@ -136,7 +136,7 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
           onChange = { onChange }
           type = 'infants'
         />
-        <div className = { styles['dropdown-guests__body-buttons'] }>
+        <div className = { styles.dropdownGuestsBodyButtons }>
           <div
             style = {
               (child + adult + infants) > 0 ? {} : { visibility: 'hidden', cursor: 'none' }

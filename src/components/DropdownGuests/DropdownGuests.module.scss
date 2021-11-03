@@ -1,4 +1,4 @@
-.dropdown-guests {
+.dropdownGuests {
   position: relative;
   font-family: Montserrat, sans-serif;
   line-height: 14.63px;
@@ -10,7 +10,7 @@
   border: 1px solid rgba(31, 32, 65, 0.25);
   border-radius: 4px;
 
-  &__input-wrapper {
+  &InputWrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -19,7 +19,7 @@
     cursor: pointer;
   }
 
-  &__input {
+  &Input {
     border: none;
     outline: none;
     -webkit-appearance: none;
@@ -35,7 +35,7 @@
     background: transparent;
   }
 
-  &__input::placeholder {
+  &Input::placeholder {
     font-family: inherit;
     font-style: normal;
     font-weight: normal;
@@ -44,7 +44,7 @@
     color: rgba(31, 32, 65, 0.75);
   }
 
-  &__arrow {
+  &Arrow {
     width: 44px;
     height: 44px;
     font-family: Material Icons;
@@ -63,7 +63,7 @@
     user-select: none;
   }
 
-  &__body {
+  &Body {
     font-size: 1rem;
     font-weight: bold;
     text-transform: uppercase;
@@ -80,11 +80,11 @@
     top: 42px;
   }
 
-  &_is-opened {
+  &IsOpened {
     display: block;
   }
 
-  &__body-buttons {
+  &BodyButtons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

@@ -1,4 +1,4 @@
-.dropdown-counter {
+.dropdownCounter {
   font-family: inherit;
   display: flex;
   flex-direction: row;
@@ -9,7 +9,7 @@
   user-select: none;
   font-family: inherit;
 
-  &__header {
+  &Header {
     overflow: hidden;
     margin-bottom: 3px;
     max-width: 152px;
@@ -20,7 +20,8 @@
     letter-spacing: 0em;
     text-align: left;
   }
-  &__container {
+
+  &Container {
     max-width: 92px;
     width: 100%;
     display: flex;
@@ -30,8 +31,8 @@
   }
 }
 
-.container-dropdown__decrease,
-.container-dropdown__increase {
+.containerDropdownDecrease,
+.containerDropdownIncrease {
   border-radius: 22px;
   width: 30px;
   height: 30px;
@@ -42,22 +43,22 @@
   cursor: pointer;
   background-color: white;
 }
-.container-dropdown__value{
+.containerDropdownValue{
   font-size: 12px;
   line-height: 15px;
 }
 
-.container-dropdown__increase{
+.containerDropdownIncrease{
   border: 1px solid rgba(31, 32, 65, 0.5);
   color: rgba(31, 32, 65, 0.5);
 }
 
-.container-dropdown__decrease{
+.containerDropdownDecrease{
   color: rgba(31, 32, 65, 0.25);
   border: 1px solid rgba(31, 32, 65, 0.25);
 }
 
-.container-dropdown__decrease_dark {
+.containerDropdownDecreaseDark {
   border: 1px solid rgba(31, 32, 65, 0.5);
   color: rgba(31, 32, 65, 0.5);
   border-radius: 22px;

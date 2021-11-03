@@ -19,14 +19,14 @@ const DropdownCounter = (props: DropdownCounterProps): JSX.Element  => {
   }
     
   return (
-    <div className={styles['dropdown-counter']}>
-      <div className={styles['dropdown-counter__header']}>{text}</div>
-      <div className={styles['dropdown-counter__container']}>
+    <div className={styles.dropdownCounter}>
+      <div className={styles.dropdownCounterHeader}>{text}</div>
+      <div className={styles.dropdownCounterContainer}>
         <button
           className={
             (number > 0)
-              ? styles['container-dropdown__decrease_dark']
-              : styles['container-dropdown__decrease']
+              ? styles.containerDropdownDecreaseDark
+              : styles.containerDropdownDecrease
           }
           onClick={handleClickMinus}
           onKeyDown={handleClickMinus}
@@ -34,9 +34,9 @@ const DropdownCounter = (props: DropdownCounterProps): JSX.Element  => {
         >
           -
         </button>
-        <div className={styles['container-dropdown__value']}>{number}</div>
+        <div className={styles.containerDropdownValue}>{number}</div>
         <button
-          className={styles['container-dropdown__increase']}
+          className={styles.containerDropdownIncrease}
           onClick={handleClickPlus}
           onKeyDown={handleClickPlus}
           type = 'button'
