@@ -41,14 +41,14 @@ const Navbar = ({
 
       const arrow =
         hiddenItems.length > 0 ? (
-          <span className={styles.navbar__arrow}>expand_more</span>
+          <span className={styles.arrow}>expand_more</span>
         ) : null;
 
       const secondLevelItems = hiddenItems.map((hiddenItem) => {
         const item = (
-          <li key={hiddenItem.id} className={styles.navbar__item}>
+          <li key={hiddenItem.id} className={styles.item}>
             <Link href={hiddenItem.link}>
-              <a className={styles.navbar__link}>{hiddenItem.item}</a>
+              <a className={styles.link}>{hiddenItem.item}</a>
             </Link>
           </li>
         );
@@ -57,14 +57,14 @@ const Navbar = ({
 
       const hiddenMenu =
         secondLevelItems.length > 0 ? (
-          <ul className={styles['navbar__hidden-menu']}>{secondLevelItems}</ul>
+          <ul className={styles.hiddenMenu}>{secondLevelItems}</ul>
         ) : null;
 
       return (
-        <li key={firstLevelItem.id} className={styles.navbar__item}>
-          <div className={styles['navbar__link-section']}>
+        <li key={firstLevelItem.id} className={styles.item}>
+          <div className={styles.linkSection}>
             <Link href={firstLevelItem.link}>
-              <a className={styles.navbar__link}>{firstLevelItem.item}</a>
+              <a className={styles.link}>{firstLevelItem.item}</a>
             </Link>
             {arrow}
           </div>
@@ -75,29 +75,29 @@ const Navbar = ({
   );
 
   let navbarClasses = styles.navbar;
-  navbarClasses += navbarIsOpened ? ` ${styles.navbar_opened}` : '';
+  navbarClasses += navbarIsOpened ? ` ${styles.navbarOpened}` : '';
 
-  const separatorItemClasses = `${styles.navbar__item} ${styles.navbar__item_theme_stretched}`;
+  const separatorItemClasses = `${styles.item} ${styles.itemThemeStretched}`;
 
   const buttons =
     screenWidth <= PHONE_SCREEN_WIDTH
       ? [
-          <li className={styles.navbar__item}>
+          <li className={styles.item}>
             <Link href='/'>
-              <a className={styles.navbar__link}>Войти</a>
+              <a className={styles.link}>Войти</a>
             </Link>
           </li>,
-          <li className={styles.navbar__item}>
+          <li className={styles.item}>
             <Link href='/'>
-              <a className={styles.navbar__link}>Зарегистрироваться</a>
+              <a className={styles.link}>Зарегистрироваться</a>
             </Link>
           </li>,
         ]
       : [
-          <li className={styles.navbar__item}>
+          <li className={styles.item}>
             <Button link='/' theme='bordered' size='small' text='Войти' />
           </li>,
-          <li className={styles.navbar__item}>
+          <li className={styles.item}>
             <Button
               link='/'
               theme='filled'
@@ -110,11 +110,11 @@ const Navbar = ({
   const userSection = user
     ? [
         <li className={separatorItemClasses}>
-          <div className={styles.navbar__separator} />
+          <div className={styles.separator} />
         </li>,
-        <li className={styles.navbar__item}>
+        <li className={styles.item}>
           <Link href='/'>
-            <a className={styles.navbar__link}>{user}</a>
+            <a className={styles.link}>{user}</a>
           </Link>
         </li>,
       ]
@@ -122,8 +122,8 @@ const Navbar = ({
 
   return (
     <div className={navbarClasses}>
-      <div className={styles.navbar__body}>
-        <nav className={styles.navbar__content}>
+      <div className={styles.body}>
+        <nav className={styles.content}>
           {itemsElements}
           {userSection}
         </nav>
