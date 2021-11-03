@@ -1,10 +1,10 @@
 import type { ReactElement, PropsWithChildren } from 'react';
 import Head from 'next/head';
 
-import Header from './header/Header';
+import Header from './Header/Header';
 import Footer from './footer/Footer';
 
-const temporaryHeaderProps = require('../components/header/config.json');
+const temporaryHeaderProps = require('../components/Header/config.json');
 
 interface ILayoutProps {
   pageClass: string;

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import Navbar from '../navbar/Navbar';
-import styles from './header.module.scss';
+import Navbar from '../Navbar/Navbar';
+import styles from './Header.module.scss';
 
 type NavbarListItem = {
   id: number;
@@ -26,15 +26,15 @@ const Header = ({
     setHamburger(!hamburgerIsActive);
   };
 
-  let burgerClasses = styles.header__burger;
-  burgerClasses += hamburgerIsActive ? ` ${styles.header__burger_active}` : '';
+  let burgerClasses = styles.burger;
+  burgerClasses += hamburgerIsActive ? ` ${styles.burgerActive}` : '';
 
   return (
     <header className={styles.header}>
-      <div className={styles.header__content}>
+      <div className={styles.content}>
         <Link href='/'>
           <a>
-            <img className={styles.header__logo} src={logo} alt='logo' />
+            <img className={styles.logo} src={logo} alt='logo' />
           </a>
         </Link>
         <Navbar
@@ -47,7 +47,7 @@ const Header = ({
           className={burgerClasses}
           onClick={handleBurgerClick}
         >
-          <div className={styles['header__burger-image']} />
+          <div className={styles.burgerImage} />
         </button>
       </div>
     </header>

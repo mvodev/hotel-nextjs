@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import Button from '../button/button';
-import styles from './navbar.module.scss';
+import Button from '../Button/Button';
+import styles from './Navbar.module.scss';
 
 const PHONE_SCREEN_WIDTH = 950;
 
