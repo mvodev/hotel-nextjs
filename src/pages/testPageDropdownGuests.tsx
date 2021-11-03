@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 
-import DropdownGuests from '../components/dropdown-guests/DropdownGuests';
+import DropdownGuests from '../components/DropdownGuests/DropdownGuests';
 
 const Index = (): ReactElement => (
     <DropdownGuests

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import DropdownCounter from '../dropdown-counter/DropdownCounter';
+import DropdownCounter from '../DropdownCounter/DropdownCounter';
 import Button from '../button/button';
-import styles from './dropdown.module.scss';
+import styles from './DropdownGuests.module.scss';
 import Utils from '../../utils/Utils';
 
 type DropdownGuestsProps = {
@@ -22,7 +22,8 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
     guests: ['гость', 'гостя', 'гостей'],
     infants: ['младенец', 'младенца', 'младенцев'],
   };
-  const [ opened, setOpened ] = useState( props.opened );
+  const { opened } = props;
+  const [ isOpened, setOpened ] = useState( opened );
   const [ adult, setAdult ] = useState( value.adult );
   const [ infants, setInfants ] = useState( value.infants );
   const [ child, setChild ] = useState( value.child );
@@ -57,7 +58,7 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
   };
 
   const handleDropdownClick = ()=> {
-    setOpened(!opened);
+    setOpened(!isOpened);
     window.addEventListener('click', handleOutsideClick);
   }
 
@@ -91,7 +92,7 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
   return (
     <div
       className = { styles['dropdown-guests'] }
-      style = { opened ? dropdownOpenedStyle : {} }
+      style = { isOpened ? dropdownOpenedStyle : {} }
     >
       <div
         className = { styles['dropdown-guests__input-wrapper'] }
@@ -114,7 +115,7 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
       <div
         className = { styles['dropdown-guests__body'] }
         style={
-          opened ? dropdownBodyOpenedStyle : dropdownBodyClosedStyle
+          isOpened ? dropdownBodyOpenedStyle : dropdownBodyClosedStyle
         }
       >
         <DropdownCounter

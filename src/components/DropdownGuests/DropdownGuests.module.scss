@@ -5,7 +5,8 @@
   height: 44px;
   background: #ffffff;
   box-sizing: border-box;
-  width: 320px;
+  max-width: 320px;
+  width: 100%;
   border: 1px solid rgba(31, 32, 65, 0.25);
   border-radius: 4px;
 
@@ -69,8 +70,8 @@
     display: none;
     position: absolute;
     z-index: 3;
-    width: 320px;
     left: -1px;
+    right: -1px;
     background: #ffffff;
     border: 1px solid rgba(31, 32, 65, 0.5);
     box-sizing: border-box;

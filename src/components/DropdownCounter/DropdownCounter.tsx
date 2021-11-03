@@ -1,4 +1,4 @@
-import styles from './dropdown-counter.module.scss';
+import styles from './DropdownCounter.module.scss';
 
 type DropdownCounterProps = {
   text: string;
