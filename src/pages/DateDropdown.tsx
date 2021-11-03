@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import DateDropdown from '../components/date-dropdown/date-dropdown';
+import DateDropdown from '../components/DateDropdown/DateDropdown';
 
 import Layout from '../components/Layout';
 

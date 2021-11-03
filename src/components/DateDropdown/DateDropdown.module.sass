@@ -1,6 +1,6 @@
 @import '../../styles/vars'
     
-.date-dropdown 
+.dateDropdown 
   position: relative
   display: flex
   flex-wrap: wrap
@@ -8,7 +8,7 @@
   width: 100%
   height: fit-content
 
-  &__container 
+  &Container 
     position: relative
     width: calc(50% - 10px)
 
@@ -30,14 +30,14 @@
       @media screen and (max-width: 360px) 
         right: 0
 
-  &__title
+  &Title
     margin: 0 0 5.5px
     text-transform: uppercase
     font-weight: bold
     font-size: 12px
     line-height: 15px
 
-  &__field 
+  &Field 
     position: relative
     z-index: 2
     box-sizing: border-box
@@ -68,7 +68,7 @@
     &:hover
       border: 1px solid $color-additional-fg
 
-  &__date-picker
+  &DatePicker
     position: absolute
     top: 69px
     z-index: -1
@@ -80,11 +80,11 @@
     @media screen and (max-width: 350px)
       width: 100%
 
-    &_open
+    &Open
       z-index: 10
       height: auto
       opacity: 100%
 
-  &_single
-    .date-dropdown__container
+  &Single
+    .dateDropdownContainer
       width: 100%

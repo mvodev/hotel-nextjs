@@ -1,8 +1,7 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import DatePicker from "../date-picker/date-picker";
 
-import style from './date-dropdown.module.sass'
+import style from './DateDropdown.module.sass'
 
 type DateDropdownType = {
   titles: [string] | [string, string],
@@ -36,7 +35,7 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
   const handleOutsideClick = (event: MouseEvent) => {
     const { target } = event
 
-    if (!(target as Element).closest(`.${ style['date-dropdown'] }`)) {
+    if (!(target as Element).closest(`.${ style.dateDropdown }`)) {
       setIsOpen(false);
       window.removeEventListener('click', handleOutsideClick);
     }
@@ -50,8 +49,8 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
   }
 
   const getContainer = (title: string, date: Date | [Date, Date]) => (
-    <div className = { style['date-dropdown__container'] }>
-      <h3 className= { style['date-dropdown__title'] }>{ title }</h3>
+    <div className = { style.dateDropdownContainer }>
+      <h3 className= { style.dateDropdownTitle }>{ title }</h3>
       <input 
         value={
           (modifier === 'double') 
@@ -60,7 +59,7 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
         }
         onClick={handleFieldClick} 
         type="text" 
-        className={ style['date-dropdown__field'] }
+        className={ style.dateDropdownField }
         placeholder = "ДД.ММ.ГГГГ" 
         readOnly 
       />
@@ -68,7 +67,6 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
   )
 
   const handleChangeDate = (dates: [Date, Date]): void => setValue(dates)
-
 
   const handleControlPanelUsed = (buttonType: string): void => {
     if (buttonType === 'clean') {
@@ -78,13 +76,13 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
     else setIsOpen(false);
   }
 
-  const dropdownClass = `${style['date-dropdown']} ${(modifier === 'single') 
-    ? style['date-dropdown_single'] 
+  const dropdownClass = `${ style.dateDropdown } ${(modifier === 'single') 
+    ? style.dateDropdownSingle 
     : ''
   }`;
 
-  const datePickerClass =  `${ style['date-dropdown__date-picker'] } ${isOpen
-    ? style['date-dropdown__date-picker_open']
+  const datePickerClass =  `${ style.dateDropdownDatePicker } ${isOpen
+    ? style.dateDropdownDatePickerOpen
     : ''
   }`;
 
