@@ -1,1 +1,22 @@
+@use 'sass:color'
+
+$color-main-bg: white
+$color-title-fg: #1F2041 
+$color-main-fg: color.adjust($color-title-fg, $alpha: -0.25)
+$color-additional-fg: color.adjust($color-title-fg, $alpha: -0.5)
+$color-unclaimed-fg: color.adjust($color-title-fg, $alpha: -0.75)
+$color-primary: #BC9CFF
+$color-secondary: #6FCF97
+$color-accent: color.adjust($color-primary, $red: -49, $green: 8, $blue: -6)
+$color-secondary-accent: color.adjust($color-secondary, $red: -9, $green: 3, $blue: 83)
+$color-focus: color.adjust($color-primary, $lightness: +12%)
+$gradient-primary: linear-gradient($color-primary, $color-accent)
+$gradient-secondary: linear-gradient($color-secondary, $color-secondary-accent)
+$gradient-focus: linear-gradient($color-focus, color.adjust($color-accent, $lightness: +12%))
+$gradient-secondary-focus: linear-gradient(color.adjust($color-secondary, $green: 20, $blue: 20), $color-secondary-accent)
+$color-focus-not-so-faded: color.adjust($color-primary, $red: 40)
+$gradient-not-so-faded: linear-gradient($color-focus-not-so-faded, color.adjust($color-accent, $red: 51))
+
 $main-font-family: 'Montserrat', Arial, Sans-Serif
+$material-font-family: 'Material Icons'
+$base-font-size: 14px
