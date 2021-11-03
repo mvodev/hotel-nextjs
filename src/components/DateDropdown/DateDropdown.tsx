@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import DatePicker from "../date-picker/date-picker";
+import DatePicker from "../DatePicker/DatePicker";
 
 import style from './DateDropdown.module.sass'
 
