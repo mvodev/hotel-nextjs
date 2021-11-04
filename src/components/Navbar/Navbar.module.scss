@@ -5,6 +5,8 @@
 $navbar: '.navbar';
 
 .navbar {
+  z-index: 1;
+  
   .content {
     display: flex;
     align-items: center;
