@@ -142,9 +142,9 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
               (child + adult + infants) > 0 ? {} : { visibility: 'hidden', cursor: 'none' }
             }
           >
-            <Button text = 'очистить' onClick = { handleClearButton } />
+            <Button type='button' text = 'очистить' onClick = { handleClearButton } />
           </div>
-          <Button text = 'применить' onClick = { handleApplyButton } />
+          <Button type='button' text = 'применить' onClick = { handleApplyButton } />
         </div>
       </div>
     </div>
