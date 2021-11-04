@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DropdownCounter from '../DropdownCounter/DropdownCounter';
-import Button from '../Button/Button';
+import Button from '../button/button';
 import styles from './DropdownGuests.module.scss';
 import Utils from '../../utils/Utils';
 

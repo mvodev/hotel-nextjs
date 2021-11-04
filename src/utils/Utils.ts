@@ -1,26 +1,10 @@
 class Utils {
-  
-  static getLastNumber(value: number): number {
-    return Number(value.toString().split("").pop());
-  }
 
   static getPosInSpellCasesArray(result: number): number {
-    let res = 0;
-    if (result === 1) {
-      res = 0;
-    }
-    else if (result >= 5 && result < 21) {
-      res = 2;
-    }
-    else if
-      (Number(this.getLastNumber(result)) >= 2 && Number(this.getLastNumber(result)) <= 4) {
-      res = 1;
-    }
-    else {
-      res =  2;
-    }
-    return res;
+    const cases = [2, 0, 1, 1, 1, 2];
+    return ((result % 100) > 4 && (result % 100) < 20)? 2 : cases[( result % 10 < 5)? result % 10 : 5];
   }
 
 }
+
 export default Utils;
