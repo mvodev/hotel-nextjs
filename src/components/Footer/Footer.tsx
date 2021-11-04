@@ -1,10 +1,9 @@
 import Link from 'next/link';
-import React, { useState, ChangeEvent } from 'react';
 
-import { defaultLists, defaultSocials } from './defaultProps';
-import type { TypeFooterProps } from './defaultProps';
-import SubTextField from '../sub-text-field/SubTextField';
-import styles from './footer.module.sass';
+import { defaultLists, defaultSocials } from './DefaultProps';
+import type { TypeFooterProps } from './DefaultProps';
+import SubTextField from '../SubTextField/SubTextField';
+import styles from './Footer.module.sass';
 
 const Footer = ({
   lists = defaultLists,
@@ -14,8 +13,8 @@ const Footer = ({
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.column}>
-          <Link href='/'>
-            <a className={styles.link} title='домашняя страница'>
+          <Link href='/' passHref>
+            <a href='replace' className={styles.link} title='домашняя страница'>
               <img src='./img/logo.svg' alt='toxin logo' />
             </a>
           </Link>
@@ -30,8 +29,8 @@ const Footer = ({
             <ul className={styles.list}>
               {links.map(({ name, href, id: itemID }) => (
                 <li className={styles.listItem} key={itemID}>
-                  <Link href={href}>
-                    <a className={styles.listLink} title={name}>
+                  <Link href={href} passHref>
+                    <a href='replace' className={styles.listLink} title={name}>
                       {name}
                     </a>
                   </Link>
@@ -56,8 +55,9 @@ const Footer = ({
         </p>
         <div className={styles.social}>
           {socials.map(({ id, href, src }) => (
-            <Link key={id} href={href}>
+            <Link key={id} href={href} passHref>
               <a
+                href='replace'
                 className={styles.socialLink}
                 title={id}
                 target='_blank'

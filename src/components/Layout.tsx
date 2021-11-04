@@ -2,7 +2,7 @@ import type { ReactElement, PropsWithChildren } from 'react';
 import Head from 'next/head';
 
 import Header from './header/Header';
-import Footer from './footer/Footer';
+import Footer from './Footer/Footer';
 
 const temporaryHeaderProps = require('../components/header/config.json');
 

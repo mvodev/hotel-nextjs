@@ -1,4 +1,4 @@
-import styles from './text-field.module.sass';
+import styles from './TextField.module.sass';
 
 const TextField = (
   props: React.InputHTMLAttributes<HTMLInputElement>

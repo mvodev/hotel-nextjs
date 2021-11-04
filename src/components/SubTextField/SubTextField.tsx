@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 
-import TextField from '../text-field/TextField';
-import styles from './sub-text-field.module.sass';
+import TextField from '../TextField/TextField';
+import styles from './SubTextField.module.sass';
 
 const SubTextField = (): React.ReactElement => {
   const [email, changeEmail] = useState('');
