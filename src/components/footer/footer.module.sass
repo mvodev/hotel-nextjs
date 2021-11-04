@@ -1,0 +1,137 @@
+@use 'sass:color'
+@import '../../styles/mixins'
+@import '../../styles/vars'
+
+$max-width: 950px
+
+.footer
+  box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
+
+  .wrapper
+    display: flex
+    flex-direction: column
+    align-items: center
+
+    &:last-child
+      border-top: 1px solid color.adjust($color-title-fg, $alpha: -0.9)
+
+    @media (max-width: $max-width) 
+      &:last-child
+        border-top: none
+
+  .content
+    display: grid
+    grid-template-columns: repeat(12, 1fr)
+    gap: 40px
+    padding: 102px 15px 80px
+    width: min(1190px, 100%)
+    box-sizing: border-box
+
+    @media (max-width: $max-width) 
+      display: flex
+      justify-content: center
+      padding: 120px 0 20px
+
+  .column
+    display: flex
+    flex-direction: column
+    grid-column: span 2
+    gap: 14px
+
+    &:first-child,
+    &:last-child
+      grid-column: span 3
+
+    &:last-child .chapter
+      margin-bottom: 8px
+
+    &:not(&:first-child)
+      @media (max-width: $max-width) 
+        display: none
+
+  .chapter
+    margin: 0
+    color: $color-main-fg
+    line-height: 24px
+
+    @media (max-width: $max-width) 
+      display: none
+
+  .link
+    display: flex
+    width: min-content
+
+  .title
+    font-size: 12px
+    font-weight: bold
+    margin: 0 0 5px
+    text-transform: uppercase
+    color: $color-title-fg
+
+  .list
+    margin: 0
+    padding: 2px 0 0
+    list-style: none
+
+    @media (max-width: 300px) 
+      display: none
+
+    &Item
+      margin-bottom: 20px
+
+    &Link
+      color: $color-additional-fg
+      display: inline-block
+      text-decoration: none
+      outline: none
+
+      &:first-letter
+        text-transform: uppercase
+
+      &:hover,
+      &:focus
+        color: $color-main-fg
+
+  .copyright
+    display: flex
+    align-items: center
+    margin: 0
+    color: $color-main-fg
+
+  .bottom
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: min(1190px, 100%)
+    padding: 0 15px
+    height: 70px
+
+    @media (max-width: $max-width) 
+      flex-direction: column
+      align-items: center
+      row-gap: 25px
+      padding-bottom: 123px
+      border-top: none
+      height: unset
+
+    &Container
+      margin: 0 auto
+      display: flex
+      align-items: center
+      justify-content: space-between
+      width: min(1920px, 100%)
+      height: 100%
+      box-sizing: border-box
+
+      @media (max-width: $max-width) 
+        flex-direction: column
+        gap: 25px
+        height: auto
+
+  .social
+    display: flex
+    gap: 22px
+    height: min-content
+
+    &Link
+      display: flex
