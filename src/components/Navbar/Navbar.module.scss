@@ -6,7 +6,7 @@ $navbar: '.navbar';
 
 .navbar {
   z-index: 1;
-  
+
   .content {
     display: flex;
     align-items: center;
@@ -170,22 +170,21 @@ $navbar: '.navbar';
   @media screen and (max-width: 950px) {
     position: fixed;
     padding: 30px;
-    left: 0;
+    left: -100%;
     top: 0;
     width: 100%;
     height: 100%;
     background: $color-title-fg;
     opacity: 98%;
     overflow: auto;
-    transform: translate(-100%, 0);
-    transition: transform 0.5s ease;
+    transition: left 0.5s ease;
 
     .body {
       display: inline-block;
     }
 
     &Opened {
-      transform: translate(0%, 0);
+      left:0
     }
   }
 }
