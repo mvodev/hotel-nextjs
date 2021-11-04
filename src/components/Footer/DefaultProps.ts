@@ -19,8 +19,8 @@ type TypeSocialProps<T extends TypeSocialSources> = {
 };
 
 type TypeFooterProps = {
-  lists: TypeListProps[];
-  socials: TypeSocialProps<TypeSocialSources>[];
+  lists?: TypeListProps[];
+  socials?: TypeSocialProps<TypeSocialSources>[];
 };
 
 const getLinkProps = ({
