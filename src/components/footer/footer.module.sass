@@ -5,8 +5,7 @@
 $max-width: 950px
 
 .footer
-  background-color: #ccc
-  // box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
+  box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
 
   .wrapper
     display: flex
@@ -14,8 +13,7 @@ $max-width: 950px
     align-items: center
 
     &:last-child
-      // border-top: 1px solid color.adjust($color-title-fg, $alpha: -0.9)
-      border-top: 1px solid black
+      border-top: 1px solid color.adjust($color-title-fg, $alpha: -0.9)
 
     @media (max-width: $max-width) 
       &:last-child
@@ -53,7 +51,7 @@ $max-width: 950px
 
   .chapter
     margin: 0
-    // color: $color-main-fg
+    color: $color-main-fg
     line-height: 24px
 
     @media (max-width: $max-width) 
@@ -68,6 +66,7 @@ $max-width: 950px
     font-weight: bold
     margin: 0 0 5px
     text-transform: uppercase
+    color: $color-title-fg
 
   .list
     margin: 0
@@ -81,8 +80,7 @@ $max-width: 950px
       margin-bottom: 20px
 
     &Link
-      // color: $color-additional-fg
-      color: black
+      color: $color-additional-fg
       display: inline-block
       text-decoration: none
       outline: none
@@ -92,14 +90,13 @@ $max-width: 950px
 
       &:hover,
       &:focus
-        // color: $color-main-fg
-        color: lightblue
+        color: $color-main-fg
 
   .copyright
     display: flex
     align-items: center
     margin: 0
-    text-align: center
+    color: $color-main-fg
 
   .bottom
     display: flex

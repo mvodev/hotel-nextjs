@@ -1,19 +1,18 @@
 @use '../../styles/mixins'
+@import '../../styles/vars'
 
 $size-border-radius: 4px
 
 .subTextField
   display: flex
   width: min(260px, 100%)
-  // border: 1px solid $color-unclaimed-fg
-  border: 1px solid #ccc
+  border: 1px solid $color-unclaimed-fg
   border-radius: $size-border-radius
 
   &:hover,
   &:focus,
   &Active
-    // border: 1px solid $color-additional-fg
-    border-color: black
+    border: 1px solid $color-additional-fg
 
   .button
     display: flex

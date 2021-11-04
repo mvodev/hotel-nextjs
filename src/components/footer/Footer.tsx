@@ -16,7 +16,6 @@ const Footer = ({
           <Link href='/'>
             <a className={styles.link} title='домашняя страница'>
               <img
-                className={styles.logo}
                 src='./img/logo.svg'
                 alt='toxin logo'
               />
