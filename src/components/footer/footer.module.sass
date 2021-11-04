@@ -2,15 +2,14 @@
 @import '../../styles/mixins'
 @import '../../styles/vars'
 
-$max-width: 1170px
+$max-width: 950px
 
 .footer
   background-color: #ccc
   // box-shadow: 0 10px 20px 0 color.adjust($color-title-fg, $alpha: -0.95)
 
-  &__wrapper
+  .wrapper
     display: flex
-    padding: 0 140px
     flex-direction: column
     align-items: center
 
@@ -22,12 +21,12 @@ $max-width: 1170px
       &:last-child
         border-top: none
 
-  &__container
+  .content
     display: grid
     grid-template-columns: repeat(12, 1fr)
     gap: 40px
-    padding: 102px 0 80px
-    width: min(1920px, 100%)
+    padding: 102px 15px 80px
+    width: min(1190px, 100%)
     box-sizing: border-box
 
     @media (max-width: $max-width) 
@@ -35,7 +34,7 @@ $max-width: 1170px
       justify-content: center
       padding: 120px 0 20px
 
-  &__column
+  .column
     display: flex
     flex-direction: column
     grid-column: span 2
@@ -45,14 +44,14 @@ $max-width: 1170px
     &:last-child
       grid-column: span 3
 
-    &:last-child .footer__chapter
+    &:last-child .chapter
       margin-bottom: 8px
 
     &:not(&:first-child)
       @media (max-width: $max-width) 
         display: none
 
-  &__chapter
+  .chapter
     margin: 0
     // color: $color-main-fg
     line-height: 24px
@@ -60,17 +59,17 @@ $max-width: 1170px
     @media (max-width: $max-width) 
       display: none
 
-  &__link
+  .link
     display: flex
     width: min-content
 
-  &__title
+  .title
     font-size: 12px
     font-weight: bold
     margin: 0 0 5px
     text-transform: uppercase
 
-  &__list 
+  .list
     margin: 0
     padding: 2px 0 0
     list-style: none
@@ -78,10 +77,10 @@ $max-width: 1170px
     @media (max-width: 300px) 
       display: none
 
-    &-item
+    &Item
       margin-bottom: 20px
 
-    &-link
+    &Link
       // color: $color-additional-fg
       color: black
       display: inline-block
@@ -96,47 +95,29 @@ $max-width: 1170px
         // color: $color-main-fg
         color: lightblue
 
-  $br: 4px
-  &__subscription
+  .copyright
     display: flex
-    width: fit-content
-    border: 1px solid black
-    border-radius: $br
-
-    &_selected
-      border: 1px dashed green
-
-    &-input
-      font-family: $main-font-family
-      padding: 10px 0
-      text-indent: 20px
-      border: none
-      border-top-left-radius: $br
-      border-bottom-left-radius: $br
-      outline: none
-
-    &-button
-      margin: 0
-      background-color: #fff
-      border: none
-      border-top-right-radius: $br
-      border-bottom-right-radius: $br
-      cursor: pointer
-      outline: none
-
-  &__copyright
+    align-items: center
     margin: 0
     text-align: center
 
-  &__bottom
-    width: 100%
+  .bottom
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: min(1190px, 100%)
+    padding: 0 15px
     height: 70px
 
     @media (max-width: $max-width) 
-      padding-bottom: 188px
+      flex-direction: column
+      align-items: center
+      row-gap: 25px
+      padding-bottom: 123px
       border-top: none
+      height: unset
 
-    &-container
+    &Container
       margin: 0 auto
       display: flex
       align-items: center
@@ -150,9 +131,10 @@ $max-width: 1170px
         gap: 25px
         height: auto
 
-  &__social
+  .social
     display: flex
     gap: 22px
+    height: min-content
 
-    &-link
+    &Link
       display: flex

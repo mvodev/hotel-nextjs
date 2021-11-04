@@ -10,31 +10,31 @@ const Footer = ({
   lists = defaultLists,
 }: TypeFooterProps): React.ReactElement => (
   <div className={styles.footer}>
-    <div className={styles.footer__wrapper}>
-      <div className={styles.footer__container}>
-        <div className={styles.footer__column}>
+    <div className={styles.wrapper}>
+      <div className={styles.content}>
+        <div className={styles.column}>
           <Link href='/'>
-            <a className={styles.footer__link} title='домашняя страница'>
+            <a className={styles.link} title='домашняя страница'>
               <img
-                className={styles.footer__logo}
+                className={styles.logo}
                 src='./img/logo.svg'
                 alt='toxin logo'
               />
             </a>
           </Link>
-          <p className={styles.footer__chapter}>
+          <p className={styles.chapter}>
             Бронирование номеров в лучшем отеле 2019 года по версии ассоциации
             «Отельные взгляды»
           </p>
         </div>
         {lists.map(({ title, links, id }) => (
-          <div className={styles.footer__column} key={id}>
-            <h3 className={styles.footer__title}>{title}</h3>
-            <ul className={styles.footer__list}>
+          <div className={styles.column} key={id}>
+            <h3 className={styles.title}>{title}</h3>
+            <ul className={styles.list}>
               {links.map(({ name, href, id: itemID }) => (
-                <li className={styles['footer__list-item']} key={itemID}>
+                <li className={styles.listItem} key={itemID}>
                   <Link href={href}>
-                    <a className={styles['footer__list-link']} title={name}>
+                    <a className={styles.listLink} title={name}>
                       {name}
                     </a>
                   </Link>
@@ -43,35 +43,33 @@ const Footer = ({
             </ul>
           </div>
         ))}
-        <div className={styles.footer__column}>
-          <h3 className={styles.footer__title}>Подписка</h3>
-          <p className={styles.footer__chapter}>
+        <div className={styles.column}>
+          <h3 className={styles.title}>Подписка</h3>
+          <p className={styles.chapter}>
             Получайте специальные предложения и новости сервиса
           </p>
           <SubTextField />
         </div>
       </div>
     </div>
-    <div className={styles.footer__wrapper}>
-      <div className={styles.footer__bottom}>
-        <div className={styles['footer__bottom-container']}>
-          <p className={styles.footer__copyright}>
-            Copyright © 2018 Toxin отель. Все права защищены.
-          </p>
-          <div className={styles.footer__social}>
-            {['twitter', 'facebook', 'instagram'].map((i) => (
-              <Link key={i} href={`https://${i}.com`}>
-                <a
-                  className={styles['footer__social-link']}
-                  title={i}
-                  target='_blank'
-                  rel='noopener, noreferrer'
-                >
-                  <img src={`./img/${i}-icon.svg`} alt={`${i} icon`} />
-                </a>
-              </Link>
-            ))}
-          </div>
+    <div className={styles.wrapper}>
+      <div className={styles.bottom}>
+        <p className={styles.copyright}>
+          Copyright © 2018 Toxin отель. Все права защищены.
+        </p>
+        <div className={styles.social}>
+          {['twitter', 'facebook', 'instagram'].map((i) => (
+            <Link key={i} href={`https://${i}.com`}>
+              <a
+                className={styles.socialLink}
+                title={i}
+                target='_blank'
+                rel='noopener, noreferrer'
+              >
+                <img src={`./img/${i}-icon.svg`} alt={`${i} icon`} />
+              </a>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

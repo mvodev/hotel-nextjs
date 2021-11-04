@@ -2,7 +2,7 @@
 
 $size-border-radius: 4px
 
-.sub-text-field
+.subTextField
   display: flex
   width: min(260px, 100%)
   // border: 1px solid $color-unclaimed-fg
@@ -11,11 +11,11 @@ $size-border-radius: 4px
 
   &:hover,
   &:focus,
-  &_active
+  &Active
     // border: 1px solid $color-additional-fg
     border-color: black
 
-  &__button
+  .button
     display: flex
     justify-content: center
     align-items: center
@@ -32,10 +32,10 @@ $size-border-radius: 4px
     &:hover,
     &:focus
   
-      & .sub-text-field__icon
+      & .icon
         opacity: 1
 
-  &__input
+  .input
     @include mixins.text-field
     height: 42px
     border-radius: $size-border-radius

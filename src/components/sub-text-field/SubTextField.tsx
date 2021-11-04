@@ -11,14 +11,14 @@ const SubTextField = (): React.ReactElement => {
   return (
     <div
       className={[
-        styles['sub-text-field'],
-        isHover || isFocus ? styles['sub-text-field_active'] : '',
+        styles.subTextField,
+        isHover || isFocus ? styles.subTextFieldActive : '',
       ].join(' ')}
       onPointerOver={() => toggleHover(true)}
       onPointerOut={() => toggleHover(false)}
     >
       <TextField
-        className={styles['sub-text-field__input']}
+        className={styles.input}
         value={email}
         type='email'
         placeholder='Email'
@@ -29,13 +29,13 @@ const SubTextField = (): React.ReactElement => {
         onBlur={() => toggleFocus(false)}
       />
       <button
-        className={styles['sub-text-field__button']}
+        className={styles.button}
         type='button'
         onFocus={() => toggleFocus(true)}
         onBlur={() => toggleFocus(false)}
       >
         <svg
-          className={styles['sub-text-field__icon']}
+          className={styles.icon}
           width='18'
           height='18'
           viewBox='0 0 18 18'
@@ -44,7 +44,7 @@ const SubTextField = (): React.ReactElement => {
           xmlns='http://www.w3.org/2000/svg'
         >
           <path
-            className={styles['sub-text-field__arrow']}
+            className={styles.arrow}
             d='M9 0.984375L17.0156 9L9 17.0156L7.59375 15.6094L13.1719 9.98438H0.984375V8.01562H13.1719L7.59375 2.39062L9 0.984375Z'
             fill='url(#sub-text-field-arrow-focus)'
           />
