@@ -44,8 +44,8 @@ const DatePicker = (props: DatePickerType): JSX.Element => {
         />
       </div>
       <div className='date-picker__control-panel'>
-        <Button text='очистить' onClick={handleCleanButtonClick} />
-        <Button text='применить' onClick={handleApplyButtonClick} />
+        <Button type="button" text='очистить' onClick={handleCleanButtonClick} />
+        <Button type="button" text='применить' onClick={handleApplyButtonClick} />
       </div>
     </div>
   );
