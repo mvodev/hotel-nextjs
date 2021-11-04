@@ -8,6 +8,7 @@
   box-shadow: 0px 10px 20px $shadow;
 
   .content {
+    box-sizing: content-box;
     width: 100%;
     max-width: 1160px;
     padding: 0 15px;
