@@ -10,8 +10,17 @@ type TypeListProps = {
   id: string;
 };
 
+type TypeSocialSources = 'twitter' | 'facebook' | 'instagram';
+
+type TypeSocialProps<T extends TypeSocialSources> = {
+  id: T;
+  href: string;
+  src: `./img/${T}-icon.svg`;
+};
+
 type TypeFooterProps = {
   lists: TypeListProps[];
+  socials: TypeSocialProps<TypeSocialSources>[];
 };
 
 const getLinkProps = ({
@@ -51,5 +60,23 @@ const defaultLists: TypeListProps[] = [
   },
 ];
 
-export { defaultLists };
+const defaultSocials: TypeSocialProps<TypeSocialSources>[] = [
+  {
+    id: 'twitter',
+    href: 'https://twitter.com',
+    src: './img/twitter-icon.svg',
+  },
+  {
+    id: 'facebook',
+    href: 'https://facebook.com',
+    src: './img/facebook-icon.svg',
+  },
+  {
+    id: 'instagram',
+    href: 'https://instagram.com',
+    src: './img/instagram-icon.svg',
+  },
+];
+
+export { defaultLists, defaultSocials };
 export type { TypeFooterProps, TypeListProps, TypeLinkProps };

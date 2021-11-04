@@ -1,13 +1,14 @@
 import Link from 'next/link';
 import React, { useState, ChangeEvent } from 'react';
 
-import { defaultLists } from './defaultProps';
+import { defaultLists, defaultSocials } from './defaultProps';
 import type { TypeFooterProps } from './defaultProps';
 import SubTextField from '../sub-text-field/SubTextField';
 import styles from './footer.module.sass';
 
 const Footer = ({
   lists = defaultLists,
+  socials = defaultSocials,
 }: TypeFooterProps): React.ReactElement => (
   <div className={styles.footer}>
     <div className={styles.wrapper}>
@@ -15,10 +16,7 @@ const Footer = ({
         <div className={styles.column}>
           <Link href='/'>
             <a className={styles.link} title='домашняя страница'>
-              <img
-                src='./img/logo.svg'
-                alt='toxin logo'
-              />
+              <img src='./img/logo.svg' alt='toxin logo' />
             </a>
           </Link>
           <p className={styles.chapter}>
@@ -57,15 +55,15 @@ const Footer = ({
           Copyright © 2018 Toxin отель. Все права защищены.
         </p>
         <div className={styles.social}>
-          {['twitter', 'facebook', 'instagram'].map((i) => (
-            <Link key={i} href={`https://${i}.com`}>
+          {socials.map(({ id, href, src }) => (
+            <Link key={id} href={href}>
               <a
                 className={styles.socialLink}
-                title={i}
+                title={id}
                 target='_blank'
                 rel='noopener, noreferrer'
               >
-                <img src={`./img/${i}-icon.svg`} alt={`${i} icon`} />
+                <img src={src} alt={`${id} icon`} />
               </a>
             </Link>
           ))}

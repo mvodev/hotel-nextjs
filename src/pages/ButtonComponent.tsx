@@ -48,7 +48,6 @@ const ButtonComponent = (): ReactElement => (
       </div>
     </div>
   </div>
-  
 );
 
 export default ButtonComponent;
