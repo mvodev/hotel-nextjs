@@ -6,11 +6,7 @@ import { NavbarProps, NavbarListItem } from './Types';
 
 const PHONE_SCREEN_WIDTH = 950;
 
-const Navbar = ({
-  items,
-  user,
-  navbarIsOpened,
-}: NavbarProps): React.ReactElement => {
+const Navbar = ({ items, user, navbarIsOpened }: NavbarProps): React.ReactElement => {
   const [screenWidth, setWidth] = useState(0);
   const updateWidth = () => {
     setWidth(window.innerWidth);
@@ -23,14 +19,8 @@ const Navbar = ({
   const itemsCollections = items !== undefined ? items : [];
   const itemsElements = itemsCollections.map(
     (firstLevelItem: NavbarListItem) => {
-      const hiddenItems = firstLevelItem.hiddenItems
-        ? firstLevelItem.hiddenItems
-        : [];
-
-      const arrow =
-        hiddenItems.length > 0 ? (
-          <span className={styles.arrow}>expand_more</span>
-        ) : null;
+      const hiddenItems = firstLevelItem.hiddenItems ? firstLevelItem.hiddenItems : [];
+      const arrow =  hiddenItems.length > 0 ? (<span className={styles.arrow}>expand_more</span>) : null;
 
       const secondLevelItems = hiddenItems.map((hiddenItem) => {
         const item = (
@@ -40,13 +30,12 @@ const Navbar = ({
             </Link>
           </li>
         );
+
         return item;
       });
 
       const hiddenMenu =
-        secondLevelItems.length > 0 ? (
-          <ul className={styles.hiddenMenu}>{secondLevelItems}</ul>
-        ) : null;
+        secondLevelItems.length > 0 ? (<ul className={styles.hiddenMenu}>{secondLevelItems}</ul>) : null;
 
       return (
         <li key={firstLevelItem.id} className={styles.item}>
