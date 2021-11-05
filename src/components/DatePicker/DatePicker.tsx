@@ -1,12 +1,9 @@
 import Calendar from 'react-calendar';
 import Button from '../Button/Button';
+import DatePickerType from './Types';
+
 import 'react-calendar/dist/Calendar.css';
 
-type DatePickerType = {
-  initDates: Date[];
-  onChangeDate: (dates: [Date, Date]) => void;
-  onControlPanelUsed: (buttonType: string) => void;
-}
 
 const DatePicker = (props: DatePickerType): JSX.Element => {
   const { initDates, onChangeDate, onControlPanelUsed } = props;

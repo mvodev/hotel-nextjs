@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import DatePicker from "../DatePicker/DatePicker";
+import DateDropdownType from './Types';
 
-import style from './DateDropdown.module.sass'
+import style from './DateDropdown.module.sass';
 
-type DateDropdownType = {
-  titles: [string] | [string, string],
-  modifier: 'single' | 'double',
-  initDate: [Date, Date] | [null, null],
-}
 
 const DateDropdown = (props: DateDropdownType): JSX.Element => {
   const { initDate = [null, null], titles = ['прибытие', 'выезд'], modifier = 'double' } = props; 
@@ -43,9 +39,7 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
 
   const handleFieldClick = () => {
     setIsOpen(!isOpen);
-    if (!isOpen) {
-      window.addEventListener('click', handleOutsideClick);
-    }
+    if (!isOpen) window.addEventListener('click', handleOutsideClick);S
   }
 
   const getContainer = (title: string, date: Date | [Date, Date]) => (
