@@ -1,18 +1,9 @@
 import React, { useState } from 'react';
 import DropdownCounter from '../DropdownCounter/DropdownCounter';
-import Button from '../button/button';
+import Button from '../Button/Button';
 import styles from './DropdownGuests.module.scss';
 import Utils from '../../utils/Utils';
-
-type DropdownGuestsProps = {
-  placeholder: string;
-  opened: boolean;
-  value: {
-    adult: number;
-    child: number;
-    infants: number;
-  };
-}
+import DropdownGuestsProps from './Types';
 
 const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
 

@@ -1,5 +1,5 @@
 import Calendar from 'react-calendar';
-import Button from '../button/button';
+import Button from '../Button/Button';
 import 'react-calendar/dist/Calendar.css';
 
 type DatePickerType = {

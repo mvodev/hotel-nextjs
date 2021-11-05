@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import Button from '../components/button/button';
+import Button from '../components/Button/Button';
 
 const ButtonComponent = (): ReactElement => (
   <div>

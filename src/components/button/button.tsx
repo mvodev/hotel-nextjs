@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import styles from './button.module.scss';
+import styles from './Button.module.scss';
 
 type ButtonType = {
   type?: 'button' | 'submit';
