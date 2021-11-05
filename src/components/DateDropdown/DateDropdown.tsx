@@ -39,7 +39,7 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
 
   const handleFieldClick = () => {
     setIsOpen(!isOpen);
-    if (!isOpen) window.addEventListener('click', handleOutsideClick);S
+    if (!isOpen) window.addEventListener('click', handleOutsideClick);
   }
 
   const getContainer = (title: string, date: Date | [Date, Date]) => (
