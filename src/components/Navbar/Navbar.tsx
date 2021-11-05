@@ -58,43 +58,43 @@ const Navbar = ({ items, user, navbarIsOpened }: NavbarProps): React.ReactElemen
 
   const buttons =
     screenWidth <= PHONE_SCREEN_WIDTH
-      ? [
-          <li className={styles.item}>
+      ? <div className={styles.userSection}>
+          <div className={styles.item}>
             <Link href='/'>
               <a className={styles.link}>Войти</a>
             </Link>
-          </li>,
-          <li className={styles.item}>
+          </div>
+          <div className={styles.item}>
             <Link href='/'>
               <a className={styles.link}>Зарегистрироваться</a>
             </Link>
-          </li>,
-        ]
-      : [
-          <li className={styles.item}>
+          </div>
+        </div>
+      : <div className={styles.userSection}>
+          <div className={styles.item}>
             <Button link='/' theme='bordered' size='small' text='Войти' />
-          </li>,
-          <li className={styles.item}>
+          </div>
+          <div className={styles.item}>
             <Button
               link='/'
               theme='filled'
               size='small'
               text='Зарегистрироваться'
             />
-          </li>,
-        ];
+          </div>
+        </div>;
 
   const userSection = user
-    ? [
-        <li className={separatorItemClasses}>
+    ? <div className={styles.userSection}>
+        <div className={separatorItemClasses}>
           <div className={styles.separator} />
-        </li>,
-        <li className={styles.item}>
+        </div>
+        <div className={styles.item}>
           <Link href='/'>
             <a className={styles.link}>{user}</a>
           </Link>
-        </li>,
-      ]
+        </div>
+      </div>
     : buttons;
 
   return (
@@ -102,8 +102,8 @@ const Navbar = ({ items, user, navbarIsOpened }: NavbarProps): React.ReactElemen
       <div className={styles.body}>
         <nav className={styles.content}>
           {itemsElements}
-          {userSection}
         </nav>
+        {userSection}
       </div>
     </div>
   );

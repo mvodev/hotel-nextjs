@@ -29,10 +29,6 @@ $navbar: '.navbar';
     padding: 10px;
     cursor: pointer;
 
-    &:last-child {
-      padding-right: 0;
-    }
-
     @media screen and (max-width: 950px) {
       &ThemeStretched {
         width: 100%;
@@ -83,10 +79,6 @@ $navbar: '.navbar';
           color: $color-main-bg;
         }
       }
-
-      &:last-child {
-        margin: 0;
-      }
     }
 
     @media screen and (max-width: 450px) {
@@ -117,12 +109,10 @@ $navbar: '.navbar';
     background: transparentize($color-title-fg, 0.95);
 
     @media screen and (max-width: 950px) {
-      .separator {
-        flex: none;
-        background: $color-main-bg;
-        width: 100%;
-        min-height: 1px;
-      }
+      flex: none;
+      background: $color-main-bg;
+      width: 100%;
+      min-height: 1px;
     }
   }
 
@@ -167,6 +157,15 @@ $navbar: '.navbar';
     }
   }
 
+  .body {
+    display: flex;
+  }
+
+  .userSection {
+    align-items: center;
+    display: flex;
+  }
+
   @media screen and (max-width: 950px) {
     position: fixed;
     padding: 30px;
@@ -183,8 +182,17 @@ $navbar: '.navbar';
       display: inline-block;
     }
 
+    .userSection {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .item:last-child {
+        margin: 0;
+      }
+    }
+
     &Opened {
-      left:0
+      left: 0;
     }
   }
 }
