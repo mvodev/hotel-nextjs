@@ -15,7 +15,7 @@ type TypeSocialSources = 'twitter' | 'facebook' | 'instagram';
 type TypeSocialProps<T extends TypeSocialSources> = {
   id: T;
   href: string;
-  src: `./img/${T}-icon.svg`;
+  src: `./images/${T}-icon.svg`;
 };
 
 type TypeFooterProps = {
@@ -64,17 +64,17 @@ const defaultSocials: TypeSocialProps<TypeSocialSources>[] = [
   {
     id: 'twitter',
     href: 'https://twitter.com',
-    src: './img/twitter-icon.svg',
+    src: './images/twitter-icon.svg',
   },
   {
     id: 'facebook',
     href: 'https://facebook.com',
-    src: './img/facebook-icon.svg',
+    src: './images/facebook-icon.svg',
   },
   {
     id: 'instagram',
     href: 'https://instagram.com',
-    src: './img/instagram-icon.svg',
+    src: './images/instagram-icon.svg',
   },
 ];
 

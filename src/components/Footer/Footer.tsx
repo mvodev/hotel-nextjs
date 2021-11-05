@@ -15,7 +15,7 @@ const Footer = ({
         <div className={styles.column}>
           <Link href='/' passHref>
             <a href='replace' className={styles.link} title='домашняя страница'>
-              <img src='./img/logo.svg' alt='toxin logo' />
+              <img src='./images/logo.svg' alt='toxin logo' />
             </a>
           </Link>
           <p className={styles.chapter}>
