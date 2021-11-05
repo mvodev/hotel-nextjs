@@ -2,19 +2,7 @@ import { useState, useCallback } from 'react';
 import Link from 'next/link';
 import Navbar from '../Navbar/Navbar';
 import styles from './Header.module.scss';
-
-type NavbarListItem = {
-  id: number;
-  item: string;
-  link: string;
-  hiddenItems?: NavbarListItem[];
-};
-
-type HeaderProps = {
-  logo: string;
-  user?: string;
-  navbarItems?: NavbarListItem[];
-};
+import HeaderProps from './Types';
 
 const Header = ({ logo, user, navbarItems }: HeaderProps): React.ReactElement => {
   const [hamburgerIsActive, setHamburger] = useState(false);

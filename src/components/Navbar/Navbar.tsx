@@ -2,21 +2,9 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import styles from './Navbar.module.scss';
+import { NavbarProps, NavbarListItem } from './Types';
 
 const PHONE_SCREEN_WIDTH = 950;
-
-type NavbarProps = {
-  items?: NavbarListItem[];
-  user?: string;
-  navbarIsOpened?: boolean;
-};
-
-type NavbarListItem = {
-  id: number;
-  item: string;
-  link: string;
-  hiddenItems?: NavbarListItem[];
-};
 
 const Navbar = ({
   items,
