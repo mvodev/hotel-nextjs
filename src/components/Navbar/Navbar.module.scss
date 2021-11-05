@@ -159,6 +159,10 @@ $navbar: '.navbar';
 
   .body {
     display: flex;
+
+    .item:last-child {
+      padding-right: 0;
+    }
   }
 
   .userSection {
@@ -185,10 +189,6 @@ $navbar: '.navbar';
     .userSection {
       flex-direction: column;
       align-items: flex-start;
-
-      .item:last-child {
-        margin: 0;
-      }
     }
 
     &Opened {
