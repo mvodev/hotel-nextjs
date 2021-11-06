@@ -1,11 +1,5 @@
 import styles from './DropdownCounter.module.scss';
-
-type DropdownCounterProps = {
-  text: string;
-  number: number;
-  onChange: (counter: number, type: string) => void;
-  type: string;
-};
+import DropdownCounterProps from './Types';
 
 const DropdownCounter = (props: DropdownCounterProps): JSX.Element  => {
   const { text, number, onChange, type } = props
