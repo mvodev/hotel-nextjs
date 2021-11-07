@@ -4,9 +4,11 @@ import styles from './Carousel.module.sass';
 
 const Carousel = ({ names }: { names: string[] }): React.ReactElement => {
   const [index, changeIndex] = useState(0);
+  
+  const getNext = () => index === names.length - 1 ? 0 : index + 1;
 
   useEffect(() => {
-    setTimeout(() => changeIndex(index + 1), 10000);
+    setTimeout(() => changeIndex(getNext()), 10000);
   });
 
   return (
