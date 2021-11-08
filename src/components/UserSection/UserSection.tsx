@@ -25,14 +25,7 @@ const UserSection = ({ user }: UserSectionProps): React.ReactElement => {
       <Link href='/'><a className={styles.link}>Зарегистрироваться</a></Link> :
       <Button link='/' theme='filled' size='small' text='Зарегистрироваться' />;
 
-  const buttons = (
-    <>
-      <div className={styles.item}>{entryButton}</div>
-      <div className={styles.item}>{registrationButton}</div>
-    </>
-  );
-
-  const userSection = user ? (
+  const userSection = user ?
     <>
       <div className={separatorItemClasses}>
         <div className={styles.separator} />
@@ -40,10 +33,11 @@ const UserSection = ({ user }: UserSectionProps): React.ReactElement => {
       <div className={styles.item}>
         <Link href='/'><a className={styles.link}>{user}</a></Link>
       </div>
-    </>
-  ) : (
-    buttons
-  );
+    </> :
+    <>
+      <div className={styles.item}>{entryButton}</div>
+      <div className={styles.item}>{registrationButton}</div>
+    </>;
 
   return <div className={styles.userSection}>{userSection}</div>;
 };
