@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DropdownCounter from '../DropdownCounter/DropdownCounter';
 import Button from '../Button/Button';
 import styles from './DropdownGuests.module.scss';
-import Utils from '../../utils/Utils';
+import { getPosInSpellCasesArray } from '../../utils/Utils';
 import DropdownGuestsProps from './Types';
 
 const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
@@ -67,11 +67,11 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
     let result = '';
     const total = adult + child;
     result = `${total} ${
-      spellCases.guests[Utils.getPosInSpellCasesArray(total)]
+      spellCases.guests[getPosInSpellCasesArray(total)]
     }`;
     if (infants > 0) {
       result += `,  ${infants} ${
-        spellCases.infants[Utils.getPosInSpellCasesArray(infants)]
+        spellCases.infants[getPosInSpellCasesArray(infants)]
       }`;
     }
     if (total === 0) {
