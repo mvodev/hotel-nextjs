@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
 import styles from './Carousel.module.sass';
+import TypeCarouselProps from './Types';
 
-const Carousel = ({ names }: { names: string[] }): React.ReactElement => {
+const Carousel = ({
+  names,
+  delay = 10000,
+}: TypeCarouselProps): React.ReactElement => {
   const [index, changeIndex] = useState(0);
-  
-  const getNext = () => index === names.length - 1 ? 0 : index + 1;
+
+  const getNext = () => (index === names.length - 1 ? 0 : index + 1);
 
   useEffect(() => {
-    setTimeout(() => changeIndex(getNext()), 10000);
+    setTimeout(() => changeIndex(getNext()), Math.abs(delay));
   });
 
   return (
