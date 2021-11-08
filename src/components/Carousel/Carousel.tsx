@@ -12,7 +12,7 @@ const Carousel = ({
   const getNext = () => (index === names.length - 1 ? 0 : index + 1);
 
   useEffect(() => {
-    setTimeout(() => changeIndex(getNext()), Math.abs(delay));
+    setTimeout(() => changeIndex(getNext()), delay);
   });
 
   return (
