@@ -102,20 +102,6 @@ $navbar: '.navbar';
     }
   }
 
-  .separator {
-    display: flex;
-    width: 1px;
-    min-height: 30px;
-    background: transparentize($color-title-fg, 0.95);
-
-    @media screen and (max-width: 950px) {
-      flex: none;
-      background: $color-main-bg;
-      width: 100%;
-      min-height: 1px;
-    }
-  }
-
   .arrow {
     @include material-icon;
     transition: transform 0.3s ease;
@@ -163,11 +149,6 @@ $navbar: '.navbar';
     .item:last-child {
       padding-right: 0;
     }
-  }
-
-  .userSection {
-    align-items: center;
-    display: flex;
   }
 
   @media screen and (max-width: 950px) {

@@ -1,26 +1,23 @@
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import Button from '../Button/Button';
+import UserSection from '../UserSection/UserSection';
 import styles from './Navbar.module.scss';
 import { NavbarProps, NavbarListItem } from './Types';
 
-const PHONE_SCREEN_WIDTH = 950;
-
-const Navbar = ({ items, user, navbarIsOpened }: NavbarProps): React.ReactElement => {
-  const [screenWidth, setWidth] = useState(0);
-  const updateWidth = () => {
-    setWidth(window.innerWidth);
-  };
-  useEffect(() => {
-    window.addEventListener('resize', updateWidth);
-    updateWidth();
-  }, []);
-
+const Navbar = ({
+  items,
+  user,
+  navbarIsOpened,
+}: NavbarProps): React.ReactElement => {
   const itemsCollections = items !== undefined ? items : [];
   const itemsElements = itemsCollections.map(
     (firstLevelItem: NavbarListItem) => {
-      const hiddenItems = firstLevelItem.hiddenItems ? firstLevelItem.hiddenItems : [];
-      const arrow =  hiddenItems.length > 0 ? (<span className={styles.arrow}>expand_more</span>) : null;
+      const hiddenItems = firstLevelItem.hiddenItems
+        ? firstLevelItem.hiddenItems
+        : [];
+      const arrow =
+        hiddenItems.length > 0 ? (
+          <span className={styles.arrow}>expand_more</span>
+        ) : null;
 
       const secondLevelItems = hiddenItems.map((hiddenItem) => {
         const item = (
@@ -35,7 +32,9 @@ const Navbar = ({ items, user, navbarIsOpened }: NavbarProps): React.ReactElemen
       });
 
       const hiddenMenu =
-        secondLevelItems.length > 0 ? (<ul className={styles.hiddenMenu}>{secondLevelItems}</ul>) : null;
+        secondLevelItems.length > 0 ? (
+          <ul className={styles.hiddenMenu}>{secondLevelItems}</ul>
+        ) : null;
 
       return (
         <li key={firstLevelItem.id} className={styles.item}>
@@ -54,56 +53,11 @@ const Navbar = ({ items, user, navbarIsOpened }: NavbarProps): React.ReactElemen
   let navbarClasses = styles.navbar;
   navbarClasses += navbarIsOpened ? ` ${styles.navbarOpened}` : '';
 
-  const separatorItemClasses = `${styles.item} ${styles.itemThemeStretched}`;
-
-  const buttons =
-    screenWidth <= PHONE_SCREEN_WIDTH
-      ? <div className={styles.userSection}>
-          <div className={styles.item}>
-            <Link href='/'>
-              <a className={styles.link}>Войти</a>
-            </Link>
-          </div>
-          <div className={styles.item}>
-            <Link href='/'>
-              <a className={styles.link}>Зарегистрироваться</a>
-            </Link>
-          </div>
-        </div>
-      : <div className={styles.userSection}>
-          <div className={styles.item}>
-            <Button link='/' theme='bordered' size='small' text='Войти' />
-          </div>
-          <div className={styles.item}>
-            <Button
-              link='/'
-              theme='filled'
-              size='small'
-              text='Зарегистрироваться'
-            />
-          </div>
-        </div>;
-
-  const userSection = user
-    ? <div className={styles.userSection}>
-        <div className={separatorItemClasses}>
-          <div className={styles.separator} />
-        </div>
-        <div className={styles.item}>
-          <Link href='/'>
-            <a className={styles.link}>{user}</a>
-          </Link>
-        </div>
-      </div>
-    : buttons;
-
   return (
     <div className={navbarClasses}>
       <div className={styles.body}>
-        <nav className={styles.content}>
-          {itemsElements}
-        </nav>
-        {userSection}
+        <nav className={styles.content}>{itemsElements}</nav>
+        <UserSection {...{ user }} />
       </div>
     </div>
   );
