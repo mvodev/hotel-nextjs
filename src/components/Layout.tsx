@@ -1,10 +1,10 @@
 import type { ReactElement, PropsWithChildren } from 'react';
 import Head from 'next/head';
 
-import Header from './header/Header';
-import Footer from './footer/Footer';
-
-const temporaryHeaderProps = require('../components/header/config.json');
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
+import { defaultLists, defaultSocials } from './Footer/DefaultProps';
+import HeaderDefaultProps from './Header/HeaderDefaultProps';
 
 interface ILayoutProps {
   pageClass: string;
@@ -24,9 +24,9 @@ const Layout = ({
       <link rel='icon' type='image/jpg' href='/favicons/favicon-32x32.png' />
       <link rel='icon' type='image/jpg' href='/favicons/favicon-16x16.png' />
     </Head>
-    <Header {...temporaryHeaderProps} />
+    <Header {...HeaderDefaultProps} />
     <main className={pageClass}>{children}</main>
-    <Footer />
+    <Footer {...{lists: defaultLists, socials: defaultSocials}} />
   </>
 );
 
