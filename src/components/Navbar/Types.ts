@@ -1,7 +1,7 @@
 type NavbarProps = {
   items?: NavbarListItem[];
   user?: string;
-  navbarIsOpened?: boolean;
+  isOpened?: boolean;
 };
 
 type NavbarListItem = {

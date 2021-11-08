@@ -6,42 +6,31 @@ import { NavbarProps, NavbarListItem } from './Types';
 const Navbar = ({
   items,
   user,
-  navbarIsOpened,
+  isOpened,
 }: NavbarProps): React.ReactElement => {
   const itemsCollections = items !== undefined ? items : [];
   const itemsElements = itemsCollections.map(
     (firstLevelItem: NavbarListItem) => {
-      const hiddenItems = firstLevelItem.hiddenItems
-        ? firstLevelItem.hiddenItems
-        : [];
-      const arrow =
-        hiddenItems.length > 0 ? (
-          <span className={styles.arrow}>expand_more</span>
-        ) : null;
+      const hiddenItems = firstLevelItem.hiddenItems ? firstLevelItem.hiddenItems : [];
+      const arrow = hiddenItems.length > 0 ? <span className={styles.arrow} >expand_more</span> : null;
 
       const secondLevelItems = hiddenItems.map((hiddenItem) => {
         const item = (
           <li key={hiddenItem.id} className={styles.item}>
-            <Link href={hiddenItem.link}>
-              <a className={styles.link}>{hiddenItem.item}</a>
-            </Link>
+            <Link href={hiddenItem.link}><a className={styles.link}>{hiddenItem.item}</a></Link>
           </li>
         );
 
         return item;
       });
 
-      const hiddenMenu =
-        secondLevelItems.length > 0 ? (
-          <ul className={styles.hiddenMenu}>{secondLevelItems}</ul>
-        ) : null;
+      const hiddenMenu = secondLevelItems.length > 0 ?
+          <ul className={styles.hiddenMenu}>{secondLevelItems}</ul> : null;
 
       return (
         <li key={firstLevelItem.id} className={styles.item}>
           <div className={styles.linkSection}>
-            <Link href={firstLevelItem.link}>
-              <a className={styles.link}>{firstLevelItem.item}</a>
-            </Link>
+            <Link href={firstLevelItem.link}><a className={styles.link}>{firstLevelItem.item}</a></Link>
             {arrow}
           </div>
           {hiddenMenu}
@@ -51,7 +40,7 @@ const Navbar = ({
   );
 
   let navbarClasses = styles.navbar;
-  navbarClasses += navbarIsOpened ? ` ${styles.navbarOpened}` : '';
+  navbarClasses += isOpened ? ` ${styles.navbarOpened}` : '';
 
   return (
     <div className={navbarClasses}>

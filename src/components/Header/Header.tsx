@@ -23,15 +23,11 @@ const Header = ({ logo, user, navbarItems }: HeaderProps): React.ReactElement =>
       <div className={styles.subHeader} style={{ height: `${headerHeight}px` }} />
       <div className={styles.body} ref={headerRef}>
         <div className={styles.content}>
-          <Link href='/'>
-            <a>
-              <img className={styles.logo} src={logo} alt='logo' />
-            </a>
-          </Link>
+          <Link href='/'><a><img className={styles.logo} src={logo} alt='logo' /></a></Link>
           <Navbar
             items={navbarItems}
             user={user}
-            navbarIsOpened={hamburgerIsActive}
+            isOpened={hamburgerIsActive}
           />
           <button
             type='button'
