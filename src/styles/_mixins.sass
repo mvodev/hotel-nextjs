@@ -1,3 +1,5 @@
+@import '@styles/vars'
+
 @mixin material-icon()
   font-family: 'Material Icons'
   font-weight: normal
@@ -15,7 +17,7 @@
   text-rendering: optimizeLegibility
   -moz-osx-font-smoothing: grayscale
   font-feature-settings: 'liga'
-
+  
 @mixin h1()
   font-family: Montserrat
   font-style: normal
@@ -42,4 +44,17 @@
   text-transform: uppercase
   color: $color-title-fg
   margin: 0 0 5px 0
+  
+@function px2rem($px)
+  @return math.div($px, 14px) * 1rem
 
+@mixin font-type($size: null, $color: null, $weight: null, $transform: null, $family: null)
+  @if $size
+    font-size: px2rem($size)
+  font-weight: $weight
+  color: $color
+  text-transform: $transform
+  font-family: $family
+
+@mixin font-bold-type
+  @include font-type(12px, $color-title-fg, bold, uppercase)
