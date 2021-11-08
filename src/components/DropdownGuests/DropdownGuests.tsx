@@ -19,16 +19,6 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
   const [ infants, setInfants ] = useState( value.infants );
   const [ child, setChild ] = useState( value.child );
 
-  const dropdownOpenedStyle = {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    border: '1px solid rgba(31, 32, 65, 0.5)',
-  };
-
-  const dropdownBodyOpenedStyle = { display: 'block' };
-
-  const dropdownBodyClosedStyle = { display: 'none' };
-
   const handleApplyButton = ()=> {
     setOpened(false);
   }
@@ -81,9 +71,10 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
   }
 
   return (
+
     <div
-      className = { styles.dropdownGuests }
-      style = { isOpened ? dropdownOpenedStyle : {} }
+      className = { [styles.dropdownGuests, isOpened ? styles.dropdownGuestsIsOpened : '']
+                    .join(' ') }
     >
       <div
         className = { styles.dropdownGuestsInputWrapper }
@@ -104,10 +95,8 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
         </div>
       </div>
       <div
-        className = { styles.dropdownGuestsBody }
-        style={
-          isOpened ? dropdownBodyOpenedStyle : dropdownBodyClosedStyle
-        }
+        className = { [styles.dropdownGuestsBody, isOpened ? styles.dropdownGuestsBodyIsOpened : '']
+        .join(' ') }
       >
         <DropdownCounter
           text = 'Взрослые'
@@ -128,10 +117,7 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
           type = 'infants'
         />
         <div className = { styles.dropdownGuestsBodyButtons }>
-          <div
-            style = {
-              (child + adult + infants) > 0 ? {} : { visibility: 'hidden', cursor: 'none' }
-            }
+          <div className={(child + adult + infants) > 0 ? '' : styles.dropdownGuestsButtonIsHidden}
           >
             <Button type='button' text = 'очистить' onClick = { handleClearButton } />
           </div>
