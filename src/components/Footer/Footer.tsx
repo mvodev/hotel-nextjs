@@ -1,8 +1,9 @@
 import Link from 'next/link';
 
+import SubTextField from 'src/components/SubTextField/SubTextField';
+
 import { defaultLists, defaultSocials } from './DefaultProps';
 import type { TypeFooterProps } from './Types';
-import SubTextField from '../SubTextField/SubTextField';
 import styles from './Footer.module.sass';
 
 const Footer = ({
