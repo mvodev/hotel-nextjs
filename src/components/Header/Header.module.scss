@@ -1,0 +1,99 @@
+@import '../../styles/vars.sass';
+
+.header {
+  background: $color-main-bg;
+
+  .subHeader {
+    position: relative;
+  }
+
+  .body {
+    z-index: 3;
+    background: $color-main-bg;
+    display: flex;
+    min-height: 70px;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0px 10px 20px $shadow;
+    top: 0;
+  }
+
+  .content {
+    box-sizing: content-box;
+    width: 100%;
+    max-width: 1160px;
+    padding: 0 15px;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+  }
+
+  .burger {
+    background: none;
+    border: none;
+    display: none;
+    position: relative;
+    padding: 8px 0;
+    z-index: 1;
+    cursor: pointer;
+
+    @media screen and (max-width: 950px) {
+      display: flex;
+    }
+
+    &Active {
+      .burgerImage {
+        background: transparent;
+
+        &:before {
+          background: white;
+          transition: background 0.1s ease 0.4s, top 0.2s ease-in 0.6s,
+            transform 0.2s ease-in 0.8s;
+          top: 0;
+          transform: rotate(-45deg);
+        }
+
+        &:after {
+          background: white;
+          transition: background 0.1s ease 0.4s, top 0.2s ease-in 0.6s,
+            transform 0.2s ease-in 0.8s;
+          top: 0;
+          transform: rotate(45deg);
+        }
+      }
+    }
+  }
+
+  .burgerImage {
+    transition: background 0.2s ease-in 0.2s;
+    position: relative;
+    margin: 0;
+    width: 25px;
+    height: 4px;
+    background: $color-main-fg;
+
+    &:before {
+      content: '';
+      transition: top 0.2s ease-in 0.2s, transform 0.2s ease-in;
+      position: absolute;
+      top: -8px;
+      display: block;
+      width: 25px;
+      height: 4px;
+      background: $color-main-fg;
+    }
+
+    &:after {
+      content: '';
+      transition: top 0.2s ease-in 0.2s, transform 0.2s ease-in;
+      position: absolute;
+      top: 8px;
+      display: block;
+      width: 25px;
+      height: 4px;
+      background: $color-main-fg;
+    }
+  }
+}
