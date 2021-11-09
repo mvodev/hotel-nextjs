@@ -17,6 +17,7 @@ const DropdownCounter = (props: DropdownCounterProps): JSX.Element  => {
       <div className={styles.dropdownCounterHeader}>{text}</div>
       <div className={styles.dropdownCounterContainer}>
         <button
+          disabled={number <= 0}
           className={
             (number > 0)
               ? styles.containerDropdownDecreaseDark
