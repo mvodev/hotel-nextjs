@@ -37,6 +37,7 @@ module.exports = {
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/prop-types": "off"
   },
 };
