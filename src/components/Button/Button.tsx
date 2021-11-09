@@ -17,23 +17,20 @@ const Button = ({ type, text = 'click me', isDisabled = false,
   };
 
   const classes = [ styles.button, themes[theme || ''], sizes[size || '' ]];
-  const classesString = classes.filter((classItem) => classItem).join(' ');
+  const classesString = classes.join(' ');
 
   const handleButtonClick = (): void => {
     if (onClick) {
       onClick();
     }
   };
-
-  if (link) {
-    return <Link href={link}><a className={classesString}>{text}</a></Link>;
-  }
-
-  return (
+  const button = link ? 
+    <Link href={link}><a className={classesString}>{text}</a></Link> :
     <button className={classesString} type={type} disabled={isDisabled} onClick={handleButtonClick}>
       {text}
     </button>
-  );
+
+  return button;
 };
 
 export default Button;
