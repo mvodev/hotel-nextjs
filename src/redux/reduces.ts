@@ -2,7 +2,7 @@ import { combineReducers } from '@reduxjs/toolkit';
 import dates from './Dates/DatesReducer';
 
 const reducers = combineReducers({
-  dates
-})
+  dates,
+});
 
-export default reducers
+export default reducers;

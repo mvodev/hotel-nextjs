@@ -16,7 +16,7 @@ const state: RoomRateCardState = {
     titles: ['прибытие', 'выезд'],
     modifier: 'double',
   },
-  guestsDropdown: null
+  guestsDropdown: null,
 };
 
 const Index = (): ReactElement => (
