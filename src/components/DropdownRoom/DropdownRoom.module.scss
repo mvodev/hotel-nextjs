@@ -1,0 +1,97 @@
+@import '../../styles/vars.sass';
+
+.dropdownRoom {
+  position: relative;
+  font-family: $main-font-family;
+  line-height: 14.63px;
+  height: 44px;
+  background: $color-main-bg;
+  box-sizing: border-box;
+  width: 266px;
+  border: 1px solid $color-unclaimed-fg;
+  border-radius: 4px 4px 0 0;
+
+  &IsOpened {
+    border: 1px solid $color-additional-fg;
+  }
+
+  &InputWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+  }
+
+  &Input {
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+    height: 24px;
+    padding-left: 15px;
+    margin-top: 8px;
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1rem;
+    line-height: 1.7rem;
+    cursor: pointer;
+    background: transparent;
+    width: 220px;
+  }
+
+  &InputAllPositions{
+    font-size: 0.9rem;
+    padding-left: 10px;
+  }
+
+  &Input::placeholder {
+    font-family: inherit;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.16rem;
+    line-height: 2rem;
+    height: 18px;
+    color: $color-main-fg;
+  }
+
+  &Arrow {
+    width: 44px;
+    height: 44px;
+    font-family: $material-font-family;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: $color-additional-fg;
+    position: absolute;
+    right: 0;
+    top: 0;
+    user-select: none;
+  }
+
+  &Body {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: none;
+    position: absolute;
+    z-index: 3;
+    left: -1px;
+    right: -1px;
+    background: $color-main-bg;
+    border: 1px solid $color-additional-fg;
+    box-sizing: border-box;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 10px 20px rgba(31, 32, 65, 0.05);
+  }
+
+  &BodyIsOpened {
+    display: block;
+  }
+}
