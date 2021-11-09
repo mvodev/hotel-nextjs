@@ -1,13 +1,13 @@
 import { AnyAction } from '@reduxjs/toolkit';
-import { CHANGE_DATE } from './DatesActions'
+import { CHANGE_DATE } from './DatesActions';
 
 const dates = (state = null, action: AnyAction): any => {
   switch (action.type) {
     case CHANGE_DATE:
-      return action.dates
+      return action.dates;
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default dates
+export default dates;
