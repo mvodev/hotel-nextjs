@@ -1,17 +1,17 @@
 import styles from './DropdownCounter.module.scss';
 import DropdownCounterProps from './Types';
 
-const DropdownCounter = (props: DropdownCounterProps): JSX.Element  => {
-  const { text, number, onChange, type } = props
+const DropdownCounter = (props: DropdownCounterProps): JSX.Element => {
+  const { text, number, onChange, type } = props;
 
   const handleClickMinus = () => {
     if (number > 0) onChange(number - 1, type);
-  }
+  };
 
   const handleClickPlus = () => {
     onChange(number + 1, type);
-  }
-    
+  };
+
   return (
     <div className={styles.dropdownCounter}>
       <div className={styles.dropdownCounterHeader}>{text}</div>
@@ -19,7 +19,7 @@ const DropdownCounter = (props: DropdownCounterProps): JSX.Element  => {
         <button
           disabled={number <= 0}
           className={
-            (number > 0)
+            number > 0
               ? styles.containerDropdownDecreaseDark
               : styles.containerDropdownDecrease
           }
@@ -34,13 +34,13 @@ const DropdownCounter = (props: DropdownCounterProps): JSX.Element  => {
           className={styles.containerDropdownIncrease}
           onClick={handleClickPlus}
           onKeyDown={handleClickPlus}
-          type = 'button'
+          type='button'
         >
           +
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default DropdownCounter;

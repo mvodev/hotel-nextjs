@@ -6,5 +6,5 @@ type DropdownGuestsProps = {
     child: number;
     infants: number;
   };
-}
+};
 export default DropdownGuestsProps;

@@ -10,7 +10,7 @@
   border-radius: 4px;
   border: 1px solid rgba(31, 32, 65, 0.25);
 
-  &:hover{
+  &:hover {
     border: 1px solid rgba(31, 32, 65, 0.5);
   }
 
@@ -84,7 +84,7 @@
     top: 42px;
   }
 
-  &BodyIsOpened{
+  &BodyIsOpened {
     display: block;
   }
 
@@ -92,7 +92,7 @@
     display: block;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border: 1px solid rgba(31, 32, 65, 0.5),
+    border: 1px solid rgba(31, 32, 65, 0.5);
   }
 
   &BodyButtons {
@@ -102,9 +102,8 @@
     color: #bc9cff;
     margin: 20px 7px 12px 14px;
   }
-  &ButtonIsHidden{
-    visibility: hidden; 
+  &ButtonIsHidden {
+    visibility: hidden;
     cursor: none;
   }
-  
 }

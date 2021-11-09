@@ -4,9 +4,15 @@ import Navbar from '../Navbar/Navbar';
 import styles from './Header.module.scss';
 import HeaderProps from './Types';
 
-const Header = ({ logo, user, navbarItems }: HeaderProps): React.ReactElement => {
+const Header = ({
+  logo,
+  user,
+  navbarItems,
+}: HeaderProps): React.ReactElement => {
   const [hamburgerIsActive, setHamburger] = useState(false);
-  const handleBurgerClick = (): void => { setHamburger(!hamburgerIsActive); };
+  const handleBurgerClick = (): void => {
+    setHamburger(!hamburgerIsActive);
+  };
 
   const [headerHeight, setHeaderHeight] = useState(0);
   const headerRef = useCallback((node) => {
@@ -20,10 +26,17 @@ const Header = ({ logo, user, navbarItems }: HeaderProps): React.ReactElement =>
 
   return (
     <header className={styles.header}>
-      <div className={styles.subHeader} style={{ height: `${headerHeight}px` }} />
+      <div
+        className={styles.subHeader}
+        style={{ height: `${headerHeight}px` }}
+      />
       <div className={styles.body} ref={headerRef}>
         <div className={styles.content}>
-          <Link href='/'><a><img className={styles.logo} src={logo} alt='logo' /></a></Link>
+          <Link href='/'>
+            <a>
+              <img className={styles.logo} src={logo} alt='logo' />
+            </a>
+          </Link>
           <Navbar
             items={navbarItems}
             user={user}
