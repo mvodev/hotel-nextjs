@@ -1,0 +1,47 @@
+@use '../../styles/mixins'
+@import '../../styles/vars'
+
+$size-border-radius: 4px
+
+.subTextField
+  display: flex
+  width: min(260px, 100%)
+  border: 1px solid $color-unclaimed-fg
+  border-radius: $size-border-radius
+
+  &:hover,
+  &:focus,
+  &Active
+    border: 1px solid $color-additional-fg
+
+  .button
+    display: flex
+    justify-content: center
+    align-items: center
+    min-width: 44px
+    padding: 0
+    border: none
+    border-radius: $size-border-radius
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    outline: none
+    background: white
+    cursor: pointer
+
+    &:hover,
+    &:focus
+  
+      & .icon
+        opacity: 1
+
+  .input
+    @include mixins.text-field
+    height: 42px
+    border-radius: $size-border-radius
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+    border: none
+    
+    &:hover,
+    &:focus
+      border: none
