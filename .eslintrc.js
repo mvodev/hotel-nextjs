@@ -38,6 +38,7 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
     "react/require-default-props": "off",
+    "jsx-a11y/anchor-is-valid": "off"
     "react/prop-types": "off"
   },
 };
