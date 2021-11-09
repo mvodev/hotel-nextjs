@@ -1,14 +1,13 @@
 import type { ReactElement } from 'react';
 import Carousel from '../components/Carousel/Carousel';
 import DateDropdownType from '../components/DateDropdown/Types';
-import DropdownGuestsProps from '../components/DropdownGuests/Types';
 import Layout from '../components/Layout';
 import SearchRoomCard from '../components/SearchRoomCard/SearchRoomCard';
 import styles from '../styles/pages/index.module.scss';
 
 type RoomRateCardState = {
   dateDropdown: DateDropdownType;
-  guestsDropdown: DropdownGuestsProps;
+  guestsDropdown: null;
 };
 
 const state: RoomRateCardState = {
@@ -17,15 +16,7 @@ const state: RoomRateCardState = {
     titles: ['прибытие', 'выезд'],
     modifier: 'double',
   },
-  guestsDropdown: {
-    placeholder: 'Сколько гостей',
-    opened: false,
-    value: {
-      adult: 0,
-      child: 0,
-      infants: 0,
-    },
-  },
+  guestsDropdown: null
 };
 
 const Index = (): ReactElement => (
