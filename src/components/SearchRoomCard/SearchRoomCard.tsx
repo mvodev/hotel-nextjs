@@ -1,27 +1,11 @@
 import Button from '../Button/Button';
 import DateDropdown from '../DateDropdown/DateDropdown';
-import DropdownGuests from '../DropdownGuests/DropdownGuests';
+import DateDropdownType from '../DateDropdown/Types';
 import styles from './SearchRoomCard.module.scss';
-
-type DropdownGuestsProps = {
-  placeholder: string;
-  opened: boolean;
-  value: {
-    adult: number;
-    child: number;
-    infants: number;
-  };
-};
-
-type DateDropdownType = {
-  titles: [string] | [string, string];
-  modifier: 'single' | 'double';
-  initDate: [Date, Date] | [null, null];
-};
 
 type RoomRateCardState = {
   dateDropdown: DateDropdownType;
-  guestsDropdown: DropdownGuestsProps;
+  guestsDropdown: null;
 };
 
 const SearchRoomCard = ({
@@ -35,10 +19,10 @@ const SearchRoomCard = ({
         <div className={styles.formItem}>
           <DateDropdown {...dateDropdown} />
         </div>
-        <div className={styles.formItem}>
+        {/* <div className={styles.formItem}>
           <h3 className={styles.formItemTitle}>гости</h3>
           <DropdownGuests {...guestsDropdown} />
-        </div>
+        </div> */}
         <div className={styles.buttonContainer}>
           <Button type='submit' theme='filled' text='подобрать номер' />
         </div>
