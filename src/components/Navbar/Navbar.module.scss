@@ -1,8 +1,5 @@
 @sass:color;
-@import '../../styles/mixins';
 @import '../../styles/vars';
-
-$navbar: '.navbar';
 
 .navbar {
   z-index: 1;
@@ -15,131 +12,6 @@ $navbar: '.navbar';
       flex-direction: column;
       align-items: flex-start;
       justify-content: flex-start;
-    }
-  }
-
-  .item {
-    display: flex;
-    flex-direction: column;
-    list-style-type: none;
-    position: relative;
-    font-family: Montserrat;
-    font-size: 14px;
-    color: $color-additional-fg;
-    padding: 10px;
-    cursor: pointer;
-
-    @media screen and (max-width: 950px) {
-      &ThemeStretched {
-        width: 100%;
-      }
-    }
-
-    &:hover {
-      color: $color-main-fg;
-
-      .hiddenMenu {
-        opacity: 1;
-        visibility: visible;
-        transform: translate(0, 0);
-        pointer-events: all;
-      }
-
-      .link {
-        color: $color-main-fg;
-      }
-
-      .arrow {
-        transform: rotate(180deg);
-      }
-
-      @media screen and (max-width: 950px) {
-        color: $color-main-bg;
-
-        .hiddenMenu {
-          padding-top: 30px;
-          display: block;
-        }
-      }
-    }
-
-    @media screen and (max-width: 950px) {
-      align-items: flex-start;
-      color: $color-main-bg;
-      padding: 0;
-      margin: 0 0 30px 0;
-      font-size: 24px;
-
-      .link {
-        color: $color-main-bg;
-      }
-
-      &:hover {
-        .link {
-          color: $color-main-bg;
-        }
-      }
-    }
-
-    @media screen and (max-width: 450px) {
-      font-size: 5vw;
-    }
-  }
-
-  .linkSection {
-    display: flex;
-    align-items: center;
-  }
-
-  .link {
-    color: $color-additional-fg;
-    text-decoration: none;
-
-    @media screen and (max-width: 950px) {
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .arrow {
-    @include material-icon;
-    transition: transform 0.3s ease;
-  }
-
-  .hiddenMenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: $color-main-fg;
-    padding: 15px;
-    margin: 0;
-    min-width: 200px;
-    transform: translate(0px, 10%);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: all 0.3s ease 0s;
-
-    @media screen and (max-width: 950px) {
-      position: unset;
-      display: none;
-      background: unset;
-    }
-
-    .item {
-      padding: 0 0 10px 0;
-
-      .link {
-        color: $color-main-bg;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-
-      &:last-child {
-        padding: 0;
-      }
     }
   }
 
@@ -165,11 +37,6 @@ $navbar: '.navbar';
 
     .body {
       display: inline-block;
-    }
-
-    .userSection {
-      flex-direction: column;
-      align-items: flex-start;
     }
 
     &Opened {

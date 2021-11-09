@@ -1,14 +1,9 @@
+import { NavbarItem } from '../NavbarItem/Types';
+
 type NavbarProps = {
-  items?: NavbarListItem[];
+  items?: NavbarItem[];
   user?: string;
   isOpened?: boolean;
 };
 
-type NavbarListItem = {
-  id: number;
-  item: string;
-  link: string;
-  hiddenItems?: NavbarListItem[];
-};
-
-export type { NavbarProps, NavbarListItem };
+export default NavbarProps;
