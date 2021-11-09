@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import Header from './Header/Header';
 import HeaderDefaultProps from './Header/HeaderDefaultProps';
+import Footer from './Footer/Footer';
 
 interface ILayoutProps {
   pageClass: string;
@@ -24,6 +25,7 @@ const Layout = ({
     </Head>
     <Header {...HeaderDefaultProps} />
     <main className={pageClass}>{children}</main>
+    <Footer />
   </>
 );
 
