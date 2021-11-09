@@ -1,5 +1,5 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import dates from './dates';
+import dates from './Dates/DatesReducer';
 
 const reducers = combineReducers({
   dates

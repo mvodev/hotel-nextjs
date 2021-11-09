@@ -1,5 +1,5 @@
 import { AnyAction } from '@reduxjs/toolkit';
-import { CHANGE_DATE } from '../actions/change-date'
+import { CHANGE_DATE } from './DatesActions'
 
 const dates = (state = null, action: AnyAction): any => {
   switch (action.type) {
