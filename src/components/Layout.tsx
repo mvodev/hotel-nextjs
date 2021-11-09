@@ -2,8 +2,7 @@ import type { ReactElement, PropsWithChildren } from 'react';
 import Head from 'next/head';
 
 import Header from './Header/Header';
-import Footer from './Footer/Footer';
-import { defaultLists, defaultSocials } from './Footer/DefaultProps';
+import Footer from './footer/Footer';
 import HeaderDefaultProps from './Header/HeaderDefaultProps';
 
 interface ILayoutProps {

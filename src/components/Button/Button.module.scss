@@ -54,8 +54,8 @@
     }
   }
 
-  &_theme {
-    &_filled {
+  &Theme {
+    &Filled {
       width: 100%;
       padding: 15px 20px;
       background: $gradient-primary;
@@ -74,7 +74,7 @@
       }
     }
 
-    &_bordered {
+    &Bordered {
       width: 100%;
       padding: 15px 20px;
 
@@ -112,7 +112,7 @@
       }
     }
 
-    &_rounded {
+    &Rounded {
       border-radius: 50%;
       border: 1px solid $color-unclaimed-fg;
       color: $color-additional-fg;
@@ -143,12 +143,12 @@
     outline: none;
   }
 
-  &_size {
-    &_small {
+  &Size {
+    &Small {
       padding-top: 11px;
       padding-bottom: 11px;
     }
-    &_fixed {
+    &Fixed {
       width: fit-content;
     }
   }

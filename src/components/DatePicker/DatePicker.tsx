@@ -1,12 +1,9 @@
 import Calendar from 'react-calendar';
-import Button from '../button/button';
+import Button from '../Button/Button';
+import DatePickerType from './Types';
+
 import 'react-calendar/dist/Calendar.css';
 
-type DatePickerType = {
-  initDates: Date[];
-  onChangeDate: (dates: Date[]) => void;
-  onControlPanelUsed: (buttonType: string) => void;
-}
 
 const DatePicker = (props: DatePickerType): JSX.Element => {
   const { initDates, onChangeDate, onControlPanelUsed } = props;
@@ -23,7 +20,10 @@ const DatePicker = (props: DatePickerType): JSX.Element => {
     date.toLocaleString('ru', options as Intl.DateTimeFormatOptions).slice(0, -3)
   );
 
-  const handleCleanButtonClick = () => onControlPanelUsed('clean');
+  const handleCleanButtonClick = () => {
+    onControlPanelUsed('clean');
+    
+  }
   const handleApplyButtonClick = () => onControlPanelUsed('apply');
 
   return (
@@ -41,8 +41,8 @@ const DatePicker = (props: DatePickerType): JSX.Element => {
         />
       </div>
       <div className='date-picker__control-panel'>
-        <Button text='очистить' onClick={handleCleanButtonClick} />
-        <Button text='применить' onClick={handleApplyButtonClick} />
+        <Button type="button" text='очистить' onClick={handleCleanButtonClick} />
+        <Button type="button" text='применить' onClick={handleApplyButtonClick} />
       </div>
     </div>
   );
