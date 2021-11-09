@@ -17,7 +17,34 @@
   text-rendering: optimizeLegibility
   -moz-osx-font-smoothing: grayscale
   font-feature-settings: 'liga'
+  
+@mixin h1()
+  font-family: Montserrat
+  font-style: normal
+  font-weight: bold
+  font-size: 1.71rem
+  line-height: 2.15rem
+  color: $color-title-fg
+  margin: 10px 0
 
+@mixin h2()
+  font-family: Montserrat
+  font-style: normal
+  font-weight: bold
+  font-size: 1.35rem
+  line-height: 1.72rem
+  color: $color-title-fg
+
+@mixin h3()
+  font-family: Montserrat
+  font-style: normal
+  font-weight: bold
+  font-size: 0.85rem
+  line-height: 1.08rem
+  text-transform: uppercase
+  color: $color-title-fg
+  margin: 0 0 5px 0
+  
 @function px2rem($px)
   @return math.div($px, 14px) * 1rem
 
