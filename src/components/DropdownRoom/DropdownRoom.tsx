@@ -5,6 +5,7 @@ import { getPosInSpellCasesArray } from '../../utils/Utils';
 import DropdownRoomProps from './Types';
 
 const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
+
   const { value, placeholder } = props;
 
   const spellCases = {
@@ -17,6 +18,20 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
   const [bedrooms, setBedrooms] = useState(value.bedrooms);
   const [beds, setBeds] = useState(value.beds);
   const [bathrooms, setBathrooms] = useState(value.bathrooms);
+
+  const dropdownClass = `${styles.dropdownRoom} ${
+    isOpened ? styles.dropdownRoomIsOpened : ''
+  }`;
+
+  const allPositionChosen = bathrooms > 0 && beds > 0 && bedrooms > 0;
+
+  const dropdownRoomInputClass = `${styles.dropdownRoomInput} ${
+    allPositionChosen ? styles.dropdownRoomInputAllPositions : ''
+  }`;
+
+  const dropdownRoomBodyClass = `${styles.dropdownRoomBody} ${
+    isOpened ? styles.dropdownRoomBodyIsOpened : ''
+  }`;
 
   const handleOutsideClick = (event: Event) => {
     const { target } = event;
@@ -43,43 +58,38 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
 
   const getValueForInputField = (): string => {
     let result = '';
-      if (bedrooms > 0) {
-        result += `${bedrooms } ${spellCases.bedrooms[getPosInSpellCasesArray(bedrooms)]}`;
-      }
-      if (beds > 0) {
-        if (result.length > 0) {
-          result += `, ${beds} ${spellCases.beds[getPosInSpellCasesArray(beds)]}`;
-        }
-        else result += `${beds } ${spellCases.beds[getPosInSpellCasesArray(beds)]}`;
-      }
-      if (bathrooms > 0) {
-        if (result.length > 0) {
-          result += `, ${bathrooms} ${spellCases.bathrooms[getPosInSpellCasesArray(bathrooms)]}`;
-        }
-        else result += `${bathrooms } ${spellCases.bathrooms[getPosInSpellCasesArray(bathrooms)]}`;
-      }
-      const allPositionChosen = (bathrooms > 0) && (beds > 0) && (bedrooms > 0);
-      if(!allPositionChosen){
-        result += '...';
-      }
-      if ((bathrooms + bedrooms + beds) === 0) {
-        result = '';
-      }
-      return result;
+    if (bedrooms > 0) {
+      result += `${bedrooms} ${
+        spellCases.bedrooms[getPosInSpellCasesArray(bedrooms)]
+      }`;
+    }
+    if (beds > 0) {
+      if (result.length > 0) {
+        result += `, ${beds} ${spellCases.beds[getPosInSpellCasesArray(beds)]}`;
+      } else
+        result += `${beds} ${spellCases.beds[getPosInSpellCasesArray(beds)]}`;
+    }
+    if (bathrooms > 0) {
+      if (result.length > 0) {
+        result += `, ${bathrooms} ${
+          spellCases.bathrooms[getPosInSpellCasesArray(bathrooms)]
+        }`;
+      } else
+        result += `${bathrooms} ${
+          spellCases.bathrooms[getPosInSpellCasesArray(bathrooms)]
+        }`;
+    }
+    if (!allPositionChosen) {
+      result += '...';
+    }
+    if (bathrooms + bedrooms + beds === 0) {
+      result = '';
+    }
+    return result;
   };
 
-  const dropdownClass = `${styles.dropdownRoom} ${
-    isOpened ? styles.dropdownRoomIsOpened : ''
-  }`;
-  const allPositionChosen = (bathrooms > 0) && (beds > 0) && (bedrooms > 0);
-  const dropdownRoomInputClass = `${styles.dropdownRoomInput} ${
-    allPositionChosen ? styles.dropdownRoomInputAllPositions : ''
-  }`;
-
   return (
-    <div
-      className={dropdownClass}
-    >
+    <div className={dropdownClass}>
       <div
         className={styles.dropdownRoomInputWrapper}
         onClick={handleDropdownClick}
@@ -97,10 +107,7 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
         <div className={styles.dropdownRoomArrow}>keyboard_arrow_down</div>
       </div>
       <div
-        className={[
-          styles.dropdownRoomBody,
-          isOpened ? styles.dropdownRoomBodyIsOpened : '',
-        ].join(' ')}
+        className={dropdownRoomBodyClass}
       >
         <DropdownCounter
           text='Спальни'
