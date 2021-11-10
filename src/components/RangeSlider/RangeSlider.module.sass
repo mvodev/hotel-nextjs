@@ -1,0 +1,25 @@
+$size: 14px
+
+.rangeSlider
+  background-color: PowderBlue
+  padding: 0 $size
+
+  .container
+    position: relative
+    height: $size
+
+  .handle
+    position: absolute
+    width: $size
+    height: $size
+    margin: 0
+    padding: 0
+    border: none
+    border-radius: 50%
+    cursor: pointer
+
+    &:first-of-type
+      transform: translateX(-$size)
+
+    &:last-child
+      left: 100%
