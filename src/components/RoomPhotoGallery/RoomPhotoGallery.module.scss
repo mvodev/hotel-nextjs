@@ -1,0 +1,23 @@
+.roomPhotoGallery {
+  display: flex;
+  flex-direction: row;
+
+  .mainPhoto {
+    display: block;
+    object-fit: cover;
+    width: 68.3%;
+  }
+
+  .additionalPhotosSection {
+    background: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .additionalPhoto {
+    object-fit: cover;
+    width: 100%;
+    height: 50%;
+  }
+}
