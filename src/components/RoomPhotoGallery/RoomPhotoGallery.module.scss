@@ -9,7 +9,6 @@
   }
 
   .additionalPhotosSection {
-    background: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,7 +16,7 @@
 
   .additionalPhoto {
     object-fit: cover;
-    width: 100%;
+    width: 105%;
     height: 50%;
   }
 }
