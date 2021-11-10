@@ -1,0 +1,42 @@
+@import '../../styles/vars';
+@import '../../styles/mixins';
+
+.bulletList {
+  display: inline-block;
+  
+  .list {
+    color: $color-main-fg;
+    padding-left: 0;
+    list-style-type: none;
+  }
+
+  .title {
+    @include h2();
+    margin-bottom: 17px;
+
+    &ThemeShifted {
+      padding-left: 22px;
+    }
+  }
+
+  .item {
+    line-height: 24px;
+
+    &ThemeMarked {
+      padding-left: 22px;
+      position: relative;
+      margin: 10px 0;
+
+      &:before {
+        content: '';
+        position: absolute;
+        background: $color-unclaimed-fg;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        top: 7px;
+        left: 0;
+      }
+    }
+  }
+}
