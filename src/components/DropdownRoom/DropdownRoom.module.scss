@@ -11,6 +11,10 @@
   border: 1px solid $color-unclaimed-fg;
   border-radius: 4px 4px 0 0;
 
+  &:hover {
+    border: 1px solid rgba(31, 32, 65, 0.5);
+  }
+
   &IsOpened {
     border: 1px solid $color-additional-fg;
   }
@@ -20,7 +24,7 @@
     flex-direction: row;
     justify-content: space-between;
     position: relative;
-    height: 100%;
+    height: 42px;
     cursor: pointer;
   }
 
@@ -28,9 +32,7 @@
     border: none;
     outline: none;
     -webkit-appearance: none;
-    height: 24px;
     padding-left: 15px;
-    margin-top: 8px;
     font-family: inherit;
     font-style: normal;
     font-weight: normal;
@@ -50,9 +52,8 @@
     font-family: inherit;
     font-style: normal;
     font-weight: normal;
-    font-size: 1.16rem;
-    line-height: 2rem;
-    height: 18px;
+    font-size: 1rem;
+    line-height: 1.7rem;
     color: $color-main-fg;
   }
 
