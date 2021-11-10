@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DropdownCounter from '../DropdownCounter/DropdownCounter';
 import styles from './DropdownRoom.module.scss';
 import { getPosInSpellCasesArray } from '../../utils/Utils';
