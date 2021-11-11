@@ -1,0 +1,18 @@
+@import '../../styles/mixins';
+@import '../../styles/vars';
+
+.ratingBar {
+  line-height: 0;
+  user-select: none;
+  display: inline-block;
+  text-align: center;
+
+  .star {
+    @include material-icon;
+
+    font-size: 24px;
+    background: $gradient-primary;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
