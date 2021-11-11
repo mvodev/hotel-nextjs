@@ -1,3 +1,4 @@
+import CirclesNavigateBar from './CirclesNavigateBar/CirclesNavigateBar';
 import styles from './RoomSlider.module.scss';
 
 const RoomSlider = (): React.ReactElement => {
@@ -15,11 +16,8 @@ const RoomSlider = (): React.ReactElement => {
       >
         navigate_next
       </button>
-      <div className={styles.circlesNavigateBar}>
-        <button className={styles.circleButton} type='button' />
-        <button className={styles.circleButton} type='button' />
-        <button className={styles.circleButton} type='button' />
-        <button className={styles.circleButton} type='button' />
+      <div className={styles.circlesNavigateBarContainer}>
+        <CirclesNavigateBar {...{ circlesCount: 4 }} />
       </div>
     </div>
   );
