@@ -24,15 +24,30 @@ const cancellation = {
   items: [
     {
       id: 1,
-      text: 'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за '
-        + '5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.'
+      text:
+        'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за ' +
+        '5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     },
   ],
 };
 
 const bulletListComponent = (): ReactElement => (
-  <div style={{ height: '100vh', display: 'flex', justifyContent: 'center'}}>
-    <div style={{ width: '250px', padding: '40px', boxSizing: 'content-box', flex: 'none' }}>
+  <div
+    style={{
+      height: '100vh',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    }}
+  >
+    <div
+      style={{
+        width: '250px',
+        padding: '40px',
+        boxSizing: 'content-box',
+        flex: 'none',
+      }}
+    >
       <BulletList {...rules} />
     </div>
     <div style={{ width: '340px', padding: '40px', boxSizing: 'content-box' }}>
