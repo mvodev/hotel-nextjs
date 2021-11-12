@@ -13,11 +13,13 @@
     display: flex;
     flex-direction: row;
     height: 120px;
-    width: 311px;
+    max-width: 311px;
+    width: 100%;
+    margin-top: 20px;
 
     &Chart {
       height: 120px;
-      margin-right: 45px;
+      margin:0;
       position: relative;
       width: 120px;
     }
@@ -37,7 +39,12 @@
       transform: translate(-50%, -50%);
 
       &Number {
-        font-size: 2rem;
+        font-size: 1.7rem;
+      }
+
+      &List{
+        margin: 0;
+        padding: 0;
       }
 
       &Label {

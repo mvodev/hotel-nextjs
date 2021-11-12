@@ -31,9 +31,10 @@ const Impressions = (props: ImpressionsProps): JSX.Element => {
         <figure className={styles.impressionsDiagramChart}>
           <PieChart
             lineWidth={6.7}
-            paddingAngle={5}
+            paddingAngle={2}
             radius={60}
-            startAngle={-90}
+            startAngle={92}
+            center={[60,60]}
             viewBoxSize={[120, 120]}
             data={[
               {
@@ -59,7 +60,7 @@ const Impressions = (props: ImpressionsProps): JSX.Element => {
             </div>
           </div>
           <figcaption className={styles.impressionsDiagramDescription}>
-            <ul>
+            <ul className={styles.impressionsDiagramLabelsList}>
               <li
                 className={`${styles.impressionsDiagramDescriptionItem} ${styles.impressionsDiagramDescriptionItemPerfect}`}
               >
