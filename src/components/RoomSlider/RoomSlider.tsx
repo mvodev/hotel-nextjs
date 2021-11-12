@@ -1,9 +1,15 @@
+import { useState } from 'react';
 import CirclesNavigateBar from './CirclesNavigateBar/CirclesNavigateBar';
 import styles from './RoomSlider.module.scss';
+import SlidesSection from './SlidesSection/SlidesSection';
+import RoomSliderProps from './Type';
 
-const RoomSlider = (): React.ReactElement => {
+const RoomSlider = ({ slides }: RoomSliderProps): React.ReactElement => {
+  const [activeSlideIndex, changeIndex] = useState(0);
+
   const roomSlider = (
     <div className={styles.roomSlider}>
+      <SlidesSection {...{ slides, activeSlideIndex }} />
       <button
         type='button'
         className={`${styles.arrowButton} ${styles.arrowButtonAlignmentLeft}`}
@@ -17,7 +23,9 @@ const RoomSlider = (): React.ReactElement => {
         navigate_next
       </button>
       <div className={styles.circlesNavigateBarContainer}>
-        <CirclesNavigateBar {...{ circlesCount: 4 }} />
+        <CirclesNavigateBar
+          {...{ circlesCount: 4, activeSlideIndex, onClick: changeIndex }}
+        />
       </div>
     </div>
   );
