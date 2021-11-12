@@ -3,13 +3,9 @@
 
 .roomSlider {
   position: relative;
-  border-radius: 4px 4px 0px 0px;
   width: 100%;
-  max-width: 270px;
   height: 100%;
   max-height: 151px;
-  background: rgb(218, 218, 241);
-  overflow: hidden;
 
   &:before {
     content: '';
@@ -53,57 +49,9 @@
     }
   }
 
-  // .arrowButton {
-  //   @include material-icon();
-
-  //   color: white;
-  //   size: 24px;
-  //   position: absolute;
-  //   border: none;
-  //   width: 42px;
-  //   height: 100%;
-  //   top: 0;
-  //   cursor: pointer;
-  //   transition: transform 0.5s ease;
-
-    // &AlignmentLeft {
-    //   left: 0;
-    //   transform: translateX(-100%);
-    //   background: linear-gradient(
-    //     90deg,
-    //     transparentize(black, 0.5) 0%,
-    //     transparentize(black, 1) 99.99%,
-    //     transparentize(white, 0.5) 100%
-    //   );
-    // }
-
-    // &AlignmentRight {
-    //   right: 0;
-    //   transform: translateX(100%);
-    //   background: linear-gradient(
-    //     270deg,
-    //     transparentize(black, 0.5) 0%,
-    //     transparentize(black, 1) 99.99%,
-    //     transparentize(white, 0.5) 100%
-    //   );
-    // }
-  // }
-
   .circlesNavigateBarContainer {
     position: absolute;
     bottom: 15px;
     right: 13px;
   }
-
-  // .circleButton {
-  //   cursor: pointer;
-  //   border-radius: 50%;
-  //   padding: 0;
-  //   margin: 0 2px;
-  //   background: none;
-  //   width: 7.5px;
-  //   height: 7.5px;
-  //   border: 1px solid white;
-  //   box-shadow: 0px 5px 5px transparentize($color-title-fg, 0.7);
-  // }
 }
