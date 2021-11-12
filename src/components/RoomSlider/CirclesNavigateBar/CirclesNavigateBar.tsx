@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './CirclesNavigateBar.module.scss';
 import CirclesNavigateBarProps from './Types';
 
@@ -7,9 +7,14 @@ const CirclesNavigateBar = ({
 }: CirclesNavigateBarProps): React.ReactElement => {
   const [activeIndex, changeIndex] = useState(0);
 
+  const handleButtonClick = (circleIndex: number) => {
+    changeIndex(circleIndex);
+  };
+
   const circles = [...new Array(circlesCount)].map((_, circleIndex) => {
     let circleClasses = styles.circleButton;
-    circleClasses += circleIndex === activeIndex ? ` ${styles.circleButtonActive}` : '';
+    circleClasses +=
+      circleIndex === activeIndex ? ` ${styles.circleButtonActive}` : '';
 
     return (
       <button
@@ -17,6 +22,7 @@ const CirclesNavigateBar = ({
         className={circleClasses}
         type='button'
         aria-label='slide switch'
+        onClick={handleButtonClick.bind(this, circleIndex)}
       />
     );
   });
