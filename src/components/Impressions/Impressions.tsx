@@ -29,36 +29,39 @@ const Impressions = (props: ImpressionsProps): JSX.Element => {
       <h2 className={styles.impressionsHeader}>{header}</h2>
       <div className={styles.impressionsDiagram}>
         <figure className={styles.impressionsDiagramChart}>
-          <PieChart
-            lineWidth={6.7}
-            paddingAngle={2}
-            radius={60}
-            startAngle={92}
-            center={[60,60]}
-            viewBoxSize={[120, 120]}
-            data={[
-              {
-                title: 'perfect',
-                value: perfectReviewsNumber,
-                color: '#FFE39C',
-              },
-              { title: 'good', value: goodReviewsNumber, color: '#6FCF97' },
-              {
-                title: 'satisfactory',
-                value: satisfactoryReviewsNumber,
-                color: '#BC9CFF',
-              },
-              { title: 'poor', value: poorReviewsNumber, color: '#919191' },
-            ]}
-          />
-          <div className={styles.impressionsDiagramLabels}>
-            <div className={styles.impressionsDiagramLabelsNumber}>
-              {totalReviewsNumber}
-            </div>
-            <div className={styles.impressionsDiagramLabelsLabel}>
-              {spellCases.total[getPosInSpellCasesArray(totalReviewsNumber)]}
+          <div className={styles.impressionsDiagramChartWrapper}>
+            <PieChart
+              lineWidth={6.7}
+              paddingAngle={2}
+              radius={60}
+              startAngle={92}
+              center={[60,60]}
+              viewBoxSize={[120, 120]}
+              data={[
+                {
+                  title: 'perfect',
+                  value: perfectReviewsNumber,
+                  color: '#FFE39C',
+                },
+                { title: 'good', value: goodReviewsNumber, color: '#6FCF97' },
+                {
+                  title: 'satisfactory',
+                  value: satisfactoryReviewsNumber,
+                  color: '#BC9CFF',
+                },
+                { title: 'poor', value: poorReviewsNumber, color: '#919191' },
+              ]}
+            />
+            <div className={styles.impressionsDiagramLabels}>
+              <span className={styles.impressionsDiagramLabelsNumber}>
+                {totalReviewsNumber}
+              </span>
+              <span className={styles.impressionsDiagramLabelsLabel}>
+                {spellCases.total[getPosInSpellCasesArray(totalReviewsNumber)]}
+              </span>
             </div>
           </div>
+
           <figcaption className={styles.impressionsDiagramDescription}>
             <ul className={styles.impressionsDiagramLabelsList}>
               <li

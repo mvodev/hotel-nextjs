@@ -3,25 +3,35 @@
 
 .impressions {
   position: relative;
+  max-width: 311px;
+  min-width: 285px;
+  width: 100%;
 
   &Header {
     @include h2();
   }
 
   &Diagram {
-    align-items: flex-end;
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
-    height: 120px;
-    max-width: 311px;
-    width: 100%;
-    margin-top: 20px;
+    justify-content: space-between;
 
     &Chart {
       height: 120px;
       margin:0;
       position: relative;
-      width: 120px;
+      max-width: 311px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      &Wrapper{
+        width: 120px;
+        height: 120px;
+        position: relative;
+      }
     }
 
     &Labels {
@@ -54,11 +64,9 @@
     }
 
     &Description {
-      position: absolute;
       height: 96px;
-      left: 165px;
-      top: 28px;
       width: 146px;
+      margin-top: 28px;
     }
 
     &DescriptionItem {
@@ -99,37 +107,4 @@
     }
   }
 
-  .diagramchart__chart-text {
-    font-family: inherit;
-    fill: $color-primary;
-    transform: translateY(5px) translateX(-30px);
-  }
-
-  .diagramchart__chart-number {
-    color: $color-primary;
-    font-family: inherit;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 2rem;
-    line-height: 2.5rem;
-    transform: translateY(-5px) translateX(12px);
-  }
-
-  .diagramchart__chart-label {
-    color: $color-primary;
-    font-family: $main-font-family;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    text-align: center;
-    text-transform: uppercase;
-    transform: translateY(14px);
-  }
-
-  @media (max-width: 767px) {
-    .diagram__description {
-      left: 145px;
-    }
-  }
 }
