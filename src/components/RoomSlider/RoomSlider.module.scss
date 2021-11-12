@@ -1,6 +1,5 @@
 @use 'sass:color';
 @import '../../styles/vars.sass';
-@import '../../styles/mixins';
 
 .roomSlider {
   position: relative;
@@ -19,22 +18,16 @@
   }
 
   &:hover {
-    .arrowButton {
+    .arrowButtonContainer {
       transform: translateX(0);
     }
   }
 
-  .arrowButton {
-    @include material-icon();
-
-    color: white;
-    size: 24px;
+  .arrowButtonContainer {
     position: absolute;
-    border: none;
-    width: 42px;
-    height: 100%;
     top: 0;
-    cursor: pointer;
+    height: 100%;
+    width: 42px;
     transition: transform 0.5s ease;
 
     &AlignmentLeft {
@@ -59,6 +52,42 @@
       );
     }
   }
+
+  // .arrowButton {
+  //   @include material-icon();
+
+  //   color: white;
+  //   size: 24px;
+  //   position: absolute;
+  //   border: none;
+  //   width: 42px;
+  //   height: 100%;
+  //   top: 0;
+  //   cursor: pointer;
+  //   transition: transform 0.5s ease;
+
+    // &AlignmentLeft {
+    //   left: 0;
+    //   transform: translateX(-100%);
+    //   background: linear-gradient(
+    //     90deg,
+    //     transparentize(black, 0.5) 0%,
+    //     transparentize(black, 1) 99.99%,
+    //     transparentize(white, 0.5) 100%
+    //   );
+    // }
+
+    // &AlignmentRight {
+    //   right: 0;
+    //   transform: translateX(100%);
+    //   background: linear-gradient(
+    //     270deg,
+    //     transparentize(black, 0.5) 0%,
+    //     transparentize(black, 1) 99.99%,
+    //     transparentize(white, 0.5) 100%
+    //   );
+    // }
+  // }
 
   .circlesNavigateBarContainer {
     position: absolute;
