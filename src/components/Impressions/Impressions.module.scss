@@ -13,16 +13,9 @@
 
   &Diagram {
     margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 
     &Chart {
-      height: 120px;
       margin:0;
-      position: relative;
-      max-width: 311px;
-      width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
