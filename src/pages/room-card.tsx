@@ -24,7 +24,7 @@ const props3: RoomCardProps = {
   isLux: true,
   rating: 1,
   price: 100000,
-  reviewsCount: 100000,
+  reviewsCount: 1000,
   slides: ['room9.png', 'room10.png', 'room11.png', 'room12.png'],
 };
 
@@ -34,18 +34,39 @@ const roomCard = (): ReactElement => (
       width: '100vw',
       height: '100vh',
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'space-evenly',
       alignItems: 'center',
       padding: '50px',
     }}
   >
-    <div style={{ padding: '10px' }}>
+    <div
+      style={{
+        padding: '10px',
+        boxSizing: 'content-box',
+        width: '100%',
+        maxWidth: '270px',
+      }}
+    >
       <RoomCard {...props1} />
     </div>
-    <div style={{ padding: '10px' }}>
+    <div
+      style={{
+        padding: '10px',
+        boxSizing: 'content-box',
+        width: '100%',
+        maxWidth: '270px',
+      }}
+    >
       <RoomCard {...props2} />
     </div>
-    <div style={{ padding: '10px' }}>
+    <div
+      style={{
+        padding: '10px',
+        boxSizing: 'content-box',
+        width: '100%',
+        maxWidth: '270px',
+      }}
+    >
       <RoomCard {...props3} />
     </div>
   </div>

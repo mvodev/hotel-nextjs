@@ -11,24 +11,37 @@ const RoomCard = ({
   reviewsCount,
   slides,
 }: RoomCardProps): React.ReactElement => {
-  const luxText = isLux ? <span className={styles.luxText}>люкс</span> : null;
+  const luxText = isLux ? (
+    <span className={`${styles.textSizeLarge} ${styles.textColorPurple}`}>
+      люкс
+    </span>
+  ) : null;
 
   const number = (
-    <span className={styles.number}>
-      № {roomNumber}
+    <span className={`${styles.textStyleBold} ${styles.textColorDark}`}>
+      № <span className={styles.textSizeExtraLarge}>{roomNumber} </span>
       {luxText}
     </span>
   );
 
   const roomPrice = (
-    <span className={styles.priceText}>
-      <span className={styles.price}>{price}</span> в сутки
+    <span
+      className={`${styles.text} ${styles.textSizeSmall} ${styles.textAlignmentRight}`}
+    >
+      <span className={styles.textStyleBold}>
+        {price.toLocaleString('ru-RU', {
+          style: 'currency',
+          maximumFractionDigits: 0,
+          currency: 'RUB',
+        })}
+      </span>{' '}
+      в сутки
     </span>
   );
 
   const reviews = (
-    <span className={styles.review}>
-      <span className={styles.reviewCount}>{reviewsCount} Отзывов</span>
+    <span className={`${styles.text} ${styles.textAlignmentRight}`}>
+      <span className={styles.textStyleBold}>{reviewsCount}</span> Отзывов
     </span>
   );
 
@@ -40,7 +53,9 @@ const RoomCard = ({
           {number}
           {roomPrice}
         </div>
-        <div className={styles.info}>
+        <div
+          className={`${styles.info} ${styles.infoAlignmentCenter} ${styles.infoAlignmentLeft}`}
+        >
           <RatingBar {...{ rating }} />
           {reviews}
         </div>
