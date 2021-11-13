@@ -1,4 +1,4 @@
-import RatingBar from '../../RatingBar/RatingBar';
+import RatingBar from './RatingBar/RatingBar';
 import styles from './InfoSection.module.scss';
 import InfoSectionProps from './Types';
 

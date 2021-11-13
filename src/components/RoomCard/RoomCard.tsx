@@ -1,4 +1,4 @@
-import RoomSlider from '../RoomSlider/RoomSlider';
+import RoomSlider from './RoomSlider/RoomSlider';
 import InfoSection from './InfoSection/InfoSection';
 import styles from './RoomCard.module.scss';
 import RoomCardProps from './Types';
