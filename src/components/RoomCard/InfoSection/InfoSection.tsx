@@ -1,3 +1,4 @@
+import getPosInSpellCasesArray from 'src/utils/Utils';
 import RatingBar from './RatingBar/RatingBar';
 import styles from './InfoSection.module.scss';
 import InfoSectionProps from './Types';
@@ -9,6 +10,10 @@ const InfoSection = ({
   price,
   reviewsCount,
 }: InfoSectionProps): React.ReactElement => {
+  const review = ['Отзыв', 'Отзыва', 'Отзывов'][
+    getPosInSpellCasesArray(reviewsCount)
+  ];
+
   const luxText = isLux ? (
     <span className={`${styles.textSizeLarge} ${styles.textColorPurple}`}>
       люкс
@@ -27,19 +32,15 @@ const InfoSection = ({
       className={`${styles.text} ${styles.textSizeSmall} ${styles.textAlignmentRight}`}
     >
       <span className={styles.textStyleBold}>
-        {price.toLocaleString('ru-RU', {
-          style: 'currency',
-          maximumFractionDigits: 0,
-          currency: 'RUB',
-        })}
-      </span>{' '}
-      в сутки
+        {price.toLocaleString('ru-RU')}&#8381;
+      </span>
+      {' в сутки'}
     </span>
   );
 
   const reviews = (
     <span className={`${styles.text} ${styles.textAlignmentRight}`}>
-      <span className={styles.textStyleBold}>{reviewsCount}</span> Отзывов
+      <span className={styles.textStyleBold}>{reviewsCount}</span> {review}
     </span>
   );
 

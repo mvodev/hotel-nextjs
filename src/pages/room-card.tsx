@@ -14,7 +14,7 @@ const props1: RoomCardProps = {
 };
 
 const props2: RoomCardProps = {
-  infoSection: { roomNumber: 48, rating: 3, price: 8769, reviewsCount: 20 },
+  infoSection: { roomNumber: 48, rating: 3, price: 8769, reviewsCount: 22 },
   slides: ['room5.png', 'room6.png', 'room7.png', 'room8.png'],
 };
 
@@ -24,7 +24,7 @@ const props3: RoomCardProps = {
     isLux: true,
     rating: 1,
     price: 100000,
-    reviewsCount: 1000,
+    reviewsCount: 101,
   },
   slides: ['room9.png', 'room10.png', 'room11.png', 'room12.png'],
 };
