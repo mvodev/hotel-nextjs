@@ -7,7 +7,9 @@
   height: 44px;
   background: $color-main-bg;
   box-sizing: border-box;
-  width: 266px;
+  max-width: 266px;
+  width: 100%;
+  min-width: 250px;
   border: 1px solid $color-unclaimed-fg;
   border-radius: 4px 4px 0 0;
 

@@ -1,9 +1,12 @@
+type DropdownRoomValue = {
+  text: string;
+  value: number;
+  spellCases: Array<string>;
+}
+
 type DropdownRoomProps = {
   placeholder: string;
-  value: {
-    bedrooms: number;
-    beds: number;
-    bathrooms: number;
-  };
-};
+  values: Array<DropdownRoomValue>;
+}
+
 export default DropdownRoomProps;

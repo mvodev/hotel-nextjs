@@ -6,24 +6,24 @@ import DropdownRoomProps from './Types';
 
 const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
 
-  const { value, placeholder } = props;
-
-  const spellCases = {
-    bedrooms: ['спальня', 'спальни', 'спален'],
-    beds: ['кровать', 'кровати', 'кроватей'],
-    bathrooms: ['ванная', 'ванные', 'ванных'],
-  };
+  const { values, placeholder } = props;
 
   const [isOpened, setOpened] = useState(false);
-  const [bedrooms, setBedrooms] = useState(value.bedrooms);
-  const [beds, setBeds] = useState(value.beds);
-  const [bathrooms, setBathrooms] = useState(value.bathrooms);
+  const [counterItems, setCounterItems] = useState(values);
+
+  let allPositionChosen = false;;
+
+  counterItems.forEach(elem => {
+    if(elem.value >0 ){
+      allPositionChosen = true;
+    } else{
+      allPositionChosen = false;
+    }    
+  });
 
   const dropdownClass = `${styles.dropdownRoom} ${
     isOpened ? styles.dropdownRoomIsOpened : ''
   }`;
-
-  const allPositionChosen = bathrooms > 0 && beds > 0 && bedrooms > 0;
 
   const dropdownRoomInputClass = `${styles.dropdownRoomInput} ${
     allPositionChosen ? styles.dropdownRoomInputAllPositions : ''
@@ -47,42 +47,43 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
   };
 
   const onChange = (data: number, type: string): void => {
-    if (type === 'bedrooms') {
-      setBedrooms(data);
-    } else if (type === 'beds') {
-      setBeds(data);
-    } else {
-      setBathrooms(data);
+    const newState = counterItems.slice(0);
+    for(let i=0;i<newState.length;i+=1){
+      if(newState[i].text === type && (data >= 0)){
+        newState[i].value = data;
+      }
     }
+    setCounterItems(newState);
   };
+
+    const countersList = counterItems.map((elem) => 
+    <DropdownCounter
+      key={elem.text.toString()}
+      text={elem.text}
+      number={elem.value}
+      onChange={onChange}
+      type={elem.text}
+    />
+  );
+
 
   const getValueForInputField = (): string => {
     let result = '';
-    if (bedrooms > 0) {
-      result += `${bedrooms} ${
-        spellCases.bedrooms[getPosInSpellCasesArray(bedrooms)]
-      }`;
-    }
-    if (beds > 0) {
-      if (result.length > 0) {
-        result += `, ${beds} ${spellCases.beds[getPosInSpellCasesArray(beds)]}`;
-      } else
-        result += `${beds} ${spellCases.beds[getPosInSpellCasesArray(beds)]}`;
-    }
-    if (bathrooms > 0) {
-      if (result.length > 0) {
-        result += `, ${bathrooms} ${
-          spellCases.bathrooms[getPosInSpellCasesArray(bathrooms)]
+    let counter = 0;
+    counterItems.forEach(( elem ) => {
+      if(elem.value > 0 ){
+        counter += elem.value;
+        if(result.length >0 ){
+          result += `, ${elem.value } ${elem.spellCases[getPosInSpellCasesArray(elem.value)]
         }`;
-      } else
-        result += `${bathrooms} ${
-          spellCases.bathrooms[getPosInSpellCasesArray(bathrooms)]
-        }`;
-    }
-    if (!allPositionChosen) {
-      result += '...';
-    }
-    if (bathrooms + bedrooms + beds === 0) {
+        } else {
+          result += `${elem.value } ${elem.spellCases[getPosInSpellCasesArray(elem.value)]
+          }`;
+        }
+      }
+    });
+    if(!allPositionChosen) result += '...';
+    if(counter === 0){
       result = '';
     }
     return result;
@@ -109,24 +110,7 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
       <div
         className={dropdownRoomBodyClass}
       >
-        <DropdownCounter
-          text='Спальни'
-          number={bedrooms}
-          onChange={onChange}
-          type='bedrooms'
-        />
-        <DropdownCounter
-          text='Кровати'
-          number={beds}
-          onChange={onChange}
-          type='beds'
-        />
-        <DropdownCounter
-          text='Ванные комнаты'
-          number={bathrooms}
-          onChange={onChange}
-          type='bathrooms'
-        />
+        { countersList }
       </div>
     </div>
   );
