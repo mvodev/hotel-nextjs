@@ -3,28 +3,29 @@ import RoomCard from 'src/components/RoomCard/RoomCard';
 import RoomCardProps from 'src/components/RoomCard/Types';
 
 const props1: RoomCardProps = {
-  roomNumber: 888,
-  isLux: true,
-  rating: 5,
-  price: 9990,
-  reviewsCount: 145,
+  infoSection: {
+    roomNumber: 888,
+    isLux: true,
+    rating: 5,
+    price: 9990,
+    reviewsCount: 145,
+  },
   slides: ['room1.png', 'room2.png', 'room3.png', 'room4.png'],
 };
 
 const props2: RoomCardProps = {
-  roomNumber: 48,
-  rating: 3,
-  price: 8769,
-  reviewsCount: 20,
+  infoSection: { roomNumber: 48, rating: 3, price: 8769, reviewsCount: 20 },
   slides: ['room5.png', 'room6.png', 'room7.png', 'room8.png'],
 };
 
 const props3: RoomCardProps = {
-  roomNumber: 1,
-  isLux: true,
-  rating: 1,
-  price: 100000,
-  reviewsCount: 1000,
+  infoSection: {
+    roomNumber: 1,
+    isLux: true,
+    rating: 1,
+    price: 100000,
+    reviewsCount: 1000,
+  },
   slides: ['room9.png', 'room10.png', 'room11.png', 'room12.png'],
 };
 
