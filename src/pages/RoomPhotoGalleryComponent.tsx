@@ -2,9 +2,9 @@ import type { ReactElement } from 'react';
 import RoomPhotoGallery from 'src/components/RoomPhotoGallery/RoomPhotoGallery';
 
 const props = {
-  mainPhoto: 'room-1-photo-1.png',
-  firstAdditionalPhoto: 'room-1-photo-2.png',
-  secondAdditionalPhoto: 'room-1-photo-3.png',
+  mainPhoto: 'gallery-room-1.webp',
+  firstAdditionalPhoto: 'gallery-room-2.webp',
+  secondAdditionalPhoto: 'gallery-room-3.webp',
 };
 
 const RoomPhotoGalleryComponent = (): ReactElement => (
