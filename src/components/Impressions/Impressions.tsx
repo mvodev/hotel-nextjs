@@ -5,8 +5,7 @@ import { getPosInSpellCasesArray } from '../../utils/Utils';
 import ImpressionsProps from './Types';
 import styles from './Impressions.module.scss';
 
-const Impressions = (props: ImpressionsProps): JSX.Element => {
-  const { value, header } = props;
+const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
 
   let totalReviewsNumber = 0;
 
