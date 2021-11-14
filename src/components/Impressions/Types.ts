@@ -1,11 +1,13 @@
 type ImpressionsProps = {
   header: string;
-  value: {
-    perfectReviewsNumber: number;
-    goodReviewsNumber: number;
-    satisfactoryReviewsNumber: number;
-    poorReviewsNumber: number;
-  };
+  value: Array<ImpressionsItem>;
+};
+
+type ImpressionsItem = {
+  title: string;
+  value: number;
+  color: string;
+  description: string;
 };
 
 export default ImpressionsProps;

@@ -8,21 +8,24 @@ import styles from './Impressions.module.scss';
 const Impressions = (props: ImpressionsProps): JSX.Element => {
   const { value, header } = props;
 
-  const { 
-    perfectReviewsNumber,
-    goodReviewsNumber,
-    satisfactoryReviewsNumber,
-    poorReviewsNumber } = value;
-
-  const totalReviewsNumber =
-    perfectReviewsNumber +
-    goodReviewsNumber +
-    satisfactoryReviewsNumber +
-    poorReviewsNumber;
+  let totalReviewsNumber = 0;
 
   const spellCases = {
     total: ['голос', 'голоса', 'голосов'],
   };
+
+  const descriptionList = value.map(elem =>{
+    totalReviewsNumber += elem.value;
+    return <li 
+              key={elem.description}
+              className={styles.impressionsDiagramDescriptionItem}>
+                <div 
+                  className={styles.impressionsDiagramDescriptionItemMarker}
+                  style={{background:`${elem.color}`}}/>
+              {elem.description}
+            </li>
+    } 
+  );
 
   return (
     <div className={styles.impressions}>
@@ -37,20 +40,7 @@ const Impressions = (props: ImpressionsProps): JSX.Element => {
               startAngle={92}
               center={[60,60]}
               viewBoxSize={[120, 120]}
-              data={[
-                {
-                  title: 'perfect',
-                  value: perfectReviewsNumber,
-                  color: '#FFE39C',
-                },
-                { title: 'good', value: goodReviewsNumber, color: '#6FCF97' },
-                {
-                  title: 'satisfactory',
-                  value: satisfactoryReviewsNumber,
-                  color: '#BC9CFF',
-                },
-                { title: 'poor', value: poorReviewsNumber, color: '#919191' },
-              ]}
+              data={value}
             />
             <div className={styles.impressionsDiagramLabels}>
               <span className={styles.impressionsDiagramLabelsNumber}>
@@ -64,26 +54,7 @@ const Impressions = (props: ImpressionsProps): JSX.Element => {
 
           <figcaption className={styles.impressionsDiagramDescription}>
             <ul className={styles.impressionsDiagramLabelsList}>
-              <li
-                className={`${styles.impressionsDiagramDescriptionItem} ${styles.impressionsDiagramDescriptionItemPerfect}`}
-              >
-                Великолепно
-              </li>
-              <li
-                className={`${styles.impressionsDiagramDescriptionItem} ${styles.impressionsDiagramDescriptionItemGood}`}
-              >
-                Хорошо
-              </li>
-              <li
-                className={`${styles.impressionsDiagramDescriptionItem} ${styles.impressionsDiagramDescriptionItemSatisfactory}`}
-              >
-                Удовлетворительно
-              </li>
-              <li
-                className={`${styles.impressionsDiagramDescriptionItem} ${styles.impressionsDiagramDescriptionItemPoor}`}
-              >
-                Разочарован
-              </li>
+              {descriptionList}
             </ul>
           </figcaption>
         </figure>
