@@ -11,13 +11,14 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
   const [isOpened, setOpened] = useState(false);
   const [counterItems, setCounterItems] = useState(values);
 
-  let allPositionChosen = false;;
+  let allOptionsChosen:boolean = false;
+  let counterTotal:number = 0;
 
   counterItems.forEach(elem => {
     if(elem.value >0 ){
-      allPositionChosen = true;
+      allOptionsChosen = true;
     } else{
-      allPositionChosen = false;
+      allOptionsChosen = false;
     }    
   });
 
@@ -26,7 +27,7 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
   }`;
 
   const dropdownRoomInputClass = `${styles.dropdownRoomInput} ${
-    allPositionChosen ? styles.dropdownRoomInputAllPositions : ''
+    allOptionsChosen ? styles.dropdownRoomInputAllPositions : ''
   }`;
 
   const dropdownRoomBodyClass = `${styles.dropdownRoomBody} ${
@@ -66,13 +67,12 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
     />
   );
 
-
+  
   const getValueForInputField = (): string => {
     let result = '';
-    let counter = 0;
     counterItems.forEach(( elem ) => {
       if(elem.value > 0 ){
-        counter += elem.value;
+        counterTotal += elem.value;
         if(result.length >0 ){
           result += `, ${elem.value } ${elem.spellCases[getPosInSpellCasesArray(elem.value)]
         }`;
@@ -82,9 +82,9 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
         }
       }
     });
-    if(!allPositionChosen) result += '...';
-    if(counter === 0){
-      result = '';
+    if(!allOptionsChosen) result += '...';
+    if(counterTotal === 0){
+      result = placeholder;
     }
     return result;
   };
@@ -102,7 +102,7 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
           type='text'
           readOnly
           className={dropdownRoomInputClass}
-          placeholder={placeholder}
+          placeholder={ counterTotal === 0 ? '0' : placeholder}
           value={getValueForInputField()}
         />
         <div className={styles.dropdownRoomArrow}>keyboard_arrow_down</div>

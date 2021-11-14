@@ -1,5 +1,5 @@
 const DropdownRoomDefaultProps = {
-  placeholder: '2 спальни, 2 кровати',
+  placeholder: 'Выберите опции',
   values: [
     {
       text: 'Спальни',
