@@ -4,22 +4,20 @@ import styles from './DropdownRoom.module.scss';
 import { getPosInSpellCasesArray } from '../../utils/Utils';
 import DropdownRoomProps from './Types';
 
-const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
-
-  const { values, placeholder } = props;
+const DropdownRoom = ({ values, placeholder }: DropdownRoomProps): JSX.Element => {
 
   const [isOpened, setOpened] = useState(false);
   const [counterItems, setCounterItems] = useState(values);
 
-  let allOptionsChosen:boolean = false;
-  let counterTotal:number = 0;
+  let allOptionsChosen = false;
+  let counterTotal = 0;
 
-  counterItems.forEach(elem => {
-    if(elem.value >0 ){
+  counterItems.forEach((elem) => {
+    if (elem.value > 0) {
       allOptionsChosen = true;
-    } else{
+    } else {
       allOptionsChosen = false;
-    }    
+    }
   });
 
   const dropdownClass = `${styles.dropdownRoom} ${
@@ -49,15 +47,15 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
 
   const onChange = (data: number, type: string): void => {
     const newState = counterItems.slice(0);
-    for(let i=0;i<newState.length;i+=1){
-      if(newState[i].text === type && (data >= 0)){
+    for (let i = 0; i < newState.length; i += 1) {
+      if (newState[i].text === type && data >= 0) {
         newState[i].value = data;
       }
     }
     setCounterItems(newState);
   };
 
-    const countersList = counterItems.map((elem) => 
+  const countersList = counterItems.map((elem) => (
     <DropdownCounter
       key={elem.text.toString()}
       text={elem.text}
@@ -65,25 +63,26 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
       onChange={onChange}
       type={elem.text}
     />
-  );
+  ));
 
-  
   const getValueForInputField = (): string => {
     let result = '';
-    counterItems.forEach(( elem ) => {
-      if(elem.value > 0 ){
+    counterItems.forEach((elem) => {
+      if (elem.value > 0) {
         counterTotal += elem.value;
-        if(result.length >0 ){
-          result += `, ${elem.value } ${elem.spellCases[getPosInSpellCasesArray(elem.value)]
-        }`;
+        if (result.length > 0) {
+          result += `, ${elem.value} ${
+            elem.spellCases[getPosInSpellCasesArray(elem.value)]
+          }`;
         } else {
-          result += `${elem.value } ${elem.spellCases[getPosInSpellCasesArray(elem.value)]
+          result += `${elem.value} ${
+            elem.spellCases[getPosInSpellCasesArray(elem.value)]
           }`;
         }
       }
     });
-    if(!allOptionsChosen) result += '...';
-    if(counterTotal === 0){
+    if (!allOptionsChosen) result += '...';
+    if (counterTotal === 0) {
       result = placeholder;
     }
     return result;
@@ -102,16 +101,12 @@ const DropdownRoom = (props: DropdownRoomProps): JSX.Element => {
           type='text'
           readOnly
           className={dropdownRoomInputClass}
-          placeholder={ counterTotal === 0 ? '0' : placeholder}
+          placeholder={counterTotal === 0 ? '0' : placeholder}
           value={getValueForInputField()}
         />
         <div className={styles.dropdownRoomArrow}>keyboard_arrow_down</div>
       </div>
-      <div
-        className={dropdownRoomBodyClass}
-      >
-        { countersList }
-      </div>
+      <div className={dropdownRoomBodyClass}>{countersList}</div>
     </div>
   );
 };
