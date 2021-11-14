@@ -8,8 +8,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 7px;
   }
+
   .title {
     @include h3();
     margin: 0;
@@ -33,6 +33,10 @@
   .item {
     list-style-type: none;
     padding: 5px 0;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
   }
 
   &Opened {
@@ -41,6 +45,7 @@
     }
 
     .hiddenList {
+      padding-top: 7px;
       display: block;
     }
   }
