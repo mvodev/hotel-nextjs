@@ -10,12 +10,12 @@ const props1: RoomCardProps = {
     price: 9990,
     reviewsCount: 145,
   },
-  slides: ['room1.webp', 'room2.webp', 'room3.webp', 'room4.webp'],
+  slides: ['room-1.webp', 'room-2.webp', 'room-3.webp', 'room-4.webp'],
 };
 
 const props2: RoomCardProps = {
   infoSection: { roomNumber: 48, rating: 3, price: 8769, reviewsCount: 22 },
-  slides: ['room5.webp', 'room6.webp', 'room7.webp', 'room8.webp'],
+  slides: ['room-5.webp', 'room-6.webp', 'room-7.webp', 'room-8.webp'],
 };
 
 const props3: RoomCardProps = {
@@ -26,7 +26,7 @@ const props3: RoomCardProps = {
     price: 100000,
     reviewsCount: 101,
   },
-  slides: ['room9.webp', 'room10.webp', 'room11.webp', 'room12.webp'],
+  slides: ['room-9.webp', 'room-10.webp', 'room-11.webp', 'room-12.webp'],
 };
 
 const roomCard = (): ReactElement => (
