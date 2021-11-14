@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import { PieChart } from 'react-minimal-pie-chart';
 
-import ImpressionsProps from './Types';
 import { getPosInSpellCasesArray } from '../../utils/Utils';
+import ImpressionsProps from './Types';
 import styles from './Impressions.module.scss';
 
 const Impressions = (props: ImpressionsProps): JSX.Element => {
