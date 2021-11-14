@@ -38,6 +38,7 @@ const roomCard = (): ReactElement => (
       justifyContent: 'space-evenly',
       alignItems: 'center',
       padding: '50px',
+      flexWrap: 'wrap',
     }}
   >
     <div
