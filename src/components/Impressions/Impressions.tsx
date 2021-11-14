@@ -14,18 +14,21 @@ const Impressions = (props: ImpressionsProps): JSX.Element => {
     total: ['голос', 'голоса', 'голосов'],
   };
 
-  const descriptionList = value.map(elem =>{
+  const descriptionList = value.map((elem) => {
     totalReviewsNumber += elem.value;
-    return <li 
-              key={elem.description}
-              className={styles.impressionsDiagramDescriptionItem}>
-                <div 
-                  className={styles.impressionsDiagramDescriptionItemMarker}
-                  style={{background:`${elem.color}`}}/>
-              {elem.description}
-            </li>
-    } 
-  );
+    return (
+      <li
+        key={elem.description}
+        className={styles.impressionsDiagramDescriptionItem}
+      >
+        <div
+          className={styles.impressionsDiagramDescriptionItemMarker}
+          style={{ background: `${elem.color}` }}
+        />
+        {elem.description}
+      </li>
+    );
+  });
 
   return (
     <div className={styles.impressions}>
@@ -38,7 +41,7 @@ const Impressions = (props: ImpressionsProps): JSX.Element => {
               paddingAngle={2}
               radius={60}
               startAngle={92}
-              center={[60,60]}
+              center={[60, 60]}
               viewBoxSize={[120, 120]}
               data={value}
             />
