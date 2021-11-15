@@ -22,7 +22,7 @@ const RangeSlider = ({
   const formater = new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency: 'RUB',
-    minimumIntegerDigits: 1,
+    minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   });
 
