@@ -5,7 +5,6 @@ import ImpressionsProps from './Types';
 import styles from './Impressions.module.scss';
 
 const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
-
   let totalReviewsNumber = 0;
 
   const spellCases = {
@@ -22,9 +21,12 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
         <div
           className={styles.impressionsDiagramDescriptionItemMarker}
           style={
-            elem.withGradient?
-            {background:`linear-gradient(180deg, ${elem.color} 0%, ${elem.stopColor} 100%);`}:
-            { background: `${elem.color}` }}
+            elem.withGradient
+              ? {
+                  background: `linear-gradient(180deg, ${elem.color} 0%, ${elem.stopColor} 100%);`,
+                }
+              : { background: `${elem.color}` }
+          }
         />
         {elem.description}
       </li>
@@ -37,7 +39,7 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
       <div className={styles.impressionsDiagram}>
         <figure className={styles.impressionsDiagramChart}>
           <div className={styles.impressionsDiagramChartWrapper}>
-            <Diagram header='' value={value}/>
+            <Diagram header='' value={value} />
             <div className={styles.impressionsDiagramLabels}>
               <span className={styles.impressionsDiagramLabelsNumber}>
                 {totalReviewsNumber}
@@ -47,7 +49,6 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
               </span>
             </div>
           </div>
-
           <figcaption className={styles.impressionsDiagramDescription}>
             <ul className={styles.impressionsDiagramLabelsList}>
               {descriptionList}

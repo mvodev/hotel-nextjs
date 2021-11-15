@@ -5,25 +5,28 @@ import ImpressionsProps from '../Types';
 
 const Diagram = ({ value }: ImpressionsProps): JSX.Element => {
 
-  const colors = value.map((elem,index) =>
-    {if(elem.withGradient){
+  const colors = value.map((elem, index) => {
+    if (elem.withGradient) {
       return (
         <defs>
           <linearGradient id={`gradient${index}`}>
-            <stop offset="0%" stopColor={`${elem.color}`} />
-            <stop offset="100%" stopColor={`${elem.stopColor}`} />
+            <stop offset='0%' stopColor={`${elem.color}`} />
+            <stop offset='100%' stopColor={`${elem.stopColor}`} />
           </linearGradient>
-        </defs>)
+        </defs>
+      );
     }
-    return null;}
-  );
+    return null;
+  });
+
   const dataForChart = value.slice(0);
-  const dataWithGradient =  dataForChart.map((elem,index)=>{
-    if(elem.withGradient){
+  
+  const dataWithGradient = dataForChart.map((elem, index) => {
+    if (elem.withGradient) {
       return {
         value: elem.value,
         color: `url(#gradient${index})`,
-      }
+      };
     }
     return elem;
   });
