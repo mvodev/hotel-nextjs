@@ -1,0 +1,48 @@
+@import '../../styles/vars';
+@import '../../styles/mixins';
+
+.bulletList {
+  display: inline-block;
+
+  .list {
+    color: $color-main-fg;
+    padding-left: 0;
+    list-style-type: none;
+    margin-bottom: 0;
+  }
+
+  .title {
+    @include h2();
+    margin-top: 0;
+    margin-bottom: 17px;
+
+    &ThemeShifted {
+      padding-left: 22px;
+    }
+  }
+
+  .item {
+    line-height: 24px;
+
+    &ThemeMarked {
+      padding-left: 22px;
+      position: relative;
+      margin: 10px 0;
+
+      &:before {
+        @include material-icon();
+        position: absolute;
+        left: 0;
+        font-size: 15px;
+        font-family: 'Material Icons';
+        content: 'fiber_manual_record';
+        line-height: 24px;
+        color: $color-unclaimed-fg;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
