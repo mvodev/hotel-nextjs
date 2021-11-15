@@ -22,7 +22,7 @@ const RoomSlider = ({ slides }: RoomSliderProps): React.ReactElement => {
     }
   };
 
-  const roomSlider = (
+  return (
     <div className={styles.roomSlider}>
       <SlidesSection {...{ slides, activeSlideIndex }} />
       <div
@@ -42,8 +42,6 @@ const RoomSlider = ({ slides }: RoomSliderProps): React.ReactElement => {
       </div>
     </div>
   );
-
-  return roomSlider;
 };
 
 export default RoomSlider;

@@ -7,14 +7,12 @@ const RoomCard = ({
   infoSection,
   slides,
 }: RoomCardProps): React.ReactElement => {
-  const roomCard = (
+  return (
     <div className={styles.roomCard}>
       <RoomSlider {...{ slides }} />
       <InfoSection {...infoSection} />
     </div>
   );
-
-  return roomCard;
 };
 
 export default RoomCard;

@@ -44,7 +44,7 @@ const InfoSection = ({
     </span>
   );
 
-  const infoSection = (
+  return (
     <div className={styles.infoSection}>
       <div className={styles.info}>
         {number}
@@ -58,8 +58,6 @@ const InfoSection = ({
       </div>
     </div>
   );
-
-  return infoSection;
 };
 
 export default InfoSection;
