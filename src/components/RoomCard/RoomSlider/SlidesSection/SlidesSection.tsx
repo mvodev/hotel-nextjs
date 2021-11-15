@@ -5,10 +5,10 @@ const SlidesSection = ({
   slides,
   activeSlideIndex,
 }: SlidesSectionProps): React.ReactElement => {
-  const slidesCollections = slides.map((slide, slideIdnex) => {
+  const slidesCollections = slides.map((slide, slideIndex) => {
     let slideClasses = styles.slide;
     slideClasses +=
-      slideIdnex === activeSlideIndex ? ` ${styles.slideActive}` : '';
+      slideIndex === activeSlideIndex ? ` ${styles.slideActive}` : '';
 
     return (
       <img
