@@ -10,22 +10,28 @@ const RoomPhotoGallery = ({
 }: RoomPhotoGalleryProps): React.ReactElement => {
   return (
     <div className={styles.roomPhotoGallery}>
-      <img
-        className={styles.mainPhoto}
-        src={`./images/${mainPhoto}`}
-        alt='room'
-      />
+      <div className={styles.mainPhotoSection}>
+        <img
+          className={styles.roomPhoto}
+          src={`./images/${mainPhoto}`}
+          alt='room'
+        />
+      </div>
       <div className={styles.additionalPhotosSection}>
-        <img
-          className={styles.additionalPhoto}
-          src={`./images/${firstAdditionalPhoto}`}
-          alt='room'
-        />
-        <img
-          className={styles.additionalPhoto}
-          src={`./images/${secondAdditionalPhoto}`}
-          alt='room'
-        />
+        <div className={styles.additionalPhotoContainer}>
+          <img
+            className={styles.roomPhoto}
+            src={`./images/${firstAdditionalPhoto}`}
+            alt='room'
+          />
+        </div>
+        <div className={styles.additionalPhotoContainer}>
+          <img
+            className={styles.roomPhoto}
+            src={`./images/${secondAdditionalPhoto}`}
+            alt='room'
+          />
+        </div>
       </div>
     </div>
   );
