@@ -2,11 +2,15 @@ import styles from './BulletList.module.scss';
 import BulletListProps from './Types';
 
 const BulletList = ({ title, items }: BulletListProps): React.ReactElement => {
-  let titleClasses = styles.title;
-  titleClasses += items.length > 1 ? ` ${styles.titleThemeShifted}` : '';
+  const titleClasses = [
+    styles.title,
+    items.length > 1 ? styles.titleThemeShifted : '',
+  ].join(' ');
 
-  let itemClasses = styles.item;
-  itemClasses += items.length > 1 ? ` ${styles.itemThemeMarked}` : '';
+  const itemClasses = [
+    styles.item,
+    items.length > 1 ? styles.itemThemeMarked : '',
+  ].join(' ');
 
   const bulletItems = items.map((item) => (
     <li key={item.id} className={itemClasses}>
@@ -14,14 +18,12 @@ const BulletList = ({ title, items }: BulletListProps): React.ReactElement => {
     </li>
   ));
 
-  const bulletList = (
+  return (
     <div className={styles.bulletList}>
       <h2 className={titleClasses}>{title}</h2>
       <ul className={styles.list}>{bulletItems}</ul>
     </div>
   );
-
-  return bulletList;
 };
 
 export default BulletList;
