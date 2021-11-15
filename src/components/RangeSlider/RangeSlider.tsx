@@ -19,12 +19,6 @@ const RangeSlider = ({
     [from, to].map((p) => p / (max - min))
   );
   const container = useRef<HTMLDivElement>(null);
-  const formater = new Intl.NumberFormat('ru-RU', {
-    style: 'currency',
-    currency: 'RUB',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  });
 
   const calcValue = (position: number) =>
     Math.min(
@@ -33,7 +27,14 @@ const RangeSlider = ({
     );
 
   const formateValue = (value: number) =>
-    formater.format(value).replace(/\s(?!\d)/, '');
+    new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    })
+      .format(value)
+      .replace(/\s(?!\d)/, '');
 
   const calcPosition = ({
     pageX,
@@ -88,16 +89,16 @@ const RangeSlider = ({
       </div>
       <div className={styles.rangeSlider}>
         <button
-          className={styles.giglet}
+          className={styles.filler}
           type='button'
-          aria-label='giglet'
+          aria-label='track'
           onPointerDown={() => changePosition([0, positions[1]])}
           tabIndex={-1}
         />
         <button
-          className={styles.giglet}
+          className={styles.filler}
           type='button'
-          aria-label='giglet'
+          aria-label='track'
           onPointerDown={() => changePosition([positions[0], 1])}
           tabIndex={-1}
         />
