@@ -26,9 +26,7 @@ const expandableList = (): React.ReactElement => (
       alignItems: 'flex-start',
     }}
   >
-    <div style={{ width: '266px' }}>
-      <ExpandableList {...props} />
-    </div>
+    <ExpandableList {...props} />
   </div>
 );
 
