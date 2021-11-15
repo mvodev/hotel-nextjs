@@ -1,85 +1,133 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-import type TypeRangeSliderProp from './Types';
+import type {
+  TypeRangeSliderProps,
+  TypeHandleMoveArgs,
+  TypeCalcPositionArgs,
+} from './Types';
 import styles from './RangeSlider.module.sass';
+import Handle from './Handle';
 
 const RangeSlider = ({
-  from = 0,
-  to = 1,
-}: TypeRangeSliderProp): JSX.Element => {
+  min = 0,
+  max = 15000,
+  from = 5000,
+  to = 10000,
+  step = 100,
+}: TypeRangeSliderProps): JSX.Element => {
+  const [positions, changePosition] = useState(
+    [from, to].map((p) => p / (max - min))
+  );
   const container = useRef<HTMLDivElement>(null);
-  const trigger = useRef(false);
-  const shift = useRef(0);
-  const offset = useRef(0);
-  const activeIDX = useRef(0);
-  const [positions, changePosition] = useState([from, to]);
-
-  const getOppositeBit = (bit: number) => Number(!bit);
-
-  const formExtremums = (idx: number) => [idx, positions[getOppositeBit(idx)]];
-
-  const getExtremums = (idx: number) =>
-    idx === 0 ? formExtremums(idx) : formExtremums(idx).reverse();
-
-  const onPointerDown = (e: React.PointerEvent<HTMLElement>) => {
-    const handle = e.target;
-    if (handle instanceof HTMLElement) {
-      handle.setPointerCapture(e.pointerId);
-      trigger.current = true;
-      shift.current = e.pageX - handle.getBoundingClientRect().x;
-      offset.current = new DOMMatrix(getComputedStyle(handle).transform).e;
-      activeIDX.current = getOppositeBit(offset.current);
-    }
+  const formaterOptions = {
+    maximumFractionDigits: 0,
+    style: 'currency',
+    currency: 'RUB',
   };
 
-  const onLostPointerCapture = () => {
-    trigger.current = false;
+  const calcValue = (position: number) =>
+    Math.min(
+      max,
+      Math.floor((position * (max - min + step)) / step) * step + min
+    );
+
+  const formateValue = (value: number) =>
+    value.toLocaleString('ru', formaterOptions).replace(/\s(?!\d)/, '');
+
+  const calcPosition = ({
+    pageX,
+    shift = 0,
+    offset = 0,
+  }: TypeCalcPositionArgs): number => {
+    const { x, width } = container.current?.getBoundingClientRect() || {
+      x: 0,
+      width: 0,
+    };
+    return (pageX - x - shift - offset) / width;
   };
 
-  const onPointerMove = (e: React.PointerEvent<HTMLElement>): void => {
-    const containerRect = container.current?.getBoundingClientRect();
-    if (trigger.current && containerRect) {
-      const [min, max] = getExtremums(activeIDX.current);
-      positions[activeIDX.current] = Math.min(
-        max,
-        Math.max(
-          min,
-          (e.pageX - containerRect.x - shift.current - offset.current) /
-            containerRect.width
-        )
-      );
-      changePosition([...positions]);
-    }
+  const handleHandlePointerMove = ({
+    handleID,
+    pageX,
+    shift,
+    offset,
+  }: TypeHandleMoveArgs): void => {
+    const [relativeMin, relativeMax] = [
+      positions[Number(!handleID)],
+      handleID,
+    ].sort((a, b) => a - b);
+    positions[handleID] = Math.min(
+      relativeMax,
+      Math.max(relativeMin, calcPosition({ pageX, shift, offset }))
+    );
+    changePosition([...positions]);
   };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLElement>): void => {
-    if (e.code === 'ArrowLeft') {
-      changePosition([positions[0] - 0.1, positions[1]]);
-    }
+  const handleTrackPointerDown = (e: React.PointerEvent<HTMLElement>) => {
+    const newPosition = calcPosition({ pageX: e.clientX });
+    const diffs = positions.map((p) => Math.abs(p - newPosition));
+    const activeIDX = diffs.indexOf(Math.min(...diffs));
+    positions[activeIDX] = newPosition;
+    changePosition([...positions]);
   };
 
   return (
-    <div className={styles.rangeSlider}>
-      <div ref={container} className={styles.container}>
+    <div className={styles.wrapper}>
+      <div className={styles.header}>
+        <h3 className={styles.title}>диапазон цены</h3>
+        <div className={styles.rangeLabel}>
+          <span className={styles.value}>
+            {formateValue(calcValue(positions[0]))}
+          </span>{' '}
+          -{' '}
+          <span className={styles.value}>
+            {formateValue(calcValue(positions[1]))}
+          </span>
+        </div>
+      </div>
+      <div className={styles.rangeSlider}>
         <button
-          className={styles.handle}
+          className={styles.giglet}
           type='button'
-          aria-label='left handle'
-          onPointerDown={onPointerDown}
-          onLostPointerCapture={onLostPointerCapture}
-          onPointerMove={onPointerMove}
-          onKeyDown={onKeyDown}
-          style={{ left: `${positions[0] * 100}%` }}
+          aria-label='giglet'
+          onPointerDown={() => changePosition([0, positions[1]])}
+          tabIndex={-1}
         />
         <button
-          className={styles.handle}
+          className={styles.giglet}
           type='button'
-          aria-label='right handle'
-          onPointerDown={onPointerDown}
-          onLostPointerCapture={onLostPointerCapture}
-          onPointerMove={onPointerMove}
-          style={{ left: `${positions[1] * 100}%` }}
+          aria-label='giglet'
+          onPointerDown={() => changePosition([positions[0], 1])}
+          tabIndex={-1}
         />
+        <div ref={container} className={styles.container}>
+          <Handle
+            handlePointerMove={handleHandlePointerMove}
+            position={positions[0]}
+            handleID={0}
+          />
+          <Handle
+            handlePointerMove={handleHandlePointerMove}
+            position={positions[1]}
+            handleID={1}
+          />
+          <button
+            className={styles.track}
+            type='button'
+            aria-label='track'
+            onPointerDown={handleTrackPointerDown}
+            tabIndex={-1}
+          >
+            <div
+              className={styles.progressBar}
+              style={{ flexBasis: `${positions[0] * 100}%` }}
+            />
+            <div
+              className={styles.progressBar}
+              style={{ flexBasis: `${(1 - positions[1]) * 100}%` }}
+            />
+          </button>
+        </div>
       </div>
     </div>
   );
