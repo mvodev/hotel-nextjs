@@ -4,8 +4,14 @@ import type { ReviewType } from '../Types';
 import { dateToTimeAgo } from '../../../utils/Utils';
 import style from './Review.module.sass';
 
-const Review = (props: ReviewType): ReactElement => {
-  const { avatar, userName, publicationDate, text, likesNumber, liked } = props;
+const Review = ({
+  avatar,
+  userName,
+  publicationDate,
+  text,
+  likesNumber,
+  liked,
+}: ReviewType): ReactElement => {
   const [likes, setLikes] = useState({ likesNumber, liked });
 
   const handleLikeButtonClick = () => {

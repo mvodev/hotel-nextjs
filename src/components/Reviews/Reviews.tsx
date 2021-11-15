@@ -4,8 +4,10 @@ import type { ReviewsType } from './Types';
 import { getDeclension } from '../../utils/Utils';
 import style from './Reviews.module.sass';
 
-const Reviews = (props: ReviewsType): ReactElement => {
-  const { title, reviews } = props;
+const Reviews = ({
+  title, 
+  reviews
+}: ReviewsType): ReactElement => {
   const reviewsNumber = reviews.length;
 
   const getReviews = reviews.map((review) => (
