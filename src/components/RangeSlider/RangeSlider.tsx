@@ -19,11 +19,11 @@ const RangeSlider = ({
     [from, to].map((p) => p / (max - min))
   );
   const container = useRef<HTMLDivElement>(null);
-  const formaterOptions = {
+  const formater = new Intl.NumberFormat('ru-RU', {
     maximumFractionDigits: 0,
     style: 'currency',
     currency: 'RUB',
-  };
+  });
 
   const calcValue = (position: number) =>
     Math.min(
@@ -32,7 +32,7 @@ const RangeSlider = ({
     );
 
   const formateValue = (value: number) =>
-    value.toLocaleString('ru', formaterOptions).replace(/\s(?!\d)/, '');
+    formater.format(value).replace(/\s(?!\d)/, '');
 
   const calcPosition = ({
     pageX,
