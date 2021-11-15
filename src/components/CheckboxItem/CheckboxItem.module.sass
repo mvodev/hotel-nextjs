@@ -18,26 +18,9 @@
     &.checkboxItemCheckboxChecked
       border: 1px solid $color-primary
       position: relative
+      background: url('/images/checked.svg') center no-repeat
 
-      &::before
-        position: absolute
-        top: 8px
-        left: 4px
-        width: 4px
-        height: 2px
-        background: $gradient-primary
-        transform: rotate(45deg)
-        content: ""
 
-      &::after
-        position: absolute
-        top: 8px
-        left: 6px
-        width: 8px
-        height: 2px
-        background: $gradient-primary
-        transform: rotate(-45deg)
-        content: ""
 
   &Label
     flex: 1 1 auto
@@ -57,7 +40,6 @@
   
   &Rich
     & .checkboxItemTitle
-      display: inline-block
       display: flex
       align-items: center
       box-sizing: border-box
