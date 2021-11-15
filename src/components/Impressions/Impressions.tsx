@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import { PieChart } from 'react-minimal-pie-chart';
-
+import Diagram from './Diagram/Diagram';
 import { getPosInSpellCasesArray } from '../../utils/Utils';
 import ImpressionsProps from './Types';
 import styles from './Impressions.module.scss';
@@ -22,7 +21,10 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
       >
         <div
           className={styles.impressionsDiagramDescriptionItemMarker}
-          style={{ background: `${elem.color}` }}
+          style={
+            elem.withGradient?
+            {background:`linear-gradient(180deg, ${elem.color} 0%, ${elem.stopColor} 100%);`}:
+            { background: `${elem.color}` }}
         />
         {elem.description}
       </li>
@@ -35,16 +37,7 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
       <div className={styles.impressionsDiagram}>
         <figure className={styles.impressionsDiagramChart}>
           <div className={styles.impressionsDiagramChartWrapper}>
-            <PieChart
-              lineWidth={6.7}
-              paddingAngle={2}
-              radius={60}
-              startAngle={270}
-              lengthAngle={-360}
-              center={[60, 60]}
-              viewBoxSize={[120, 120]}
-              data={value}
-            />
+            <Diagram header='' value={value}/>
             <div className={styles.impressionsDiagramLabels}>
               <span className={styles.impressionsDiagramLabelsNumber}>
                 {totalReviewsNumber}
