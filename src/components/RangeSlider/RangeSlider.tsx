@@ -20,15 +20,16 @@ const RangeSlider = ({
   );
   const container = useRef<HTMLDivElement>(null);
   const formater = new Intl.NumberFormat('ru-RU', {
-    maximumFractionDigits: 0,
     style: 'currency',
     currency: 'RUB',
+    minimumIntegerDigits: 1,
+    maximumFractionDigits: 0,
   });
 
   const calcValue = (position: number) =>
     Math.min(
       max,
-      Math.floor((position * (max - min + step)) / step) * step + min || 0
+      Math.floor((position * (max - min + step)) / step) * step + min
     );
 
   const formateValue = (value: number) =>
@@ -78,8 +79,8 @@ const RangeSlider = ({
         <div className={styles.rangeLabel}>
           <span className={styles.value}>
             {formateValue(calcValue(positions[0]))}
-          </span>{' '}
-          -{' '}
+          </span>
+          {' - '}
           <span className={styles.value}>
             {formateValue(calcValue(positions[1]))}
           </span>
