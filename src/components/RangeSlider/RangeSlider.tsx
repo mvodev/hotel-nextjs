@@ -69,7 +69,7 @@ const RangeSlider = ({
     const newPosition = calcPosition({ pageX: e.clientX });
     const diffs = positions.map((p) => Math.abs(p - newPosition));
     const activeIDX = diffs.indexOf(Math.min(...diffs));
-    positions[activeIDX] = newPosition;
+    positions[newPosition > positions[1] ? 1 : activeIDX] = newPosition;
     changePosition([...positions]);
   };
 

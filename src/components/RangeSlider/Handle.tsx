@@ -37,7 +37,7 @@ const Handle = ({
     <button
       className={styles.handle}
       type='button'
-      aria-label='left handle'
+      aria-label={`${handleID === 0 ? 'left' : 'right'} handle`}
       onPointerDown={onPointerDown}
       onLostPointerCapture={() => {
         trigger.current = false;
