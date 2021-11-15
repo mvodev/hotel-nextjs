@@ -39,7 +39,8 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
               lineWidth={6.7}
               paddingAngle={2}
               radius={60}
-              startAngle={92}
+              startAngle={270}
+              lengthAngle={-360}
               center={[60, 60]}
               viewBoxSize={[120, 120]}
               data={value}
