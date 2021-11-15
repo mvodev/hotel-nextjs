@@ -5,8 +5,11 @@ import { KeyboardEvent } from 'react';
 import LikeButtonType from './Types';
 import style from './LikeButton.module.sass';
 
-const LikeButton = (props: LikeButtonType): JSX.Element => {
-  const { likesNumber, liked, onClick } = props;
+const LikeButton = ({
+  likesNumber,
+  liked,
+  onClick
+}: LikeButtonType): JSX.Element => {
 
   const handleLikeButtonClick = (): void => {
     onClick();
