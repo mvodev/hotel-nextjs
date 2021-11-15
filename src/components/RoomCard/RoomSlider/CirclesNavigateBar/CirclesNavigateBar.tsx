@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './CirclesNavigateBar.module.scss';
 import CirclesNavigateBarProps from './Types';
 
@@ -6,10 +7,12 @@ const CirclesNavigateBar = ({
   activeSlideIndex,
   onClick,
 }: CirclesNavigateBarProps): React.ReactElement => {
-  const handleButtonClick = (circleIndex: number) => {
+  const handleButtonClick = (event: React.MouseEvent, circleIndex: number) => {
     if (onClick) {
       onClick(circleIndex);
     }
+
+    event.preventDefault();
   };
 
   const circles = [...new Array(circlesCount)].map((_, circleIndex) => {
@@ -23,7 +26,9 @@ const CirclesNavigateBar = ({
         className={circleClasses}
         type='button'
         aria-label='slide switch'
-        onClick={handleButtonClick.bind(this, circleIndex)}
+        onClick={(event: React.MouseEvent) =>
+          handleButtonClick(event, circleIndex)
+        }
       />
     );
   });

@@ -7,4 +7,8 @@
   box-shadow: 0px 10px 20px transparentize($color-title-fg, 0.95);
   overflow: hidden;
   color: $color-additional-fg;
+
+  .link {
+    text-decoration: none;
+  }
 }

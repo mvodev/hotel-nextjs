@@ -7,8 +7,22 @@ const ArrowButton = ({
   icon,
   onClick,
 }: ArrowButtonProps): React.ReactElement => {
+  const handleArrowButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (onClick) {
+      onClick();
+    }
+
+    event.preventDefault();
+  };
+
   return (
-    <button type='button' className={styles.arrowButton} onClick={onClick}>
+    <button
+      type='button'
+      className={styles.arrowButton}
+      onClick={handleArrowButtonClick}
+    >
       {icon}
     </button>
   );
