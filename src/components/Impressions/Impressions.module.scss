@@ -4,8 +4,11 @@
 .impressions {
   position: relative;
   max-width: 311px;
-  min-width: 285px;
   width: 100%;
+
+  @media screen and (max-width: 320px) {
+    text-align: center;
+  }
 
   &Header {
     @include h2();
@@ -22,14 +25,14 @@
 
       @media screen and (max-width: 320px) {
         flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
+        align-items: center;
       }
 
       &Wrapper {
         width: 120px;
         height: 120px;
         position: relative;
+        flex-shrink: 0;
       }
     }
 
@@ -65,6 +68,7 @@
     &Description {
       height: 96px;
       margin-top: 28px;
+      margin-left: 20px;
     }
 
     &DescriptionItem {
