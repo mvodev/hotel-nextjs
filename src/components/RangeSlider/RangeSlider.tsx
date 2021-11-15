@@ -28,7 +28,7 @@ const RangeSlider = ({
   const calcValue = (position: number) =>
     Math.min(
       max,
-      Math.floor((position * (max - min + step)) / step) * step + min
+      Math.floor((position * (max - min + step)) / step) * step + min || 0
     );
 
   const formateValue = (value: number) =>
