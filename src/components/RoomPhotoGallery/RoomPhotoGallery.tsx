@@ -1,3 +1,5 @@
+/* eslint-disable arrow-body-style */
+
 import styles from './RoomPhotoGallery.module.scss';
 import RoomPhotoGalleryProps from './Types';
 
@@ -6,7 +8,7 @@ const RoomPhotoGallery = ({
   firstAdditionalPhoto,
   secondAdditionalPhoto,
 }: RoomPhotoGalleryProps): React.ReactElement => {
-  const roomPhotoGallery = (
+  return (
     <div className={styles.roomPhotoGallery}>
       <img
         className={styles.mainPhoto}
@@ -27,8 +29,6 @@ const RoomPhotoGallery = ({
       </div>
     </div>
   );
-
-  return roomPhotoGallery;
 };
 
 export default RoomPhotoGallery;
