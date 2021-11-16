@@ -12,7 +12,7 @@
     width: 100%;
 
     @media screen and (max-width: 320px) {
-      flex-wrap: wrap;
+      justify-content: space-evenly;
     }
   }
 
@@ -28,6 +28,16 @@
       content: '';
       display: block;
       padding-top: 100%;
+    }
+
+    @media screen and (max-width: 320px) {
+      display: none;
+    }
+
+    &IsMobileDisplayed {
+      @media screen and (max-width: 320px) {
+        display: flex;
+      }
     }
   }
 

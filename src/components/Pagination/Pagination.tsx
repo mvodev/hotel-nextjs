@@ -10,27 +10,27 @@ const Pagination = ({
   currentPage,
   text,
 }: PaginationProps): React.ReactElement => {
-  const [active, setActive] = useState(currentPage);
+  const [activeButton, setActive] = useState(currentPage);
 
-  const handlePageButtonClick = (activeButton: number): void => {
-    setActive(activeButton);
+  const handlePageButtonClick = (button: number): void => {
+    setActive(button);
   };
 
   const handleBackButtonClick = (): void => {
-    setActive(active - 1);
+    setActive(activeButton - 1);
   };
 
   const handleForwardButtonClick = (): void => {
-    setActive(active + 1);
+    setActive(activeButton + 1);
   };
 
   const buttonIsAllowed = (button: number): boolean => {
     return (
       button === 1 ||
       button === buttonsCount ||
-      (button === 2 && active === 5) ||
-      (button === buttonsCount - 1 && active === buttonsCount - 4) ||
-      (button >= active - 2 && button <= active + 2)
+      (button === 2 && activeButton === 5) ||
+      (button === buttonsCount - 1 && activeButton === buttonsCount - 4) ||
+      (button >= activeButton - 2 && button <= activeButton + 2)
     );
   };
 
@@ -42,9 +42,11 @@ const Pagination = ({
     ) : null;
   };
 
+  const buttonsClasses = `${styles.buttonContainer} ${styles.buttonContainerIsMobileDisplayed}`;
+
   const backButton =
-    active > 1 ? (
-      <div className={styles.buttonContainer}>
+    activeButton > 1 ? (
+      <div className={buttonsClasses}>
         <Button
           theme='paginationIcon'
           text='arrow_back'
@@ -54,8 +56,8 @@ const Pagination = ({
     ) : null;
 
   const forwardButton =
-    active < buttonsCount ? (
-      <div className={styles.buttonContainer}>
+    activeButton < buttonsCount ? (
+      <div className={buttonsClasses}>
         <Button
           theme='paginationIcon'
           text='arrow_forward'
@@ -66,10 +68,18 @@ const Pagination = ({
 
   const pagesButtons = [...new Array(buttonsCount)].map((_, index) => {
     const pageNumber = index + 1;
-    const theme = active === pageNumber ? 'paginationActive' : 'pagination';
+    const theme =
+      activeButton === pageNumber ? 'paginationActive' : 'pagination';
+
+    const containerClasses = [
+      styles.buttonContainer,
+      pageNumber === activeButton
+        ? styles.buttonContainerIsMobileDisplayed
+        : '',
+    ].join(' ');
 
     return buttonIsAllowed(pageNumber) ? (
-      <div key={pageNumber} className={styles.buttonContainer}>
+      <div key={pageNumber} className={containerClasses}>
         <Button
           theme={theme}
           text={pageNumber.toString()}
