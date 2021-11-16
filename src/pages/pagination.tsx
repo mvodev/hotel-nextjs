@@ -16,7 +16,7 @@ const pagination = (): React.ReactElement => (
         {...{
           buttonsCount: 15,
           currentPage: 1,
-          text: '1 - 12 из 100+ вариантов одежды',
+          text: '1 - 12 из 100+ вариантов аренды',
         }}
       />
     </div>
