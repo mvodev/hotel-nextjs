@@ -141,12 +141,21 @@
     &Pagination {
       background: none;
       font-weight: normal;
+      color: $color-additional-fg;
+
+      &:not(:disabled) {
+        &:hover {
+          color: $color-main-fg;
+        }
+      }
 
       &Active {
+        font-weight: 700;
         width: 100%;
         height: 100%;
         background: $gradient-primary;
         color: $color-main-bg;
+        pointer-events: none;
       }
 
       &Icon {
@@ -155,13 +164,24 @@
         width: 100%;
         background: $gradient-secondary;
         color: $color-main-bg;
+
+        &:not(:disabled) {
+          &:hover {
+            background: $color-secondary-accent;
+            color: $color-main-bg;
+          }
+        }
+      }
+
+      &:hover {
+        color: $color-accent;
       }
     }
   }
 
-  &:focus {
-    outline: none;
-  }
+  // &:focus {
+  //   outline: none;
+  // }
 
   &Size {
     &Small {

@@ -5,7 +5,7 @@ const pagination = (): React.ReactElement => (
   <Layout title='pagination demo' pageClass='paginationDemo'>
     <div
       style={{
-        width: '100%',
+        width: '100vw',
         height: '400px',
         display: 'flex',
         alignItems: 'center',
