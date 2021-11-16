@@ -1,5 +1,5 @@
 @import '../../styles/mixins';
-@import '../../styles/vars.sass';
+@import '../../styles/vars';
 
 .button {
   position: relative;
@@ -135,6 +135,26 @@
 
       &:disabled {
         opacity: 0.5;
+      }
+    }
+
+    &Pagination {
+      background: none;
+      font-weight: normal;
+
+      &Active {
+        width: 100%;
+        height: 100%;
+        background: $gradient-primary;
+        color: $color-main-bg;
+      }
+
+      &Icon {
+        @include material-icon;
+        height: 100%;
+        width: 100%;
+        background: $gradient-secondary;
+        color: $color-main-bg;
       }
     }
   }
