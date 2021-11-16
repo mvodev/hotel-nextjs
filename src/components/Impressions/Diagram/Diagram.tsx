@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { PieChart } from 'react-minimal-pie-chart';
 
 import ImpressionsProps from '../Types';
@@ -8,7 +7,7 @@ const Diagram = ({ value }: ImpressionsProps): JSX.Element => {
   const colors = value.map((elem, index) => {
     if (elem.withGradient) {
       return (
-        <defs>
+        <defs key={elem.description}>
           <linearGradient id={`gradient${index}`}>
             <stop offset='0%' stopColor={`${elem.color}`} />
             <stop offset='100%' stopColor={`${elem.stopColor}`} />
@@ -18,14 +17,13 @@ const Diagram = ({ value }: ImpressionsProps): JSX.Element => {
     }
     return null;
   });
-
-  const dataForChart = value.slice(0);
   
-  const dataWithGradient = dataForChart.map((elem, index) => {
+  const valueWithGradient = value.map((elem, index) => {
     if (elem.withGradient) {
       return {
         value: elem.value,
         color: `url(#gradient${index})`,
+        key: elem.description,
       };
     }
     return elem;
@@ -40,7 +38,7 @@ const Diagram = ({ value }: ImpressionsProps): JSX.Element => {
       lengthAngle={-360}
       center={[60, 60]}
       viewBoxSize={[120, 120]}
-      data={dataWithGradient}
+      data={valueWithGradient}
     >
       {colors}
     </PieChart>
