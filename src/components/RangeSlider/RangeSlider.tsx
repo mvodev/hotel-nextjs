@@ -76,7 +76,7 @@ const RangeSlider = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <h3 className={styles.title}>диапазон цены</h3>
+        <h2 className={styles.title}>диапазон цены</h2>
         <div className={styles.rangeLabel}>
           <span className={styles.value}>
             {formateValue(calcValue(positions[0]))}
