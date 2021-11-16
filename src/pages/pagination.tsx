@@ -12,7 +12,13 @@ const pagination = (): React.ReactElement => (
         justifyContent: 'center',
       }}
     >
-      <Pagination {...{ buttonsCount: 15, currentPage: 1 }} />
+      <Pagination
+        {...{
+          buttonsCount: 15,
+          currentPage: 1,
+          text: '1 - 12 из 100+ вариантов одежды',
+        }}
+      />
     </div>
   </Layout>
 );

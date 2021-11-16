@@ -8,6 +8,7 @@ import PaginationProps from './Types';
 const Pagination = ({
   buttonsCount,
   currentPage,
+  text,
 }: PaginationProps): React.ReactElement => {
   const [active, setActive] = useState(currentPage);
 
@@ -84,9 +85,12 @@ const Pagination = ({
 
   return (
     <div className={styles.pagination}>
-      {backButton}
-      {pagesButtons}
-      {forwardButton}
+      <div className={styles.buttons}>
+        {backButton}
+        {pagesButtons}
+        {forwardButton}
+      </div>
+      <div className={styles.text}>{text}</div>
     </div>
   );
 };

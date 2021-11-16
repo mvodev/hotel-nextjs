@@ -2,18 +2,43 @@
 
 .pagination {
   display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    @media screen and (max-width: 320px) {
+      flex-wrap: wrap;
+    }
+  }
 
   .buttonContainer {
-    flex: none;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    max-width: 40px;
+    width: 100%;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
   }
 
   .gap {
     color: $color-additional-fg;
     user-select: none;
+  }
+
+  .text {
+    text-align: center;
+    color: $color-main-fg;
+    padding-top: 13px;
   }
 }
