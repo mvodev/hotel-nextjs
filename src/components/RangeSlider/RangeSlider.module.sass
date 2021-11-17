@@ -1,0 +1,95 @@
+@import '@styles/vars'
+@import '@styles/mixins'
+
+$size: 16px
+$track-height: 6px
+
+.wrapper
+  display: flex
+  flex-direction: column
+  gap: 16px
+
+.header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-wrap: wrap
+
+.title
+  @include font-bold-type
+  margin: 0
+
+.rangeLabel
+  color: $color-additional-fg
+
+.value
+  @include font-type($size: 12px)
+
+%button-reset
+  margin: 0
+  padding: 0
+  border: none
+  outline: none
+
+.rangeSlider
+  display: flex
+  align-items: center
+  position: relative
+  padding: 0 $size
+
+.filler
+  @extend %button-reset
+  position: absolute
+  background-color: white
+  height: $track-height
+  width: 50%
+  right: 0
+  border: 1px solid $color-unclaimed-fg
+  border-radius: 3px
+  cursor: pointer
+  touch-action: none
+
+  &:first-child
+    left: 0
+
+.container
+  display: flex
+  flex-grow: 1
+  align-items: center
+  position: relative
+  height: $size
+
+.handle
+  @extend %button-reset
+  position: absolute
+  width: $size
+  height: $size
+  border-radius: 50%
+  cursor: pointer
+  touch-action: none
+  border: 2px solid white
+  outline: none
+  background: $gradient-secondary
+
+  &:first-child
+    transform: translateX(-$size)
+
+  &:hover
+    background: $gradient-secondary-focus
+
+.track
+  @extend %button-reset
+  display: flex
+  justify-content: space-between
+  height: $track-height
+  flex-grow: 1
+  background: $gradient-secondary
+  cursor: pointer
+  touch-action: none
+
+.progressBar
+  height: 100%
+  background-color: white
+  border: 1px solid $color-unclaimed-fg
+  border-left: none
+  border-right: none
