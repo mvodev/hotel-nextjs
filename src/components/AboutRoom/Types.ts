@@ -1,11 +1,11 @@
 type TypeSection = {
-  icon: 'comfort' | 'convenience' | 'coziness'
-  title: string
-  description: string
-}
+  icon: 'comfort' | 'convenience' | 'coziness';
+  title: string;
+  description: string;
+};
 
 type TypeAboutRoomProps = {
-  sections?: TypeSection[]
+  sections?: TypeSection[];
 };
 
 export type { TypeAboutRoomProps, TypeSection };

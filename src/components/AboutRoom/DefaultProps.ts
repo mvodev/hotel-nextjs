@@ -1,6 +1,6 @@
 import type { TypeSection } from './Types';
 
-const defaultSections: TypeSection[]  = [
+const defaultSections: TypeSection[] = [
   {
     icon: 'comfort',
     title: 'Комфорт',
