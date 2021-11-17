@@ -3,12 +3,6 @@
 .expandableList {
   user-select: none;
 
-  .titleSection {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
   .title {
     @include h3();
     width: 100%;
