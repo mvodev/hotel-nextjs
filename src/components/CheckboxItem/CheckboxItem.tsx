@@ -41,7 +41,7 @@ const CheckboxItem = (props: CheckboxItemType): React.ReactElement => {
       onClick={handleCheckboxItemClick}
       onKeyDown={handleCheckboxItemKeyDown}
     >
-      <div className={checkboxClass} />
+      <input className={checkboxClass} />
       <div className={style.checkboxItemLabel}>
         {titleElement}
         <p className={style.checkboxItemText}>{text}</p>

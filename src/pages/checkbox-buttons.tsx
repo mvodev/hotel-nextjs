@@ -39,16 +39,16 @@ const stateRich = {
 };
 
 const Index = (): ReactElement => (
-  <Layout title='landing page' pageClass='landing'>
-    <div className='container'>
-      <div className='firstExample'>
+  <Layout title="landing page" pageClass="landing">
+    <div className="container">
+      <div className="firstExample">
         <CheckboxButtons
           isRich={stateNormal.isRich}
           title={stateNormal.title}
           items={stateNormal.items}
         />
       </div>
-      <div className='secondExample'>
+      <div className="secondExample">
         <CheckboxButtons
           isRich={stateRich.isRich}
           title={stateRich.title}

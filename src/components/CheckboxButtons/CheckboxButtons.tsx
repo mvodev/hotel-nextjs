@@ -15,7 +15,7 @@ const CheckboxButtons = (props: CheckboxButtonsType): React.ReactElement => {
   };
 
   const titleElement = <h2 className={style.checkboxButtonsTitle}>{title}</h2>;
-  const getItemsList = checkboxItems.map((item, index) => (
+  const itemsList = checkboxItems.map((item, index) => (
     <li key={item.text}>
       <CheckboxItem
         id={index}
@@ -31,7 +31,7 @@ const CheckboxButtons = (props: CheckboxButtonsType): React.ReactElement => {
   return (
     <div className={style.checkboxButtons}>
       {title ? titleElement : ''}
-      <ul className={style.checkboxButtonsItems}>{getItemsList}</ul>
+      <ul className={style.checkboxButtonsItems}>{itemsList}</ul>
     </div>
   );
 };
