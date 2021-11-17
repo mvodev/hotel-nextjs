@@ -1,5 +1,5 @@
 type ExpandableListProps = {
-  title: string;
+  text: string;
   elements: Element[];
 };
 
