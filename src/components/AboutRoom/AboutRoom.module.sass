@@ -10,6 +10,9 @@
   margin: 0
   padding: 0
 
+  & .container:last-child .separator
+    display: none
+
 .title
   @include font-type($size: 19px, $weight: bold, $color: $color-title-fg)
   margin: 0
@@ -22,15 +25,16 @@
 .section
   display: grid
   grid-template-columns: 48px 1fr
-  grid-template-rows: 24px 24px
+  grid-template-rows: 1fr 1fr
   gap: 0 10px
   align-items: center
 
   &Icon
     grid-row: span 2
-    align-self: stretch
+    align-self: center
     background-repeat: no-repeat
     background-position: center
+    height: 48px
 
     &Type
 
