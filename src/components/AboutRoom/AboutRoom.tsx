@@ -1,24 +1,22 @@
 import styles from './AboutRoom.module.sass';
-import type TypeAboutRoomProps from './Types';
-import sections from './Sections';
+import type { TypeAboutRoomProps } from './Types';
+import defaultSections from './DefaultProps';
 
-const AboutRoom = ({
-  sectionNames = ['comfort', 'convenience', 'coziness'],
-}: TypeAboutRoomProps): JSX.Element => (
+const AboutRoom = ({ sections = defaultSections }: TypeAboutRoomProps): JSX.Element => (
   <ul className={styles.aboutRoom}>
     <h2 className={styles.title}>Сведения о номере</h2>
-    {sectionNames.map((n) => (
-      <li className={styles.container} key={n}>
+    {sections.map((s) => (
+      <li className={styles.container} key={s.icon}>
         <div className={styles.section}>
           <div
             className={[
               styles.sectionIcon,
-              styles[`sectionIconType${n[0].toUpperCase()}${n.slice(1)}`],
+              styles[`sectionIconType${s.icon[0].toUpperCase()}${s.icon.slice(1)}`],
             ].join(' ')}
           />
-          <h3 className={styles.sectionTitle}>{sections[n].title}</h3>
+          <h3 className={styles.sectionTitle}>{s.title}</h3>
           <span className={styles.sectionDescription}>
-            {sections[n].description}
+            {s.description}
           </span>
         </div>
         <div className={styles.separator} />

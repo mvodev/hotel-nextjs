@@ -1,16 +1,21 @@
-const sections = {
-  comfort: {
+import type { TypeSection } from './Types';
+
+const defaultSections: TypeSection[]  = [
+  {
+    icon: 'comfort',
     title: 'Комфорт',
     description: 'Шумопоглощающие стены',
   },
-  convenience: {
+  {
+    icon: 'convenience',
     title: 'Удобство',
     description: 'Окно в каждой из спален',
   },
-  coziness: {
+  {
+    icon: 'coziness',
     title: 'Уют',
     description: 'Номер оснащён камином',
   },
-};
+];
 
-export default sections;
+export default defaultSections;

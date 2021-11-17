@@ -1,7 +1,11 @@
-import sections from './Sections';
+type TypeSection = {
+  icon: 'comfort' | 'convenience' | 'coziness'
+  title: string
+  description: string
+}
 
 type TypeAboutRoomProps = {
-  sectionNames?: (keyof typeof sections)[];
+  sections?: TypeSection[]
 };
 
-export default TypeAboutRoomProps;
+export type { TypeAboutRoomProps, TypeSection };
