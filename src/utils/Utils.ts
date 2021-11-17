@@ -38,22 +38,22 @@ export const dateToTimeAgo = (date: Date): string => {
     return result.join('');
   };
 
-  const minute = 60000;
-  const hour = 3600000;
-  const day = 86400000;
-  const week = 604800000;
-  const month = day * 30;
-  const yer = 31536000000;
+  const MINUTE = 60000;
+  const HOUR = 3600000;
+  const DAY = 86400000;
+  const WEEK = 604800000;
+  const MONTH = DAY * 30;
+  const YER = 31536000000;
 
-  if (timeDelta < hour)
-    return getValue(timeDelta, minute, ['минуту', 'минуты', 'минут']);
-  if (timeDelta < day)
-    return getValue(timeDelta, hour, ['час', 'часа', 'часов']);
-  if (timeDelta < week)
-    return getValue(timeDelta, day, ['день', 'дня', 'дней']);
-  if (timeDelta < month)
-    return getValue(timeDelta, week, ['неделю', 'недели', 'недель']);
-  if (timeDelta < yer)
-    return getValue(timeDelta, month, ['месяц', 'месяца', 'месяцев']);
-  return getValue(timeDelta, yer, ['год', 'года', 'лет']);
+  if (timeDelta < HOUR)
+    return getValue(timeDelta, MINUTE, ['минуту', 'минуты', 'минут']);
+  if (timeDelta < DAY)
+    return getValue(timeDelta, HOUR, ['час', 'часа', 'часов']);
+  if (timeDelta < WEEK)
+    return getValue(timeDelta, DAY, ['день', 'дня', 'дней']);
+  if (timeDelta < MONTH)
+    return getValue(timeDelta, WEEK, ['неделю', 'недели', 'недель']);
+  if (timeDelta < YER)
+    return getValue(timeDelta, MONTH, ['месяц', 'месяца', 'месяцев']);
+  return getValue(timeDelta, YER, ['год', 'года', 'лет']);
 };
