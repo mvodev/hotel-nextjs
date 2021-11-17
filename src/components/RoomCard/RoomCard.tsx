@@ -12,14 +12,12 @@ const RoomCard = ({
   slides,
 }: RoomCardProps): React.ReactElement => {
   return (
-    <div className={styles.roomCard}>
-      <Link href={link}>
-        <a className={styles.link}>
-          <RoomSlider {...{ slides }} />
-          <InfoSection {...infoSection} />
-        </a>
-      </Link>
-    </div>
+    <Link href={link}>
+      <a className={styles.roomCard}>
+        <RoomSlider {...{ slides }} />
+        <InfoSection {...infoSection} />
+      </a>
+    </Link>
   );
 };
 

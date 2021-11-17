@@ -22,6 +22,7 @@ const ArrowButton = ({
       type='button'
       className={styles.arrowButton}
       onClick={handleArrowButtonClick}
+      tabIndex={-1}
     >
       {icon}
     </button>
