@@ -20,6 +20,10 @@
     padding: 10px;
     cursor: pointer;
 
+    &:last-child {
+      padding-right: 0;
+    }
+
     @media screen and (max-width: 950px) {
       align-items: flex-start;
       color: $color-main-bg;
