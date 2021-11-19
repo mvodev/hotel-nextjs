@@ -1,5 +1,5 @@
 @import '../../styles/mixins';
-@import '../../styles/vars.sass';
+@import '../../styles/vars';
 
 .button {
   position: relative;
@@ -137,10 +137,48 @@
         opacity: 0.5;
       }
     }
-  }
 
-  &:focus {
-    outline: none;
+    &Pagination {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: none;
+      font-weight: normal;
+      color: $color-additional-fg;
+
+      &:not(:disabled) {
+        &:hover {
+          color: $color-main-bg;
+          background: $color-unclaimed-fg;
+          font-weight: bold;
+        }
+      }
+
+      &Active {
+        font-weight: 700;
+        background: $gradient-primary;
+        color: $color-main-bg;
+        pointer-events: none;
+      }
+
+      &Icon {
+        @include material-icon;
+        background: $gradient-secondary;
+        color: $color-main-bg;
+
+        &:not(:disabled) {
+          &:hover {
+            background: $color-secondary-accent;
+            color: $color-main-bg;
+            font-weight: normal;
+          }
+        }
+      }
+
+      &:hover {
+        color: $color-accent;
+      }
+    }
   }
 
   &Size {
