@@ -5,11 +5,11 @@ import defaultSections from './DefaultProps';
 const AboutRoom = ({
   sections = defaultSections,
 }: TypeAboutRoomProps): JSX.Element => (
-  <ul className={styles.aboutRoom}>
+  <div className={styles.aboutRoom}>
     <h2 className={styles.title}>Сведения о номере</h2>
-    {sections.map(({ icon, title, description }) => (
-      <li className={styles.container} key={icon}>
-        <div className={styles.section}>
+    <ul className={styles.container}>
+      {sections.map(({ icon, title, description }) => (
+        <li className={styles.section} key={icon}>
           <img 
             src={`/images/${icon}`} 
             alt="room service icon" 
@@ -17,11 +17,10 @@ const AboutRoom = ({
           />
           <h3 className={styles.sectionTitle}>{title}</h3>
           <span className={styles.sectionDescription}>{description}</span>
-        </div>
-        <div className={styles.separator} />
-      </li>
-    ))}
-  </ul>
+        </li>
+      ))}
+    </ul>
+  </div>
 );
 
 export default AboutRoom;
