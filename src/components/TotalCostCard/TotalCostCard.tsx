@@ -47,22 +47,27 @@ const TotalCostCard = ({
           >
             {roomNumber}
           </h1>
-          <span className={styles.costPerDay}>{costPerDay}</span>
+          <span className={styles.costPerDay}>{formatInRubles(costPerDay)}</span>
         </div>
-        <DateDropdown
-          titles={['прибытие', 'выезд']}
-          modifier='double'
-          initDate={initDate}
-        />
-        <DropdownGuests
-          placeholder='Сколько гостей'
-          opened={false}
-          value={{
-            adult,
-            child,
-            infants,
-          }}
-        />
+        <div className={styles.dateDropdownWrapper}>
+          <DateDropdown
+            titles={['прибытие', 'выезд']}
+            modifier='double'
+            initDate={initDate}
+          />
+        </div>
+        <div className={styles.dropdownGuestsWrapper}>
+          <h3 className={styles.dropdownGuestsTitle}>гости</h3>
+          <DropdownGuests
+            placeholder='Сколько гостей'
+            opened={false}
+            value={{
+              adult,
+              child,
+              infants,
+            }}
+          />
+        </div>
         <table className={styles.costTable}>
           <tbody>
             <tr className={styles.costTableRow}>

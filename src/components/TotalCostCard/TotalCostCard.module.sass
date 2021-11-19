@@ -16,13 +16,20 @@
 .container
   display: flex
   flex-direction: column
-  gap: 20px
+  grid-gap: 23px
   width: 320px
 
 .heading
   display: flex
   align-items: flex-end
   justify-content: space-between
+
+.dateDropdownWrapper
+  color: $color-title-fg
+
+.dropdownGuestsTitle
+  @include font-bold-type
+  margin: 0 0 5px
 
 .roomNumber
   margin: 0
@@ -51,7 +58,7 @@
 
 .costTable
   border-collapse: collapse
-  margin-bottom: 10px
+  margin-bottom: 3px
   
   & &Row:first-child &Info
     background-image: none
