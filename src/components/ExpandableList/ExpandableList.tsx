@@ -3,8 +3,8 @@ import styles from './ExpandableList.module.scss';
 import ExpandableListProps from './Types';
 
 const ExpandableList = ({
+  children,
   title,
-  elements,
 }: ExpandableListProps): React.ReactElement => {
   const [isOpened, setIsOpened] = useState(false);
 
@@ -14,12 +14,6 @@ const ExpandableList = ({
 
   let classes = styles.expandableList;
   classes += isOpened ? ` ${styles.expandableListOpened}` : '';
-
-  const items = elements.map((element) => (
-    <li key={element.id} className={styles.item}>
-      {element.element}
-    </li>
-  ));
 
   const expandableList = (
     <div className={classes}>
@@ -43,7 +37,7 @@ const ExpandableList = ({
           expand_more
         </div>
       </div>
-      <ul className={styles.hiddenList}>{items}</ul>
+      <div className={styles.hiddenList}>{children}</div>
     </div>
   );
 
