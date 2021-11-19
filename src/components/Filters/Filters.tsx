@@ -77,21 +77,13 @@ const Filters = ({
         <DropdownRoom placeholder='' values={dropdownRoom.values} />
       </div>
       <div className={style.filtersAdditionalConveniences}>
-        <ExpandableList
-          title='дополнительные удобства'
-          elements={[
-            {
-              id: 1,
-              element: (
-                <CheckboxButtons
-                  title=''
-                  isRich={false}
-                  items={expandableList.items}
-                />
-              ),
-            },
-          ]}
-        />
+        <ExpandableList title='дополнительные удобства'>
+          <CheckboxButtons
+            title=''
+            isRich={false}
+            items={expandableList.items}
+          />
+        </ExpandableList>
       </div>
     </div>
   );
