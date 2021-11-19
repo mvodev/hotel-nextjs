@@ -1,9 +1,12 @@
 import type { ReactElement } from 'react';
-import Layout from '../components/Layout';
+
 import RoomPhotoGallery from 'src/components/RoomPhotoGallery/RoomPhotoGallery';
-import styles from '../styles/pages/details.module.scss';
+import Reviews from 'src/components/Reviews/Reviews';
+import ReviewDefaultProps from 'src/components/Reviews/ReviewDefaultProps';
 import Impressions from 'src/components/Impressions/Impressions';
 import impressionsDefaultProps from 'src/components/Impressions/ImpressionsDefaultProps';
+import styles from '../styles/pages/details.module.scss';
+import Layout from '../components/Layout';
 
 const Details = (): ReactElement => (
   <Layout title="room details" pageClass="details">
@@ -19,8 +22,8 @@ const Details = (): ReactElement => (
             <article className={styles.detailsInfo}>
               <Impressions {...impressionsDefaultProps}/>
             </article>
-            <article className={styles.detailsInfo}>
-              Comments
+            <article className={styles.detailsReview}>
+              <Reviews {...ReviewDefaultProps}/>
             </article>
             <article className={styles.detailsRules}>
               Rules

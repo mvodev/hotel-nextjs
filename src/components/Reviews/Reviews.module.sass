@@ -1,0 +1,41 @@
+@import '../../styles/vars'
+@import '../../styles/_mixins'
+
+.reviews
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-between
+  box-sizing: border-box
+  width: 100%
+
+  &Title
+    @mixin h2()
+    margin: 0
+    font-size: 19px
+    line-height: 23px
+
+    @media screen and (max-width: 400px)
+      flex: 1 1 auto
+      text-align: center
+
+  &NumberOfReviews
+    display: flex
+    align-items: center
+    margin: 0
+    color: $color-additional-fg
+    font-size: 14px
+    line-height: 14px
+    text-align: right
+
+    @media screen and (max-width: 414px)
+      margin: 10px 0 0 10px
+
+  &Content 
+    box-sizing: border-box
+    width: 100%
+    padding-top: 21px
+
+  &Item
+    box-sizing: border-box
+    width: 100%
+    padding-bottom: 23px
