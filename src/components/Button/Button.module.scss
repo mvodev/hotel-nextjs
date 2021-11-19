@@ -139,31 +139,30 @@
     }
 
     &Pagination {
+      position: absolute;
+      height: 100%;
+      width: 100%;
       background: none;
       font-weight: normal;
       color: $color-additional-fg;
 
       &:not(:disabled) {
         &:hover {
-          color: $color-main-fg;
+          color: $color-main-bg;
+          background: $color-unclaimed-fg;
+          font-weight: bold;
         }
       }
 
       &Active {
-        position: absolute;
         font-weight: 700;
-        width: 100%;
-        height: 100%;
         background: $gradient-primary;
         color: $color-main-bg;
         pointer-events: none;
       }
 
       &Icon {
-        position: absolute;
         @include material-icon;
-        height: 100%;
-        width: 100%;
         background: $gradient-secondary;
         color: $color-main-bg;
 
