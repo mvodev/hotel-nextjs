@@ -1,0 +1,106 @@
+@import '../../styles/vars'
+@import '../../styles/_mixins'
+  
+.filters
+  box-sizing: border-box
+  width: 100%
+  max-width: 320px
+  background-color: $color-main-bg
+  transition: 0.75s
+  background-color: #fff
+  padding-top: 30px
+
+  @media screen and (max-width: 1150px)
+    position: fixed
+    left: -340px
+    top: 70px
+    z-index: 50
+    flex: 1 1 auto
+    height: calc(100% - 70px)
+    padding-left: 20px
+    border-radius: 10px
+    box-shadow: 15px 0 10px rgb(31 32 65 / 25%)
+    overflow: scroll
+    z-index: 0
+
+  &Open
+    left: 0
+
+    & .filtersButton
+      left: 290px
+
+      &::before
+        content: 'arrow_back'
+
+  &Button
+    position: fixed
+    display: none
+    width: 30px
+    height: 30px
+    border-radius: 50%
+    top: 50%
+    left: 0px
+    transition: 0.75s
+    background-color: #fff
+    border: 1px solid $color-additional-fg
+    
+    @media screen and (max-width: 1150px)
+      display: flex
+      justify-content: center
+      align-items: center
+
+    &::before
+      font-family: $material-font-family
+      content: 'arrow_forward'
+      color: $color-additional-fg
+
+  &Date
+    max-width: 266px
+
+  &Guests
+    max-width: 266px
+    padding-top: 20px
+
+    &Title
+      +h2
+      font-size: 12px
+      line-height: 15px
+      margin: 0
+      text-transform: uppercase
+      padding-bottom: 6px
+      
+  &Price
+    max-width: 266px
+    padding-top: 31px
+
+    &Text
+      font-family: $main-font-family
+      font-size: 12px
+      line-height: 14px
+      color: $color-additional-fg
+      margin-bottom: 0
+
+  &Rules
+    max-width: 266px
+    padding-top: 29px
+
+  &Availability
+    max-width: 266px
+    padding-top: 28px
+
+  &Conveniences
+    max-width: 266px
+    padding-top: 25px
+
+    &Title
+      +h2
+      font-size: 12px
+      line-height: 15px
+      margin: 0
+      text-transform: uppercase
+      padding-bottom: 5px
+
+  &AdditionalConveniences
+    max-width: 266px
+    padding-top: 26px
+    padding-bottom: 20px
