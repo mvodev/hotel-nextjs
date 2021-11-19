@@ -1,5 +1,5 @@
 type TypeSection = {
-  icon: 'comfort' | 'convenience' | 'coziness';
+  icon: string;
   title: string;
   description: string;
 };
