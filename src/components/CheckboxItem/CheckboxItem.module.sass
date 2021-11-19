@@ -6,7 +6,7 @@
   cursor: pointer
   padding: 5px 0
   
-  &Checkbox
+  &Imitator
     flex: 0 0 auto
     width: 20px
     height: 20px
@@ -15,10 +15,15 @@
     border: 1px solid $color-unclaimed-fg
     transition: border 0.5s
 
-    &.checkboxItemCheckboxChecked
+    &.checkboxItemImitatorChecked
       border: 1px solid $color-primary
       position: relative
       background: url('/images/checked.svg') center no-repeat
+
+  &Checkbox
+    width: 0
+    height: 0
+    opacity: 0
 
   &Label
     flex: 1 1 auto

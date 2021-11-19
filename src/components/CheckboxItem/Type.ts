@@ -4,7 +4,7 @@ type CheckboxItemType = {
   title: string;
   text: string;
   checked: boolean;
-  onClick: (id: number) => void;
+  onClick: (id: number, checked: boolean) => void;
 };
 
 export default CheckboxItemType;

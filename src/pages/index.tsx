@@ -24,9 +24,9 @@ const Index = (): ReactElement => (
     <section className={styles.landingPage}>
       <Carousel
         names={[
-          "background-room-1.webp",
-          "background-room-2.webp",
-          "background-room-3.webp",
+          'background-room-1.webp',
+          'background-room-2.webp',
+          'background-room-3.webp',
         ]}
       />
       <div className={styles.pageContainer}>
