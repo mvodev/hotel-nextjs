@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { KeyboardEvent } from 'react';
+import { ChangeEvent } from 'react';
 import CheckboxItemType from './Type';
 import style from './CheckboxItem.module.sass';
 
@@ -23,30 +25,32 @@ const CheckboxItem = (props: CheckboxItemType): React.ReactElement => {
     isRich ? style.checkboxItemRich : style.checkboxItemNormal
   }`;
 
-  const checkboxClass = `${style.checkboxItemCheckbox} ${
-    checked ? style.checkboxItemCheckboxChecked : ''
+  const imitatorClass = `${style.checkboxItemImitator} ${
+    checked ? style.checkboxItemImitatorChecked : ''
   }`;
 
-  const handleCheckboxItemClick = () => {
-    onClick(id);
-  };
-
-  const handleCheckboxItemKeyDown = (event: KeyboardEvent) => {
-    if (event.code === 'Enter') onClick(id);
+  const handleCheckboxChange = (event: ChangeEvent) => {
+    onClick(id, (event.currentTarget as HTMLInputElement).checked);
   };
 
   return (
-    <div
+    <label
       className={itemClass}
-      onClick={handleCheckboxItemClick}
-      onKeyDown={handleCheckboxItemKeyDown}
+      tabIndex = {0}
     >
-      <input className={checkboxClass} />
+      <span className = { imitatorClass }>
+        <input 
+          className={ style.checkboxItemCheckbox } 
+          onChange = { handleCheckboxChange }
+          type = "checkbox"
+          checked = {checked}
+        />
+      </span>
       <div className={style.checkboxItemLabel}>
         {titleElement}
         <p className={style.checkboxItemText}>{text}</p>
       </div>
-    </div>
+    </label>
   );
 };
 

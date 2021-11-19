@@ -8,9 +8,9 @@ const CheckboxButtons = (props: CheckboxButtonsType): React.ReactElement => {
 
   const [checkboxItems, setCheckboxItems] = useState(items);
 
-  const handleItemClick = (id: number): void => {
+  const handleItemClick = (id: number, checked: boolean): void => {
     const newState = checkboxItems.slice(0);
-    newState[id].checked = !newState[id].checked;
+    newState[id].checked = checked;
     setCheckboxItems(newState);
   };
 

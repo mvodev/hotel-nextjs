@@ -4,11 +4,11 @@ import ExpandableListProps from './Types';
 
 const ExpandableList = ({
   children,
-  title,
+  text
 }: ExpandableListProps): React.ReactElement => {
   const [isOpened, setIsOpened] = useState(false);
 
-  const handleTitleElementClick = (): void => {
+  const handleTitleClick = (): void => {
     setIsOpened(!isOpened);
   };
 
@@ -17,26 +17,10 @@ const ExpandableList = ({
 
   const expandableList = (
     <div className={classes}>
-      <div className={styles.titleSection}>
-        <div
-          role='button'
-          className={styles.title}
-          onClick={handleTitleElementClick}
-          onKeyPress={handleTitleElementClick}
-          tabIndex={0}
-        >
-          {title}
-        </div>
-        <div
-          role='button'
-          className={styles.arrow}
-          onClick={handleTitleElementClick}
-          onKeyPress={handleTitleElementClick}
-          tabIndex={0}
-        >
-          expand_more
-        </div>
-      </div>
+      <button type='button' className={styles.title} onClick={handleTitleClick}>
+        <span className={styles.text}>{text}</span>
+        <span className={styles.arrow}>expand_more</span>
+      </button>
       <div className={styles.hiddenList}>{children}</div>
     </div>
   );
