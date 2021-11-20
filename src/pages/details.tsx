@@ -5,6 +5,10 @@ import Reviews from 'src/components/Reviews/Reviews';
 import ReviewDefaultProps from 'src/components/Reviews/ReviewDefaultProps';
 import Impressions from 'src/components/Impressions/Impressions';
 import impressionsDefaultProps from 'src/components/Impressions/ImpressionsDefaultProps';
+import AboutRoom from 'src/components/AboutRoom/AboutRoom';
+import TotalCostCard from 'src/components/TotalCostCard/TotalCostCard';
+import totalCostCardDefaultProps from 'src/components/TotalCostCard/DefaultProps';
+import BulletList from 'src/components/BulletList/BulletList';
 import styles from '../styles/pages/details.module.scss';
 import Layout from '../components/Layout';
 
@@ -20,22 +24,32 @@ const Details = (): ReactElement => (
         <section className={styles.detailsDescription}>
           <div>
             <article className={styles.detailsInfo}>
+              <AboutRoom/>
               <Impressions {...impressionsDefaultProps}/>
             </article>
             <article className={styles.detailsReview}>
               <Reviews {...ReviewDefaultProps}/>
             </article>
             <article className={styles.detailsRules}>
-              Rules
+              <BulletList 
+                title="Правила" 
+                items={[
+                  {id:1,text:'Можно с питомцами'},
+                  {id:2,text:'Без вечеринок и мероприятий'},
+                  {id:3,text:'Время прибытия — после 13:00,а выезд до 12:00'},
+                ]}/>
+              <BulletList 
+                title="Отмена" 
+                items={[
+                  {id:1,text:'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.'},
+                ]}/>
             </article>
           </div>
         </section>
         <section className={styles.detailsForm}>
-          <div style={{maxWidth:'380px',height:'511px',border:'1px solid red',width:'100%'}}> </div>
+          <TotalCostCard {...totalCostCardDefaultProps}/>
         </section>
       </div>
-      
-
     </div>
   </Layout>
 );
