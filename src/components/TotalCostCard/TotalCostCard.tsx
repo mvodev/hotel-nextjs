@@ -68,39 +68,31 @@ const TotalCostCard = ({
             }}
           />
         </div>
-        <table className={styles.costTable}>
-          <tbody>
-            <tr className={styles.costTableRow}>
-              <td className={styles.costTableServiceDescription}>
-                <span className={styles.costTableCostPerDay}>
-                  {formatInRubles(costPerDay)}
-                </span>
-                {' x '}
-                <span className={styles.costTableNDays}>
-                  {nDays} {spells[getPosInSpellCasesArray(nDays)]}
-                </span>
-              </td>
-              <td className={styles.costTableInfo} title='info' />
-              <td className={styles.costTableCost}>
-                {formatInRubles(preTotal)}
-              </td>
-            </tr>
-            <tr className={styles.costTableRow}>
-              <td className={styles.costTableServiceDescription}>
-                {`Сбор за услуги: скидка ${formatInRubles(discount)}`}
-              </td>
-              <td className={styles.costTableInfo} title='info' />
-              <td className={styles.costTableCost}>0₽</td>
-            </tr>
-            <tr className={styles.costTableRow}>
-              <td className={styles.costTableServiceDescription}>
-                Сбор за дополнительные {'\n'} услуги
-              </td>
-              <td className={styles.costTableInfo} title='info' />
-              <td className={styles.costTableCost}>{formatInRubles(fee)}</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className={styles.costTable}>
+          <div className={styles.costTableServiceDescription}>
+            <span className={styles.costTableCostPerDay}>
+              {formatInRubles(costPerDay)}
+            </span>
+            {' x '}
+            <span className={styles.costTableNDays}>
+              {nDays} {spells[getPosInSpellCasesArray(nDays)]}
+            </span>
+          </div>
+          <div className={styles.costTableInfo} title='info' />
+          <div className={styles.costTableCost}>
+            {formatInRubles(preTotal)}
+          </div>
+          <div className={styles.costTableServiceDescription}>
+            {`Сбор за услуги: скидка ${formatInRubles(discount)}`}
+          </div>
+          <div className={styles.costTableInfo} title='info' />
+          <div className={styles.costTableCost}>0₽</div>
+          <div className={styles.costTableServiceDescription}>
+            Сбор за дополнительные {'\n'} услуги
+          </div>
+          <div className={styles.costTableInfo} title='info' />
+          <div className={styles.costTableCost}>{formatInRubles(fee)}</div>
+        </div>
         <div className={styles.total}>
           <span className={styles.totalCaption}>Итого</span>
           <div className={styles.totalDashedLine} />

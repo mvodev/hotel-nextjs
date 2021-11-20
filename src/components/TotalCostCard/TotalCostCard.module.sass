@@ -5,7 +5,7 @@
   display: flex
   justify-content: center
   max-width: 380px
-  padding: 40px 0 30px
+  padding: 40px 10px 30px
   color: $color-main-fg
   background-color: $color-main-bg
   border-radius: 4px
@@ -16,7 +16,7 @@
 .container
   display: flex
   flex-direction: column
-  grid-gap: 23px
+  grid-gap: 22px
   width: 320px
 
 .heading
@@ -57,30 +57,24 @@
     @include font-type($weight: normal, $size: 12px)
 
 .costTable
-  border-collapse: collapse
-  margin-bottom: 3px
-  
-  & &Row:first-child &Info
+  display: grid
+  grid-template-columns: 220px 20px auto
+  grid-gap: 15px 0
+  margin-bottom: 10px
+
+  & &Info:nth-child(2)
     background-image: none
 
-  &Row
-    height: 35px
-
   &ServiceDescription
-    vertical-align: top
     white-space: pre-line
-    width: 220px
 
   &Info
-    vertical-align: top
     background-image: url(/images/info-icon.svg)
-    height: 20px
-    min-width: 20px
     background-repeat: no-repeat
+    height: 20px
 
   &Cost
     text-align: right
-    vertical-align: top
 
 .total
   display: flex
