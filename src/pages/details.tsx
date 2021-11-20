@@ -51,6 +51,7 @@ const Details = (): ReactElement => (
         <section className={styles.detailsForm}>
           <TotalCostCard {...totalCostCardDefaultProps}/>
         </section>
+        <div className={styles.detailsDelimeter}/>
       </div>
     </div>
   </Layout>
