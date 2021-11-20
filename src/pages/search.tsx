@@ -5,7 +5,9 @@ import Layout from '../components/Layout';
 
 
 const Search = (): ReactElement => (
-  <Layout title='search room' pageClass='search'/>
+  <Layout title='search room' pageClass='search'>
+    
+  </Layout>/>
 );
 
 export default Search;
