@@ -1,0 +1,50 @@
+@import '../vars' 
+@import '../_mixins'
+    
+.pageContainer
+  max-width: 1190px
+  width: 100%
+  padding: 0 15px
+  margin: auto
+  display: flex
+  justify-content: space-between
+  font-size: $base-font-size
+
+.searchContent
+  padding-top: 30px
+  flex: 1 1 auto
+  max-width: 834px
+  width: 100%
+
+  @media screen and (max-width: 1150px)
+    max-width: unset
+
+.searchTitle
+  +h1
+  margin: 0
+
+  @media screen and (max-width: 590px)
+    text-align: center
+
+.searchResult
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  width: 100%
+  padding-top: 21px
+
+.searchItem
+  padding-bottom: 20px
+  width: calc( 33.3333% - 7px)
+
+  @media screen and (max-width: 850px)
+    width: calc( 50% - 10px)
+
+  @media screen and (max-width: 590px)
+    width: 100%
+
+.searchPagination
+  width: 100%
+  display: flex
+  justify-content: center
+  padding-top: 19px
