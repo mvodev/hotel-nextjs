@@ -10,30 +10,75 @@
     flex-direction: column;
   }
 
+  &Images{
+    margin-bottom: 70px;
+
+    @media screen and (max-width: 767px) {
+      margin-bottom: 50px;
+    }
+  }
+
+  &Description{
+    max-width: 711px;
+    width: 100%;
+  }
+
+  &Form{
+    flex: 0 0 380px;
+    max-width: 380px;
+    width: 100%;
+  }
+
   &Content{
     flex: 1 0 auto;
-    margin-top: 70px;
     box-sizing: content-box;
     margin: 0 auto;
     padding: 0 15px;
-    max-width: 1190px;
+    max-width: 1170px;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 20px;
+
+    @media screen and (max-width: 767px) {
+      gap: 30px;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &Info{
     display: flex;
     flex-direction: row;
-    margin-top: 70px;
     gap: 70px;
+    margin-bottom: 35px;
+
+    @media screen and (max-width: 1024px) {
+      gap: 30px;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &Rules{
     display: flex;
     flex-direction: row;
     gap: 99px;
+
+    @media screen and (max-width: 1024px) {
+      gap: 30px;
+      flex-direction: column;
+    }
+
+    &Wrapper{
+      max-width: 250px;
+      width: 100%;
+
+      @media screen and (max-width: 1024px) {
+        max-width: none;
+      }
+    }
   }
 
 }

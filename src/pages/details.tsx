@@ -15,14 +15,15 @@ import Layout from '../components/Layout';
 const Details = (): ReactElement => (
   <Layout title="room details" pageClass="details">
     <div className={styles.detailsWrapper}>
-      <RoomPhotoGallery
-        mainPhoto="gallery-room-1.webp"
-        firstAdditionalPhoto="gallery-room-2.webp"
-        secondAdditionalPhoto="gallery-room-3.webp"
-      />
+      <div className={styles.detailsImages}> 
+        <RoomPhotoGallery
+          mainPhoto="gallery-room-1.webp"
+          firstAdditionalPhoto="gallery-room-2.webp"
+          secondAdditionalPhoto="gallery-room-3.webp"
+        />
+      </div>
       <div className={styles.detailsContent}>
         <section className={styles.detailsDescription}>
-          <div>
             <article className={styles.detailsInfo}>
               <AboutRoom/>
               <Impressions {...impressionsDefaultProps}/>
@@ -31,20 +32,21 @@ const Details = (): ReactElement => (
               <Reviews {...ReviewDefaultProps}/>
             </article>
             <article className={styles.detailsRules}>
-              <BulletList 
-                title="Правила" 
-                items={[
-                  {id:1,text:'Можно с питомцами'},
-                  {id:2,text:'Без вечеринок и мероприятий'},
-                  {id:3,text:'Время прибытия — после 13:00,а выезд до 12:00'},
+              <div className={styles.detailsRulesWrapper}>
+                <BulletList 
+                  title="Правила" 
+                  items={[
+                          {id:1,text:'Можно с питомцами'},
+                          {id:2,text:'Без вечеринок и мероприятий'},
+                          {id:3,text:'Время прибытия — после 13:00,а выезд до 12:00'},
                 ]}/>
+              </div>
               <BulletList 
                 title="Отмена" 
                 items={[
-                  {id:1,text:'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.'},
-                ]}/>
+                      {id:1,text:'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.'},
+              ]}/>
             </article>
-          </div>
         </section>
         <section className={styles.detailsForm}>
           <TotalCostCard {...totalCostCardDefaultProps}/>
