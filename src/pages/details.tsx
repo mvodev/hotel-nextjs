@@ -14,14 +14,14 @@ import Layout from '../components/Layout';
 
 const Details = (): ReactElement => (
   <Layout title="room details" pageClass="details">
-    <div className={styles.detailsWrapper}>
-      <div className={styles.detailsImages}> 
+    <div className={styles.detailsImages}> 
         <RoomPhotoGallery
           mainPhoto="gallery-room-1.webp"
           firstAdditionalPhoto="gallery-room-2.webp"
           secondAdditionalPhoto="gallery-room-3.webp"
         />
       </div>
+    <div className={styles.detailsWrapper}>
       <div className={styles.detailsContent}>
         <section className={styles.detailsDescription}>
             <article className={styles.detailsInfo}>
@@ -51,7 +51,6 @@ const Details = (): ReactElement => (
         <section className={styles.detailsForm}>
           <TotalCostCard {...totalCostCardDefaultProps}/>
         </section>
-        <div className={styles.detailsDelimeter}/>
       </div>
     </div>
   </Layout>

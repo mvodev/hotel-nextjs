@@ -5,10 +5,12 @@
 .details{
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   &Wrapper{
     display: flex;
     flex-direction: column;
+    align-items: center;
     border-bottom: 1px solid color.adjust($color-title-fg, $alpha: -0.9);
   }
 
@@ -29,12 +31,14 @@
     flex: 0 0 380px;
     max-width: 380px;
     width: 100%;
+
+    @media screen and (max-width: 1024px) {
+        margin-bottom: 20px;
+      }
   }
 
   &Content{
     flex-grow: 1;
-    box-sizing: content-box;
-    margin: 0 auto;
     padding: 0 15px;
     max-width: 1170px;
     width: 100%;
@@ -74,6 +78,7 @@
     @media screen and (max-width: 1024px) {
       gap: 30px;
       flex-direction: column;
+      margin-bottom: 20px;
     }
 
     &Wrapper{
@@ -81,15 +86,9 @@
       width: 100%;
 
       @media screen and (max-width: 1024px) {
-        max-width: none;
+        flex: 0;
       }
     }
-  }
-
-  &Delimeter{
-    width: 100%;
-    height: 1px;
-    background-color: $color-additional-fg;
   }
 
 }
