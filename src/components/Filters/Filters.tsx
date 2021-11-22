@@ -36,6 +36,7 @@ const Filters = ({
           titles={['даты пребывания в отеле']}
           modifier='single'
           initDate={dateDropdown.initDate}
+          isSmall
         />
       </div>
       <div className={style.filtersGuests}>

@@ -4,12 +4,12 @@ import DateDropdownType from './Types';
 
 import style from './DateDropdown.module.sass';
 
-const DateDropdown = (props: DateDropdownType): JSX.Element => {
-  const {
-    initDate = [null, null],
-    titles = ['прибытие', 'выезд'],
-    modifier = 'double',
-  } = props;
+const DateDropdown = ({
+  initDate = [null, null],
+  titles = ['прибытие', 'выезд'],
+  modifier = 'double',
+  isSmall = false
+}: DateDropdownType): JSX.Element => {
   const [value, setValue] = useState(initDate);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -96,6 +96,7 @@ const DateDropdown = (props: DateDropdownType): JSX.Element => {
           initDates={value as Date[]}
           onChangeDate={handleChangeDate}
           onControlPanelUsed={handleControlPanelUsed}
+          isSmall = {isSmall}
         />
       </div>
     </div>
