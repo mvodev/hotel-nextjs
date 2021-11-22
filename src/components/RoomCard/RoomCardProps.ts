@@ -9,7 +9,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 9990,
       reviewsCount: 145
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-1.webp',
       'room-4.webp',
@@ -25,7 +25,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 9900,
       reviewsCount: 65
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-2.webp',
       'room-8.webp',
@@ -41,7 +41,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 8500,
       reviewsCount: 35
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-3.webp',
       'room-9.webp',
@@ -57,7 +57,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 7300,
       reviewsCount: 19
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-4.webp',
       'room-8.webp',
@@ -73,7 +73,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 6000,
       reviewsCount: 44
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-5.webp',
       'room-1.webp',
@@ -89,7 +89,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 5800,
       reviewsCount: 56
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-6.webp',
       'room-2.webp',
@@ -105,7 +105,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 5500,
       reviewsCount: 45
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-7.webp',
       'room-2.webp',
@@ -121,7 +121,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 5300,
       reviewsCount: 39
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-8.webp',
       'room-1.webp',
@@ -137,7 +137,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 5000,
       reviewsCount: 77
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-9.webp',
       'room-3.webp',
@@ -153,7 +153,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 5000,
       reviewsCount: 25
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-10.webp',
       'room-4.webp',
@@ -169,7 +169,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 5000,
       reviewsCount: 15
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-11.webp',
       'room-6.webp',
@@ -185,7 +185,7 @@ const roomCardProps: RoomCardProps[] = [
       price: 5000,
       reviewsCount: 55
     },
-    link: '/Filters',
+    link: '/details',
     slides: [
       'room-12.webp',
       'room-5.webp',
