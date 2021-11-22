@@ -1,11 +1,8 @@
+import { ReactNode } from "react";
+
 type ExpandableListProps = {
   text: string;
-  elements: Element[];
-};
-
-type Element = {
-  id: number;
-  element: React.ReactElement;
+  children: ReactNode;
 };
 
 export default ExpandableListProps;
