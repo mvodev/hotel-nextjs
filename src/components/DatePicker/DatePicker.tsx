@@ -4,8 +4,12 @@ import DatePickerType from './Types';
 
 import 'react-calendar/dist/Calendar.css';
 
-const DatePicker = (props: DatePickerType): JSX.Element => {
-  const { initDates, onChangeDate, onControlPanelUsed } = props;
+const DatePicker = ({
+  initDates,
+  isSmall = false,
+  onChangeDate, 
+  onControlPanelUsed 
+}: DatePickerType): JSX.Element => {
   const dateObject = new Date();
   const options = { year: 'numeric', month: 'long' };
 
@@ -25,8 +29,10 @@ const DatePicker = (props: DatePickerType): JSX.Element => {
   };
   const handleApplyButtonClick = () => onControlPanelUsed('apply');
 
+  const datePickerClass = `date-picker ${isSmall ? 'date-picker_small' : ''}`
+
   return (
-    <div className='date-picker'>
+    <div className={datePickerClass}>
       <div className='date-picker__calendar'>
         <Calendar
           locale='ru'
