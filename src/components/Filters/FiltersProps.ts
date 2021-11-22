@@ -1,10 +1,8 @@
-import type { ReactElement } from 'react';
-import Layout from '../components/Layout';
-import Filters from '../components/Filters/Filters';
-import DropdownGuestsDefaultProps from '../components/DropdownGuests/DropdownGuestsDefaultProps';
-import DropdownRoomDefaultProps from '../components/DropdownRoom/DropdownRoomDefaultProps';
+import FiltersType from "./Types";
+import DropdownGuestsDefaultProps from '../DropdownGuests/DropdownGuestsDefaultProps';
+import DropdownRoomDefaultProps from '../DropdownRoom/DropdownRoomDefaultProps';
 
-const filtersProps = {
+const FiltersProps: FiltersType = {
   dateDropdown: {
     initDate: [new Date(2022, 7, 19), new Date(2022, 7, 23)],
     titles: ['даты пребывания в отеле'] as [string],
@@ -23,14 +21,17 @@ const filtersProps = {
     title: 'правила дома',
     items: [
       {
+        title: "",
         text: 'Можно курить',
         checked: false,
       },
       {
+        title: "",
         text: 'Можно с питомцами',
         checked: true,
       },
       {
+        title: "",
         text: 'Можно пригласить гостей (до 10 человек)',
         checked: true,
       },
@@ -58,26 +59,32 @@ const filtersProps = {
     title: '',
     items: [
       {
+        title: "",
         text: 'Завтрак',
         checked: false,
       },
       {
+        title: "",
         text: 'Письменный стол',
         checked: true,
       },
       {
+        title: "",
         text: 'Стул для кормления',
         checked: true,
       },
       {
+        title: "",
         text: 'Кроватка',
         checked: true,
       },
       {
+        title: "",
         text: 'Телевизор',
         checked: false,
       },
       {
+        title: "",
         text: 'Шампунь',
         checked: false,
       },
@@ -85,21 +92,4 @@ const filtersProps = {
   },
 };
 
-const Index = (): ReactElement => (
-  <Layout title='landing page' pageClass='landing'>
-    <div className='container'>
-      <Filters {...filtersProps} />
-    </div>
-
-    <style jsx>{`
-      .container {
-        max-width: 1190px;
-        width: 100%;
-        padding: 0 15px;
-        margin: auto;
-      }
-    `}</style>
-  </Layout>
-);
-
-export default Index;
+export default FiltersProps;
