@@ -23,7 +23,7 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
           style={
             elem.withGradient
               ? {
-                  background: `linear-gradient(180deg, ${elem.color} 0%, ${elem.stopColor} 100%);`,
+                  background: `linear-gradient(180deg, ${elem.color} 0%, ${elem.stopColor} 100%)`,
                 }
               : { background: `${elem.color}` }
           }
