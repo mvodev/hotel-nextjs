@@ -11,12 +11,12 @@ const SignInCard = (): JSX.Element => (
       <TextField placeholder="Пароль" type="password" required />
     </div>
     <div className={styles.bigButton}>
-      <Button text='войти' type='submit' theme='filled' />
+      <Button text="войти" type="submit" theme="filled" />
     </div>
     <div className={styles.regSection}>
       <span className={styles.regSectionSign}>Нет аккаунта на Toxin?</span>
       <div className={styles.regSectionButton}>
-        <Button link='/reg' theme='bordered' text='создать' />
+        <Button link="/reg" theme="bordered" text="создать" />
       </div>
     </div>
   </form>
