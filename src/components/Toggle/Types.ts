@@ -1,8 +1,7 @@
 type ToggleProps = {
   isChecked: boolean;
   description: string;
-  onChange: () => void;
-  id: string;
+  onChangeCallback?: () => void;
 }
 
 export default ToggleProps;

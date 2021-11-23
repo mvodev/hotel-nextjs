@@ -3,9 +3,6 @@
 .toggle{
 
   &Container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     max-width: 260px;
     width: 100%;
     position: relative;
@@ -37,10 +34,8 @@
   &Switch {
     position: absolute;
     cursor: pointer;
-    top: 0;
+    top: 3px;
     left: 0;
-    right: 0;
-    bottom: 0;
     width: 40px;
     height: 20px;
     -webkit-transition: 0.6s;

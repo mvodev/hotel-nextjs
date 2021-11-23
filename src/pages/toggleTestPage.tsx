@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { ReactElement, PropsWithChildren } from 'react';
 
 import Toggle from '../components/Toggle/Toggle';
@@ -15,15 +16,11 @@ const Layout = ({
       <Toggle {...{
         isChecked:false,
         description:"Получать умопомрачительные спецпредложения",
-        onChange:()=>{},
-        id:'toggle1'
         }}/>
       <div style={{marginBottom:'50px'}}/>
       <Toggle {...{
         isChecked:true,
-        description:"Получать вау спецпредложения",
-        onChange:()=>{},
-        id:"toggle2"}}/>
+        description:"Получать спецпредложения"}}/>
     </main>
 
   </>
