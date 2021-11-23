@@ -1,0 +1,77 @@
+@import '../../styles/vars.sass';
+
+.toggle{
+
+  &Container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 260px;
+    width: 100%;
+    position: relative;
+  }
+
+  &Label{
+    font-family: $main-font-family;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: $color-main-fg;
+    height: 24px;
+    display: inline-block;
+    margin-left: 50px;
+    max-width: 210px;
+    width: 100%;
+    cursor: pointer;
+  }
+
+  &Input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &Switch {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    height: 20px;
+    -webkit-transition: 0.6s;
+    transition: 0.6s;
+    border: 1px solid $color-unclaimed-fg;
+    box-sizing: border-box;
+    border-radius: 10px;
+
+    &::before{
+      position: absolute;
+      content: '';
+      height: 12px;
+      width: 12px;
+      left: 4px;
+      bottom: 3px;
+      background: rgba(31, 32, 65, 0.25);
+      -webkit-transition: 0.4s;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+  }
+
+  &Input:checked + &Switch {
+    border: 1px solid $color-primary;
+  }
+
+  &Input:checked + &Switch:before {
+    -webkit-transform: translateX(19px);
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
+    background: $gradient-primary;
+  }
+
+}
