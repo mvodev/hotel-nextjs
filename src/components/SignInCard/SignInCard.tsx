@@ -16,7 +16,7 @@ const SignInCard = (): JSX.Element => (
     <div className={styles.regSection}>
       <span className={styles.regSectionSign}>Нет аккаунта на Toxin?</span>
       <div className={styles.regSectionButton}>
-        <Button link="/reg" theme="bordered" text="создать" />
+        <Button link="/registration" theme="bordered" text="создать" />
       </div>
     </div>
   </form>
