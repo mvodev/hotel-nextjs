@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import Diagram from './Diagram/Diagram';
 import { getPosInSpellCasesArray } from '../../utils/Utils';
 import ImpressionsProps from './Types';
