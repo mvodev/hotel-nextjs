@@ -5,8 +5,8 @@ import styles from './Toggle.module.scss';
 const Toggle = ({
   isChecked,
   description,
-  onChangeCallback,
-}: ToggleProps): JSX.Element => (
+  ...props
+}: ToggleProps & React.InputHTMLAttributes<HTMLInputElement>): JSX.Element => (
   <div className={styles.toggleContainer}>
     <label className={styles.toggleLabel}>
       {description}
@@ -14,7 +14,7 @@ const Toggle = ({
         type='checkbox'
         defaultChecked={isChecked}
         className={styles.toggleInput}
-        onChange={onChangeCallback}
+        {...props}
       />
       <span className={styles.toggleSwitch} />
     </label>
