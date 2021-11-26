@@ -5,13 +5,13 @@ import type { AppState } from 'src/redux/store';
 type Dates = [null, null] | [string, string];
 
 type DatesState = {
-  dates: Dates
+  dates: Dates;
 };
 
 const dates: Dates = [null, null];
 
 const initialState: DatesState = {
-  dates
+  dates,
 };
 
 const datesSlice = createSlice({
@@ -20,7 +20,7 @@ const datesSlice = createSlice({
   reducers: {
     setDates: (state, action: PayloadAction<Dates>) => {
       state.dates = action.payload;
-    }
+    },
   },
 });
 
