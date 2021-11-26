@@ -6,11 +6,11 @@ const guests: Guests = {
   adults: 0,
   childs: 0,
   infants: 0,
-}
+};
 
 const initialState: FiltersState = {
   dates,
-  guests
+  guests,
 };
 
 export default initialState;

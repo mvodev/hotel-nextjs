@@ -9,7 +9,7 @@ function* workerSaga(): Generator {
 }
 
 function* watcherSaga(): Generator {
-  yield takeLatest(submit.type, workerSaga)
+  yield takeLatest(submit.type, workerSaga);
 }
 
 function* rootSaga(): Generator {

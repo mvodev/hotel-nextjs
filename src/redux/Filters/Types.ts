@@ -4,7 +4,7 @@ type Guests = {
   adults: number;
   childs: number;
   infants: number;
-}
+};
 
 type FiltersState = {
   dates: Dates;
