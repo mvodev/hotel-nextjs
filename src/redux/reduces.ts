@@ -5,4 +5,8 @@ const reducers = combineReducers({
   dates,
 });
 
+type RootState = ReturnType<typeof reducers>;
+
 export default reducers;
+
+export type { RootState };
