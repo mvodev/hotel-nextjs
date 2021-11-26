@@ -5,12 +5,12 @@ type UserDataType = {
   surname: string,
   photo: string,
   gender: 'man' | 'woman',
-  birthday: Date
+  birthday: string
 }
 
 type UserType = {
   uid: string,
-  email: string
+  email: string | null
 }
 
 export type { UserDataType, UserType }

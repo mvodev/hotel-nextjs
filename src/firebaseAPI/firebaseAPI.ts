@@ -1,5 +1,5 @@
 import { initializeApp, FirebaseApp } from "firebase/app";
-import { getAuth, Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { getAuth, Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential, AuthError } from "firebase/auth";
 import { getDatabase, ref, set, Database } from "firebase/database";
 import { UserDataType, UserType } from './Types'
 
@@ -27,7 +27,7 @@ class FirebaseAPI {
     this.db = getDatabase();
   }
 
-  public signUp = async (userData: UserDataType): Promise<UserType> => (
+  public signUp = async (userData: UserDataType): Promise<UserType | AuthError> => (
     createUserWithEmailAndPassword(this.auth, userData.email, userData.password)
       .then((userCredential: UserCredential) => {
         set(ref(this.db, `/userData/${userCredential.user.uid}`), {
@@ -38,20 +38,20 @@ class FirebaseAPI {
           birthday: userData.birthday
         });
         return {
-          uid: userCredential.user.uid, 
+          uid: userCredential.user.uid,
           email: userCredential.user.email
         }
       })
-      .catch((error) => error)
+      .catch((error: AuthError) => error)
   );
 
-  public signIn = async (email: string, password: string): Promise<UserType> => (
+  public signIn = async (email: string, password: string): Promise<UserType | AuthError> => (
     signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential: UserCredential) => ({
         uid: userCredential.user.uid, 
         email: userCredential.user.email
       }))
-      .catch((error) => error)
+      .catch((error: AuthError): AuthError => error)
   )
 }
 
