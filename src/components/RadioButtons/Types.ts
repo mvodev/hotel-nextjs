@@ -1,7 +1,6 @@
 import { InputHTMLAttributes } from "react";
 
 type RadioButtonsItemType = {
-  id: number;
   text: string;
   value: string;
   checked: boolean;
