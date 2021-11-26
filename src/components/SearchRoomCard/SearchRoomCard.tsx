@@ -1,4 +1,4 @@
-import { Form, Field } from 'react-final-form'
+import { Form } from 'react-final-form'
 
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
 import DropdownGuestsDefaultProps from 'src/components/DropdownGuests/DropdownGuestsDefaultProps';
@@ -13,11 +13,11 @@ type RoomRateCardState = {
 };
 
 const SearchRoomCard = ({ dateDropdown }: RoomRateCardState): JSX.Element => (
-  <Form onSubmit={() => console.log('submit!')}>
-    {(props) => (
+  <Form onSubmit={(values) => console.log(values)}>
+    {({ handleSubmit }) => (
       <div className={styles.searchRoomCard}>
         <h1 className={styles.title}>Найдём номера под ваши пожелания</h1>
-        <form className={styles.form} onSubmit={props.handleSubmit}>
+        <form className={styles.form} onSubmit={(values) => handleSubmit(values)}>
           <div className={styles.formItem}>
             <DateDropdown {...dateDropdown} />
           </div>
