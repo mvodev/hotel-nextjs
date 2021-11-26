@@ -1,6 +1,7 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { initializeApp, FirebaseApp } from "firebase/app";
+import { getAuth, Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { getDatabase, ref, set, Database } from "firebase/database";
+import { UserDataType, UserType } from './Types'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA",
@@ -13,34 +14,45 @@ const firebaseConfig = {
   measurementId: "G-42H384R7P3"
 };
 
-//const app = initializeApp(firebaseConfig);
-//const analytics = getAnalytics(app);
-
 class FirebaseAPI {
+  private app: FirebaseApp;
+
+  private auth: Auth;
+
+  private db: Database;
+
   constructor() {
     this.app = initializeApp(firebaseConfig);
     this.auth = getAuth();
+    this.db = getDatabase();
   }
 
-  public signUp = (email: string, password: string) => {
-    createUserWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential) => {
-        return userCredential.user;
+  public signUp = async (userData: UserDataType): Promise<UserType> => (
+    createUserWithEmailAndPassword(this.auth, userData.email, userData.password)
+      .then((userCredential: UserCredential) => {
+        set(ref(this.db, `/userData/${userCredential.user.uid}`), {
+          name: userData.name,
+          surname: userData.surname,
+          photo: '',
+          gender: userData.gender,
+          birthday: userData.birthday
+        });
+        return {
+          uid: userCredential.user.uid, 
+          email: userCredential.user.email
+        }
       })
-      .catch((error) => {
-        return error;
-      });
-  }
+      .catch((error) => error)
+  );
 
-  public signIn = (email: string, password: string) => {
+  public signIn = async (email: string, password: string): Promise<UserType> => (
     signInWithEmailAndPassword(this.auth, email, password)
-    .then((userCredential) => {
-      return userCredential.user;
-    })
-    .catch((error) => {
-      return error;
-    });
-  }
+      .then((userCredential: UserCredential) => ({
+        uid: userCredential.user.uid, 
+        email: userCredential.user.email
+      }))
+      .catch((error) => error)
+  )
 }
 
 const firebaseAPI = new FirebaseAPI();

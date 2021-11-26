@@ -5,7 +5,17 @@ import firebaseAPI from '../firebaseAPI/firebaseAPI'
 
 const Index = (): ReactElement => (
   <Layout title="landing page" pageClass="landing">
-    {firebaseAPI.signIn('asdf@mail.ru', 'qazwsxedc')}
+    {
+      console.log(firebaseAPI.signUp({
+        email: 'qazpoiuytrew@mail.ru',
+        password: 'lkjhgfdsa',
+        name: 'Name3',
+        surname: 'Surname3',
+        photo: '',
+        gender: 'man',
+        birthday: Date(1979, 3, 18)
+      }))
+    }
   </Layout>
 );
 
