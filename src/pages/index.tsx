@@ -15,6 +15,7 @@ const state: RoomRateCardState = {
     initDate: [null, null],
     titles: ['прибытие', 'выезд'],
     modifier: 'double',
+    isSmall: false
   },
   guestsDropdown: null,
 };
