@@ -27,7 +27,8 @@ const filtersSlice = createSlice({
         childs: 0,
         infants: 0,
       };
-    }
+    },
+    submit: () => {}
   },
 });
 
@@ -37,6 +38,7 @@ export const {
   setChilds,
   setInfants,
   resetGuests,
+  submit
 } = filtersSlice.actions;
 
 export const selectDates = (state: AppState): Dates => state.filters.dates;
