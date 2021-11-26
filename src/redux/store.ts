@@ -1,14 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 
-import dates from './Dates/DatesSlice';
+import filters from './Filters/FiltersSlice';
 
 const makeStore = () => configureStore({
   reducer: {
-    dates 
+    filters 
   }
 });
 
-const wrapper = createWrapper(makeStore, { debug: true });
+const wrapper = createWrapper(makeStore);
+
+type AppStore = ReturnType<typeof makeStore>;
+type AppState = ReturnType<AppStore['getState']>;
 
 export default wrapper;
+
+export type { AppStore, AppState };
