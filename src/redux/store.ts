@@ -1,8 +1,12 @@
-import { createStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit'
 import { createWrapper } from 'next-redux-wrapper';
-import reducers from './reduces';
 
-const makeStore = () => createStore(reducers);
-const wrapper = createWrapper(makeStore, { debug: true });
+const makeStore = () => configureStore({
+  reducer: {
+
+  }
+});
+
+const wrapper = createWrapper(makeStore);
 
 export default wrapper;
