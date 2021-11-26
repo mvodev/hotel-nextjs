@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { RootState } from 'src/redux/reduces';
+import type { AppState } from 'src/redux/store';
 
 type Dates = [null, null] | [string, string];
 
@@ -26,7 +26,7 @@ const datesSlice = createSlice({
 
 const { setDates } = datesSlice.actions;
 
-const selectDates = (state: RootState): Dates => state.dates.dates;
+const selectDates = (state: AppState): Dates => state.dates.dates;
 
 export default datesSlice.reducer;
 

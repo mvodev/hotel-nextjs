@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectDates, setDates } from 'src/redux/Dates/DatesSlice';
+import { selectDates, setDates } from 'src/redux/Filters/FiltersSlice';
 
 import DatePicker from '../DatePicker/DatePicker';
 import DateDropdownType from './Types';
