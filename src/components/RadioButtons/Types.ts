@@ -1,3 +1,5 @@
+import { InputHTMLAttributes } from "react";
+
 type RadioButtonsItemType = {
   id: number;
   text: string;
@@ -8,6 +10,7 @@ type RadioButtonsItemType = {
 type RadioButtonsType = {
   groupName: string;
   items: Array<RadioButtonsItemType>;
+  props: InputHTMLAttributes<HTMLInputElement>
 };
 
 export default RadioButtonsType;
