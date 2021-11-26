@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
-import DropdownCounter from '../DropdownCounter/DropdownCounter';
-import Button from '../Button/Button';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  selectGuests,
+  setAdults,
+  setChilds,
+  setInfants,
+  resetGuests,
+} from 'src/redux/Filters/FiltersSlice';
+import DropdownCounter from 'src/components/DropdownCounter/DropdownCounter';
+import Button from 'src/components/Button/Button';
+import { getPosInSpellCasesArray } from 'src/utils/Utils';
+
 import styles from './DropdownGuests.module.scss';
-import { getPosInSpellCasesArray } from '../../utils/Utils';
 import DropdownGuestsProps from './Types';
 
-const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
-  const { value, placeholder } = props;
-
+const DropdownGuests = ({
+  placeholder = 'Сколько гостей',
+  opened = false,
+}: DropdownGuestsProps): JSX.Element => {
   const spellCases = {
     guests: ['гость', 'гостя', 'гостей'],
     infants: ['младенец', 'младенца', 'младенцев'],
   };
-  const { opened } = props;
   const [isOpened, setOpened] = useState(opened);
-  const [adult, setAdult] = useState(value.adult);
-  const [infants, setInfants] = useState(value.infants);
-  const [child, setChild] = useState(value.child);
+  const { adults, childs, infants } = useSelector(selectGuests);
+  const dispatch = useDispatch();
 
-  const handleApplyButton = () => {
-    setOpened(false);
-  };
+  const handleApplyButton = () => setOpened(false);
 
   const handleClearButton = () => {
     setOpened(false);
-    setAdult(0);
-    setChild(0);
-    setInfants(0);
+    dispatch(resetGuests());
   };
 
   const handleOutsideClick = (event: Event) => {
@@ -43,18 +48,18 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
   };
 
   const onChange = (data: number, type: string): void => {
-    if (type === 'adult') {
-      setAdult(data);
-    } else if (type === 'child') {
-      setChild(data);
+    if (type === 'adults') {
+      dispatch(setAdults(data));
+    } else if (type === 'childs') {
+      dispatch(setChilds(data));
     } else {
-      setInfants(data);
+      dispatch(setInfants(data));
     }
   };
 
   const getValueForInputField = (): string => {
     let result = '';
-    const total = adult + child;
+    const total = adults + childs;
     result = `${total} ${spellCases.guests[getPosInSpellCasesArray(total)]}`;
     if (infants > 0) {
       result += `,  ${infants} ${
@@ -78,11 +83,11 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
         className={styles.dropdownGuestsInputWrapper}
         onClick={handleDropdownClick}
         onKeyDown={handleDropdownClick}
-        role='textbox'
+        role="textbox"
         tabIndex={0}
       >
         <input
-          type='text'
+          type="text"
           readOnly
           className={styles.dropdownGuestsInput}
           placeholder={placeholder}
@@ -97,34 +102,34 @@ const DropdownGuests = (props: DropdownGuestsProps): JSX.Element => {
         ].join(' ')}
       >
         <DropdownCounter
-          text='Взрослые'
-          number={adult}
+          text="Взрослые"
+          number={adults}
           onChange={onChange}
-          type='adult'
+          type="adults"
         />
         <DropdownCounter
-          text='Дети'
-          number={child}
+          text="Дети"
+          number={childs}
           onChange={onChange}
-          type='child'
+          type="childs"
         />
         <DropdownCounter
           text='Младенцы'
           number={infants}
           onChange={onChange}
-          type='infants'
+          type="infants"
         />
         <div className={styles.dropdownGuestsBodyButtons}>
           <div
             className={
-              child + adult + infants > 0
+              childs + adults + infants > 0
                 ? ''
                 : styles.dropdownGuestsButtonIsHidden
             }
           >
-            <Button type='button' text='очистить' onClick={handleClearButton} />
+            <Button type="button" text="очистить" onClick={handleClearButton} />
           </div>
-          <Button type='button' text='применить' onClick={handleApplyButton} />
+          <Button type="button" text="применить" onClick={handleApplyButton} />
         </div>
       </div>
     </div>

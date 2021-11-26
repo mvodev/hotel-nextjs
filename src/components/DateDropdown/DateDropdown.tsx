@@ -1,16 +1,20 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { selectDates, setDates } from 'src/redux/Filters/FiltersSlice';
+
 import DatePicker from '../DatePicker/DatePicker';
 import DateDropdownType from './Types';
 
 import style from './DateDropdown.module.sass';
 
 const DateDropdown = ({
-  initDate = [null, null],
   titles = ['прибытие', 'выезд'],
   modifier = 'double',
   isSmall = false
 }: DateDropdownType): JSX.Element => {
-  const [value, setValue] = useState(initDate);
+  const value = useSelector(selectDates).map((d) => d && new Date(d));
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const getValueForDoubleField = (date: Date): string => {
@@ -64,11 +68,13 @@ const DateDropdown = ({
     </div>
   );
 
-  const handleChangeDate = (dates: [Date, Date]): void => setValue(dates);
+  const handleChangeDate = (dates: [Date, Date]) => (
+    dispatch(setDates(dates.map(String) as [string, string]))
+  );
 
   const handleControlPanelUsed = (buttonType: string): void => {
     if (buttonType === 'clean') {
-      setValue([null, null]);
+      dispatch(setDates([null, null]));
       setIsOpen(false);
     } else setIsOpen(false);
   };
