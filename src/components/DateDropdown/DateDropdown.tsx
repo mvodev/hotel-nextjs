@@ -13,7 +13,7 @@ const DateDropdown = ({
   modifier = 'double',
   isSmall = false
 }: DateDropdownType): JSX.Element => {
-  const value = useSelector(selectDates)
+  const value = useSelector(selectDates).map((d) => d && new Date(d));
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -68,7 +68,9 @@ const DateDropdown = ({
     </div>
   );
 
-  const handleChangeDate = (dates: [Date, Date]) => dispatch(setDates(dates));
+  const handleChangeDate = (dates: [Date, Date]) => (
+    dispatch(setDates(dates.map(String) as [string, string]))
+  );
 
   const handleControlPanelUsed = (buttonType: string): void => {
     if (buttonType === 'clean') {

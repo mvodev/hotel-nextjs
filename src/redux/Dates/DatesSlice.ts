@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { RootState } from 'src/redux/reduces';
 
-type Dates = [null, null] | [Date, Date];
+type Dates = [null, null] | [string, string];
 
 type DatesState = {
   dates: Dates
