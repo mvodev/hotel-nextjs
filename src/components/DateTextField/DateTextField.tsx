@@ -27,7 +27,6 @@ const DateTextField = (
 
   return (
     <InputMask
-      { ...props }
       className={[
         styles.dateTextField,
         isValid ? '' : styles.dateTextFieldInvalid
@@ -38,6 +37,7 @@ const DateTextField = (
       value={value}
       maskPlaceholder={null}
       placeholder={placeholder}
+      { ...props }
     />
   );
 };
