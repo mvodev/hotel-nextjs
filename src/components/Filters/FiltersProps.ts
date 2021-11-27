@@ -7,6 +7,7 @@ const FiltersProps: FiltersType = {
     initDate: [new Date(2022, 7, 19), new Date(2022, 7, 23)],
     titles: ['даты пребывания в отеле'] as [string],
     modifier: 'single',
+    isSmall:false,
   },
   dropdownGuests: DropdownGuestsDefaultProps,
   rangeSlider: {
