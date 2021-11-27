@@ -9,7 +9,6 @@ type RadioButtonsItemType = {
 type RadioButtonsType = {
   groupName: string;
   items: Array<RadioButtonsItemType>;
-  props: InputHTMLAttributes<HTMLInputElement>
-};
+} & InputHTMLAttributes<HTMLInputElement>;
 
 export default RadioButtonsType;
