@@ -7,13 +7,13 @@ const Index = (): ReactElement => (
   <Layout title="landing page" pageClass="landing">
     {
       console.log(firebaseAPI.signUp({
-        email: 'zfhfxfjnszrjmmmgfs@mail.ru',
+        email: 'dxcgfghcffgxjxfgxgffbx@mail.ru',
         password: 'lkjhgfdsa',
         name: 'Name4',
         surname: 'Surname4',
         photo: '',
         gender: 'man',
-        birthday: Date(1979, 3, 18)
+        birthday: new Date(1979, 3, 18)
       }))
     }
   </Layout>

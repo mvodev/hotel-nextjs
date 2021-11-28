@@ -1,7 +1,14 @@
 import { initializeApp, FirebaseApp } from "firebase/app";
-import { getAuth, Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential, AuthError } from "firebase/auth";
-import { getDatabase, ref, set, Database } from "firebase/database";
-import { UserDataType, UserType } from './Types'
+import { 
+  getAuth, 
+  Auth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  UserCredential, 
+  AuthError 
+} from "firebase/auth";
+import { getFirestore, Firestore, setDoc, doc } from 'firebase/firestore';
+import { UserDataType, UserType } from './Types';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA",
@@ -19,24 +26,24 @@ class FirebaseAPI {
 
   private auth: Auth;
 
-  private db: Database;
+  private db: Firestore;
 
   constructor() {
     this.app = initializeApp(firebaseConfig);
     this.auth = getAuth();
-    this.db = getDatabase();
+    this.db = getFirestore(this.app);
   }
 
   public signUp = async (userData: UserDataType): Promise<UserType | AuthError> => (
     createUserWithEmailAndPassword(this.auth, userData.email, userData.password)
       .then((userCredential: UserCredential) => {
-        set(ref(this.db, `/userData/${userCredential.user.uid}`), {
+        setDoc(doc(this.db, `userData/${userCredential.user.uid}`), {
           name: userData.name,
           surname: userData.surname,
           photo: '',
           gender: userData.gender,
           birthday: userData.birthday
-        });
+        })
         return {
           uid: userCredential.user.uid,
           email: userCredential.user.email

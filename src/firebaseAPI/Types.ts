@@ -5,7 +5,7 @@ type UserDataType = {
   surname: string,
   photo: string,
   gender: 'man' | 'woman',
-  birthday: string
+  birthday: Date
 }
 
 type UserType = {
