@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, Form } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
-import { SUBMIT_FORM } from 'src/redux/RegistrationCard/Types';
+import { SUBMIT_FORM } from 'src/redux/SignInCard/Types';
 import FormData from './Types';
 import { RootState } from '../../redux/reduces';
 import styles from './SignInCard.module.scss';

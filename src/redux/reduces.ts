@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import dates from './Dates/DatesReducer';
-import registrationCard from './RegistrationCard/RegistrationCardReducer';
+import registrationCard from './SignInCard/SignInCardReducer';
 
 const reducers = combineReducers({
   dates,

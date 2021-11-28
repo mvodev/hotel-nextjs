@@ -5,11 +5,10 @@ const initialState = {
   submitting: false,
 };
 
-const registrationCardReducer = (
+const signInCardReducer = (
   state: RegistrationCardState = initialState,
   action: AnyAction
 ): RegistrationCardState => {
-  console.log('inside registrationCardReducer');
   switch (action.type) {
     case SET_SUBMITTING:
       return {
@@ -21,4 +20,4 @@ const registrationCardReducer = (
   }
 };
 
-export default registrationCardReducer;
+export default signInCardReducer;
