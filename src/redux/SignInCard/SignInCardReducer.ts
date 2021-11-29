@@ -1,14 +1,14 @@
 import { AnyAction } from 'redux';
-import RegistrationCardState, { SET_SUBMITTING } from './Types';
+import SignInCardState, { SET_SUBMITTING } from './Types';
 
 const initialState = {
   submitting: false,
 };
 
 const signInCardReducer = (
-  state: RegistrationCardState = initialState,
+  state: SignInCardState = initialState,
   action: AnyAction
-): RegistrationCardState => {
+): SignInCardState => {
   switch (action.type) {
     case SET_SUBMITTING:
       return {

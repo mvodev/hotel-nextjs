@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import dates from './Dates/DatesReducer';
-import registrationCard from './SignInCard/SignInCardReducer';
+import signInCardReducer from './SignInCard/SignInCardReducer';
 
 const reducers = combineReducers({
   dates,
-  registrationCard,
+  signInCardReducer,
 });
 
 type RootState = ReturnType<typeof reducers>;

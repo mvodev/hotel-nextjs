@@ -10,9 +10,8 @@ import styles from './SignInCard.module.scss';
 const SignInCard = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { submitting } = {
-    ...useSelector((state: RootState) => state.registrationCard),
+    ...useSelector((state: RootState) => state.signInCardReducer),
   };
-
   const handleFormSubmit = (values: FormData) => {
     const formData = { ...values };
     dispatch({ type: SUBMIT_FORM, payload: formData });
@@ -30,7 +29,7 @@ const SignInCard = (): React.ReactElement => {
                   name={props.input.name}
                   value={props.input.value}
                   onChange={props.input.onChange}
-                  placeholder='Имя'
+                  placeholder='Email'
                 />
               )}
             </Field>
@@ -40,7 +39,8 @@ const SignInCard = (): React.ReactElement => {
                   name={props.input.name}
                   value={props.input.value}
                   onChange={props.input.onChange}
-                  placeholder='Фамилия'
+                  type='password'
+                  placeholder='Пароль'
                 />
               )}
             </Field>
