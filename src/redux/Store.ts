@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 
-import RootSaga from './RootSaga';
+import RootSaga from './Sagas/RootSaga';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -11,8 +11,7 @@ export interface SagaStore extends Store {
 const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
-    reducer: {
-    },
+    reducer: {},
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);
