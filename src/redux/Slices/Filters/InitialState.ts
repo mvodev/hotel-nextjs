@@ -9,6 +9,7 @@ const guests: Guests = {
 };
 
 const initialState: FiltersState = {
+  prices: [5000, 10000],
   dates,
   guests,
 };

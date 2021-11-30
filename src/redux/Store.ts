@@ -13,7 +13,7 @@ const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
     reducer: {
-      filters
+      filters,
     },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });

@@ -6,9 +6,22 @@ type Guests = {
   infants: number;
 };
 
+type Prices = {
+  min: number;
+  max: number;
+  from: number;
+  to: number;
+}
+
 type FiltersState = {
   dates: Dates;
   guests: Guests;
+  prices: Prices;
 };
 
-export type { Dates, Guests, FiltersState };
+export type {
+  Dates,
+  Guests,
+  Prices,
+  FiltersState 
+};

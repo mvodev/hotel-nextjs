@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { AppState } from 'src/redux/Store';
 
-import type { Dates, Guests } from './Types';
+import type { Dates, Guests, Prices } from './Types';
 import initialState from './InitialState';
 
 const filtersSlice = createSlice({
@@ -28,6 +28,9 @@ const filtersSlice = createSlice({
         infants: 0,
       };
     },
+    setPrices: (state, action: PayloadAction<Partial<Prices>>) => {
+      state.prices = { ...state.prices, ...action.payload };
+    },
     submit: () => {},
   },
 });
@@ -38,11 +41,14 @@ export const {
   setChilds,
   setInfants,
   resetGuests,
+  setPrices,
   submit,
 } = filtersSlice.actions;
 
 export const selectDates = (state: AppState): Dates => state.filters.dates;
 
 export const selectGuests = (state: AppState): Guests => state.filters.guests;
+
+export const selectPrices = (state: AppState): Prices => state.filters.prices;
 
 export default filtersSlice.reducer;
