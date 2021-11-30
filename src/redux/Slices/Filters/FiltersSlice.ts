@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { AppState } from 'src/redux/store';
+import type { AppState } from 'src/redux/Store';
 
 import type { Dates, Guests } from './Types';
 import initialState from './InitialState';

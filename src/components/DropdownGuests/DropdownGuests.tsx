@@ -7,7 +7,7 @@ import {
   setChilds,
   setInfants,
   resetGuests,
-} from 'src/redux/Filters/FiltersSlice';
+} from 'src/redux/Slices/Filters/FiltersSlice';
 import DropdownCounter from 'src/components/DropdownCounter/DropdownCounter';
 import Button from 'src/components/Button/Button';
 import { getPosInSpellCasesArray } from 'src/utils/Utils';

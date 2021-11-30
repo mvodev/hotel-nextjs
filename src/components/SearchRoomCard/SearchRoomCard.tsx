@@ -2,7 +2,7 @@ import { Form } from 'react-final-form'
 import { useDispatch } from 'react-redux';
 
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
-import { submit } from 'src/redux/Filters/FiltersSlice';
+import { submit } from 'src/redux/Slices/Filters/FiltersSlice';
 
 import Button from '../Button/Button';
 import DateDropdown from '../DateDropdown/DateDropdown';

@@ -9,10 +9,7 @@
     "prettier": "npx prettier --write ./src/**/*"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@redux-saga/core": "^1.1.3",
-=======
->>>>>>> bfccf5f (process null value)
     "@reduxjs/toolkit": "^1.6.2",
     "final-form": "^4.20.4",
     "next": "latest",
