@@ -12,7 +12,6 @@ const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
     reducer: {
-      // reducers
     },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });
