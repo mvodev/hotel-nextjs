@@ -3,6 +3,7 @@ import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 
 import RootSaga from './Sagas/RootSaga';
+import filters from './Slices/Filters/FiltersSlice';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -11,7 +12,9 @@ export interface SagaStore extends Store {
 const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
-    reducer: {},
+    reducer: {
+      filters
+    },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);
