@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styles from './ModalWindow.module.scss';
 import ModalWindowProps from './Types';
 
@@ -7,17 +6,13 @@ const ModalWindow = ({
   image,
   title,
   text,
+  handleCloseClick,
 }: ModalWindowProps): React.ReactElement | null => {
-  const [isWindowEnabled, setEnabled] = useState(isEnabled);
-  const handleCloseClick = () => {
-    setEnabled(false);
-  };
-
   const cardImage = image ? (
     <img className={styles.image} src={`./images/${image}`} alt="" />
   ) : null;
 
-  const modalWindow = isWindowEnabled ? (
+  const modalWindow = isEnabled ? (
     <div className={styles.modalWindow}>
       <div className={styles.curtain} />
       <div className={styles.card}>

@@ -3,6 +3,7 @@ type ModalWindowProps = {
   image?: string;
   title: string;
   text: string;
+  handleCloseClick?: () => void;
 };
 
 export default ModalWindowProps;
