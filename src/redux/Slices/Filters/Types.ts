@@ -9,6 +9,7 @@ type Guests = {
 type FiltersState = {
   dates: Dates;
   guests: Guests;
+  isUpdated: boolean;
 };
 
 export type { Dates, Guests, FiltersState };

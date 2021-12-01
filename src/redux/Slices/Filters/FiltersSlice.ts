@@ -28,6 +28,9 @@ const filtersSlice = createSlice({
         infants: 0,
       };
     },
+    switchUpdateStatus: (state, action: PayloadAction<boolean>) => {
+      state.isUpdated = action.payload;
+    },
   },
 });
 
@@ -37,10 +40,14 @@ export const {
   setChilds,
   setInfants,
   resetGuests,
+  switchUpdateStatus,
 } = filtersSlice.actions;
 
 export const selectDates = (state: AppState): Dates => state.filters.dates;
 
 export const selectGuests = (state: AppState): Guests => state.filters.guests;
+
+export const selectUpdateStatus = (state: AppState): boolean => 
+  state.filters.isUpdated;
 
 export default filtersSlice.reducer;

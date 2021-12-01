@@ -1,10 +1,10 @@
-import type { ReactElement } from 'react';
+import styles from '@styles/pages/index.module.scss';
+
 import Carousel from '../components/Carousel/Carousel';
 import Layout from '../components/Layout';
 import SearchRoomCard from '../components/SearchRoomCard/SearchRoomCard';
-import styles from '../styles/pages/index.module.scss';
 
-const Index = (): ReactElement => (
+const Index = (): JSX.Element => (
   <Layout title="landing page" pageClass="landing">
     <section className={styles.landingPage}>
       <Carousel

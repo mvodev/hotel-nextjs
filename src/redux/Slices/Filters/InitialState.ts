@@ -11,6 +11,7 @@ const guests: Guests = {
 const initialState: FiltersState = {
   dates,
   guests,
+  isUpdated: false
 };
 
 export default initialState;

@@ -1,39 +1,36 @@
-import { Form } from 'react-final-form'
+import { Form } from 'react-final-form';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
-import {
-  selectResponseStatus,
-  switchResponseUnreadyStatus,
-} from 'src/redux/Slices/SearchRoom/SearchRoomSlice';
+import { selectUpdateStatus } from 'src/redux/Slices/Filters/FiltersSlice';
 
 import Button from '../Button/Button';
 import DateDropdown from '../DateDropdown/DateDropdown';
 import styles from './SearchRoomCard.module.scss';
 
 const SearchRoomCard = (): JSX.Element => {
-  const [isDisabled, toggleDisable] = useState(false);
-  const isReadyDate = useSelector(selectResponseStatus);
+  const [isSubmited, submit] = useState(false);
+  const isFiltersUpdated = useSelector(selectUpdateStatus);
   const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
-    if (isReadyDate) {
+    if (isSubmited && isFiltersUpdated) {
       router.push('/search');
     }
 
-    return () => {
-      dispatch(switchResponseUnreadyStatus()); 
-    };
-  })
+    return () => {};
+  });
 
   return (
-    <Form onSubmit={() => {
-      dispatch({ type: 'searchRoom/submit' });
-      toggleDisable(true);
-    }}>
+    <Form
+      onSubmit={() => {
+        dispatch({ type: 'searchRoomCard/submit' });
+        submit(true);
+      }}
+    >
       {({ handleSubmit }) => (
         <div className={styles.searchRoomCard}>
           <h1 className={styles.title}>Найдём номера под ваши пожелания</h1>
@@ -46,18 +43,18 @@ const SearchRoomCard = (): JSX.Element => {
               <DropdownGuests />
             </div>
             <div className={styles.buttonContainer}>
-              <Button 
-                type='submit' 
-                theme='filled' 
-                text='подобрать номер' 
-                isDisabled={isDisabled}
+              <Button
+                type='submit'
+                theme='filled'
+                text='подобрать номер'
+                isDisabled={isSubmited}
               />
             </div>
           </form>
         </div>
       )}
     </Form>
-  )
+  );
 };
 
 export default SearchRoomCard;
