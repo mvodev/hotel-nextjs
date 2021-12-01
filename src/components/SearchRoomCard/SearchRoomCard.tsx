@@ -5,10 +5,9 @@ import { useRouter } from 'next/router';
 
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
 import {
-  submit,
-  selectReadyDate,
-  switchToUnreadyDate,
-} from 'src/redux/Slices/Filters/FiltersSlice';
+  selectResponseStatus,
+  switchResponseUnreadyStatus,
+} from 'src/redux/Slices/SearchRoom/SearchRoomSlice';
 
 import Button from '../Button/Button';
 import DateDropdown from '../DateDropdown/DateDropdown';
@@ -16,7 +15,7 @@ import styles from './SearchRoomCard.module.scss';
 
 const SearchRoomCard = (): JSX.Element => {
   const [isDisabled, toggleDisable] = useState(false);
-  const isReadyDate = useSelector(selectReadyDate);
+  const isReadyDate = useSelector(selectResponseStatus);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -26,13 +25,13 @@ const SearchRoomCard = (): JSX.Element => {
     }
 
     return () => {
-      dispatch(switchToUnreadyDate()); 
+      dispatch(switchResponseUnreadyStatus()); 
     };
   })
 
   return (
     <Form onSubmit={() => {
-      dispatch(submit());
+      dispatch({ type: 'searchRoom/submit' });
       toggleDisable(true);
     }}>
       {({ handleSubmit }) => (

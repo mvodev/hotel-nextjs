@@ -9,7 +9,6 @@ type Guests = {
 type FiltersState = {
   dates: Dates;
   guests: Guests;
-  isReadyDate: boolean;
 };
 
 export type { Dates, Guests, FiltersState };

@@ -28,13 +28,6 @@ const filtersSlice = createSlice({
         infants: 0,
       };
     },
-    submit: () => {},
-    switchToReadyDate: (state) => {
-      state.isReadyDate = true;
-    },
-    switchToUnreadyDate: (state) => {
-      state.isReadyDate = false;
-    }
   },
 });
 
@@ -44,16 +37,10 @@ export const {
   setChilds,
   setInfants,
   resetGuests,
-  submit,
-  switchToReadyDate,
-  switchToUnreadyDate,
 } = filtersSlice.actions;
 
 export const selectDates = (state: AppState): Dates => state.filters.dates;
 
 export const selectGuests = (state: AppState): Guests => state.filters.guests;
-
-export const selectReadyDate = (state: AppState): boolean => 
-  state.filters.isReadyDate;
 
 export default filtersSlice.reducer;
