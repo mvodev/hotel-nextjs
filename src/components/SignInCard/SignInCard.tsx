@@ -19,7 +19,7 @@ const SignInCard = (): React.ReactElement => {
     ...useSelector((state: RootState) => state.signInCardReducer),
   };
 
-  const validationBlock = (meta: FieldMetaState<any>) => (
+  const validationBlock = (meta: FieldMetaState<unknown>) => (
       meta.error &&
       meta.touched && <span className={styles.signInCardError}>{meta.error}</span>
     );
