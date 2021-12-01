@@ -14,7 +14,7 @@ const ModalWindow = ({
   };
 
   const cardImage = image ? (
-    <img className={styles.image} src={`./images/${image}`} alt='' />
+    <img className={styles.image} src={`./images/${image}`} alt="" />
   ) : null;
 
   const modalWindow = isWindowEnabled ? (
@@ -22,7 +22,7 @@ const ModalWindow = ({
       <div className={styles.curtain} />
       <div className={styles.card}>
         <button
-          type='button'
+          type="button"
           className={styles.close}
           onClick={handleCloseClick}
         >

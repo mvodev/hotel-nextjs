@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import styles from '../styles/pages/index.module.scss';
 
 const Modal = (): ReactElement => (
-  <Layout title='landing page' pageClass='landing'>
+  <Layout title="landing page" pageClass="landing">
     <section className={styles.landingPage}>
       <Carousel
         names={[
@@ -16,9 +16,9 @@ const Modal = (): ReactElement => (
       />
       <ModalWindow
         isEnabled
-        image='users.png'
-        title='Профиль зарегистрирован!'
-        text='Вы успешно зарегистрировались на сайте Toxin. Сейчас вы будете автоматически перенаправлены на главную страницу.'
+        image="users.png"
+        title="Профиль зарегистрирован!"
+        text="Вы успешно зарегистрировались на сайте Toxin. Сейчас вы будете автоматически перенаправлены на главную страницу."
       />
     </section>
   </Layout>
