@@ -4,9 +4,8 @@ import style from './LikeButton.module.sass';
 const LikeButton = ({
   likesNumber,
   liked,
-  onClick
+  onClick,
 }: LikeButtonType): JSX.Element => {
-
   const handleLikeButtonClick = (): void => {
     onClick();
   };
@@ -18,7 +17,7 @@ const LikeButton = ({
   return (
     <button
       className={likeButtonClass}
-      type="button"
+      type='button'
       onClick={handleLikeButtonClick}
       tabIndex={0}
     >

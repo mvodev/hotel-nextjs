@@ -4,8 +4,10 @@ import styles from './DropdownRoom.module.scss';
 import { getPosInSpellCasesArray } from '../../utils/Utils';
 import DropdownRoomProps from './Types';
 
-const DropdownRoom = ({ values, placeholder }: DropdownRoomProps): JSX.Element => {
-
+const DropdownRoom = ({
+  values,
+  placeholder,
+}: DropdownRoomProps): JSX.Element => {
   const [isOpened, setOpened] = useState(false);
   const [counterItems, setCounterItems] = useState(values);
 

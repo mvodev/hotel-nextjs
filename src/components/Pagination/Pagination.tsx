@@ -48,8 +48,8 @@ const Pagination = ({
     activeButton > 1 ? (
       <div className={buttonsClasses}>
         <Button
-          theme="paginationIcon"
-          text="arrow_back"
+          theme='paginationIcon'
+          text='arrow_back'
           onClick={handleBackButtonClick}
         />
       </div>
@@ -59,8 +59,8 @@ const Pagination = ({
     activeButton < buttonsCount ? (
       <div className={buttonsClasses}>
         <Button
-          theme="paginationIcon"
-          text="arrow_forward"
+          theme='paginationIcon'
+          text='arrow_forward'
           onClick={handleForwardButtonClick}
         />
       </div>

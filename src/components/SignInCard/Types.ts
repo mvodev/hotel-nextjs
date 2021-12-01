@@ -3,4 +3,9 @@ type FormData = {
   password: string;
 };
 
+type FormKey =
+  | 'email'
+  | 'password';
+
 export default FormData;
+export type { FormKey };

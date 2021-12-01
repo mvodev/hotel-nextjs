@@ -34,16 +34,13 @@ const CheckboxItem = (props: CheckboxItemType): React.ReactElement => {
   };
 
   return (
-    <label
-      className={itemClass}
-      tabIndex = {0}
-    >
-      <span className = { imitatorClass }>
-        <input 
-          className={ style.checkboxItemCheckbox } 
-          onChange = { handleCheckboxChange }
-          type = "checkbox"
-          checked = {checked}
+    <label className={itemClass} tabIndex={0}>
+      <span className={imitatorClass}>
+        <input
+          className={style.checkboxItemCheckbox}
+          onChange={handleCheckboxChange}
+          type='checkbox'
+          checked={checked}
         />
       </span>
       <div className={style.checkboxItemLabel}>

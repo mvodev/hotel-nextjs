@@ -16,6 +16,6 @@ const DropdownRoomDefaultProps = {
       value: 0,
       spellCases: ['ванная', 'ванные', 'ванных'],
     },
-  ]
+  ],
 };
 export default DropdownRoomDefaultProps;

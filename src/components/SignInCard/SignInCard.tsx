@@ -1,49 +1,59 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Field, Form } from 'react-final-form';
+import { Field, Form, FieldMetaState } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
-import { SUBMIT_FORM } from 'src/redux/SignInCard/Types';
+import { SUBMIT_SIGN_IN_FORM } from 'src/redux/SignInCard/Types';
 import FormData from './Types';
 import { RootState } from '../../redux/reduces';
 import styles from './SignInCard.module.scss';
+import validate from './validate';
 
 const SignInCard = (): React.ReactElement => {
   const dispatch = useDispatch();
+
   const { submitting } = {
     ...useSelector((state: RootState) => state.signInCardReducer),
   };
+
+  const { error } = {
+    ...useSelector((state: RootState) => state.signInCardReducer),
+  };
+
+  const validationBlock = (meta: FieldMetaState<any>) => (
+      meta.error &&
+      meta.touched && <span className={styles.error}>{meta.error}</span>
+    );
+
   const handleFormSubmit = (values: FormData) => {
     const formData = { ...values };
-    dispatch({ type: SUBMIT_FORM, payload: formData });
+    dispatch({ type: SUBMIT_SIGN_IN_FORM, payload: formData });
   };
 
   return (
     <div className={styles.signInCard}>
       <h1 className={styles.signInCardTitle}>Войти</h1>
-      <Form onSubmit={handleFormSubmit}>
+      <Form onSubmit={handleFormSubmit} validate={validate}>
         {({ handleSubmit }) => (
           <form className={styles.signInCardForm} onSubmit={handleSubmit}>
-            <Field name='name'>
-              {(props) => (
-                <TextField
-                  name={props.input.name}
-                  value={props.input.value}
-                  onChange={props.input.onChange}
-                  placeholder='Email'
-                />
+            <Field name='email'>
+              {({ input, meta }) => (
+                <>
+                  <TextField {...input} placeholder='Email' />
+                  {validationBlock(meta)}
+                </>
               )}
             </Field>
-            <Field name='surname'>
-              {(props) => (
-                <TextField
-                  name={props.input.name}
-                  value={props.input.value}
-                  onChange={props.input.onChange}
-                  type='password'
-                  placeholder='Пароль'
-                />
+            <Field name='password'>
+              {({ input, meta }) => (
+                <>
+                  <TextField {...input} placeholder='Пароль' type='password'/>
+                  {validationBlock(meta)}
+                </>
               )}
             </Field>
+            <span style={error ? { display: 'block' } : { display: 'none' }}>
+              Некорректное имя пользователя/пароль.
+            </span>
             <div className={styles.signInCardButtonContainer}>
               <Button
                 theme='filled'

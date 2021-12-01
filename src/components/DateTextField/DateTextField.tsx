@@ -4,7 +4,7 @@ import InputMask from 'react-input-mask';
 import styles from './DateTextField.module.sass';
 
 const DateTextField = (
-  props :React.InputHTMLAttributes<HTMLInputElement>
+  props: React.InputHTMLAttributes<HTMLInputElement>
 ): JSX.Element => {
   const [value, changeValue] = useState('');
   const [isValid, toggleValidStatus] = useState(true);
@@ -23,13 +23,13 @@ const DateTextField = (
       return;
     }
     toggleValidStatus(false);
-  }
+  };
 
   return (
     <InputMask
       className={[
         styles.dateTextField,
-        isValid ? '' : styles.dateTextFieldInvalid
+        isValid ? '' : styles.dateTextFieldInvalid,
       ].join(' ')}
       mask={mask.current}
       onChange={onChange}
@@ -37,7 +37,7 @@ const DateTextField = (
       value={value}
       maskPlaceholder={null}
       placeholder={placeholder}
-      { ...props }
+      {...props}
     />
   );
 };

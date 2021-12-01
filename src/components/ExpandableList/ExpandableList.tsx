@@ -4,7 +4,7 @@ import ExpandableListProps from './Types';
 
 const ExpandableList = ({
   children,
-  text
+  text,
 }: ExpandableListProps): React.ReactElement => {
   const [isOpened, setIsOpened] = useState(false);
 

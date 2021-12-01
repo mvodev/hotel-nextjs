@@ -58,4 +58,4 @@ export const dateToTimeAgo = (date: Date): string => {
   return getValue(timeDelta, YER, ['год', 'года', 'лет']);
 };
 
-export const stringToDate = (stringDate:string):Date => new Date(stringDate);
+export const stringToDate = (stringDate: string): Date => new Date(stringDate);

@@ -22,5 +22,4 @@ const makeStore = () => {
 };
 
 const wrapper = createWrapper(makeStore, { debug: true });
-
 export default wrapper;

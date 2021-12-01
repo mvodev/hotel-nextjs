@@ -1,17 +1,25 @@
-import { initializeApp, FirebaseApp } from "firebase/app";
-import { getAuth, Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential, AuthError } from "firebase/auth";
-import { getDatabase, ref, set, Database } from "firebase/database";
-import { UserDataType, UserType } from './Types'
+import { initializeApp, FirebaseApp } from 'firebase/app';
+import {
+  getAuth,
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  UserCredential,
+  AuthError,
+} from 'firebase/auth';
+import { getDatabase, ref, set, Database } from 'firebase/database';
+import { UserDataType, UserType } from './Types';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA",
-  authDomain: "breaking-code-ebe74.firebaseapp.com",
-  databaseURL: "https://breaking-code-ebe74-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "breaking-code-ebe74",
-  storageBucket: "breaking-code-ebe74.appspot.com",
-  messagingSenderId: "770591862991",
-  appId: "1:770591862991:web:4dea4eda027fcf69ef07ba",
-  measurementId: "G-42H384R7P3"
+  apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
+  authDomain: 'breaking-code-ebe74.firebaseapp.com',
+  databaseURL:
+    'https://breaking-code-ebe74-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'breaking-code-ebe74',
+  storageBucket: 'breaking-code-ebe74.appspot.com',
+  messagingSenderId: '770591862991',
+  appId: '1:770591862991:web:4dea4eda027fcf69ef07ba',
+  measurementId: 'G-42H384R7P3',
 };
 
 class FirebaseAPI {
@@ -27,7 +35,9 @@ class FirebaseAPI {
     this.db = getDatabase();
   }
 
-  public signUp = async (userData: UserDataType): Promise<UserType | AuthError> => (
+  public signUp = async (
+    userData: UserDataType
+  ): Promise<UserType | AuthError> =>
     createUserWithEmailAndPassword(this.auth, userData.email, userData.password)
       .then((userCredential: UserCredential) => {
         set(ref(this.db, `/userData/${userCredential.user.uid}`), {
@@ -35,24 +45,25 @@ class FirebaseAPI {
           surname: userData.surname,
           photo: '',
           gender: userData.gender,
-          birthday: userData.birthday
+          birthday: userData.birthday,
         });
         return {
           uid: userCredential.user.uid,
-          email: userCredential.user.email
-        }
+          email: userCredential.user.email,
+        };
       })
-      .catch((error: AuthError) => error)
-  );
+      .catch((error: AuthError) => error);
 
-  public signIn = async (email: string, password: string): Promise<UserType | AuthError> => (
+  public signIn = async (
+    email: string,
+    password: string
+  ): Promise<UserType | AuthError> =>
     signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential: UserCredential) => ({
-        uid: userCredential.user.uid, 
-        email: userCredential.user.email
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
       }))
-      .catch((error: AuthError): AuthError => error)
-  )
+      .catch((error: AuthError): AuthError => error);
 }
 
 const firebaseAPI = new FirebaseAPI();

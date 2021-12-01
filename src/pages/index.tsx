@@ -20,7 +20,7 @@ const state: RoomRateCardState = {
 };
 
 const Index = (): ReactElement => (
-  <Layout title="landing page" pageClass="landing">
+  <Layout title='landing page' pageClass='landing'>
     <section className={styles.landingPage}>
       <Carousel
         names={[

@@ -1,4 +1,4 @@
-import FiltersType from "./Types";
+import FiltersType from './Types';
 import DropdownGuestsDefaultProps from '../DropdownGuests/DropdownGuestsDefaultProps';
 import DropdownRoomDefaultProps from '../DropdownRoom/DropdownRoomDefaultProps';
 
@@ -7,7 +7,7 @@ const FiltersProps: FiltersType = {
     initDate: [new Date(2022, 7, 19), new Date(2022, 7, 23)],
     titles: ['даты пребывания в отеле'] as [string],
     modifier: 'single',
-    isSmall:false,
+    isSmall: false,
   },
   dropdownGuests: DropdownGuestsDefaultProps,
   rangeSlider: {
@@ -22,17 +22,17 @@ const FiltersProps: FiltersType = {
     title: 'правила дома',
     items: [
       {
-        title: "",
+        title: '',
         text: 'Можно курить',
         checked: false,
       },
       {
-        title: "",
+        title: '',
         text: 'Можно с питомцами',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Можно пригласить гостей (до 10 человек)',
         checked: true,
       },
@@ -60,32 +60,32 @@ const FiltersProps: FiltersType = {
     title: '',
     items: [
       {
-        title: "",
+        title: '',
         text: 'Завтрак',
         checked: false,
       },
       {
-        title: "",
+        title: '',
         text: 'Письменный стол',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Стул для кормления',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Кроватка',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Телевизор',
         checked: false,
       },
       {
-        title: "",
+        title: '',
         text: 'Шампунь',
         checked: false,
       },

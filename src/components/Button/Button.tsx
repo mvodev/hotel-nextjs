@@ -17,7 +17,7 @@ const Button = ({
     rounded: styles.buttonThemeRounded,
     pagination: styles.buttonThemePagination,
     paginationActive: `${styles.buttonThemePagination} ${styles.buttonThemePaginationActive}`,
-    paginationIcon: `${styles.buttonThemePagination} ${styles.buttonThemePaginationIcon}`
+    paginationIcon: `${styles.buttonThemePagination} ${styles.buttonThemePaginationIcon}`,
   };
 
   const sizes: ButtonModifiers = {

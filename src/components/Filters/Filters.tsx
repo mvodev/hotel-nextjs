@@ -42,7 +42,7 @@ const Filters = ({
       <div className={style.filtersGuests}>
         <h2 className={style.filtersGuestsTitle}>гости</h2>
         <DropdownGuests
-          placeholder="Сколько гостей"
+          placeholder='Сколько гостей'
           opened={false}
           value={dropdownGuests.value}
         />
@@ -61,14 +61,14 @@ const Filters = ({
       </div>
       <div className={style.filtersRules}>
         <CheckboxButtons
-          title="правила дома"
+          title='правила дома'
           isRich={false}
           items={checkboxButtons.items}
         />
       </div>
       <div className={style.filtersAvailability}>
         <CheckboxButtons
-          title="доступность"
+          title='доступность'
           isRich
           items={richCheckboxButtons.items}
         />
@@ -78,9 +78,9 @@ const Filters = ({
         <DropdownRoom placeholder='' values={dropdownRoom.values} />
       </div>
       <div className={style.filtersAdditionalConveniences}>
-        <ExpandableList text="дополнительные удобства">
+        <ExpandableList text='дополнительные удобства'>
           <CheckboxButtons
-            title=""
+            title=''
             isRich={false}
             items={expandableList.items}
           />

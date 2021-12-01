@@ -8,7 +8,7 @@ const DateDropdown = ({
   initDate = [null, null],
   titles = ['прибытие', 'выезд'],
   modifier = 'double',
-  isSmall = false
+  isSmall = false,
 }: DateDropdownType): JSX.Element => {
   const [value, setValue] = useState(initDate);
   const [isOpen, setIsOpen] = useState(false);
@@ -96,7 +96,7 @@ const DateDropdown = ({
           initDates={value as Date[]}
           onChangeDate={handleChangeDate}
           onControlPanelUsed={handleControlPanelUsed}
-          isSmall = {isSmall}
+          isSmall={isSmall}
         />
       </div>
     </div>

@@ -4,23 +4,25 @@ import RadioButtonsType from './Types';
 
 import styles from './RadioButtons.module.sass';
 
-const RadioButtons = ({ groupName, items, ...props }: RadioButtonsType): ReactElement => {
-
+const RadioButtons = ({
+  groupName,
+  items,
+  ...props
+}: RadioButtonsType): ReactElement => {
   const radioItems = items.map((item) => (
-      <label className={styles.radioButtonsItem} key={item.value}>
-        <input
-          name={groupName}
-          className={styles.radioButtonsInput}
-          type='radio'
-          value={item.value}
-          defaultChecked={item.checked}
-          {...props}
-        />
-        <span className={styles.radioButtonsImitator} />
-        <span className={styles.radioButtonsText}>{item.text}</span>
-      </label>
-    )
-  );
+    <label className={styles.radioButtonsItem} key={item.value}>
+      <input
+        name={groupName}
+        className={styles.radioButtonsInput}
+        type='radio'
+        value={item.value}
+        defaultChecked={item.checked}
+        {...props}
+      />
+      <span className={styles.radioButtonsImitator} />
+      <span className={styles.radioButtonsText}>{item.text}</span>
+    </label>
+  ));
 
   return <div className={styles.radioButtons}>{radioItems}</div>;
 };
