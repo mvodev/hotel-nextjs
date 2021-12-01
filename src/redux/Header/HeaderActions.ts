@@ -1,29 +1,11 @@
 import { AnyAction } from 'redux';
-import {
-  SET_SUBMITTING,
-  SUBMIT_SIGN_IN_FORM,
-  SET_UID,
-  SET_ERROR,
+import HeaderState, {
+  SET_USER_IN_HEADER
 } from './Types';
 
-const setSubmitting = (payload: boolean): AnyAction => ({
-  type: SET_SUBMITTING,
+const setUserInHeader = (payload: HeaderState): AnyAction => ({
+  type: SET_USER_IN_HEADER,
   payload,
 });
 
-const submitForm = (payload: FormData): AnyAction => ({
-  type: SUBMIT_SIGN_IN_FORM,
-  payload,
-});
-
-const setUID = (payload: string): AnyAction => ({
-  type: SET_UID,
-  payload,
-});
-
-const setError = (payload: boolean): AnyAction => ({
-  type: SET_ERROR,
-  payload,
-});
-
-export { setSubmitting, submitForm, setUID, setError };
+export default setUserInHeader;

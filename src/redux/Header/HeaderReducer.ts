@@ -10,10 +10,10 @@ const initialState = {
   surname: '',
 };
 
-const HeaderReducer = (
+const headerReducer = (
   state: HeaderState = initialState,
   action: AnyAction
-): SignInCardState => {
+): HeaderState => {
   switch (action.type) {
     case SET_USER_IN_HEADER:
       return {
@@ -27,4 +27,4 @@ const HeaderReducer = (
   }
 };
 
-export default HeaderReducer;
+export default headerReducer;
