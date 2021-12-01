@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout';
 import Filters from '../components/Filters/Filters';
@@ -15,28 +16,32 @@ const searchItems = roomCardProps.map((item) => (
   </div>
 ))
 
+const Search = (): ReactElement => {
+  const router = useRouter();
+  console.log(router);
 
-const Search = (): ReactElement => (
-  <Layout title='search room' pageClass='search'>
-    <section className={styles.pageContainer}>
-      <Filters {...FiltersProps} />
-      <div className={styles.searchContent}>
-        <h1 className={styles.searchTitle}>Номера, которые мы для вас подобрали</h1>
-        <div className={styles.searchResult}>
-          {searchItems}
-          <div className={styles.searchPagination}>
-            <Pagination 
-              {...{
-                buttonsCount: 15,
-                currentPage: 1,
-                text: '1 - 12 из 100+ вариантов аренды',
-              }}
-            />
+  return (
+    <Layout title='search room' pageClass='search'>
+      <section className={styles.pageContainer}>
+        <Filters {...FiltersProps} />
+        <div className={styles.searchContent}>
+          <h1 className={styles.searchTitle}>Номера, которые мы для вас подобрали</h1>
+          <div className={styles.searchResult}>
+            {searchItems}
+            <div className={styles.searchPagination}>
+              <Pagination 
+                {...{
+                  buttonsCount: 15,
+                  currentPage: 1,
+                  text: '1 - 12 из 100+ вариантов аренды',
+                }}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-  </Layout>
-);
+      </section>
+    </Layout>
+  );
+};
 
 export default Search;

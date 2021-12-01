@@ -1,14 +1,7 @@
 import FiltersType from "./Types";
-import DropdownGuestsDefaultProps from '../DropdownGuests/DropdownGuestsDefaultProps';
 import DropdownRoomDefaultProps from '../DropdownRoom/DropdownRoomDefaultProps';
 
 const FiltersProps: FiltersType = {
-  dateDropdown: {
-    initDate: [new Date(2022, 7, 19), new Date(2022, 7, 23)],
-    titles: ['даты пребывания в отеле'] as [string],
-    modifier: 'single',
-  },
-  dropdownGuests: DropdownGuestsDefaultProps,
   rangeSlider: {
     min: 0,
     max: 15000,

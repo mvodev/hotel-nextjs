@@ -10,8 +10,6 @@ import ExpandableList from '../ExpandableList/ExpandableList';
 import type FiltersType from './Types';
 
 const Filters = ({
-  dateDropdown,
-  dropdownGuests,
   rangeSlider,
   checkboxButtons,
   richCheckboxButtons,
@@ -35,7 +33,6 @@ const Filters = ({
         <DateDropdown
           titles={['даты пребывания в отеле']}
           modifier='single'
-          initDate={dateDropdown.initDate}
           isSmall
         />
       </div>
@@ -44,7 +41,6 @@ const Filters = ({
         <DropdownGuests
           placeholder="Сколько гостей"
           opened={false}
-          value={dropdownGuests.value}
         />
       </div>
       <div className={style.filtersPrice}>
