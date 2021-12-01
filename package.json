@@ -21,6 +21,7 @@
     "react-minimal-pie-chart": "^8.2.0",
     "react-redux": "^7.2.6",
     "react-text-mask": "^5.4.3",
+    "redux": "^4.1.2",
     "sass": "^1.43.3"
   },
   "devDependencies": {
