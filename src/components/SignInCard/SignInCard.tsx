@@ -21,7 +21,7 @@ const SignInCard = (): React.ReactElement => {
 
   const validationBlock = (meta: FieldMetaState<any>) => (
       meta.error &&
-      meta.touched && <span className={styles.error}>{meta.error}</span>
+      meta.touched && <span className={styles.signInCardError}>{meta.error}</span>
     );
 
   const handleFormSubmit = (values: FormData) => {
