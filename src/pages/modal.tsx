@@ -15,6 +15,7 @@ const Modal = (): ReactElement => (
         ]}
       />
       <ModalWindow
+        isEnabled
         image='users.png'
         title='Профиль зарегистрирован!'
         text='Вы успешно зарегистрировались на сайте Toxin. Сейчас вы будете автоматически перенаправлены на главную страницу.'
