@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
   selectConveniences,
-  setConveniences
+  setConveniences,
 } from 'src/redux/Slices/Filters/FiltersSlice';
 
 import style from './Filters.module.sass';
@@ -33,13 +33,10 @@ const Filters = ({
   const handleDropdownRoomChange = (values: DropdownRoomValue[]) => {
     const [bedrooms, beds, bathrooms] = values.map(({ value }) => value);
     dispatch(setConveniences({ bedrooms, beds, bathrooms }));
-  }
+  };
 
   return (
-    <div className={[
-      style.filters,
-      isOpen ? style.filtersOpen : ''
-    ].join(' ')}>
+    <div className={[style.filters, isOpen ? style.filtersOpen : ''].join(' ')}>
       <button
         type='button'
         className={style.filtersButton}
@@ -55,7 +52,7 @@ const Filters = ({
       <div className={style.filtersGuests}>
         <h2 className={style.filtersGuestsTitle}>гости</h2>
         <DropdownGuests
-          placeholder="Сколько гостей"
+          placeholder='Сколько гостей'
           opened={false}
           value={dropdownGuests.value}
         />
@@ -68,34 +65,34 @@ const Filters = ({
       </div>
       <div className={style.filtersRules}>
         <CheckboxButtons
-          title="правила дома"
+          title='правила дома'
           isRich={false}
           items={checkboxButtons.items}
         />
       </div>
       <div className={style.filtersAvailability}>
         <CheckboxButtons
-          title="доступность"
+          title='доступность'
           isRich
           items={richCheckboxButtons.items}
         />
       </div>
       <div className={style.filtersConveniences}>
         <h2 className={style.filtersConveniencesTitle}>удобства номера</h2>
-        <DropdownRoom 
+        <DropdownRoom
           placeholder={DropdownRoomDefaultProps.placeholder}
           values={Object.values(conveniences).map((value, id) => ({
             text: DropdownRoomDefaultProps.values[id].text,
             spellCases: DropdownRoomDefaultProps.values[id].spellCases,
-            value
+            value,
           }))}
           handleCountersChange={handleDropdownRoomChange}
         />
       </div>
       <div className={style.filtersAdditionalConveniences}>
-        <ExpandableList text="дополнительные удобства">
+        <ExpandableList text='дополнительные удобства'>
           <CheckboxButtons
-            title=""
+            title=''
             isRich={false}
             items={expandableList.items}
           />

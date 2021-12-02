@@ -1,4 +1,4 @@
-import FiltersType from "./Types";
+import FiltersType from './Types';
 import DropdownGuestsDefaultProps from '../DropdownGuests/DropdownGuestsDefaultProps';
 
 const FiltersProps: FiltersType = {
@@ -13,17 +13,17 @@ const FiltersProps: FiltersType = {
     title: 'правила дома',
     items: [
       {
-        title: "",
+        title: '',
         text: 'Можно курить',
         checked: false,
       },
       {
-        title: "",
+        title: '',
         text: 'Можно с питомцами',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Можно пригласить гостей (до 10 человек)',
         checked: true,
       },
@@ -50,32 +50,32 @@ const FiltersProps: FiltersType = {
     title: '',
     items: [
       {
-        title: "",
+        title: '',
         text: 'Завтрак',
         checked: false,
       },
       {
-        title: "",
+        title: '',
         text: 'Письменный стол',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Стул для кормления',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Кроватка',
         checked: true,
       },
       {
-        title: "",
+        title: '',
         text: 'Телевизор',
         checked: false,
       },
       {
-        title: "",
+        title: '',
         text: 'Шампунь',
         checked: false,
       },
