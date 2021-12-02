@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import Diagram from './Diagram/Diagram';
 import { getPosInSpellCasesArray } from '../../utils/Utils';
 import ImpressionsProps from './Types';
@@ -23,7 +22,7 @@ const Impressions = ({ value, header }: ImpressionsProps): JSX.Element => {
           style={
             elem.withGradient
               ? {
-                  background: `linear-gradient(180deg, ${elem.color} 0%, ${elem.stopColor} 100%);`,
+                  background: `linear-gradient(180deg, ${elem.color} 0%, ${elem.stopColor} 100%)`,
                 }
               : { background: `${elem.color}` }
           }
