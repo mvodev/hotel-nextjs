@@ -20,7 +20,10 @@ const RangeSlider = ({
 }: TypeRangeSliderProps): JSX.Element => {
   const prices = useSelector(selectPrices);
   const dispatch = useDispatch();
-  const positions = prices.map((p) => clamp(min, p / (max - min), max)) as [number, number];
+  const positions = prices.map((p) => clamp(min, p / (max - min), max)) as [
+    number,
+    number
+  ];
   const container = useRef<HTMLDivElement>(null);
 
   const relativeToAbsolute = (position: number) =>
@@ -29,8 +32,10 @@ const RangeSlider = ({
       Math.floor((position * (max - min + step)) / step) * step + min
     );
 
-  const updatePrices = (newPositions: [number, number]) => 
-    dispatch(setPrices(newPositions.map(relativeToAbsolute) as [number, number]));
+  const updatePrices = (newPositions: [number, number]) =>
+    dispatch(
+      setPrices(newPositions.map(relativeToAbsolute) as [number, number])
+    );
 
   const calcPosition = ({
     pageX,
@@ -64,7 +69,8 @@ const RangeSlider = ({
   const handleTrackPointerDown = (e: React.PointerEvent<HTMLElement>) => {
     const newPosition = calcPosition({ pageX: e.clientX });
     const diffs = positions.map((p) => Math.abs(p - newPosition));
-    const activeIDX = newPosition > positions[1] ? 1 : diffs.indexOf(Math.min(...diffs));
+    const activeIDX =
+      newPosition > positions[1] ? 1 : diffs.indexOf(Math.min(...diffs));
     positions[activeIDX] = newPosition;
     updatePrices(positions);
   };
@@ -74,13 +80,9 @@ const RangeSlider = ({
       <div className={styles.header}>
         <h2 className={styles.title}>диапазон цены</h2>
         <div className={styles.rangeLabel}>
-          <span className={styles.value}>
-            {formateToRuble(prices[0])}
-          </span>
+          <span className={styles.value}>{formateToRuble(prices[0])}</span>
           {' - '}
-          <span className={styles.value}>
-            {formateToRuble(prices[1])}
-          </span>
+          <span className={styles.value}>{formateToRuble(prices[1])}</span>
         </div>
       </div>
       <div className={styles.rangeSlider}>
