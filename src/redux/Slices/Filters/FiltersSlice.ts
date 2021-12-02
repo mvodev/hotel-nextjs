@@ -31,7 +31,6 @@ const filtersSlice = createSlice({
     setPrices: (state, action: PayloadAction<Partial<Prices>>) => {
       state.prices = { ...state.prices, ...action.payload };
     },
-    submit: () => {},
   },
 });
 
@@ -42,7 +41,6 @@ export const {
   setInfants,
   resetGuests,
   setPrices,
-  submit,
 } = filtersSlice.actions;
 
 export const selectDates = (state: AppState): Dates => state.filters.dates;

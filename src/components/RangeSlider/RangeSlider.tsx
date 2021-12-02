@@ -1,26 +1,18 @@
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectPrices, setPrices } from 'src/redux/Prices/PricesSlice';
 import clamp from 'src/utils/Clamp';
 import formateToRuble from 'src/utils/FormateToRuble';
+import { selectPrices, setPrices } from 'src/redux/Slices/Filters/FiltersSlice';
 
-import type {
-  TypeRangeSliderProps,
-  TypeHandleMoveArgs,
-  TypeCalcPositionArgs,
-} from './Types';
+import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
 import styles from './RangeSlider.module.sass';
 import Handle from './Handle';
 
-const RangeSlider = ({
-  min = 0,
-  max = 15000,
-  step = 100,
-}: TypeRangeSliderProps): JSX.Element => {
-  const prices = useSelector(selectPrices);
+const RangeSlider = ({ step = 100 }: { step: number }): JSX.Element => {
+  const { min, max, from, to } = useSelector(selectPrices);
   const dispatch = useDispatch();
-  const positions = prices.map((p) => clamp(min, p / (max - min), max)) as [
+  const positions = [from, to].map((p) => clamp(min, p / (max - min), max)) as [
     number,
     number
   ];
@@ -32,9 +24,12 @@ const RangeSlider = ({
       Math.floor((position * (max - min + step)) / step) * step + min
     );
 
-  const updatePrices = (newPositions: [number, number]) =>
+  const updatePrices = ([newFrom, newTo]: [number, number]) =>
     dispatch(
-      setPrices(newPositions.map(relativeToAbsolute) as [number, number])
+      setPrices({
+        from: relativeToAbsolute(newFrom),
+        to: relativeToAbsolute(newTo),
+      })
     );
 
   const calcPosition = ({
@@ -80,9 +75,9 @@ const RangeSlider = ({
       <div className={styles.header}>
         <h2 className={styles.title}>диапазон цены</h2>
         <div className={styles.rangeLabel}>
-          <span className={styles.value}>{formateToRuble(prices[0])}</span>
+          <span className={styles.value}>{formateToRuble(from)}</span>
           {' - '}
-          <span className={styles.value}>{formateToRuble(prices[1])}</span>
+          <span className={styles.value}>{formateToRuble(to)}</span>
         </div>
       </div>
       <div className={styles.rangeSlider}>

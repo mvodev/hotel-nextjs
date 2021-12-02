@@ -9,7 +9,12 @@ const guests: Guests = {
 };
 
 const initialState: FiltersState = {
-  prices: [5000, 10000],
+  prices: {
+    min: 0,
+    max: 15000,
+    from: 5000,
+    to: 10000,
+  },
   dates,
   guests,
 };
