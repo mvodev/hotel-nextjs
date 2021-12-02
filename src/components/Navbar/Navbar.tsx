@@ -5,7 +5,6 @@ import NavbarProps from './Types';
 
 const Navbar = ({
   items = [],
-  user,
   isOpened,
 }: NavbarProps): React.ReactElement => {
   const itemsElements = items.map((item) => (
@@ -19,7 +18,7 @@ const Navbar = ({
     <div className={navbarClasses}>
       <div className={styles.body}>
         <nav className={styles.content}>{itemsElements}</nav>
-        <UserSection {...{ user }} />
+        <UserSection/>
       </div>
     </div>
   );

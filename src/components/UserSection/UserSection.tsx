@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux/reduces';
 import Button from '../Button/Button';
-import UserSectionProps from './Types';
 import styles from './UserSection.module.scss';
 
-const UserSection = ({ user }: UserSectionProps): React.ReactElement => {
+const UserSection = (): React.ReactElement => {
+
+  const { name, surname, isAuthorized } = {
+    ...useSelector((state: RootState) => state.headerReducer),
+  };
+  
   const [screenWidth, setWidth] = useState(0);
   const updateWidth = () => {
     setWidth(window.innerWidth);
@@ -19,11 +25,11 @@ const UserSection = ({ user }: UserSectionProps): React.ReactElement => {
 
   const entryButton =
     screenWidth <= PHONE_SCREEN_WIDTH ? (
-      <Link href='/'>
+      <Link href='/signIn'>
         <a className={styles.link}>Войти</a>
       </Link>
     ) : (
-      <Button link='/' theme='bordered' size='small' text='Войти' />
+      <Button link='/signIn' theme='bordered' size='small' text='Войти' />
     );
 
   const registrationButton =
@@ -35,14 +41,14 @@ const UserSection = ({ user }: UserSectionProps): React.ReactElement => {
       <Button link='/' theme='filled' size='small' text='Зарегистрироваться' />
     );
 
-  const userSection = user ? (
+  const userSection = isAuthorized ? (
     <>
       <div className={separatorItemClasses}>
         <div className={styles.separator} />
       </div>
       <div className={styles.item}>
         <Link href='/'>
-          <a className={styles.link}>{user}</a>
+          <a className={styles.link}>{`${name} ${surname}`}</a>
         </Link>
       </div>
     </>
