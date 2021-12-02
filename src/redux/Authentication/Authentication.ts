@@ -15,7 +15,7 @@ const initialState = {
   surname: '',
 };
 
-const AuthenticationReducer = (
+const Authentication = (
   state: AuthenticationState = initialState,
   action: AnyAction
 ): AuthenticationState => {
@@ -45,4 +45,4 @@ const AuthenticationReducer = (
   }
 };
 
-export default AuthenticationReducer;
+export default Authentication;
