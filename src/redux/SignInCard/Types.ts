@@ -2,6 +2,7 @@ const SET_SUBMITTING = 'SET-SUBMITTING';
 const SUBMIT_SIGN_IN_FORM = 'SUBMIT_SIGN_IN_FORM';
 const SET_UID = 'SET_UID';
 const SET_ERROR = 'SET_ERROR';
+const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
 
 type SignInCardState = {
   submitting: boolean;
@@ -9,7 +10,8 @@ type SignInCardState = {
   password: string;
   uid: string;
   error: boolean;
+  isAuthenticated:boolean;
 };
 
 export default SignInCardState;
-export { SET_SUBMITTING, SUBMIT_SIGN_IN_FORM, SET_UID, SET_ERROR };
+export { SET_SUBMITTING, SUBMIT_SIGN_IN_FORM, SET_UID, SET_ERROR, SET_AUTHENTICATED };

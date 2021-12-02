@@ -4,14 +4,16 @@ import SignInCardState, {
   SUBMIT_SIGN_IN_FORM,
   SET_UID,
   SET_ERROR,
+  SET_AUTHENTICATED,
 } from './Types';
 
-const initialState = {
+const initialState:SignInCardState = {
   submitting: false,
   email: '',
   password: '',
   uid: '',
   error: false,
+  isAuthenticated:false,
 };
 
 const signInCardReducer = (
@@ -23,6 +25,11 @@ const signInCardReducer = (
       return {
         ...state,
         submitting: action.payload,
+      };
+    case SET_AUTHENTICATED:
+      return {
+        ...state,
+        isAuthenticated: action.payload,
       };
     case SUBMIT_SIGN_IN_FORM:
       return {

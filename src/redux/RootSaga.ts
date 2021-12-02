@@ -13,6 +13,7 @@ import {
   setSubmitting,
   setUID,
   setError,
+  setAuthenticated,
 } from './SignInCard/SignInCardActions';
 
 function* startSaga(
@@ -32,12 +33,12 @@ function* workerSignInSaga(form: any) {
   const isAuthorized: Promise<UserType | AuthError> = yield call(() => {
     return firebaseAPI.signIn(form.payload.email, form.payload.password);
   });
-
   if (isAuthorized.constructor.name === 'FirebaseError') {
     yield put(setError(true));
     yield put(setSubmitting(false));
   } else {
     yield put(setError(false));
+    yield put(setAuthenticated(true));
     yield put(setSubmitting(false));
     yield put(setUID((isAuthorized as unknown as UserType).uid));
   }

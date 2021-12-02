@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-import { initializeApp, FirebaseApp } from 'firebase/app';
-import {
-  getAuth,
-  Auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  UserCredential,
-  AuthError,
-} from 'firebase/auth';
-import { getDatabase, ref, set, Database } from 'firebase/database';
-import { UserDataType, UserType } from './Types';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
-  authDomain: 'breaking-code-ebe74.firebaseapp.com',
-  databaseURL:
-    'https://breaking-code-ebe74-default-rtdb.europe-west1.firebasedatabase.app',
-  projectId: 'breaking-code-ebe74',
-  storageBucket: 'breaking-code-ebe74.appspot.com',
-  messagingSenderId: '770591862991',
-  appId: '1:770591862991:web:4dea4eda027fcf69ef07ba',
-  measurementId: 'G-42H384R7P3',
-=======
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getFunctions, httpsCallable, Functions } from "firebase/functions";
 import { 
@@ -43,8 +19,10 @@ import {
   collection, 
   query,
 } from 'firebase/firestore';
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
 import { FirebaseError } from "@firebase/util";
+import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA",
@@ -55,7 +33,6 @@ const firebaseConfig = {
   messagingSenderId: "770591862991",
   appId: "1:770591862991:web:4dea4eda027fcf69ef07ba",
   measurementId: "G-42H384R7P3"
->>>>>>> main
 };
 
 class FirebaseAPI {
@@ -63,26 +40,11 @@ class FirebaseAPI {
 
   private auth: Auth;
 
-<<<<<<< HEAD
-  private db: Database;
-=======
   private db: Firestore;
->>>>>>> main
 
   constructor() {
     this.app = initializeApp(firebaseConfig);
     this.auth = getAuth();
-<<<<<<< HEAD
-    this.db = getDatabase();
-  }
-
-  public signUp = async (
-    userData: UserDataType
-  ): Promise<UserType | AuthError> =>
-    createUserWithEmailAndPassword(this.auth, userData.email, userData.password)
-      .then((userCredential: UserCredential) => {
-        set(ref(this.db, `/userData/${userCredential.user.uid}`), {
-=======
     this.db = getFirestore(this.app);
   }
 
@@ -90,32 +52,10 @@ class FirebaseAPI {
     createUserWithEmailAndPassword(this.auth, userData.email, userData.password)
       .then((userCredential: UserCredential) => {
         setDoc(doc(this.db, `userData/${userCredential.user.uid}`), {
->>>>>>> main
           name: userData.name,
           surname: userData.surname,
           photo: '',
           gender: userData.gender,
-<<<<<<< HEAD
-          birthday: userData.birthday,
-        });
-        return {
-          uid: userCredential.user.uid,
-          email: userCredential.user.email,
-        };
-      })
-      .catch((error: AuthError) => error);
-
-  public signIn = async (
-    email: string,
-    password: string
-  ): Promise<UserType | AuthError> =>
-    signInWithEmailAndPassword(this.auth, email, password)
-      .then((userCredential: UserCredential) => ({
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
-      }))
-      .catch((error: AuthError): AuthError => error);
-=======
           birthday: userData.birthday
         })
         return {
@@ -156,9 +96,7 @@ class FirebaseAPI {
       .then((result) => result.forEach((item) => {
         rooms.push(({roomID: item.id, ...item.data()} as ReturnedRoomType));
       })).then(() => {
-        const filtredRooms = rooms.filter((item) => {
-          return this.filterRoom(item, filters);
-        });
+        const filtredRooms = rooms.filter((item) => this.filterRoom(item, filters));
 
         return {
           rooms: filtredRooms.slice(
@@ -231,13 +169,8 @@ class FirebaseAPI {
   
     return true;
   };
->>>>>>> main
 }
 
 const firebaseAPI = new FirebaseAPI();
 
-<<<<<<< HEAD
 export default firebaseAPI;
-=======
-export default firebaseAPI;
->>>>>>> main

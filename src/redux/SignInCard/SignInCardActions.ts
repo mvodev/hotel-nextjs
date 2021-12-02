@@ -1,9 +1,11 @@
 import { AnyAction } from 'redux';
+import FormData from 'src/components/SignInCard/Types';
 import {
   SET_SUBMITTING,
   SUBMIT_SIGN_IN_FORM,
   SET_UID,
   SET_ERROR,
+  SET_AUTHENTICATED,
 } from './Types';
 
 const setSubmitting = (payload: boolean): AnyAction => ({
@@ -26,4 +28,9 @@ const setError = (payload: boolean): AnyAction => ({
   payload,
 });
 
-export { setSubmitting, submitForm, setUID, setError };
+const setAuthenticated = (payload: boolean): AnyAction => ({
+  type: SET_AUTHENTICATED,
+  payload,
+});
+
+export { setSubmitting, submitForm, setUID, setError, setAuthenticated };

@@ -1,9 +1,10 @@
-<<<<<<< HEAD
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { Field, Form, FieldMetaState } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
-import { SUBMIT_SIGN_IN_FORM } from 'src/redux/SignInCard/Types';
+import { submitForm } from 'src/redux/SignInCard/SignInCardActions';
 import FormData from './Types';
 import { RootState } from '../../redux/reduces';
 import styles from './SignInCard.module.scss';
@@ -11,6 +12,7 @@ import validate from './validate';
 
 const SignInCard = (): React.ReactElement => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const { submitting } = {
     ...useSelector((state: RootState) => state.signInCardReducer),
@@ -20,14 +22,23 @@ const SignInCard = (): React.ReactElement => {
     ...useSelector((state: RootState) => state.signInCardReducer),
   };
 
+  const { isAuthenticated } = {
+    ...useSelector((state: RootState) => state.signInCardReducer),
+  };
+
+  useEffect(()=>{
+    if(isAuthenticated){
+      router.push('/');
+    }
+  });
+
   const validationBlock = (meta: FieldMetaState<unknown>) => (
       meta.error &&
       meta.touched && <span className={styles.signInCardError}>{meta.error}</span>
     );
 
   const handleFormSubmit = (values: FormData) => {
-    const formData = { ...values };
-    dispatch({ type: SUBMIT_SIGN_IN_FORM, payload: formData });
+    dispatch(submitForm(values));
   };
 
   return (
@@ -66,7 +77,7 @@ const SignInCard = (): React.ReactElement => {
             <div className={styles.signInCardBottomSection}>
               <span className={styles.text}>Нет аккаунта на Toxin?</span>
               <div className={styles.signInCardBorderContainer}>
-                <Button theme='bordered' link='./registration' text='Создать' />
+                <Button theme='bordered' link='/' text='Создать' />
               </div>
             </div>
           </form>
@@ -75,30 +86,5 @@ const SignInCard = (): React.ReactElement => {
     </div>
   );
 };
-=======
-import TextField from 'src/components/TextField/TextField';
-import Button from 'src/components/Button/Button';
-
-import styles from './SignInCard.module.sass';
-
-const SignInCard = (): JSX.Element => (
-  <form className={styles.signInCard}>
-    <h1 className={styles.title}>Войти</h1>
-    <div className={styles.inputsContainer}>
-      <TextField placeholder="Email" type="email" />
-      <TextField placeholder="Пароль" type="password" required />
-    </div>
-    <div className={styles.bigButton}>
-      <Button text="войти" type="submit" theme="filled" />
-    </div>
-    <div className={styles.regSection}>
-      <span className={styles.regSectionSign}>Нет аккаунта на Toxin?</span>
-      <div className={styles.regSectionButton}>
-        <Button link="/registration" theme="bordered" text="создать" />
-      </div>
-    </div>
-  </form>
-);
->>>>>>> main
 
 export default SignInCard;
