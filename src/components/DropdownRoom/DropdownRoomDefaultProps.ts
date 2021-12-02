@@ -1,5 +1,5 @@
 const DropdownRoomDefaultProps = {
-  placeholder: 'Выберите опции',
+  placeholder: 'Выберите удобства',
   values: [
     {
       text: 'Спальни',
@@ -16,6 +16,7 @@ const DropdownRoomDefaultProps = {
       value: 0,
       spellCases: ['ванная', 'ванные', 'ванных'],
     },
-  ]
+  ],
 };
+
 export default DropdownRoomDefaultProps;

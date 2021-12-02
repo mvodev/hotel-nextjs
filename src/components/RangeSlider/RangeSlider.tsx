@@ -9,7 +9,7 @@ import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
 import styles from './RangeSlider.module.sass';
 import Handle from './Handle';
 
-const RangeSlider = ({ step = 100 }: { step: number }): JSX.Element => {
+const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
   const { min, max, from, to } = useSelector(selectPrices);
   const dispatch = useDispatch();
   const positions = [from, to].map((p) => clamp(min, p / (max - min), max)) as [

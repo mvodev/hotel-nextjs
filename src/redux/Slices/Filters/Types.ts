@@ -13,15 +13,23 @@ type Prices = {
   to: number;
 }
 
+type Conveniences = {
+  bedrooms: number;
+  beds: number;
+  bathrooms: number;
+};
+
 type FiltersState = {
   dates: Dates;
   guests: Guests;
   prices: Prices;
+  conveniences: Conveniences
 };
 
 export type {
   Dates,
   Guests,
   Prices,
+  Conveniences,
   FiltersState 
 };

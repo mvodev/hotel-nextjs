@@ -1,31 +1,45 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { ReactElement, useState } from 'react';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  selectConveniences,
+  setConveniences
+} from 'src/redux/Slices/Filters/FiltersSlice';
+
 import style from './Filters.module.sass';
+import type FiltersType from './Types';
 import CheckboxButtons from '../CheckboxButtons/CheckboxButtons';
 import DateDropdown from '../DateDropdown/DateDropdown';
 import DropdownGuests from '../DropdownGuests/DropdownGuests';
 import DropdownRoom from '../DropdownRoom/DropdownRoom';
+import DropdownRoomDefaultProps from '../DropdownRoom/DropdownRoomDefaultProps';
+import type { DropdownRoomValue } from '../DropdownRoom/Types';
 import RangeSlider from '../RangeSlider/RangeSlider';
 import ExpandableList from '../ExpandableList/ExpandableList';
-import type FiltersType from './Types';
 
 const Filters = ({
-  dateDropdown,
   dropdownGuests,
-  rangeSlider,
   checkboxButtons,
   richCheckboxButtons,
-  dropdownRoom,
   expandableList,
-}: FiltersType): ReactElement => {
+}: FiltersType): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+  const conveniences = useSelector(selectConveniences);
+  const dispatch = useDispatch();
 
   const handleFiltersButtonClick = () => setIsOpen(!isOpen);
 
-  const filtersClass = `${style.filters} ${isOpen ? style.filtersOpen : ''}`;
+  const handleDropdownRoomChange = (values: DropdownRoomValue[]) => {
+    const [bedrooms, beds, bathrooms] = values.map(({ value }) => value);
+    dispatch(setConveniences({ bedrooms, beds, bathrooms }));
+  }
 
   return (
-    <div className={filtersClass}>
+    <div className={[
+      style.filters,
+      isOpen ? style.filtersOpen : ''
+    ].join(' ')}>
       <button
         type='button'
         className={style.filtersButton}
@@ -35,7 +49,6 @@ const Filters = ({
         <DateDropdown
           titles={['даты пребывания в отеле']}
           modifier='single'
-          initDate={dateDropdown.initDate}
           isSmall
         />
       </div>
@@ -48,11 +61,7 @@ const Filters = ({
         />
       </div>
       <div className={style.filtersPrice}>
-        <RangeSlider
-          min={rangeSlider.min}
-          max={rangeSlider.max}
-          step={rangeSlider.step}
-        />
+        <RangeSlider />
         <p className={style.filtersPriceText}>
           Стоимость за сутки пребывания в номере
         </p>
@@ -73,7 +82,15 @@ const Filters = ({
       </div>
       <div className={style.filtersConveniences}>
         <h2 className={style.filtersConveniencesTitle}>удобства номера</h2>
-        <DropdownRoom placeholder='' values={dropdownRoom.values} />
+        <DropdownRoom 
+          placeholder={DropdownRoomDefaultProps.placeholder}
+          values={Object.values(conveniences).map((value, id) => ({
+            text: DropdownRoomDefaultProps.values[id].text,
+            spellCases: DropdownRoomDefaultProps.values[id].spellCases,
+            value
+          }))}
+          handleCountersChange={handleDropdownRoomChange}
+        />
       </div>
       <div className={style.filtersAdditionalConveniences}>
         <ExpandableList text="дополнительные удобства">

@@ -1,11 +1,16 @@
 import { useState } from 'react';
+
+import { getPosInSpellCasesArray } from 'src/utils/Utils';
+
 import DropdownCounter from '../DropdownCounter/DropdownCounter';
 import styles from './DropdownRoom.module.scss';
-import { getPosInSpellCasesArray } from '../../utils/Utils';
 import DropdownRoomProps from './Types';
 
-const DropdownRoom = ({ values, placeholder }: DropdownRoomProps): JSX.Element => {
-
+const DropdownRoom = ({
+  values,
+  placeholder,
+  handleCountersChange = () => {},
+}: DropdownRoomProps): JSX.Element => {
   const [isOpened, setOpened] = useState(false);
   const [counterItems, setCounterItems] = useState(values);
 
@@ -53,6 +58,7 @@ const DropdownRoom = ({ values, placeholder }: DropdownRoomProps): JSX.Element =
       }
     }
     setCounterItems(newState);
+    handleCountersChange(newState);
   };
 
   const countersList = counterItems.map((elem) => (
