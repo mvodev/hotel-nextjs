@@ -2,12 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import type { AppState } from 'src/redux/Store';
 
-import type {
-  Dates,
-  Guests,
-  Prices,
-  Conveniences,
-} from './Types';
+import type { Dates, Guests, Prices, Conveniences } from './Types';
 import initialState from './InitialState';
 
 const filtersSlice = createSlice({
@@ -17,37 +12,21 @@ const filtersSlice = createSlice({
     setDates: (state, action: PayloadAction<Dates>) => {
       state.dates = action.payload;
     },
-    setAdults: (state, action: PayloadAction<number>) => {
-      state.guests.adults = action.payload;
-    },
-    setChilds: (state, action: PayloadAction<number>) => {
-      state.guests.childs = action.payload;
-    },
-    setInfants: (state, action: PayloadAction<number>) => {
-      state.guests.infants = action.payload;
-    },
-    resetGuests: (state) => {
-      state.guests = {
-        adults: 0,
-        childs: 0,
-        infants: 0,
-      };
+    setGuests: (state, action: PayloadAction<Guests>) => {
+      state.guests = action.payload;
     },
     setPrices: (state, action: PayloadAction<Partial<Prices>>) => {
       state.prices = { ...state.prices, ...action.payload };
     },
     setConveniences: (state, action: PayloadAction<Conveniences>) => {
       state.conveniences = action.payload;
-    }
+    },
   },
 });
 
 export const {
   setDates,
-  setAdults,
-  setChilds,
-  setInfants,
-  resetGuests,
+  setGuests,
   setPrices,
   setConveniences,
 } = filtersSlice.actions;
