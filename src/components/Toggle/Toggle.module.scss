@@ -1,13 +1,14 @@
 @import '../../styles/vars.sass';
 
-.toggle {
-  &Container {
+.toggle{
+
+  &Container{
     max-width: 260px;
     width: 100%;
     position: relative;
   }
 
-  &Label {
+  &Label{
     font-family: $main-font-family;
     font-size: 14px;
     font-style: normal;
@@ -24,7 +25,7 @@
     cursor: pointer;
   }
 
-  &Input {
+  &Input{
     opacity: 0;
     width: 0;
     height: 0;
@@ -43,7 +44,7 @@
     box-sizing: border-box;
     border-radius: 10px;
 
-    &::before {
+    &::before{
       position: absolute;
       content: '';
       height: 12px;
@@ -67,4 +68,5 @@
     transform: translateX(19px);
     background: $gradient-primary;
   }
+
 }

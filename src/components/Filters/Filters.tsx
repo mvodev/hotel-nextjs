@@ -51,8 +51,6 @@ const Filters = ({
         <RangeSlider
           min={rangeSlider.min}
           max={rangeSlider.max}
-          from={rangeSlider.from}
-          to={rangeSlider.to}
           step={rangeSlider.step}
         />
         <p className={style.filtersPriceText}>
