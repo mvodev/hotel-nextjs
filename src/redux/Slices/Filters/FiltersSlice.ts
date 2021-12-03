@@ -26,6 +26,9 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
+    setFilters: (state, action: PayloadAction<FiltersState>) => {
+      state = action.payload;
+    }, 
     setDates: (state, action: PayloadAction<Dates>) => {
       state.dates = action.payload;
     },
