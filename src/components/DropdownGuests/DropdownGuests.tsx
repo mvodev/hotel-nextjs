@@ -18,14 +18,14 @@ const DropdownGuests = ({
     infants: ['младенец', 'младенца', 'младенцев'],
   };
   const [isOpened, setOpened] = useState(opened);
-  const { adults, childs, infants } = useSelector(selectGuests);
+  const { adult, child, infants } = useSelector(selectGuests);
   const dispatch = useDispatch();
 
   const handleApplyButton = () => setOpened(false);
 
   const handleClearButton = () => {
     setOpened(false);
-    dispatch(setGuests({ adults: 0, childs: 0, infants: 0 }));
+    dispatch(setGuests({ adult: 0, child: 0, infants: 0 }));
   };
 
   const handleOutsideClick = (event: Event) => {
@@ -42,12 +42,12 @@ const DropdownGuests = ({
   };
 
   const onChange = (data: number, type: string): void => {
-    dispatch(setGuests({ adults, childs, infants, [type]: data }));
+    dispatch(setGuests({ adult, child, infants, [type]: data }));
   };
 
   const getValueForInputField = (): string => {
     let result = '';
-    const total = adults + childs;
+    const total = adult + child;
     result = `${total} ${spellCases.guests[getPosInSpellCasesArray(total)]}`;
     if (infants > 0) {
       result += `,  ${infants} ${
@@ -91,15 +91,15 @@ const DropdownGuests = ({
       >
         <DropdownCounter
           text='Взрослые'
-          number={adults}
+          number={adult}
           onChange={onChange}
-          type='adults'
+          type='adult'
         />
         <DropdownCounter
           text='Дети'
-          number={childs}
+          number={child}
           onChange={onChange}
-          type='childs'
+          type='child'
         />
         <DropdownCounter
           text='Младенцы'
@@ -110,7 +110,7 @@ const DropdownGuests = ({
         <div className={styles.dropdownGuestsBodyButtons}>
           <div
             className={
-              childs + adults + infants > 0
+              child + adult + infants > 0
                 ? ''
                 : styles.dropdownGuestsButtonIsHidden
             }

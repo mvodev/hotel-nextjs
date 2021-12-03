@@ -3,7 +3,7 @@ import DropdownRoomDefaultProps from 'src/components/DropdownRoom/DropdownRoomDe
 import type {
   Dates,
   Guests,
-  Prices,
+  Price,
   Rules,
   Availability,
   Conveniences,
@@ -14,12 +14,12 @@ import type {
 const dates: Dates = [null, null];
 
 const guests: Guests = {
-  adults: 0,
-  childs: 0,
+  adult: 0,
+  child: 0,
   infants: 0,
 };
 
-const prices: Prices = {
+const price: Price = {
   min: 0,
   max: 15000,
   from: 5000,
@@ -92,7 +92,7 @@ const additionalConvenience: AdditionalConvenience = {
 const initialState: FiltersState = {
   dates,
   guests,
-  prices,
+  price,
   rules,
   availability,
   conveniences,

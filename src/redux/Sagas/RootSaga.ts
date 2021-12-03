@@ -4,7 +4,8 @@
 import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
 
-import searchRoomCardSubmitWatcher from './SearchRoomCard/SearchRoomCardSaga'
+import searchRoomCardSubmitWatcher from './SearchRoomCard/SearchRoomCardSaga';
+import filtersWatcher from './Filters/FiltersSaga';
 
 function* startSaga(
   saga: Saga<any>
@@ -21,7 +22,8 @@ function* startSaga(
 
 function* RootSaga(): Generator<any, any, any> {
   const sagas: Saga<any>[] = [
-    searchRoomCardSubmitWatcher  
+    searchRoomCardSubmitWatcher,
+    filtersWatcher,
   ];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));

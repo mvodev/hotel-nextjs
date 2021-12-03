@@ -7,20 +7,22 @@ import styles from '@styles/pages/search.module.sass';
 
 const searchItems = roomCardProps.map((item) => (
   <div key={item.infoSection.roomNumber} className={styles.searchItem}>
-    <RoomCard {...item}/>
+    <RoomCard {...item} />
   </div>
-))
+));
 
 const Search = (): JSX.Element => (
   <Layout title='search room' pageClass='search'>
     <section className={styles.pageContainer}>
       <Filters />
       <div className={styles.searchContent}>
-        <h1 className={styles.searchTitle}>Номера, которые мы для вас подобрали</h1>
+        <h1 className={styles.searchTitle}>
+          Номера, которые мы для вас подобрали
+        </h1>
         <div className={styles.searchResult}>
           {searchItems}
           <div className={styles.searchPagination}>
-            <Pagination 
+            <Pagination
               {...{
                 buttonsCount: 15,
                 currentPage: 1,

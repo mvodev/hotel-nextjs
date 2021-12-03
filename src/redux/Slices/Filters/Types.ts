@@ -3,9 +3,9 @@ import type { DropdownRoomValue } from 'src/components/DropdownRoom/Types';
 
 export type Dates = [null, null] | [string, string];
 
-export type Guests = Record<'adults' | 'childs' | 'infants', number>;
+export type Guests = Record<'adult' | 'child' | 'infants', number>;
 
-export type Prices = Record<'min' | 'max' | 'from' | 'to', number>;
+export type Price = Record<'min' | 'max' | 'from' | 'to', number>;
 
 export type FieldsWithCheckboxes<T extends string> = Record<
   T,
@@ -38,7 +38,7 @@ export type AdditionalConvenience =
 export type FiltersState = {
   dates: Dates;
   guests: Guests;
-  prices: Prices;
+  price: Price;
   rules: Rules;
   availability: Availability;
   conveniences: Conveniences;

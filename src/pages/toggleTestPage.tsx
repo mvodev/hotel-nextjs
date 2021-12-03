@@ -12,19 +12,22 @@ const Layout = ({
   pageClass,
 }: PropsWithChildren<ILayoutProps>): ReactElement => (
   <>
-    <main className={pageClass} style={{margin:'100px'}}>
-      <Toggle {...{
-        isChecked:false,
-        description:"Получать умопомрачительные спецпредложения",
-        }}/>
-      <div style={{marginBottom:'50px'}}/>
-      <Toggle {...{
-        isChecked:true,
-        description:"Получать спецпредложения"}}/>
+    <main className={pageClass} style={{ margin: '100px' }}>
+      <Toggle
+        {...{
+          isChecked: false,
+          description: 'Получать умопомрачительные спецпредложения',
+        }}
+      />
+      <div style={{ marginBottom: '50px' }} />
+      <Toggle
+        {...{
+          isChecked: true,
+          description: 'Получать спецпредложения',
+        }}
+      />
     </main>
-
   </>
 );
 
 export default Layout;
-

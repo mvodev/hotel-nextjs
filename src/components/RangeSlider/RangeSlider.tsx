@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectPrices, setPrices } from 'src/redux/Slices/Filters/FiltersSlice';
+import { selectPrice, setPrice } from 'src/redux/Slices/Filters/FiltersSlice';
 import clamp from 'src/utils/Clamp';
 import formateToRuble from 'src/utils/FormateToRuble';
 
@@ -10,7 +10,7 @@ import Handle from './Handle';
 import styles from './RangeSlider.module.sass';
 
 const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
-  const { min, max, from, to } = useSelector(selectPrices);
+  const { min, max, from, to } = useSelector(selectPrice);
   const dispatch = useDispatch();
   const [positions, setPositions] = useState(
     [from, to].map((p) => clamp(min, p / (max - min), max))
@@ -30,7 +30,7 @@ const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
     timer.current = window.setTimeout(
       () =>
         dispatch(
-          setPrices({
+          setPrice({
             from: relativeToAbsolute(newPositions[0]),
             to: relativeToAbsolute(newPositions[1]),
           })

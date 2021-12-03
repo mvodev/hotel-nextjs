@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 import SearchRoomCard from '../components/SearchRoomCard/SearchRoomCard';
 
 const Index = (): JSX.Element => (
-  <Layout title="landing page" pageClass="landing">
+  <Layout title='landing page' pageClass='landing'>
     <section className={styles.landingPage}>
       <Carousel
         names={[

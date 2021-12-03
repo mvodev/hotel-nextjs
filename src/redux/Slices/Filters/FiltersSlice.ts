@@ -7,7 +7,7 @@ import type { DropdownRoomValue } from 'src/components/DropdownRoom/Types';
 import type {
   Dates,
   Guests,
-  Prices,
+  Price,
   RulesKeys,
   AvailabilityKeys,
   ConveniencesKeys,
@@ -35,8 +35,8 @@ const filtersSlice = createSlice({
     setGuests: (state, action: PayloadAction<Guests>) => {
       state.guests = action.payload;
     },
-    setPrices: (state, action: PayloadAction<Partial<Prices>>) => {
-      state.prices = { ...state.prices, ...action.payload };
+    setPrice: (state, action: PayloadAction<Partial<Price>>) => {
+      state.price = { ...state.price, ...action.payload };
     },
     setRules: (state, action: PayloadAction<CheckboxButtonItemType[]>) => {
       state.rules = retype(
@@ -77,7 +77,7 @@ export const {
   setFilters,
   setDates,
   setGuests,
-  setPrices,
+  setPrice,
   setRules,
   setAvailability,
   setConveniences,
@@ -90,7 +90,7 @@ export const selectDates = (state: AppState): Dates => state.filters.dates;
 
 export const selectGuests = (state: AppState): Guests => state.filters.guests;
 
-export const selectPrices = (state: AppState): Prices => state.filters.prices;
+export const selectPrice = (state: AppState): Price => state.filters.price;
 
 export const selectRules = (state: AppState): CheckboxButtonItemType[] =>
   Object.values(state.filters.rules);

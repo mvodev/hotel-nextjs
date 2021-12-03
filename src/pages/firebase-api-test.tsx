@@ -5,41 +5,37 @@ import firebaseAPI from '../firebaseAPI/firebaseAPI';
 
 const rooms: RoomType[] = [
   {
-    gallery: [
-      'room-2.webp',
-      'room-8.webp',
-      'room-4.webp',
-      'room-5.webp',
-    ],
+    gallery: ['room-2.webp', 'room-8.webp', 'room-4.webp', 'room-5.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 250,
       good: 43,
       satisfactory: 22,
-      poor: 5
+      poor: 5,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 9900,
     roomNumber: 840,
     isLux: false,
@@ -72,44 +68,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-3.webp',
-      'room-7.webp',
-      'room-1.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-3.webp', 'room-7.webp', 'room-1.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 150,
       good: 79,
       satisfactory: 43,
-      poor: 9
+      poor: 9,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7500,
     roomNumber: 564,
     isLux: false,
@@ -142,44 +134,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: false,
     haveTV: false,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-4.webp',
-      'room-3.webp',
-      'room-9.webp',
-      'room-5.webp',
-    ],
+    gallery: ['room-4.webp', 'room-3.webp', 'room-9.webp', 'room-5.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 67,
       good: 37,
       satisfactory: 20,
-      poor: 10
+      poor: 10,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 5430,
     roomNumber: 432,
     isLux: true,
@@ -209,44 +197,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-5.webp',
-      'room-7.webp',
-      'room-2.webp',
-      'room-11.webp',
-    ],
+    gallery: ['room-5.webp', 'room-7.webp', 'room-2.webp', 'room-11.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 439,
       good: 215,
       satisfactory: 67,
-      poor: 30
+      poor: 30,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 740,
     roomNumber: 579,
     isLux: false,
@@ -278,44 +262,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: false,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-12.webp',
-      'room-8.webp',
-      'room-3.webp',
-    ],
+    gallery: ['room-6.webp', 'room-12.webp', 'room-8.webp', 'room-3.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 32,
       good: 11,
       satisfactory: 2,
-      poor: 0
+      poor: 0,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 8655,
     roomNumber: 985,
     isLux: false,
@@ -340,44 +320,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-9.webp',
-      'room-4.webp',
-      'room-7.webp',
-      'room-10.webp',
-    ],
+    gallery: ['room-9.webp', 'room-4.webp', 'room-7.webp', 'room-10.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 240,
       good: 200,
       satisfactory: 300,
-      poor: 50
+      poor: 50,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 6000,
     roomNumber: 236,
     isLux: true,
@@ -410,44 +386,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: false,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-3.webp',
-      'room-8.webp',
-      'room-4.webp',
-      'room-9.webp',
-    ],
+    gallery: ['room-3.webp', 'room-8.webp', 'room-4.webp', 'room-9.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 21,
       good: 6,
       satisfactory: 2,
-      poor: 7
+      poor: 7,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7854,
     roomNumber: 276,
     isLux: false,
@@ -476,51 +448,44 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-3.webp',
-      'room-9.webp',
-      'room-1.webp',
-    ],
+    gallery: ['room-6.webp', 'room-3.webp', 'room-9.webp', 'room-1.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 321,
       good: 234,
       satisfactory: 76,
-      poor: 12
+      poor: 12,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 8700,
     roomNumber: 587,
     isLux: true,
-    bookedDays: [
-      new Date(2021, 11, 6),
-      new Date(2021, 11, 7),
-    ],
+    bookedDays: [new Date(2021, 11, 6), new Date(2021, 11, 7)],
     maxGuests: 3,
     discount: 400,
     serviceFee: 0,
@@ -541,44 +506,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-3.webp',
-      'room-9.webp',
-      'room-5.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-3.webp', 'room-9.webp', 'room-5.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 450,
       good: 6,
       satisfactory: 11,
-      poor: 2
+      poor: 2,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7680,
     roomNumber: 154,
     isLux: false,
@@ -611,44 +572,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: false,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-12.webp',
-      'room-1.webp',
-      'room-9.webp',
-    ],
+    gallery: ['room-6.webp', 'room-12.webp', 'room-1.webp', 'room-9.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 430,
       good: 130,
       satisfactory: 30,
-      poor: 12
+      poor: 12,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 8070,
     roomNumber: 357,
     isLux: false,
@@ -685,44 +642,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-4.webp',
-      'room-1.webp',
-      'room-11.webp',
-      'room-8.webp',
-    ],
+    gallery: ['room-4.webp', 'room-1.webp', 'room-11.webp', 'room-8.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 360,
       good: 214,
       satisfactory: 22,
-      poor: 8
+      poor: 8,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7300,
     roomNumber: 592,
     isLux: true,
@@ -752,44 +705,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: false,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-3.webp',
-      'room-8.webp',
-      'room-1.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-3.webp', 'room-8.webp', 'room-1.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 438,
       good: 450,
       satisfactory: 59,
-      poor: 16
+      poor: 16,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7490,
     roomNumber: 900,
     isLux: false,
@@ -822,44 +771,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: false,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-2.webp',
-      'room-10.webp',
-      'room-1.webp',
-    ],
+    gallery: ['room-6.webp', 'room-2.webp', 'room-10.webp', 'room-1.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 341,
       good: 240,
       satisfactory: 54,
-      poor: 25
+      poor: 25,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 3500,
     roomNumber: 259,
     isLux: false,
@@ -890,44 +835,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-5.webp',
-      'room-9.webp',
-      'room-11.webp',
-      'room-3.webp',
-    ],
+    gallery: ['room-5.webp', 'room-9.webp', 'room-11.webp', 'room-3.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 30,
       good: 150,
       satisfactory: 22,
-      poor: 5
+      poor: 5,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 9900,
     roomNumber: 386,
     isLux: false,
@@ -960,44 +901,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-5.webp',
-      'room-8.webp',
-      'room-1.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-5.webp', 'room-8.webp', 'room-1.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 230,
       good: 480,
       satisfactory: 59,
-      poor: 3
+      poor: 3,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 2600,
     roomNumber: 138,
     isLux: false,
@@ -1027,44 +964,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-5.webp',
-      'room-2.webp',
-      'room-3.webp',
-      'room-9.webp',
-    ],
+    gallery: ['room-5.webp', 'room-2.webp', 'room-3.webp', 'room-9.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 23,
       good: 23,
       satisfactory: 30,
-      poor: 0
+      poor: 0,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 4680,
     roomNumber: 712,
     isLux: true,
@@ -1073,7 +1006,6 @@ const rooms: RoomType[] = [
       new Date(2021, 11, 29),
       new Date(2021, 11, 30),
       new Date(2021, 11, 31),
-
     ],
     maxGuests: 4,
     discount: 400,
@@ -1095,44 +1027,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-4.webp',
-      'room-9.webp',
-      'room-1.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-4.webp', 'room-9.webp', 'room-1.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 130,
       good: 50,
       satisfactory: 10,
-      poor: 2
+      poor: 2,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 3000,
     roomNumber: 671,
     isLux: false,
@@ -1164,44 +1092,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-1.webp',
-      'room-8.webp',
-      'room-4.webp',
-      'room-9.webp',
-    ],
+    gallery: ['room-1.webp', 'room-8.webp', 'room-4.webp', 'room-9.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 532,
       good: 359,
       satisfactory: 68,
-      poor: 22
+      poor: 22,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 6730,
     roomNumber: 123,
     isLux: false,
@@ -1234,44 +1158,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-3.webp',
-      'room-8.webp',
-      'room-11.webp',
-    ],
+    gallery: ['room-6.webp', 'room-3.webp', 'room-8.webp', 'room-11.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 132,
       good: 300,
       satisfactory: 589,
-      poor: 5
+      poor: 5,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7690,
     roomNumber: 346,
     isLux: false,
@@ -1304,44 +1224,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-5.webp',
-      'room-1.webp',
-      'room-12.webp',
-      'room-7.webp',
-    ],
+    gallery: ['room-5.webp', 'room-1.webp', 'room-12.webp', 'room-7.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 50,
       good: 34,
       satisfactory: 88,
-      poor: 12
+      poor: 12,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 5300,
     roomNumber: 719,
     isLux: false,
@@ -1373,44 +1289,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-3.webp',
-      'room-1.webp',
-      'room-8.webp',
-      'room-5.webp',
-    ],
+    gallery: ['room-3.webp', 'room-1.webp', 'room-8.webp', 'room-5.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 250,
       good: 430,
       satisfactory: 340,
-      poor: 120
+      poor: 120,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 12000,
     roomNumber: 899,
     isLux: true,
@@ -1443,44 +1355,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-12.webp',
-      'room-4.webp',
-      'room-8.webp',
-      'room-1.webp',
-    ],
+    gallery: ['room-12.webp', 'room-4.webp', 'room-8.webp', 'room-1.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 216,
       good: 32,
       satisfactory: 70,
-      poor: 2
+      poor: 2,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 15000,
     roomNumber: 482,
     isLux: false,
@@ -1513,44 +1421,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-3.webp',
-      'room-12.webp',
-      'room-8.webp',
-      'room-9.webp',
-    ],
+    gallery: ['room-3.webp', 'room-12.webp', 'room-8.webp', 'room-9.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 340,
       good: 420,
       satisfactory: 220,
-      poor: 25
+      poor: 25,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 4000,
     roomNumber: 312,
     isLux: false,
@@ -1583,44 +1487,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: true,
     haveTV: false,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-1.webp',
-      'room-7.webp',
-      'room-3.webp',
-      'room-9.webp',
-    ],
+    gallery: ['room-1.webp', 'room-7.webp', 'room-3.webp', 'room-9.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 65,
       good: 43,
       satisfactory: 12,
-      poor: 1
+      poor: 1,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 18000,
     roomNumber: 840,
     isLux: true,
@@ -1650,44 +1550,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-2.webp',
-      'room-7.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-6.webp', 'room-2.webp', 'room-7.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 54,
       good: 7,
       satisfactory: 3,
-      poor: 7
+      poor: 7,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7800,
     roomNumber: 269,
     isLux: false,
@@ -1722,44 +1618,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-8.webp',
-      'room-3.webp',
-      'room-1.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-8.webp', 'room-3.webp', 'room-1.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 120,
       good: 280,
       satisfactory: 22,
-      poor: 5
+      poor: 5,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 11000,
     roomNumber: 174,
     isLux: false,
@@ -1789,44 +1681,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: true,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-9.webp',
-      'room-3.webp',
-      'room-2.webp',
-    ],
+    gallery: ['room-6.webp', 'room-9.webp', 'room-3.webp', 'room-2.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 65,
       good: 43,
       satisfactory: 22,
-      poor: 5
+      poor: 5,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 4670,
     roomNumber: 824,
     isLux: false,
@@ -1859,44 +1747,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: false,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-11.webp',
-      'room-4.webp',
-      'room-8.webp',
-      'room-5.webp',
-    ],
+    gallery: ['room-11.webp', 'room-4.webp', 'room-8.webp', 'room-5.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 432,
       good: 430,
       satisfactory: 130,
-      poor: 22
+      poor: 22,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 7770,
     roomNumber: 430,
     isLux: false,
@@ -1921,51 +1805,44 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: true
+    haveShampoo: true,
   },
   {
-    gallery: [
-      'room-6.webp',
-      'room-12.webp',
-      'room-1.webp',
-      'room-8.webp',
-    ],
+    gallery: ['room-6.webp', 'room-12.webp', 'room-1.webp', 'room-8.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 12,
       good: 23,
       satisfactory: 5,
-      poor: 1
+      poor: 1,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 9900,
     roomNumber: 399,
     isLux: false,
-    bookedDays: [
-      new Date(2021, 11, 6),
-      new Date(2021, 11, 7),
-    ],
+    bookedDays: [new Date(2021, 11, 6), new Date(2021, 11, 7)],
     maxGuests: 5,
     discount: 1200,
     serviceFee: 0,
@@ -1986,44 +1863,40 @@ const rooms: RoomType[] = [
     haveFeedingChair: true,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
   {
-    gallery: [
-      'room-5.webp',
-      'room-3.webp',
-      'room-8.webp',
-      'room-12.webp',
-    ],
+    gallery: ['room-5.webp', 'room-3.webp', 'room-8.webp', 'room-12.webp'],
     information: [
       {
-        description: "Шумопоглощающие стены",
-        icon: "comfort-icon.svg",
-        title: "Комфорт"
+        description: 'Шумопоглощающие стены',
+        icon: 'comfort-icon.svg',
+        title: 'Комфорт',
       },
       {
-        description: "Окно в каждой из спален",
-        icon: "convenience-icon.svg",
-        title: "Удобство"
+        description: 'Окно в каждой из спален',
+        icon: 'convenience-icon.svg',
+        title: 'Удобство',
       },
       {
-        description: "Номер оснащён камином",
-        icon: "coziness-icon.svg",
-        title: "Уют"
-      }
+        description: 'Номер оснащён камином',
+        icon: 'coziness-icon.svg',
+        title: 'Уют',
+      },
     ],
     impressions: {
       perfect: 340,
       good: 210,
       satisfactory: 20,
-      poor: 5
+      poor: 5,
     },
     rules: [
-      "Можно с питомцами",
-      "Без вечеринок и мероприятий",
-      "Время прибытия — после 13:00,а выезд до 12:00"
+      'Можно с питомцами',
+      'Без вечеринок и мероприятий',
+      'Время прибытия — после 13:00,а выезд до 12:00',
     ],
-    cancellation: "Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.",
+    cancellation:
+      'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
     price: 15700,
     roomNumber: 725,
     isLux: true,
@@ -2057,43 +1930,43 @@ const rooms: RoomType[] = [
     haveFeedingChair: false,
     haveCrib: false,
     haveTV: true,
-    haveShampoo: false
+    haveShampoo: false,
   },
-]
+];
 
 const filters = {
   dates: [new Date(2021, 11, 10), new Date(2021, 11, 15)],
   guests: {
     adult: 2,
     child: 0,
-    infants: 0
+    infants: 0,
   },
   price: [5000, 15000],
-  rules : {
+  rules: {
     maySmoking: {
-      text:'',
-      checked: false
+      text: '',
+      checked: false,
     },
     mayWithPets: {
-      text:'string',
-      checked: false
+      text: 'string',
+      checked: false,
     },
     mayInviteGuests: {
-      text:'string',
-      checked: false
+      text: 'string',
+      checked: false,
     },
   },
   availability: {
     wideСorridor: {
       title: 'string',
       text: 'string',
-      checked: false
+      checked: false,
     },
     assistantForDisabled: {
       title: 'string',
       text: 'string',
-      checked: false
-    }
+      checked: false,
+    },
   },
   conveniences: {
     bedrooms: {
@@ -2115,37 +1988,36 @@ const filters = {
   additionalConvenience: {
     haveBreakfast: {
       checked: false,
-      text: 'string'
+      text: 'string',
     },
     haveDesk: {
       checked: false,
-      text: 'string'
+      text: 'string',
     },
     haveFeedingChair: {
       checked: false,
-      text: 'string'
+      text: 'string',
     },
     haveCrib: {
       checked: false,
-      text: 'string'
+      text: 'string',
     },
     haveTV: {
       checked: false,
-      text: 'string'
+      text: 'string',
     },
     haveShampoo: {
       checked: false,
-      text: 'string'
-    }
-  }
-}
-
+      text: 'string',
+    },
+  },
+};
 
 const Index = (): ReactElement => (
-  <Layout title="landing page" pageClass="landing">
-    {
-      console.log(firebaseAPI.signIn('dxcgfghcffgxjxfgxgffbx@mail.ru', 'lkjhgfdsa'))
-    }
+  <Layout title='landing page' pageClass='landing'>
+    {console.log(
+      firebaseAPI.signIn('dxcgfghcffgxjxfgxgffbx@mail.ru', 'lkjhgfdsa')
+    )}
   </Layout>
 );
 
