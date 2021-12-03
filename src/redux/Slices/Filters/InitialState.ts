@@ -32,7 +32,7 @@ const rules: Rules = {
   },
   mayInviteGuests: {
     text: `Можно пригласить гостей\n(до 10 человек)`,
-    checked: true
+    checked: true,
   },
 };
 

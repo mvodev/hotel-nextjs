@@ -8,12 +8,14 @@ const CheckboxButtons = ({
   isRich = false,
   title = '',
   items,
+  handleItemChange = () => {},
 }: CheckboxButtonsType): React.ReactElement => {
   const [checkboxItems, setCheckboxItems] = useState(items);
 
   const handleItemClick = (id: number, checked: boolean): void => {
     checkboxItems[id].checked = checked;
     setCheckboxItems([...checkboxItems]);
+    handleItemChange(checkboxItems);
   };
 
   const titleElement = <h2 className={style.checkboxButtonsTitle}>{title}</h2>;

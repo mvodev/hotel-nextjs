@@ -1,43 +1,41 @@
 import type { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
 import type { DropdownRoomValue } from 'src/components/DropdownRoom/Types';
 
-type Dates = [null, null] | [string, string];
+export type Dates = [null, null] | [string, string];
 
-type Guests = {
-  adults: number;
-  childs: number;
-  infants: number;
-};
+export type Guests = Record<'adults' | 'childs' | 'infants', number>;
 
-type Prices = [number, number];
+export type Prices = [number, number];
 
-type Rules = {
-  maySmoking: CheckboxButtonItemType;
-  mayWithPets: CheckboxButtonItemType;
-  mayInviteGuests: CheckboxButtonItemType;
-};
+export type FieldsWithCheckboxes<T extends string> = Record<
+  T,
+  CheckboxButtonItemType
+>;
 
-type Availability = {
-  wideСorridor: CheckboxButtonItemType;
-  assistantForDisabled: CheckboxButtonItemType;
-};
+export type RulesKeys = 'maySmoking' | 'mayWithPets' | 'mayInviteGuests';
 
-type Conveniences = {
-  bedrooms: DropdownRoomValue;
-  beds: DropdownRoomValue;
-  bathrooms: DropdownRoomValue;
-};
+export type Rules = FieldsWithCheckboxes<RulesKeys>;
 
-type AdditionalConvenience = {
-  haveBreakfast: CheckboxButtonItemType;
-  haveDesk: CheckboxButtonItemType;
-  haveFeedingChair: CheckboxButtonItemType;
-  haveCrib: CheckboxButtonItemType;
-  haveTV: CheckboxButtonItemType;
-  haveShampoo: CheckboxButtonItemType;
-};
+export type AvailabilityKeys = 'wideСorridor' | 'assistantForDisabled';
 
-type FiltersState = {
+export type Availability = FieldsWithCheckboxes<AvailabilityKeys>;
+
+export type ConveniencesKeys = 'bedrooms' | 'beds' | 'bathrooms';
+
+export type Conveniences = Record<ConveniencesKeys, DropdownRoomValue>;
+
+export type AdditionalConvenienceKeys =
+  | 'haveBreakfast'
+  | 'haveDesk'
+  | 'haveFeedingChair'
+  | 'haveCrib'
+  | 'haveTV'
+  | 'haveShampoo';
+
+export type AdditionalConvenience =
+  FieldsWithCheckboxes<AdditionalConvenienceKeys>;
+
+export type FiltersState = {
   dates: Dates;
   guests: Guests;
   prices: Prices;
@@ -45,16 +43,4 @@ type FiltersState = {
   availability: Availability;
   conveniences: Conveniences;
   additionalConvenience: AdditionalConvenience;
-};
-
-export type {
-  Dates,
-  Guests,
-  Prices,
-  CheckboxButtonItemType,
-  Rules,
-  Availability,
-  Conveniences,
-  AdditionalConvenience,
-  FiltersState,
 };

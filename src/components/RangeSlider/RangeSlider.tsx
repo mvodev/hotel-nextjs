@@ -6,8 +6,8 @@ import clamp from 'src/utils/Clamp';
 import formateToRuble from 'src/utils/FormateToRuble';
 
 import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
-import styles from './RangeSlider.module.sass';
 import Handle from './Handle';
+import styles from './RangeSlider.module.sass';
 
 const RangeSlider = ({
   min = 0,
