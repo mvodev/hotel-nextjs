@@ -1,18 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { AnyAction } from 'redux';
-import AuthenticationState, {
-  SET_AUTHENTICATED,
-  SET_NAME,
-  SET_SURNAME,
-  SET_UID,
-} from './Types';
+import AuthenticationState, { SET_AUTHENTICATED, SET_USER } from './Types';
 
 const initialState = {
   isAuthenticated: false,
-  uid: '',
-  name: '',
-  surname: '',
+  user: {
+    uid: null,
+    name: null,
+    surname: null,
+  },
 };
 
 const Authentication = (
@@ -25,20 +22,10 @@ const Authentication = (
         ...state,
         isAuthenticated: action.payload,
       };
-    case SET_UID:
+    case SET_USER:
       return {
         ...state,
-        uid: action.payload,
-      };
-    case SET_NAME:
-      return {
-        ...state,
-        name: action.payload,
-      };
-    case SET_SURNAME:
-      return {
-        ...state,
-        surname: action.payload,
+        user: action.payload,
       };
     default:
       return state;

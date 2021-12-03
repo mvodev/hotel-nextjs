@@ -1,16 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import { AnyAction } from 'redux';
-import { SET_AUTHENTICATED, SET_UID } from './Types';
+import { SET_AUTHENTICATED, SET_USER, User } from './Types';
 
 const setAuthenticated = (payload: boolean): AnyAction => ({
   type: SET_AUTHENTICATED,
   payload,
 });
 
-const setUID = (payload: string): AnyAction => ({
-  type: SET_UID,
+const setUser = (payload: User): AnyAction => ({
+  type: SET_USER,
   payload,
 });
 
-export { setAuthenticated, setUID };
+export { setAuthenticated, setUser };

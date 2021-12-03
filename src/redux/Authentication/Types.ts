@@ -1,14 +1,17 @@
 type AuthenticationState = {
   isAuthenticated: boolean;
-  uid: string;
-  name: string;
-  surname: string;
+  user: User;
+};
+
+type User = {
+  uid: string | null;
+  name: string | null;
+  surname: string | null;
 };
 
 const SET_AUTHENTICATED = 'SET-AUTHENTICATED';
-const SET_UID = 'SET-UID';
-const SET_NAME = 'SET-NAME';
-const SET_SURNAME = 'SET_SURNAME';
+const SET_USER = 'SET-USER';
 
 export default AuthenticationState;
-export { SET_AUTHENTICATED, SET_UID, SET_NAME, SET_SURNAME };
+export type { User };
+export { SET_AUTHENTICATED, SET_USER };
