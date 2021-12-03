@@ -28,7 +28,7 @@ const filtersSlice = createSlice({
   reducers: {
     setFilters: (state, action: PayloadAction<FiltersState>) => {
       state = action.payload;
-    }, 
+    },
     setDates: (state, action: PayloadAction<Dates>) => {
       state.dates = action.payload;
     },
@@ -73,8 +73,16 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setDates, setGuests, setPrices, setConveniences } =
-  filtersSlice.actions;
+export const {
+  setFilters,
+  setDates,
+  setGuests,
+  setPrices,
+  setRules,
+  setAvailability,
+  setConveniences,
+  setAdditionalConvenience,
+} = filtersSlice.actions;
 
 export const selectFilters = (state: AppState): FiltersState => state.filters;
 
