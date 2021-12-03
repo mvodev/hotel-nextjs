@@ -3,11 +3,7 @@ import Carousel from 'src/components/Carousel/Carousel';
 import SignInCard from 'src/components/SignInCard/SignInCard';
 import styles from 'src/styles/pages/signIn.module.sass';
 
-<<<<<<< HEAD
 const SignIn = (): JSX.Element => (
-=======
-const Sigin = (): JSX.Element => (
->>>>>>> 73e69d4 (added signIn page)
   <Layout title="Sign In" pageClass={styles.signIn}>
     <Carousel
       names={[
@@ -19,8 +15,4 @@ const Sigin = (): JSX.Element => (
   </Layout>
 );
 
-<<<<<<< HEAD
 export default SignIn;
-=======
-export default Sigin;
->>>>>>> 73e69d4 (added signIn page)
