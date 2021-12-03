@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { AnyAction } from 'redux';
 import { SET_AUTHENTICATED, SET_USER, User } from './Types';
 
