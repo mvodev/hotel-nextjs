@@ -82,9 +82,13 @@ const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
       <div className={styles.header}>
         <h2 className={styles.title}>диапазон цены</h2>
         <div className={styles.rangeLabel}>
-          <span className={styles.value}>{formateToRuble(relativeToAbsolute(positions[0]))}</span>
+          <span className={styles.value}>
+            {formateToRuble(relativeToAbsolute(positions[0]))}
+          </span>
           {' - '}
-          <span className={styles.value}>{formateToRuble(relativeToAbsolute(positions[1]))}</span>
+          <span className={styles.value}>
+            {formateToRuble(relativeToAbsolute(positions[1]))}
+          </span>
         </div>
       </div>
       <div className={styles.rangeSlider}>
