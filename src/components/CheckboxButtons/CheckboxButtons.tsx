@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
+import CheckboxItem from 'src/components/CheckboxItem/CheckboxItem';
+
 import CheckboxButtonsType from './Types';
 import style from './CheckboxButtons.module.sass';
-import CheckboxItem from '../CheckboxItem/CheckboxItem';
 
 const CheckboxButtons = ({
   isRich = false,
@@ -13,9 +14,11 @@ const CheckboxButtons = ({
   const [checkboxItems, setCheckboxItems] = useState(items);
 
   const handleItemClick = (id: number, checked: boolean): void => {
-    checkboxItems[id].checked = checked;
-    setCheckboxItems([...checkboxItems]);
-    handleItemChange(checkboxItems);
+    const copy = checkboxItems.map((i, idx) =>
+      idx === id ? { ...i, checked } : i
+    );
+    setCheckboxItems(copy);
+    handleItemChange(copy);
   };
 
   const titleElement = <h2 className={style.checkboxButtonsTitle}>{title}</h2>;

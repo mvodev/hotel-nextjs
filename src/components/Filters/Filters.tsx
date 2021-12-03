@@ -1,37 +1,31 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
-  selectConveniences,
+  setRules,
+  selectRules,
+  setAvailability,
+  selectAvailability,
   setConveniences,
+  selectConveniences,
+  setAdditionalConvenience,
+  selectAdditionalConvenience,
 } from 'src/redux/Slices/Filters/FiltersSlice';
+import CheckboxButtons from 'src/components/CheckboxButtons/CheckboxButtons';
+import DateDropdown from 'src/components/DateDropdown/DateDropdown';
+import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
+import DropdownRoom from 'src/components/DropdownRoom/DropdownRoom';
+import RangeSlider from 'src/components/RangeSlider/RangeSlider';
+import ExpandableList from 'src/components/ExpandableList/ExpandableList';
 
 import style from './Filters.module.sass';
 import type FiltersType from './Types';
-import CheckboxButtons from '../CheckboxButtons/CheckboxButtons';
-import DateDropdown from '../DateDropdown/DateDropdown';
-import DropdownGuests from '../DropdownGuests/DropdownGuests';
-import DropdownRoom from '../DropdownRoom/DropdownRoom';
-import DropdownRoomDefaultProps from '../DropdownRoom/DropdownRoomDefaultProps';
-import type { DropdownRoomValue } from '../DropdownRoom/Types';
-import RangeSlider from '../RangeSlider/RangeSlider';
-import ExpandableList from '../ExpandableList/ExpandableList';
 
-const Filters = ({
-  dropdownGuests,
-  checkboxButtons,
-  richCheckboxButtons,
-  expandableList,
-}: FiltersType): JSX.Element => {
+const Filters = ({ dropdownGuests }: FiltersType): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 
   const handleFiltersButtonClick = () => setIsOpen(!isOpen);
-
-  const handleDropdownRoomChange = (values: DropdownRoomValue[]) => {
-    dispatch(setConveniences(values));
-  };
 
   return (
     <div className={[style.filters, isOpen ? style.filtersOpen : ''].join(' ')}>
@@ -39,6 +33,7 @@ const Filters = ({
         type='button'
         className={style.filtersButton}
         onClick={handleFiltersButtonClick}
+        aria-label='filter button'
       />
       <div className={style.filtersDate}>
         <DateDropdown
@@ -64,31 +59,33 @@ const Filters = ({
       <div className={style.filtersRules}>
         <CheckboxButtons
           title='правила дома'
-          isRich={false}
-          items={checkboxButtons.items}
+          items={useSelector(selectRules)}
+          handleItemChange={(items) => dispatch(setRules(items))}
         />
       </div>
       <div className={style.filtersAvailability}>
         <CheckboxButtons
           title='доступность'
           isRich
-          items={richCheckboxButtons.items}
+          items={useSelector(selectAvailability)}
+          handleItemChange={(items) => dispatch(setAvailability(items))}
         />
       </div>
       <div className={style.filtersConveniences}>
         <h2 className={style.filtersConveniencesTitle}>удобства номера</h2>
         <DropdownRoom
-          placeholder={DropdownRoomDefaultProps.placeholder}
+          placeholder='Выберите удобства'
           values={useSelector(selectConveniences)}
-          handleCountersChange={handleDropdownRoomChange}
+          handleCountersChange={(values) => dispatch(setConveniences(values))}
         />
       </div>
       <div className={style.filtersAdditionalConveniences}>
         <ExpandableList text='дополнительные удобства'>
           <CheckboxButtons
-            title=''
-            isRich={false}
-            items={expandableList.items}
+            items={useSelector(selectAdditionalConvenience)}
+            handleItemChange={(items) =>
+              dispatch(setAdditionalConvenience(items))
+            }
           />
         </ExpandableList>
       </div>
