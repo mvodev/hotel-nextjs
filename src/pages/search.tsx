@@ -1,6 +1,3 @@
-import type { ReactElement } from 'react';
-// import { useRouter } from 'next/router';
-
 import Layout from 'src/components/Layout';
 import Filters from 'src/components/Filters/Filters';
 import RoomCard from 'src/components/RoomCard/RoomCard';
@@ -14,7 +11,7 @@ const searchItems = roomCardProps.map((item) => (
   </div>
 ))
 
-const Search = (): ReactElement => (
+const Search = (): JSX.Element => (
   <Layout title='search room' pageClass='search'>
     <section className={styles.pageContainer}>
       <Filters />
