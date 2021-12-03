@@ -9,13 +9,9 @@ import type {
   Guests,
   Prices,
   RulesKeys,
-  Rules,
   AvailabilityKeys,
-  Availability,
   ConveniencesKeys,
-  Conveniences,
   AdditionalConvenienceKeys,
-  AdditionalConvenience,
   FiltersState,
 } from './Types';
 import initialState from './InitialState';
@@ -85,9 +81,18 @@ export const selectGuests = (state: AppState): Guests => state.filters.guests;
 
 export const selectPrices = (state: AppState): Prices => state.filters.prices;
 
-export const selectRules = (state: AppState): Rules => state.filters.rules;
+export const selectRules = (state: AppState): CheckboxButtonItemType[] =>
+  Object.values(state.filters.rules);
+
+export const selectAvailability = (state: AppState): CheckboxButtonItemType[] =>
+  Object.values(state.filters.availability);
 
 export const selectConveniences = (state: AppState): DropdownRoomValue[] =>
   Object.values(state.filters.conveniences);
+
+export const selectAdditionalConvenience = (
+  state: AppState
+): CheckboxButtonItemType[] =>
+  Object.values(state.filters.additionalConvenience);
 
 export default filtersSlice.reducer;
