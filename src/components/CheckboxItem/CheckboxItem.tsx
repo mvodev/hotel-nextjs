@@ -6,16 +6,14 @@ import { ChangeEvent } from 'react';
 import CheckboxItemType from './Type';
 import style from './CheckboxItem.module.sass';
 
-const CheckboxItem = (props: CheckboxItemType): React.ReactElement => {
-  const {
-    id,
-    isRich = false,
-    title = '',
-    text,
-    checked = false,
-    onClick,
-  } = props;
-
+const CheckboxItem = ({
+  isRich = false,
+  title = '',
+  checked = false,
+  id,
+  text,
+  onClick,
+}: CheckboxItemType): JSX.Element => {
   const titleElement = title ? (
     <h3 className={style.checkboxItemTitle}>{title}</h3>
   ) : (

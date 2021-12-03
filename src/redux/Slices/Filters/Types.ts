@@ -1,3 +1,4 @@
+import type { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
 import type { DropdownRoomValue } from 'src/components/DropdownRoom/Types';
 
 type Dates = [null, null] | [string, string];
@@ -8,39 +9,17 @@ type Guests = {
   infants: number;
 };
 
-type Prices = {
-  min: number;
-  max: number;
-  from: number;
-  to: number;
-};
+type Prices = [number, number];
 
 type Rules = {
-  maySmoking: {
-    text: string;
-    checked: boolean;
-  };
-  mayWithPets: {
-    text: string;
-    checked: boolean;
-  };
-  mayInviteGuests: {
-    text: string;
-    checked: boolean;
-  };
+  maySmoking: CheckboxButtonItemType;
+  mayWithPets: CheckboxButtonItemType;
+  mayInviteGuests: CheckboxButtonItemType;
 };
 
 type Availability = {
-  wideСorridor: {
-    title: string;
-    text: string;
-    checked: boolean;
-  };
-  assistantForDisabled: {
-    title: string;
-    text: string;
-    checked: boolean;
-  };
+  wideСorridor: CheckboxButtonItemType;
+  assistantForDisabled: CheckboxButtonItemType;
 };
 
 type Conveniences = {
@@ -50,30 +29,12 @@ type Conveniences = {
 };
 
 type AdditionalConvenience = {
-  haveBreakfast: {
-    checked: boolean;
-    text: string;
-  };
-  haveDesk: {
-    checked: boolean;
-    text: string;
-  };
-  haveFeedingChair: {
-    checked: boolean;
-    text: string;
-  };
-  haveCrib: {
-    checked: boolean;
-    text: string;
-  };
-  haveTV: {
-    checked: boolean;
-    text: string;
-  };
-  haveShampoo: {
-    checked: boolean;
-    text: string;
-  };
+  haveBreakfast: CheckboxButtonItemType;
+  haveDesk: CheckboxButtonItemType;
+  haveFeedingChair: CheckboxButtonItemType;
+  haveCrib: CheckboxButtonItemType;
+  haveTV: CheckboxButtonItemType;
+  haveShampoo: CheckboxButtonItemType;
 };
 
 type FiltersState = {
@@ -90,7 +51,9 @@ export type {
   Dates,
   Guests,
   Prices,
+  CheckboxButtonItemType,
   Rules,
+  Availability,
   Conveniences,
   AdditionalConvenience,
   FiltersState,

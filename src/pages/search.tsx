@@ -15,7 +15,6 @@ const searchItems = roomCardProps.map((item) => (
   </div>
 ))
 
-
 const Search = (): ReactElement => (
   <Layout title='search room' pageClass='search'>
     <section className={styles.pageContainer}>

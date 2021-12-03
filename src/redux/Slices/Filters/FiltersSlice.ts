@@ -24,12 +24,8 @@ const filtersSlice = createSlice({
   },
 });
 
-export const {
-  setDates,
-  setGuests,
-  setPrices,
-  setConveniences,
-} = filtersSlice.actions;
+export const { setDates, setGuests, setPrices, setConveniences } =
+  filtersSlice.actions;
 
 export const selectDates = (state: AppState): Dates => state.filters.dates;
 

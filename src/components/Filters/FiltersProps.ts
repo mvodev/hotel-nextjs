@@ -24,7 +24,7 @@ const FiltersProps: FiltersType = {
       },
       {
         title: '',
-        text: 'Можно пригласить гостей (до 10 человек)',
+        text: `Можно пригласить гостей \n(до 10 человек)`,
         checked: true,
       },
     ],
