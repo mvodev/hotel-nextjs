@@ -11,5 +11,4 @@ const HeaderRedux = (): ReactElement => (
   </Layout>
 );
 
-
 export default HeaderRedux;

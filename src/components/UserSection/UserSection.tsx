@@ -7,8 +7,8 @@ import styles from './UserSection.module.scss';
 
 const UserSection = (): React.ReactElement => {
 
-  const { name, surname, isAuthorized } = {
-    ...useSelector((state: RootState) => state.headerReducer),
+  const { user, isAuthenticated } = {
+    ...useSelector((state: RootState) => state.Authentication),
   };
   
   const [screenWidth, setWidth] = useState(0);
@@ -41,14 +41,14 @@ const UserSection = (): React.ReactElement => {
       <Button link='/' theme='filled' size='small' text='Зарегистрироваться' />
     );
 
-  const userSection = isAuthorized ? (
+  const userSection = isAuthenticated ? (
     <>
       <div className={separatorItemClasses}>
         <div className={styles.separator} />
       </div>
       <div className={styles.item}>
         <Link href='/'>
-          <a className={styles.link}>{`${name} ${surname}`}</a>
+          <a className={styles.link}>{`${user.name} ${user.surname}`}</a>
         </Link>
       </div>
     </>

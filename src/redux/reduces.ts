@@ -1,12 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import dates from './Dates/DatesReducer';
 import prices from './Prices/PricesSlice';
-import headerReducer from './Header/HeaderReducer';
+import Authentication from './Slices/Authentication/Authentication';
 
 const reducers = combineReducers({
-  dates,
   prices,
-  headerReducer,
+  Authentication,
 });
 
 type RootState = ReturnType<typeof reducers>;

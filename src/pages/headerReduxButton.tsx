@@ -1,10 +1,12 @@
 import { useDispatch } from 'react-redux';
-import setUserInHeader from 'src/redux/Header/HeaderActions';
+import { setAuthenticated, setUser } from 'src/redux/Slices/Authentication/AuthenticationActions';
+
 
 const HeaderButton = (): React.ReactElement => {
   const dispatch = useDispatch();
   const handlerButtonReduxHeader=()=>{
-    dispatch( setUserInHeader({isAuthorized:true,name:'Vadim',surname:'Manushin'}));
+    dispatch(setAuthenticated(true));
+    dispatch(setUser({name:'Vadim',surname:'Manushin',uid:null}))
   };
 
   return (<button type='button' onClick={handlerButtonReduxHeader}>
