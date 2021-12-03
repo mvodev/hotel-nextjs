@@ -3,6 +3,7 @@ import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import Authentication from './Slices/Authentication/Authentication';
 import RootSaga from './Sagas/RootSaga';
+import Registration from './Slices/Registration/Registration';
 
 
 export interface SagaStore extends Store {
@@ -12,7 +13,7 @@ export interface SagaStore extends Store {
 const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
-    reducer: {Authentication},
+    reducer: {Authentication, Registration},
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);

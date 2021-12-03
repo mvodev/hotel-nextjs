@@ -57,3 +57,27 @@ export const dateToTimeAgo = (date: Date): string => {
     return getValue(timeDelta, MONTH, ['месяц', 'месяца', 'месяцев']);
   return getValue(timeDelta, YER, ['год', 'года', 'лет']);
 };
+
+export const stringToDate = (stringDate: string): Date => {
+  const [day, month, year] = stringDate.split('.');
+  return new Date(
+    parseInt(year, 10),
+    parseInt(month, 10) - 1,
+    parseInt(day, 10)
+  );
+};
+
+export const stringIsDate = (stringDate: string): boolean => {
+  if (!stringDate || !stringDate.match(/^\d{2}[./-]\d{2}[./-]\d{4}$/)) {
+    return false;
+  }
+
+  const [day, month, year] = stringDate.split('.');
+  const date = stringToDate(stringDate);
+
+  return (
+    date.getFullYear() === parseInt(year, 10) &&
+    date.getMonth() === parseInt(month, 10) - 1 &&
+    date.getDate() === parseInt(day, 10)
+  );
+};
