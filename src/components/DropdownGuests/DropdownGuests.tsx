@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  selectGuests,
-  setAdults,
-  setChilds,
-  setInfants,
-  resetGuests,
-} from 'src/redux/Slices/Filters/FiltersSlice';
+import { setGuests, selectGuests } from 'src/redux/Slices/Filters/FiltersSlice';
 import DropdownCounter from 'src/components/DropdownCounter/DropdownCounter';
 import Button from 'src/components/Button/Button';
 import { getPosInSpellCasesArray } from 'src/utils/Utils';
@@ -31,7 +25,7 @@ const DropdownGuests = ({
 
   const handleClearButton = () => {
     setOpened(false);
-    dispatch(resetGuests());
+    dispatch(setGuests({ adults: 0, childs: 0, infants: 0 }));
   };
 
   const handleOutsideClick = (event: Event) => {
@@ -48,13 +42,7 @@ const DropdownGuests = ({
   };
 
   const onChange = (data: number, type: string): void => {
-    if (type === 'adults') {
-      dispatch(setAdults(data));
-    } else if (type === 'childs') {
-      dispatch(setChilds(data));
-    } else {
-      dispatch(setInfants(data));
-    }
+    dispatch(setGuests({ adults, childs, infants, [type]: data }));
   };
 
   const getValueForInputField = (): string => {
@@ -83,11 +71,11 @@ const DropdownGuests = ({
         className={styles.dropdownGuestsInputWrapper}
         onClick={handleDropdownClick}
         onKeyDown={handleDropdownClick}
-        role="textbox"
+        role='textbox'
         tabIndex={0}
       >
         <input
-          type="text"
+          type='text'
           readOnly
           className={styles.dropdownGuestsInput}
           placeholder={placeholder}
@@ -102,22 +90,22 @@ const DropdownGuests = ({
         ].join(' ')}
       >
         <DropdownCounter
-          text="Взрослые"
+          text='Взрослые'
           number={adults}
           onChange={onChange}
-          type="adults"
+          type='adults'
         />
         <DropdownCounter
-          text="Дети"
+          text='Дети'
           number={childs}
           onChange={onChange}
-          type="childs"
+          type='childs'
         />
         <DropdownCounter
           text='Младенцы'
           number={infants}
           onChange={onChange}
-          type="infants"
+          type='infants'
         />
         <div className={styles.dropdownGuestsBodyButtons}>
           <div
@@ -127,9 +115,9 @@ const DropdownGuests = ({
                 : styles.dropdownGuestsButtonIsHidden
             }
           >
-            <Button type="button" text="очистить" onClick={handleClearButton} />
+            <Button type='button' text='очистить' onClick={handleClearButton} />
           </div>
-          <Button type="button" text="применить" onClick={handleApplyButton} />
+          <Button type='button' text='применить' onClick={handleApplyButton} />
         </div>
       </div>
     </div>

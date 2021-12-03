@@ -19,9 +19,8 @@ import RangeSlider from 'src/components/RangeSlider/RangeSlider';
 import ExpandableList from 'src/components/ExpandableList/ExpandableList';
 
 import style from './Filters.module.sass';
-import type FiltersType from './Types';
 
-const Filters = ({ dropdownGuests }: FiltersType): JSX.Element => {
+const Filters = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 

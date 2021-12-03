@@ -1,5 +1,4 @@
 import FiltersType from './Types';
-import DropdownGuestsDefaultProps from '../DropdownGuests/DropdownGuestsDefaultProps';
 
 const FiltersProps: FiltersType = {
   dateDropdown: {
@@ -7,7 +6,6 @@ const FiltersProps: FiltersType = {
     modifier: 'single',
     isSmall: true,
   },
-  dropdownGuests: DropdownGuestsDefaultProps,
   checkboxButtons: {
     isRich: false,
     title: 'правила дома',

@@ -1,14 +1,12 @@
 import type { ReactElement } from 'react';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
-import Layout from '../components/Layout';
-import Filters from '../components/Filters/Filters';
-import RoomCard from '../components/RoomCard/RoomCard';
-import Pagination from '../components/Pagination/Pagination';
-import FiltersProps from '../components/Filters/FiltersProps';
-import roomCardProps from '../components/RoomCard/RoomCardProps';
-
-import styles from '../styles/pages/search.module.sass';
+import Layout from 'src/components/Layout';
+import Filters from 'src/components/Filters/Filters';
+import RoomCard from 'src/components/RoomCard/RoomCard';
+import Pagination from 'src/components/Pagination/Pagination';
+import roomCardProps from 'src/components/RoomCard/RoomCardProps';
+import styles from '@styles/pages/search.module.sass';
 
 const searchItems = roomCardProps.map((item) => (
   <div key={item.infoSection.roomNumber} className={styles.searchItem}>
@@ -19,7 +17,7 @@ const searchItems = roomCardProps.map((item) => (
 const Search = (): ReactElement => (
   <Layout title='search room' pageClass='search'>
     <section className={styles.pageContainer}>
-      <Filters {...FiltersProps} />
+      <Filters />
       <div className={styles.searchContent}>
         <h1 className={styles.searchTitle}>Номера, которые мы для вас подобрали</h1>
         <div className={styles.searchResult}>
@@ -34,9 +32,9 @@ const Search = (): ReactElement => (
             />
           </div>
         </div>
-      </section>
-    </Layout>
-  );
-};
+      </div>
+    </section>
+  </Layout>
+);
 
 export default Search;

@@ -1,10 +1,9 @@
 import { Form } from 'react-final-form';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
-import { selectUpdateStatus } from 'src/redux/Slices/Filters/FiltersSlice';
 
 import Button from '../Button/Button';
 import DateDropdown from '../DateDropdown/DateDropdown';
@@ -12,7 +11,7 @@ import styles from './SearchRoomCard.module.scss';
 
 const SearchRoomCard = (): JSX.Element => {
   const [isSubmited, submit] = useState(false);
-  const isFiltersUpdated = useSelector(selectUpdateStatus);
+  const isFiltersUpdated = true;
   const dispatch = useDispatch();
   const router = useRouter();
 
