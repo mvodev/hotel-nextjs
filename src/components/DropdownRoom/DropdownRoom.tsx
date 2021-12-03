@@ -51,12 +51,9 @@ const DropdownRoom = ({
   };
 
   const onChange = (data: number, type: string): void => {
-    const newState = counterItems.map((i) => {
-      if (i.text === type) {
-        return { ...i, value: data };
-      };
-      return i;
-    });
+    const newState = counterItems.map((i) =>
+      i.text === type ? { ...i, value: data } : i
+    );
     setCounterItems(newState);
     handleCountersChange(newState);
   };
