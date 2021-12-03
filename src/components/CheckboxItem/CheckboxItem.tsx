@@ -9,9 +9,9 @@ import style from './CheckboxItem.module.sass';
 const CheckboxItem = ({
   isRich = false,
   title = '',
-  checked = false,
-  id,
   text,
+  checked,
+  id,
   onClick,
 }: CheckboxItemType): JSX.Element => {
   const titleElement = title ? (

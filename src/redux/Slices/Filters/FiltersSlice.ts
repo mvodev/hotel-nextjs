@@ -15,8 +15,8 @@ const filtersSlice = createSlice({
     setGuests: (state, action: PayloadAction<Guests>) => {
       state.guests = action.payload;
     },
-    setPrices: (state, action: PayloadAction<Partial<Prices>>) => {
-      state.prices = { ...state.prices, ...action.payload };
+    setPrices: (state, action: PayloadAction<Prices>) => {
+      state.prices = action.payload;
     },
     setConveniences: (state, action: PayloadAction<Conveniences>) => {
       state.conveniences = action.payload;

@@ -1,13 +1,13 @@
 type CheckboxButtonItemType = {
   text: string;
+  checked: boolean;
   title?: string;
-  checked?: boolean;
 };
 
 type CheckboxButtonsType = {
+  items: CheckboxButtonItemType[];
   isRich?: boolean;
   title?: string;
-  items: CheckboxButtonItemType[];
 };
 
 export default CheckboxButtonsType;

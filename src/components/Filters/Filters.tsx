@@ -81,11 +81,7 @@ const Filters = ({
         <h2 className={style.filtersConveniencesTitle}>удобства номера</h2>
         <DropdownRoom
           placeholder={DropdownRoomDefaultProps.placeholder}
-          values={Object.values(conveniences).map((value, id) => ({
-            text: DropdownRoomDefaultProps.values[id].text,
-            spellCases: DropdownRoomDefaultProps.values[id].spellCases,
-            value,
-          }))}
+          values={DropdownRoomDefaultProps.values}
           handleCountersChange={handleDropdownRoomChange}
         />
       </div>
