@@ -25,14 +25,12 @@ const Filters = ({
   expandableList,
 }: FiltersType): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
-  const conveniences = useSelector(selectConveniences);
   const dispatch = useDispatch();
 
   const handleFiltersButtonClick = () => setIsOpen(!isOpen);
 
   const handleDropdownRoomChange = (values: DropdownRoomValue[]) => {
-    const [bedrooms, beds, bathrooms] = values.map(({ value }) => value);
-    dispatch(setConveniences({ bedrooms, beds, bathrooms }));
+    dispatch(setConveniences(values));
   };
 
   return (
@@ -81,7 +79,7 @@ const Filters = ({
         <h2 className={style.filtersConveniencesTitle}>удобства номера</h2>
         <DropdownRoom
           placeholder={DropdownRoomDefaultProps.placeholder}
-          values={DropdownRoomDefaultProps.values}
+          values={useSelector(selectConveniences)}
           handleCountersChange={handleDropdownRoomChange}
         />
       </div>

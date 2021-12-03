@@ -19,7 +19,12 @@ const guests: Guests = {
   infants: 0,
 };
 
-const prices: Prices = [5000, 10000];
+const prices: Prices = {
+  min: 0,
+  max: 15000,
+  from: 5000,
+  to: 10000,
+};
 
 const rules: Rules = {
   maySmoking: {

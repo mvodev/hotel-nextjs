@@ -8,7 +8,7 @@ type CheckboxButtonsType = {
   items: CheckboxButtonItemType[];
   isRich?: boolean;
   title?: string;
-  handleItemChange: (items: CheckboxButtonItemType[]) => void
+  handleItemChange?: (items: CheckboxButtonItemType[]) => void
 };
 
 export default CheckboxButtonsType;

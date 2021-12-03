@@ -5,7 +5,7 @@ export type Dates = [null, null] | [string, string];
 
 export type Guests = Record<'adults' | 'childs' | 'infants', number>;
 
-export type Prices = [number, number];
+export type Prices = Record<'min' | 'max' | 'from' | 'to', number>;
 
 export type FieldsWithCheckboxes<T extends string> = Record<
   T,

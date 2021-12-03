@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectPrices, setPrices } from 'src/redux/Slices/Filters/FiltersSlice';
@@ -9,22 +9,14 @@ import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
 import Handle from './Handle';
 import styles from './RangeSlider.module.sass';
 
-const RangeSlider = ({
-  min = 0,
-  max = 15000,
-  step = 100,
-}: {
-  min: number;
-  max: number;
-  step: number;
-}): JSX.Element => {
-  const prices = useSelector(selectPrices);
+const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
+  const { min, max, from, to } = useSelector(selectPrices);
   const dispatch = useDispatch();
-  const positions = prices.map((p) => clamp(min, p / (max - min), max)) as [
-    number,
-    number
-  ];
+  const [positions, setPositions] = useState(
+    [from, to].map((p) => clamp(min, p / (max - min), max))
+  );
   const container = useRef<HTMLDivElement>(null);
+  const timer = useRef(0);
 
   const relativeToAbsolute = (position: number) =>
     Math.min(
@@ -32,10 +24,20 @@ const RangeSlider = ({
       Math.floor((position * (max - min + step)) / step) * step + min
     );
 
-  const updatePrices = (newPositions: [number, number]) =>
-    dispatch(
-      setPrices(newPositions.map(relativeToAbsolute) as [number, number])
+  const updatePositions = (newPositions: number[]): void => {
+    setPositions([...newPositions]);
+    clearTimeout(timer.current);
+    timer.current = window.setTimeout(
+      () =>
+        dispatch(
+          setPrices({
+            from: relativeToAbsolute(newPositions[0]),
+            to: relativeToAbsolute(newPositions[1]),
+          })
+        ),
+      200
     );
+  };
 
   const calcPosition = ({
     pageX,
@@ -63,7 +65,7 @@ const RangeSlider = ({
       relativeMax,
       Math.max(relativeMin, calcPosition({ pageX, shift, offset }))
     );
-    updatePrices(positions);
+    updatePositions(positions);
   };
 
   const handleTrackPointerDown = (e: React.PointerEvent<HTMLElement>) => {
@@ -72,7 +74,7 @@ const RangeSlider = ({
     const activeIDX =
       newPosition > positions[1] ? 1 : diffs.indexOf(Math.min(...diffs));
     positions[activeIDX] = newPosition;
-    updatePrices(positions);
+    updatePositions(positions);
   };
 
   return (
@@ -80,9 +82,9 @@ const RangeSlider = ({
       <div className={styles.header}>
         <h2 className={styles.title}>диапазон цены</h2>
         <div className={styles.rangeLabel}>
-          <span className={styles.value}>{formateToRuble(prices[0])}</span>
+          <span className={styles.value}>{formateToRuble(relativeToAbsolute(positions[0]))}</span>
           {' - '}
-          <span className={styles.value}>{formateToRuble(prices[1])}</span>
+          <span className={styles.value}>{formateToRuble(relativeToAbsolute(positions[1]))}</span>
         </div>
       </div>
       <div className={styles.rangeSlider}>
@@ -90,14 +92,14 @@ const RangeSlider = ({
           className={styles.filler}
           type='button'
           aria-label='track'
-          onPointerDown={() => updatePrices([0, positions[1]])}
+          onPointerDown={() => updatePositions([0, positions[1]])}
           tabIndex={-1}
         />
         <button
           className={styles.filler}
           type='button'
           aria-label='track'
-          onPointerDown={() => updatePrices([positions[0], 1])}
+          onPointerDown={() => updatePositions([positions[0], 1])}
           tabIndex={-1}
         />
         <div ref={container} className={styles.container}>

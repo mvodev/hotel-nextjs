@@ -36,8 +36,8 @@ const filtersSlice = createSlice({
     setGuests: (state, action: PayloadAction<Guests>) => {
       state.guests = action.payload;
     },
-    setPrices: (state, action: PayloadAction<Prices>) => {
-      state.prices = action.payload;
+    setPrices: (state, action: PayloadAction<Partial<Prices>>) => {
+      state.prices = { ...state.prices, ...action.payload };
     },
     setRules: (state, action: PayloadAction<CheckboxButtonItemType[]>) => {
       state.rules = retype(
@@ -87,7 +87,7 @@ export const selectPrices = (state: AppState): Prices => state.filters.prices;
 
 export const selectRules = (state: AppState): Rules => state.filters.rules;
 
-export const selectConveniences = (state: AppState): Conveniences =>
-  state.filters.conveniences;
+export const selectConveniences = (state: AppState): DropdownRoomValue[] =>
+  Object.values(state.filters.conveniences);
 
 export default filtersSlice.reducer;
