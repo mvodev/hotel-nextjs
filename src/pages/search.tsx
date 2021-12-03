@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { useRouter } from 'next/router';
 
 import Layout from '../components/Layout';
 import Filters from '../components/Filters/Filters';
@@ -33,9 +34,9 @@ const Search = (): ReactElement => (
             />
           </div>
         </div>
-      </div>
-    </section>
-  </Layout>
-);
+      </section>
+    </Layout>
+  );
+};
 
 export default Search;

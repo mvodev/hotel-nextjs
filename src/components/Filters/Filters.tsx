@@ -47,7 +47,6 @@ const Filters = ({ dropdownGuests }: FiltersType): JSX.Element => {
         <DropdownGuests
           placeholder='Сколько гостей'
           opened={false}
-          value={dropdownGuests.value}
         />
       </div>
       <div className={style.filtersPrice}>
