@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import type { AppProps } from 'next/app';
-import wrapper from '../redux/store';
+import wrapper from '../redux/Store';
 
 import '../styles/globals.sass';
 import '../components/DatePicker/DatePicker.sass';

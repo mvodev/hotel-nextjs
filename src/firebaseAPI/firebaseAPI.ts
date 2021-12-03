@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getFunctions, httpsCallable, Functions } from "firebase/functions";
 import { 
