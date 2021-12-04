@@ -3,9 +3,10 @@ import { call } from '@redux-saga/core/effects';
 import { AuthError } from 'firebase/auth';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
-import { setAuthenticated, setUser } from '../Slices/Authentication/AuthenticationActions';
+import { setAuthenticated } from '../Slices/Authentication/AuthenticationActions';
 import { setError, setSubmitting } from '../Slices/SignInCard/SignInCardActions';
 import { SUBMIT_SIGN_IN_FORM } from '../Slices/SignInCard/Types';
+import { SET_USER } from '../Slices/Authentication/Types';
 
 type SignInFormReducerType = {
   type:string,
@@ -25,11 +26,7 @@ function* workerSignInSaga(form:SignInFormReducerType) {
     yield put(setError(false));
     yield put(setAuthenticated(true));
     yield put(setSubmitting(false));
-    yield put(setUser({
-      uid:(isAuthorized as unknown as UserType).uid,
-      name:isAuthorized.name,
-      surname:isAuthorized.surname,
-    }));
+    yield put({ type: SET_USER, payload: { ...isAuthorized } });
   }
 }
 
