@@ -3,6 +3,7 @@ import { AnyAction } from 'redux';
 import PaginationState, { SET_PAGINATION } from './Types';
 
 const initialState = {
+  roomsOnPage: 12,
   pageCount: 15,
   activePage: 1,
   roomsCount: 180,

@@ -1,4 +1,5 @@
 type PaginationState = {
+  roomsOnPage?: number;
   pageCount: number;
   activePage: number;
   roomsCount: number;

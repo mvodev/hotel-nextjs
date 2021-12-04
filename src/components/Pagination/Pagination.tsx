@@ -1,11 +1,15 @@
 /* eslint-disable arrow-body-style */
 
 import { useDispatch } from 'react-redux';
-import PaginationState, { SWITCH_PAGE } from 'src/redux/Slices/Pagination/Types';
+import PaginationState, {
+  SWITCH_PAGE,
+} from 'src/redux/Slices/Pagination/Types';
+import GetPaginationText from 'src/utils/GetPaginationText';
 import Button from '../Button/Button';
 import styles from './Pagination.module.scss';
 
 const Pagination = ({
+  roomsOnPage = 12,
   pageCount,
   activePage,
   roomsCount,
@@ -97,7 +101,9 @@ const Pagination = ({
         {pagesButtons}
         {forwardButton}
       </div>
-      <div className={styles.text}>{roomsCount}</div>
+      <div className={styles.text}>
+        {GetPaginationText(roomsOnPage, roomsCount, activePage)}
+      </div>
     </div>
   );
 };
