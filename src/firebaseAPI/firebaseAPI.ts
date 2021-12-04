@@ -138,10 +138,10 @@ class FirebaseAPI {
 
     if (filters.dates[0] !== null) {
       for (let i = 0; i < item.bookedDays.length; i += 1) {
-        const date = new Date(item.bookedDays[i].seconds * 1000);
+        const date = item.bookedDays[i].seconds * 1000;
         if (
-          date >= (filters.dates[0] as Date) &&
-          date <= (filters.dates[1] as Date)
+          date >= filters.dates[0] &&
+          date <= filters.dates[1]
         )
           return false;
       }
