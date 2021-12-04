@@ -12,7 +12,7 @@ import type {
   AvailabilityKeys,
   ConveniencesKeys,
   AdditionalConvenienceKeys,
-  FiltersState,
+  Filters,
 } from './Types';
 import initialState from './InitialState';
 
@@ -26,7 +26,7 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setFilters: (state, action: PayloadAction<FiltersState>) => {
+    setFilters: (state, action: PayloadAction<Filters>) => {
       state = action.payload;
     },
     setDates: (state, action: PayloadAction<Dates>) => {
@@ -46,7 +46,7 @@ const filtersSlice = createSlice({
     },
     setAvailability: (
       state,
-      action: PayloadAction<CheckboxButtonItemType[]>
+      action: PayloadAction<Required<CheckboxButtonItemType>[]>
     ) => {
       state.availability = retype(
         Object.keys(initialState.availability) as AvailabilityKeys[],
@@ -84,9 +84,10 @@ export const {
   setAdditionalConvenience,
 } = filtersSlice.actions;
 
-export const selectFilters = (state: AppState): FiltersState => state.filters;
+export const selectFilters = (state: AppState): Filters => state.filters;
 
-export const selectDates = (state: AppState): Dates => state.filters.dates;
+export const selectDates = (state: AppState): (Date | null)[] =>
+  state.filters.dates.map((d) => (typeof d === 'number' ? new Date(d) : null));
 
 export const selectGuests = (state: AppState): Guests => state.filters.guests;
 

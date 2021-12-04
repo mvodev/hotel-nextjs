@@ -59,7 +59,7 @@ type RoomType = {
 };
 
 type FiltersAPIType = {
-  dates: [string, string] | [null, null];
+  dates: [number, number] | [null, null];
   guests: {
     adult: number;
     child: number;

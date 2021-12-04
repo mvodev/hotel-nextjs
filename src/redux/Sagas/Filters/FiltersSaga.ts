@@ -1,6 +1,6 @@
 import { takeLatest, select } from 'redux-saga/effects';
 
-import { 
+import {
   setDates,
   setGuests,
   setPrice,
@@ -19,15 +19,18 @@ function* handleFiltersChange(): Generator {
 }
 
 function* filtersWatcher(): Generator {
-  yield takeLatest([
-    setDates.type,
-    setGuests.type,
-    setPrice.type,
-    setRules.type,
-    setAvailability.type,
-    setConveniences.type,
-    setAdditionalConvenience.type,
-  ], handleFiltersChange)
+  yield takeLatest(
+    [
+      setDates.type,
+      setGuests.type,
+      setPrice.type,
+      setRules.type,
+      setAvailability.type,
+      setConveniences.type,
+      setAdditionalConvenience.type,
+    ],
+    handleFiltersChange
+  );
 }
 
 export default filtersWatcher;

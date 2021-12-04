@@ -1,7 +1,7 @@
 type DropdownRoomValue = {
   text: string;
   value: number;
-  spellCases: Array<string>;
+  spellCases: [string, string, string];
 };
 
 type DropdownRoomProps = {

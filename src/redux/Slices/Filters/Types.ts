@@ -1,46 +1,25 @@
-import type { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
-import type { DropdownRoomValue } from 'src/components/DropdownRoom/Types';
+import type { FiltersAPIType } from 'src/firebaseAPI/Types';
 
-export type Dates = [null, null] | [string, string];
+export type Filters = FiltersAPIType;
 
-export type Guests = Record<'adult' | 'child' | 'infants', number>;
+export type Dates = Filters['dates'];
 
-export type Price = Record<'min' | 'max' | 'from' | 'to', number>;
+export type Guests = Filters['guests'];
 
-export type FieldsWithCheckboxes<T extends string> = Record<
-  T,
-  CheckboxButtonItemType
->;
+export type Price = Filters['price'];
 
-export type RulesKeys = 'maySmoking' | 'mayWithPets' | 'mayInviteGuests';
+export type Rules = Filters['rules'];
 
-export type Rules = FieldsWithCheckboxes<RulesKeys>;
+export type RulesKeys = keyof Rules;
 
-export type AvailabilityKeys = 'wideСorridor' | 'assistantForDisabled';
+export type Availability = Filters['availability'];
 
-export type Availability = FieldsWithCheckboxes<AvailabilityKeys>;
+export type AvailabilityKeys = keyof Availability;
 
-export type ConveniencesKeys = 'bedrooms' | 'beds' | 'bathrooms';
+export type Conveniences = Filters['conveniences'];
 
-export type Conveniences = Record<ConveniencesKeys, DropdownRoomValue>;
+export type ConveniencesKeys = keyof Conveniences;
 
-export type AdditionalConvenienceKeys =
-  | 'haveBreakfast'
-  | 'haveDesk'
-  | 'haveFeedingChair'
-  | 'haveCrib'
-  | 'haveTV'
-  | 'haveShampoo';
+export type AdditionalConvenience = Filters['additionalConvenience'];
 
-export type AdditionalConvenience =
-  FieldsWithCheckboxes<AdditionalConvenienceKeys>;
-
-export type FiltersState = {
-  dates: Dates;
-  guests: Guests;
-  price: Price;
-  rules: Rules;
-  availability: Availability;
-  conveniences: Conveniences;
-  additionalConvenience: AdditionalConvenience;
-};
+export type AdditionalConvenienceKeys = keyof AdditionalConvenience;

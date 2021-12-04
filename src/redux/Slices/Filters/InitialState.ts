@@ -8,7 +8,7 @@ import type {
   Availability,
   Conveniences,
   AdditionalConvenience,
-  FiltersState,
+  Filters,
 } from './Types';
 
 const dates: Dates = [null, null];
@@ -89,7 +89,7 @@ const additionalConvenience: AdditionalConvenience = {
   },
 };
 
-const initialState: FiltersState = {
+const initialState: Filters = {
   dates,
   guests,
   price,

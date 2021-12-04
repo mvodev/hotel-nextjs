@@ -1,4 +1,6 @@
-const DropdownRoomDefaultProps = {
+import DropdownRoomProps from './Types';
+
+const DropdownRoomDefaultProps: DropdownRoomProps = {
   placeholder: 'Выберите удобства',
   values: [
     {

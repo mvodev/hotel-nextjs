@@ -21,10 +21,7 @@ function* startSaga(
 }
 
 function* RootSaga(): Generator<any, any, any> {
-  const sagas: Saga<any>[] = [
-    searchRoomCardSubmitWatcher,
-    filtersWatcher,
-  ];
+  const sagas: Saga<any>[] = [searchRoomCardSubmitWatcher, filtersWatcher];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));
 

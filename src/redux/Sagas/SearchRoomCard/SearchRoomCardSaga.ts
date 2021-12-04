@@ -1,9 +1,4 @@
-import {
-  takeLatest,
-  select,
-  delay,
-  put
-} from 'redux-saga/effects';
+import { takeLatest, select, delay, put } from 'redux-saga/effects';
 
 import type { AppState } from 'src/redux/Store';
 import { switchUpdateStatus } from 'src/redux/Slices/Filters/FiltersSlice';
