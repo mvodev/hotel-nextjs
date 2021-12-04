@@ -28,11 +28,11 @@ const UserSection = ({ user }: UserSectionProps): React.ReactElement => {
 
   const registrationButton =
     screenWidth <= PHONE_SCREEN_WIDTH ? (
-      <Link href='/'>
+      <Link href='/registration'>
         <a className={styles.link}>Зарегистрироваться</a>
       </Link>
     ) : (
-      <Button link='/' theme='filled' size='small' text='Зарегистрироваться' />
+      <Button link='/registration' theme='filled' size='small' text='Зарегистрироваться' />
     );
 
   const userSection = user ? (

@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-
 import { call, ForkEffect, put, takeEvery } from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
@@ -26,9 +24,7 @@ async function userRegistration(data: FormData): Promise<UserType | Error> {
   return response;
 }
 
-function* createModalWindowSaga(
-  data: UserType & Error
-) {
+function* createModalWindowSaga(data: UserType & Error) {
   if (data.errorCode && data.errorCode === 'auth/email-already-in-use') {
     yield put({ type: EMAIL_ERROR });
   } else if (data.errorCode) {
@@ -45,8 +41,7 @@ function* addCredentialsSaga(data: UserType) {
 
 function* workerSaga(data: AnyAction) {
   yield put({ type: SET_SUBMITTING, payload: true });
-  const response: UserType & Error =
-    yield call(userRegistration, data.payload);
+  const response: UserType & Error = yield call(userRegistration, data.payload);
   yield createModalWindowSaga(response);
   yield put({ type: SET_SUBMITTING, payload: false });
 

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'src/components/Carousel/Carousel';
 import RegistrationCard from 'src/components/RegistrationCard/RegistrationCard';
-import { AppState } from 'src/redux/store';
+import { AppState } from 'src/redux/Store';
 import Layout from '../components/Layout';
 import styles from '../styles/pages/registration.module.scss';
 
@@ -12,6 +12,7 @@ const Registration = (): React.ReactElement => {
   const isAuthenticated = useSelector(
     (state: AppState) => state.Authentication.isAuthenticated
   );
+  
   useEffect(() => {
     if (isAuthenticated) {
       router.push('/');
