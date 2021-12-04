@@ -3,6 +3,7 @@ import SignInCardState, {
   SET_SUBMITTING,
   SUBMIT_SIGN_IN_FORM,
   SET_ERROR,
+  SET_AUTHENTICATION_SUCCESS,
 } from './Types';
 
 const initialState:SignInCardState = {
@@ -12,6 +13,7 @@ const initialState:SignInCardState = {
   uid: '',
   error: false,
   isAuthenticated:false,
+  success:false,
 };
 
 const signInCardReducer = (
@@ -35,6 +37,11 @@ const signInCardReducer = (
       return {
         ...state,
         error: action.payload,
+      };
+    case SET_AUTHENTICATION_SUCCESS:
+      return {
+        ...state,
+        success: action.payload,
       };
     default:
       return state;

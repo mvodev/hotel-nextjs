@@ -1,10 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { Field, Form, FieldMetaState } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
-import { submitForm } from 'src/redux/Slices/SignInCard/SignInCardActions';
+import { setModalWindow, submitForm } from 'src/redux/Slices/SignInCard/SignInCardActions';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import FormData from './Types';
 import { RootState } from '../../redux/reduces';
@@ -12,8 +10,8 @@ import styles from './SignInCard.module.scss';
 import validate from './validate';
 
 const SignInCard = (): React.ReactElement => {
+
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const { submitting } = {
     ...useSelector((state: RootState) => state.signInCardReducer),
@@ -23,23 +21,22 @@ const SignInCard = (): React.ReactElement => {
     ...useSelector((state: RootState) => state.signInCardReducer),
   };
 
-  const { isAuthenticated } = {
-    ...useSelector((state: RootState) => state.Authentication),
+  const { success } = {
+    ...useSelector((state: RootState) => state.signInCardReducer),
   };
 
-  const modalWindow = isAuthenticated ? 
+  const handleModalWindowClose = ()=>{
+    dispatch(setModalWindow(false));
+  }
+  
+  const modalWindow = success ? 
     <ModalWindow 
       title="Вы авторизованы!" 
-      text="Вы успешно авторизовались на сайте Toxin. Сейчас вы будете автоматически перенаправлены на главную страницу."
+      text="Вы успешно авторизовались на сайте Toxin. Через 5 секунд вы будете автоматически перенаправлены на главную страницу."
       isEnabled
+      handleCloseClick={handleModalWindowClose}
       />
     : null;
-
-  // useEffect(()=>{
-  //   if(isAuthenticated){
-  //     router.push('/');
-  //   }
-  // });
 
   const validationBlock = (meta: FieldMetaState<unknown>) => (
       meta.error &&

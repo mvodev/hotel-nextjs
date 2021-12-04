@@ -4,6 +4,7 @@ import {
   SET_SUBMITTING,
   SUBMIT_SIGN_IN_FORM,
   SET_ERROR,
+  SET_AUTHENTICATION_SUCCESS,
 } from './Types';
 
 const setSubmitting = (payload: boolean): AnyAction => ({
@@ -21,4 +22,9 @@ const setError = (payload: boolean): AnyAction => ({
   payload,
 });
 
-export { setSubmitting, submitForm, setError };
+const setModalWindow = (payload: boolean): AnyAction => ({
+  type: SET_AUTHENTICATION_SUCCESS,
+  payload,
+});
+
+export { setSubmitting, submitForm, setError, setModalWindow };

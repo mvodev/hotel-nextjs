@@ -4,7 +4,7 @@ import { AuthError } from 'firebase/auth';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
 import { setAuthenticated } from '../Slices/Authentication/AuthenticationActions';
-import { setError, setSubmitting } from '../Slices/SignInCard/SignInCardActions';
+import { setModalWindow, setError, setSubmitting } from '../Slices/SignInCard/SignInCardActions';
 import { SUBMIT_SIGN_IN_FORM } from '../Slices/SignInCard/Types';
 import { SET_USER } from '../Slices/Authentication/Types';
 
@@ -16,6 +16,9 @@ type SignInFormReducerType = {
   }
 }
 
+const delay = (time: number) =>
+  new Promise((resolve) => setTimeout(resolve, time));
+
 function* workerSignInSaga(form:SignInFormReducerType) {
   const isAuthorized: Promise<UserType | AuthError> = 
   yield call(() => firebaseAPI.signIn(form.payload.email, form.payload.password));
@@ -24,8 +27,10 @@ function* workerSignInSaga(form:SignInFormReducerType) {
     yield put(setSubmitting(false));
   } else {
     yield put(setError(false));
-    yield put(setAuthenticated(true));
     yield put(setSubmitting(false));
+    yield put(setModalWindow(true));
+    yield call(delay,5000);
+    yield put(setAuthenticated(true));
     yield put({ type: SET_USER, payload: { ...isAuthorized } });
   }
 }
