@@ -1,8 +1,9 @@
 import { call, ForkEffect, put, takeEvery } from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
-import { Error, UserType } from 'src/firebaseAPI/Types';
+import { UserType } from 'src/firebaseAPI/Types';
 import { stringToDate } from 'src/utils/Utils';
+import { FirebaseError } from 'firebase/app';
 import {
   EMAIL_ERROR,
   REGISTRATION_SUCCESS,
@@ -16,38 +17,40 @@ import { SET_AUTHENTICATED, SET_USER } from '../Slices/Authentication/Types';
 const delay = (time: number) =>
   new Promise((resolve) => setTimeout(resolve, time));
 
-async function userRegistration(data: FormData): Promise<UserType | Error> {
-  const response = await firebaseAPI.signUp({
+async function userRegistration(
+  data: FormData
+): Promise<UserType | FirebaseError> {
+  const response: UserType | FirebaseError = await firebaseAPI.signUp({
     ...data,
     birthday: stringToDate(data.birthday),
   });
+
   return response;
 }
 
-function* createModalWindowSaga(data: UserType & Error) {
-  if (data.errorCode && data.errorCode === 'auth/email-already-in-use') {
+function* createErrorWindowSaga(data: FirebaseError) {
+  if (data.code === 'auth/email-already-in-use') {
     yield put({ type: EMAIL_ERROR });
-  } else if (data.errorCode) {
-    yield put({ type: UNKNOWN_ERROR });
   } else {
-    yield put({ type: REGISTRATION_SUCCESS });
+    yield put({ type: UNKNOWN_ERROR });
   }
-}
-
-function* addCredentialsSaga(data: UserType) {
-  yield put({ type: SET_AUTHENTICATED, payload: true });
-  yield put({ type: SET_USER, payload: { ...data } });
 }
 
 function* workerSaga(data: AnyAction) {
   yield put({ type: SET_SUBMITTING, payload: true });
-  const response: UserType & Error = yield call(userRegistration, data.payload);
-  yield createModalWindowSaga(response);
+  const response: Promise<UserType | FirebaseError> = yield call(
+    userRegistration,
+    data.payload
+  );
   yield put({ type: SET_SUBMITTING, payload: false });
 
-  if (!response.errorCode) {
+  if (response instanceof FirebaseError) {
+    yield createErrorWindowSaga(response);
+  } else {
+    yield put({ type: REGISTRATION_SUCCESS });
     yield call(delay, 5000);
-    yield addCredentialsSaga(response);
+    yield put({ type: SET_AUTHENTICATED, payload: true });
+    yield put({ type: SET_USER, payload: { ...response } });
   }
 }
 
