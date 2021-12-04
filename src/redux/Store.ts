@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import Authentication from './Slices/Authentication/Authentication';
+import roomsReducer from './Rooms/Rooms';
 import RootSaga from './Sagas/RootSaga';
 
 
@@ -12,7 +13,7 @@ export interface SagaStore extends Store {
 const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
-    reducer: {Authentication},
+    reducer: {Authentication, roomsReducer},
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);

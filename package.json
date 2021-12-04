@@ -10,9 +10,8 @@
   },
   "dependencies": {
     "@redux-saga/core": "^1.1.3",
-    "@reduxjs/toolkit": "^1.6.2",
-    "@grpc/grpc-js": "^1.4.4",
     "@reduxjs/toolkit": "^1.3.6",
+    "@grpc/grpc-js": "^1.4.4",
     "firebase": "^9.5.0",
     "final-form": "^4.20.4",
     "next": "latest",
