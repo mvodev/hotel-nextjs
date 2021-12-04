@@ -12,7 +12,10 @@ export interface SagaStore extends Store {
 const makeStore = () => {
   const sagaMiddleware = createSagaMiddleware();
   const store = configureStore({
-    reducer: {Authentication,signInCardReducer},
+    reducer: {
+      Authentication,
+      signInCardReducer,
+    },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);

@@ -23,7 +23,7 @@ const SignInCard = (): React.ReactElement => {
   };
 
   const { isAuthenticated } = {
-    ...useSelector((state: RootState) => state.signInCardReducer),
+    ...useSelector((state: RootState) => state.Authentication),
   };
 
   useEffect(()=>{
