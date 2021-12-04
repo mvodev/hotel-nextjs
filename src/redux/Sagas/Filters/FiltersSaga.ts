@@ -1,4 +1,4 @@
-import { takeLatest, select } from 'redux-saga/effects';
+import { takeLatest, select, call } from 'redux-saga/effects';
 
 import {
   setDates,
@@ -14,8 +14,14 @@ import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import type { FiltersAPIType } from 'src/firebaseAPI/Types';
 
 function* handleFiltersChange(): Generator {
-  const filters = yield select(selectFilters);
-  firebaseAPI.getRooms(filters as FiltersAPIType, 1, 20).then(console.log);
+  const filters  = yield select(selectFilters);
+  const r = yield call(
+    firebaseAPI.getRooms,
+    filters as FiltersAPIType,
+    1,
+    20
+  );
+  console.log(r);
 }
 
 function* filtersWatcher(): Generator {
