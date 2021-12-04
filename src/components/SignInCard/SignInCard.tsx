@@ -5,6 +5,7 @@ import { Field, Form, FieldMetaState } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
 import { submitForm } from 'src/redux/Slices/SignInCard/SignInCardActions';
+import ModalWindow from '../ModalWindow/ModalWindow';
 import FormData from './Types';
 import { RootState } from '../../redux/reduces';
 import styles from './SignInCard.module.scss';
@@ -26,11 +27,19 @@ const SignInCard = (): React.ReactElement => {
     ...useSelector((state: RootState) => state.Authentication),
   };
 
-  useEffect(()=>{
-    if(isAuthenticated){
-      router.push('/');
-    }
-  });
+  const modalWindow = isAuthenticated ? 
+    <ModalWindow 
+      title="Вы авторизованы!" 
+      text="Вы успешно авторизовались на сайте Toxin. Сейчас вы будете автоматически перенаправлены на главную страницу."
+      isEnabled
+      />
+    : null;
+
+  // useEffect(()=>{
+  //   if(isAuthenticated){
+  //     router.push('/');
+  //   }
+  // });
 
   const validationBlock = (meta: FieldMetaState<unknown>) => (
       meta.error &&
@@ -83,6 +92,7 @@ const SignInCard = (): React.ReactElement => {
           </form>
         )}
       </Form>
+      {modalWindow}
     </div>
   );
 };
