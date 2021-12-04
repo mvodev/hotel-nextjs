@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { Field, Form, FieldMetaState } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
-import { submitForm } from 'src/redux/SignInCard/SignInCardActions';
+import { submitForm } from 'src/redux/Slices/SignInCard/SignInCardActions';
 import FormData from './Types';
 import { RootState } from '../../redux/reduces';
 import styles from './SignInCard.module.scss';

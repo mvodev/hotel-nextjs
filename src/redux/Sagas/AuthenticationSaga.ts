@@ -4,8 +4,8 @@ import { AuthError } from 'firebase/auth';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
 import { setAuthenticated, setUser } from '../Slices/Authentication/AuthenticationActions';
-import { setError, setSubmitting } from '../SignInCard/SignInCardActions';
-import { SUBMIT_SIGN_IN_FORM } from '../SignInCard/Types';
+import { setError, setSubmitting } from '../Slices/SignInCard/SignInCardActions';
+import { SUBMIT_SIGN_IN_FORM } from '../Slices/SignInCard/Types';
 
 type SignInFormReducerType = {
   type:string,
