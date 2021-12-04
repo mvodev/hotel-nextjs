@@ -5,6 +5,7 @@ import Authentication from './Slices/Authentication/Authentication';
 import RootSaga from './Sagas/RootSaga';
 import signInCardReducer from './Slices/SignInCard/SignInCardReducer';
 
+
 export interface SagaStore extends Store {
   sagaTask?: Task;
 }
@@ -14,8 +15,8 @@ const makeStore = () => {
   const store = configureStore({
     reducer: {
       Authentication,
-      signInCardReducer,
-    },
+      signInCardReducer
+  },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);
