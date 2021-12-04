@@ -1,36 +1,36 @@
 /* eslint-disable arrow-body-style */
 
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import PaginationState, { SWITCH_PAGE } from 'src/redux/Slices/Pagination/Types';
 import Button from '../Button/Button';
 import styles from './Pagination.module.scss';
-import PaginationProps from './Types';
 
 const Pagination = ({
-  buttonsCount,
-  currentPage,
-  text,
-}: PaginationProps): React.ReactElement => {
-  const [activeButton, setActive] = useState(currentPage);
+  pageCount,
+  activePage,
+  roomsCount,
+}: PaginationState): React.ReactElement => {
+  const dispatch = useDispatch();
 
-  const handlePageButtonClick = (button: number): void => {
-    setActive(button);
+  const handlePageButtonClick = (buttonNumber: number): void => {
+    dispatch({ type: SWITCH_PAGE, payload: buttonNumber });
   };
 
   const handleBackButtonClick = (): void => {
-    setActive(activeButton - 1);
+    dispatch({ type: SWITCH_PAGE, payload: activePage - 1 });
   };
 
   const handleForwardButtonClick = (): void => {
-    setActive(activeButton + 1);
+    dispatch({ type: SWITCH_PAGE, payload: activePage + 1 });
   };
 
   const buttonIsAllowed = (button: number): boolean => {
     return (
       button === 1 ||
-      button === buttonsCount ||
-      (button === 2 && activeButton === 5) ||
-      (button === buttonsCount - 1 && activeButton === buttonsCount - 4) ||
-      (button >= activeButton - 2 && button <= activeButton + 2)
+      button === pageCount ||
+      (button === 2 && activePage === 5) ||
+      (button === pageCount - 1 && activePage === pageCount - 4) ||
+      (button >= activePage - 2 && button <= activePage + 2)
     );
   };
 
@@ -45,37 +45,34 @@ const Pagination = ({
   const buttonsClasses = `${styles.buttonContainer} ${styles.buttonContainerIsMobileDisplayed}`;
 
   const backButton =
-    activeButton > 1 ? (
+    activePage > 1 ? (
       <div className={buttonsClasses}>
         <Button
-          theme="paginationIcon"
-          text="arrow_back"
+          theme='paginationIcon'
+          text='arrow_back'
           onClick={handleBackButtonClick}
         />
       </div>
     ) : null;
 
   const forwardButton =
-    activeButton < buttonsCount ? (
+    activePage < pageCount ? (
       <div className={buttonsClasses}>
         <Button
-          theme="paginationIcon"
-          text="arrow_forward"
+          theme='paginationIcon'
+          text='arrow_forward'
           onClick={handleForwardButtonClick}
         />
       </div>
     ) : null;
 
-  const pagesButtons = [...new Array(buttonsCount)].map((_, index) => {
+  const pagesButtons = [...new Array(pageCount)].map((_, index) => {
     const pageNumber = index + 1;
-    const theme =
-      activeButton === pageNumber ? 'paginationActive' : 'pagination';
+    const theme = activePage === pageNumber ? 'paginationActive' : 'pagination';
 
     const containerClasses = [
       styles.buttonContainer,
-      pageNumber === activeButton
-        ? styles.buttonContainerIsMobileDisplayed
-        : '',
+      pageNumber === activePage ? styles.buttonContainerIsMobileDisplayed : '',
     ].join(' ');
 
     return buttonIsAllowed(pageNumber) ? (
@@ -100,7 +97,7 @@ const Pagination = ({
         {pagesButtons}
         {forwardButton}
       </div>
-      <div className={styles.text}>{text}</div>
+      <div className={styles.text}>{roomsCount}</div>
     </div>
   );
 };

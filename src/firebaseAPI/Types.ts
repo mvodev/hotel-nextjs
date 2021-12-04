@@ -5,7 +5,7 @@ type UserDataType = {
   password: string,
   name: string,
   surname: string,
-  photo: string,
+  photo?: string,
   gender: 'man' | 'woman',
   birthday: Date
 }
