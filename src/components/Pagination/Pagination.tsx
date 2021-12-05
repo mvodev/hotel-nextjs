@@ -2,7 +2,6 @@
 
 import { useDispatch } from 'react-redux';
 import PaginationState, {
-  SWITCH_PAGE,
 } from 'src/redux/Slices/Pagination/Types';
 import GetPaginationText from 'src/utils/GetPaginationText';
 import Button from '../Button/Button';
@@ -17,15 +16,15 @@ const Pagination = ({
   const dispatch = useDispatch();
 
   const handlePageButtonClick = (buttonNumber: number): void => {
-    dispatch({ type: SWITCH_PAGE, payload: buttonNumber });
+    dispatch({ type: 'UPDATE_ROOMS', payload: buttonNumber });
   };
 
   const handleBackButtonClick = (): void => {
-    dispatch({ type: SWITCH_PAGE, payload: activePage - 1 });
+    dispatch({ type: 'UPDATE_ROOMS', payload: activePage - 1 });
   };
 
   const handleForwardButtonClick = (): void => {
-    dispatch({ type: SWITCH_PAGE, payload: activePage + 1 });
+    dispatch({ type: 'UPDATE_ROOMS', payload: activePage + 1 });
   };
 
   const buttonIsAllowed = (button: number): boolean => {
@@ -52,8 +51,8 @@ const Pagination = ({
     activePage > 1 ? (
       <div className={buttonsClasses}>
         <Button
-          theme='paginationIcon'
-          text='arrow_back'
+          theme="paginationIcon"
+          text="arrow_back"
           onClick={handleBackButtonClick}
         />
       </div>
@@ -63,8 +62,8 @@ const Pagination = ({
     activePage < pageCount ? (
       <div className={buttonsClasses}>
         <Button
-          theme='paginationIcon'
-          text='arrow_forward'
+          theme="paginationIcon"
+          text="arrow_forward"
           onClick={handleForwardButtonClick}
         />
       </div>
