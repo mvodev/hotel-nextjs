@@ -21,7 +21,7 @@ const SignIn = (): React.ReactElement => {
     }
   });
 
-  return (<Layout title='Sign In' pageClass={styles.signIn}>
+  return (<Layout title="Sign In" pageClass={styles.signIn}>
     <Carousel names={['background-room-1.webp', 'background-room-4.webp']} />
     <SignInCard />
   </Layout>)

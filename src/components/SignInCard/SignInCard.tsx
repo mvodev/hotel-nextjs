@@ -53,37 +53,37 @@ const SignInCard = (): React.ReactElement => {
       <Form onSubmit={handleFormSubmit} validate={validate}>
         {({ handleSubmit }) => (
           <form className={styles.signInCardForm} onSubmit={handleSubmit}>
-            <Field name='email'>
+            <Field name="email">
               {({ input, meta }) => (
                 <>
-                  <TextField {...input} placeholder='Email' />
+                  <TextField {...input} placeholder="Email" />
                   {validationBlock(meta)}
                 </>
               )}
             </Field>
-            <Field name='password'>
+            <Field name="password">
               {({ input, meta }) => (
                 <>
-                  <TextField {...input} placeholder='Пароль' type='password'/>
+                  <TextField {...input} placeholder="Пароль" type="password"/>
                   {validationBlock(meta)}
                 </>
               )}
             </Field>
-            <span style={error ? { display: 'block' } : { display: 'none' }}>
+            <span style={error ? { display: "block" } : { display: "none" }}>
               Некорректное имя пользователя/пароль.
             </span>
             <div className={styles.signInCardButtonContainer}>
               <Button
-                theme='filled'
+                theme="filled"
                 isDisabled={submitting}
-                type='submit'
-                text='Войти'
+                type="submit"
+                text="Войти"
               />
             </div>
             <div className={styles.signInCardBottomSection}>
               <span className={styles.text}>Нет аккаунта на Toxin?</span>
               <div className={styles.signInCardBorderContainer}>
-                <Button theme='bordered' link='/registration' text='Создать' />
+                <Button theme="bordered" link="/registration" text="Создать" />
               </div>
             </div>
           </form>
