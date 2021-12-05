@@ -8,6 +8,7 @@ import {
   setAvailability,
   setConveniences,
   setAdditionalConvenience,
+  setFilters,
   filtersActions,
 } from 'src/redux/Slices/Filters/FiltersSlice';
 
@@ -25,6 +26,7 @@ function* filtersWatcher(): Generator {
       setAvailability.type,
       setConveniences.type,
       setAdditionalConvenience.type,
+      setFilters.type,
     ],
     handleFiltersChange
   );
