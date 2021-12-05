@@ -4,7 +4,11 @@ import { AuthError } from 'firebase/auth';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
 import { setAuthenticated } from '../Slices/Authentication/AuthenticationActions';
-import { setModalWindow, setError, setSubmitting } from '../Slices/SignInCard/SignInCardActions';
+import { 
+  setModalWindow,
+  setError,
+  setSubmitting 
+} from '../Slices/SignInCard/SignInCardActions';
 import { SUBMIT_SIGN_IN_FORM } from '../Slices/SignInCard/Types';
 import { SET_USER } from '../Slices/Authentication/Types';
 import { stringToDateString } from '../../utils/Utils';

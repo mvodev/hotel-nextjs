@@ -5,13 +5,12 @@ import UserSectionProps from './Types';
 import styles from './UserSection.module.scss';
 
 const UserSection = ({ user }: UserSectionProps): React.ReactElement => {
-
   const [screenWidth, setWidth] = useState(0);
-  
+
   const updateWidth = () => {
     setWidth(window.innerWidth);
   };
-  
+
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
     updateWidth();
