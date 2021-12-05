@@ -4,6 +4,7 @@ import { type } from 'os';
 
 type StateType = {
   filters: FiltersAPIType;
+  rooms: RoomsType;
 }
 
 type ActionType = {

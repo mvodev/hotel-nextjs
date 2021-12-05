@@ -129,7 +129,7 @@ class FirebaseAPI {
 
   private filterRoom = (item: ReturnedRoomType, filters: FiltersAPIType) => {
     const inPricesRange =
-      item.price >= filters.price.from && item.price <= filters.price.to;
+      ((item.price >= filters.price.from) && (item.price <= filters.price.to));
     if (!inPricesRange) return false;
 
     if (item.maxGuests < filters.guests.adult + filters.guests.child) {

@@ -1,19 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { AppState } from 'src/redux/Store';
 import type { RoomsType, initialStateType } from './Types'
 
-const initialStae: initialStateType = { rooms: [] }
+const initialState: initialStateType = { rooms: [] }
 
 const roomsSlice = createSlice({
   name:  'rooms',
-  initialStae,
+  initialState,
   reducers: {
-    writeRooms: (state: initialStateType, action: PayloadAction<RoomsType>) => {
+    writeRooms: (state, action: PayloadAction<RoomsType>) => {
       state.rooms = action.payload;
     },
   }
 })
 
-const roomsReducer = roomsSlice.reducer;
+const rooms = roomsSlice.reducer;
 
+export const selectRooms = (state: AppState): RoomsType => state.roomsReducer;
 export const { writeRooms } = roomsSlice.actions;
-export default roomsReducer;
+export default rooms;

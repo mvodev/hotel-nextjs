@@ -1,6 +1,7 @@
 import { Form } from 'react-final-form';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
 
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
 import Button from 'src/components/Button/Button';
@@ -11,9 +12,11 @@ import styles from './SearchRoomCard.module.scss';
 const SearchRoomCard = (): JSX.Element => {
   const [isSubmited, submit] = useState(false);
   const router = useRouter();
+  const disputch = useDispatch();
 
   useEffect(() => {
     if (isSubmited) {
+      disputch({ type: "UPDATE_ROOMS", payload: 1 })
       router.push('/search');
     }
 
