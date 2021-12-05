@@ -5,6 +5,9 @@ import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
 import { watchUpdateRooms } from '../Rooms/RoomsSugas';
 
+import filtersWatcher from './Filters/FiltersSaga';
+import appWatcher from './App/AppSaga';
+
 function* startSaga(
   saga: Saga<any>
 ): Generator<CallEffect<unknown>, void, unknown> {
@@ -19,10 +22,7 @@ function* startSaga(
 }
 
 function* RootSaga(): Generator<any, any, any> {
-  const sagas: Saga<any>[] = [
-    /* sagas */
-    watchUpdateRooms,
-  ];
+  const sagas: Saga<any>[] = [filtersWatcher, appWatcher, watchUpdateRooms];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));
 

@@ -1,27 +1,25 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectPrices, setPrices } from 'src/redux/Prices/PricesSlice';
-import clamp from 'src/utils/Clamp';
+import { selectPrice, setPrice } from 'src/redux/Slices/Filters/FiltersSlice';
 import formateToRuble from 'src/utils/FormateToRuble';
 
-import type {
-  TypeRangeSliderProps,
-  TypeHandleMoveArgs,
-  TypeCalcPositionArgs,
-} from './Types';
-import styles from './RangeSlider.module.sass';
+import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
 import Handle from './Handle';
+import styles from './RangeSlider.module.sass';
 
-const RangeSlider = ({
-  min = 0,
-  max = 15000,
-  step = 100,
-}: TypeRangeSliderProps): JSX.Element => {
-  const prices = useSelector(selectPrices);
+const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
+  const { min, max, from, to } = useSelector(selectPrice);
   const dispatch = useDispatch();
-  const positions = prices.map((p) => clamp(min, p / (max - min), max)) as [number, number];
+  const absoluteToRelative = useCallback((p: number) => p / (max - min), [max, min]);
+  const [positions, setPositions] = useState([from, to].map(absoluteToRelative));
   const container = useRef<HTMLDivElement>(null);
+  const timer = useRef(0);
+
+  useEffect(
+    () => setPositions([from, to].map(absoluteToRelative)),
+    [from, to, absoluteToRelative]
+  );
 
   const relativeToAbsolute = (position: number) =>
     Math.min(
@@ -29,8 +27,20 @@ const RangeSlider = ({
       Math.floor((position * (max - min + step)) / step) * step + min
     );
 
-  const updatePrices = (newPositions: [number, number]) => 
-    dispatch(setPrices(newPositions.map(relativeToAbsolute) as [number, number]));
+  const updatePositions = (newPositions: number[]): void => {
+    setPositions([...newPositions]);
+    clearTimeout(timer.current);
+    timer.current = window.setTimeout(
+      () =>
+        dispatch(
+          setPrice({
+            from: relativeToAbsolute(newPositions[0]),
+            to: relativeToAbsolute(newPositions[1]),
+          })
+        ),
+      200
+    );
+  };
 
   const calcPosition = ({
     pageX,
@@ -58,15 +68,16 @@ const RangeSlider = ({
       relativeMax,
       Math.max(relativeMin, calcPosition({ pageX, shift, offset }))
     );
-    updatePrices(positions);
+    updatePositions(positions);
   };
 
   const handleTrackPointerDown = (e: React.PointerEvent<HTMLElement>) => {
     const newPosition = calcPosition({ pageX: e.clientX });
     const diffs = positions.map((p) => Math.abs(p - newPosition));
-    const activeIDX = newPosition > positions[1] ? 1 : diffs.indexOf(Math.min(...diffs));
+    const activeIDX =
+      newPosition > positions[1] ? 1 : diffs.indexOf(Math.min(...diffs));
     positions[activeIDX] = newPosition;
-    updatePrices(positions);
+    updatePositions(positions);
   };
 
   return (
@@ -75,11 +86,11 @@ const RangeSlider = ({
         <h2 className={styles.title}>диапазон цены</h2>
         <div className={styles.rangeLabel}>
           <span className={styles.value}>
-            {formateToRuble(prices[0])}
+            {formateToRuble(relativeToAbsolute(positions[0]))}
           </span>
           {' - '}
           <span className={styles.value}>
-            {formateToRuble(prices[1])}
+            {formateToRuble(relativeToAbsolute(positions[1]))}
           </span>
         </div>
       </div>
@@ -88,14 +99,14 @@ const RangeSlider = ({
           className={styles.filler}
           type='button'
           aria-label='track'
-          onPointerDown={() => updatePrices([0, positions[1]])}
+          onPointerDown={() => updatePositions([0, positions[1]])}
           tabIndex={-1}
         />
         <button
           className={styles.filler}
           type='button'
           aria-label='track'
-          onPointerDown={() => updatePrices([positions[0], 1])}
+          onPointerDown={() => updatePositions([positions[0], 1])}
           tabIndex={-1}
         />
         <div ref={container} className={styles.container}>
