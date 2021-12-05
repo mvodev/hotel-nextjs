@@ -83,7 +83,7 @@ const SignInCard = (): React.ReactElement => {
             <div className={styles.signInCardBottomSection}>
               <span className={styles.text}>Нет аккаунта на Toxin?</span>
               <div className={styles.signInCardBorderContainer}>
-                <Button theme='bordered' link='/' text='Создать' />
+                <Button theme='bordered' link='/registration' text='Создать' />
               </div>
             </div>
           </form>
