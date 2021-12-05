@@ -1,4 +1,10 @@
-import { call, ForkEffect, put, takeEvery } from '@redux-saga/core/effects';
+import {
+  call,
+  delay,
+  ForkEffect,
+  put,
+  takeEvery,
+} from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import { UserType } from 'src/firebaseAPI/Types';
@@ -13,9 +19,6 @@ import {
 } from '../Slices/Registration/Types';
 import FormData from '../../components/RegistrationCard/Types';
 import { SET_AUTHENTICATED, SET_USER } from '../Slices/Authentication/Types';
-
-const delay = (time: number) =>
-  new Promise((resolve) => setTimeout(resolve, time));
 
 async function userRegistration(
   data: FormData
@@ -48,7 +51,7 @@ function* workerSaga(data: AnyAction) {
     yield createErrorWindowSaga(response);
   } else {
     yield put({ type: REGISTRATION_SUCCESS });
-    yield call(delay, 5000);
+    yield delay(5000);
     yield put({ type: SET_AUTHENTICATED, payload: true });
     yield put({ type: SET_USER, payload: { ...response } });
   }
