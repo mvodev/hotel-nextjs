@@ -1,5 +1,5 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { call } from '@redux-saga/core/effects';
+import { call, delay } from '@redux-saga/core/effects';
 import { AuthError } from 'firebase/auth';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
@@ -21,10 +21,8 @@ type SignInFormReducerType = {
   }
 }
 
-const delay = (time: number) =>
-  new Promise((resolve) => setTimeout(resolve, time));
-
 function* workerSignInSaga(form:SignInFormReducerType) {
+
   const isAuthorized: Promise<UserType | AuthError> = 
   yield call(() => firebaseAPI.signIn(form.payload.email, form.payload.password));
   if (isAuthorized.constructor.name === 'FirebaseError') {
@@ -34,7 +32,7 @@ function* workerSignInSaga(form:SignInFormReducerType) {
     yield put(setError(false));
     yield put(setSubmitting(false));
     yield put(setModalWindow(true));
-    yield call(delay,5000);
+    yield delay(5000);
     yield put(setAuthenticated(true));
     yield put({ 
       type: SET_USER,
