@@ -12,7 +12,7 @@ import {
   selectAdditionalConvenience,
 } from 'src/redux/Slices/Filters/FiltersSlice';
 import CheckboxButtons from 'src/components/CheckboxButtons/CheckboxButtons';
-import { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
+import type { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
 import DateDropdown from 'src/components/DateDropdown/DateDropdown';
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
 import DropdownRoom from 'src/components/DropdownRoom/DropdownRoom';
