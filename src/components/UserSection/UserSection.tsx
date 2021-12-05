@@ -7,14 +7,14 @@ import styles from './UserSection.module.scss';
 
 const UserSection = (): React.ReactElement => {
 
-  const { user, isAuthenticated } = {
-    ...useSelector((state: RootState) => state.Authentication),
-  };
-  
+  const { user, isAuthenticated } = useSelector((state: RootState) => state.Authentication);
+
   const [screenWidth, setWidth] = useState(0);
+
   const updateWidth = () => {
     setWidth(window.innerWidth);
   };
+  
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
     updateWidth();
