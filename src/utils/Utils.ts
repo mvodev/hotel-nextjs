@@ -1,3 +1,5 @@
+import { Timestamp } from '@firebase/firestore';
+
 export function getPosInSpellCasesArray(result: number): number {
   const cases = [2, 0, 1, 1, 1, 2];
   return result % 100 > 4 && result % 100 < 20
@@ -58,4 +60,9 @@ export const dateToTimeAgo = (date: Date): string => {
   return getValue(timeDelta, YER, ['год', 'года', 'лет']);
 };
 
-export const stringToDate = (stringDate: string): Date => new Date(stringDate);
+export const stringToDateString = (timestampDate: Timestamp): string => {
+  const year = timestampDate.toDate().getFullYear();
+  const month = timestampDate.toDate().getMonth();
+  const day = timestampDate.toDate().getDay();
+  return new Date(year,month,day).toDateString();
+}

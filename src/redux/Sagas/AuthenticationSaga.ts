@@ -7,6 +7,7 @@ import { setAuthenticated } from '../Slices/Authentication/AuthenticationActions
 import { setModalWindow, setError, setSubmitting } from '../Slices/SignInCard/SignInCardActions';
 import { SUBMIT_SIGN_IN_FORM } from '../Slices/SignInCard/Types';
 import { SET_USER } from '../Slices/Authentication/Types';
+import { stringToDateString } from '../../utils/Utils';
 
 type SignInFormReducerType = {
   type:string,
@@ -31,7 +32,12 @@ function* workerSignInSaga(form:SignInFormReducerType) {
     yield put(setModalWindow(true));
     yield call(delay,5000);
     yield put(setAuthenticated(true));
-    yield put({ type: SET_USER, payload: { ...isAuthorized } });
+    yield put({ 
+      type: SET_USER,
+      payload: { 
+        ...isAuthorized,
+        birthday:stringToDateString((isAuthorized).birthday),
+    }});
   }
 }
 
