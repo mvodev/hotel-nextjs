@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import CheckboxItem from 'src/components/CheckboxItem/CheckboxItem';
 
-import CheckboxButtonsType from './Types';
+import CheckboxButtonsType, { CheckboxButtonItemType } from './Types';
 import style from './CheckboxButtons.module.sass';
 
-const CheckboxButtons = ({
+const CheckboxButtons = <T extends CheckboxButtonItemType>({
   isRich = false,
   title = '',
   items,
   handleItemChange = () => {},
-}: CheckboxButtonsType): React.ReactElement => {
+}: CheckboxButtonsType<T>): React.ReactElement => {
   const [checkboxItems, setCheckboxItems] = useState(items);
+
+  useEffect(() => setCheckboxItems(items), [items]);
 
   const handleItemClick = (id: number, checked: boolean): void => {
     const copy = checkboxItems.map((i, idx) =>
@@ -27,7 +29,7 @@ const CheckboxButtons = ({
       <CheckboxItem
         id={index}
         isRich={isRich}
-        title={item.title}
+        title={item?.title}
         text={item.text}
         checked={item.checked}
         onClick={handleItemClick}

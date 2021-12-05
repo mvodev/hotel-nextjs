@@ -4,11 +4,11 @@ type CheckboxButtonItemType = {
   title?: string;
 };
 
-type CheckboxButtonsType = {
-  items: CheckboxButtonItemType[];
+type CheckboxButtonsType<T extends CheckboxButtonItemType> = {
+  items: T[];
   isRich?: boolean;
   title?: string;
-  handleItemChange?: (items: CheckboxButtonItemType[]) => void;
+  handleItemChange?: (items: T[]) => void;
 };
 
 export default CheckboxButtonsType;

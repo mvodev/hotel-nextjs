@@ -1,22 +1,22 @@
 import { Form } from 'react-final-form';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
+import { selectUpdateStatus } from 'src/redux/Slices/RoomCardsStatus/RoomCardsStatusSlice';
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
+import Button from 'src/components/Button/Button';
+import DateDropdown from 'src/components/DateDropdown/DateDropdown';
 
-import Button from '../Button/Button';
-import DateDropdown from '../DateDropdown/DateDropdown';
 import styles from './SearchRoomCard.module.scss';
 
 const SearchRoomCard = (): JSX.Element => {
   const [isSubmited, submit] = useState(false);
-  const isFiltersUpdated = true;
-  const dispatch = useDispatch();
+  const isCardsUpdated = useSelector(selectUpdateStatus);
   const router = useRouter();
 
   useEffect(() => {
-    if (isSubmited && isFiltersUpdated) {
+    if (isSubmited && isCardsUpdated) {
       router.push('/search');
     }
 
@@ -24,12 +24,7 @@ const SearchRoomCard = (): JSX.Element => {
   });
 
   return (
-    <Form
-      onSubmit={() => {
-        dispatch({ type: 'searchRoomCard/submit' });
-        submit(true);
-      }}
-    >
+    <Form onSubmit={() => submit(true)}>
       {({ handleSubmit }) => (
         <div className={styles.searchRoomCard}>
           <h1 className={styles.title}>Найдём номера под ваши пожелания</h1>

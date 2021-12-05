@@ -5,7 +5,7 @@ import type { AppState } from 'src/redux/Store';
 const roomCardsStatusSlice = createSlice({
   name: 'roomCardsStatus',
   initialState: {
-    updateStatus: false,
+    updateStatus: true,
   },
   reducers: {
     turnOff: (state) => {

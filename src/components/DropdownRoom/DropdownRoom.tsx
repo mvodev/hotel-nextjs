@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { getPosInSpellCasesArray } from 'src/utils/Utils';
 
@@ -13,6 +13,8 @@ const DropdownRoom = ({
 }: DropdownRoomProps): JSX.Element => {
   const [isOpened, setOpened] = useState(false);
   const [counterItems, setCounterItems] = useState(values);
+
+  useEffect(() => setCounterItems(values), [values]);
 
   let allOptionsChosen = false;
   let counterTotal = 0;

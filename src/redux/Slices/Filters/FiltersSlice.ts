@@ -27,7 +27,22 @@ const filtersSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action: PayloadAction<Filters>) => {
-      state = action.payload;
+      const {
+        dates,
+        guests,
+        price,
+        rules,
+        availability,
+        conveniences,
+        additionalConvenience,
+      } = action.payload;
+      state.dates = dates;
+      state.guests = guests;
+      state.price = price;
+      state.rules = rules;
+      state.availability = availability;
+      state.conveniences = conveniences;
+      state.additionalConvenience = additionalConvenience;
     },
     setDates: (state, action: PayloadAction<Dates>) => {
       state.dates = action.payload;
@@ -84,6 +99,10 @@ export const {
   setAdditionalConvenience,
 } = filtersSlice.actions;
 
+export const filtersActions = {
+  update: { type: 'filters/update' },
+};
+
 export const selectFilters = (state: AppState): Filters => state.filters;
 
 export const selectDates = (state: AppState): (Date | null)[] =>
@@ -96,11 +115,13 @@ export const selectPrice = (state: AppState): Price => state.filters.price;
 export const selectRules = (state: AppState): CheckboxButtonItemType[] =>
   Object.values(state.filters.rules);
 
-export const selectAvailability = (state: AppState): CheckboxButtonItemType[] =>
+export const selectAvailability = (state: AppState): Required<CheckboxButtonItemType>[] =>
   Object.values(state.filters.availability);
 
-export const selectConveniences = (state: AppState): DropdownRoomValue[] =>
-  Object.values(state.filters.conveniences);
+export const selectConveniences = (state: AppState): DropdownRoomValue[] => {
+  const { bedrooms, beds, bathrooms } = state.filters.conveniences;
+  return [bedrooms, beds, bathrooms];
+}
 
 export const selectAdditionalConvenience = (
   state: AppState

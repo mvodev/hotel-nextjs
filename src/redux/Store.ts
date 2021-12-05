@@ -4,6 +4,7 @@ import { createWrapper } from 'next-redux-wrapper';
 
 import RootSaga from './Sagas/RootSaga';
 import filters from './Slices/Filters/FiltersSlice';
+import roomCardsStatus from './Slices/RoomCardsStatus/RoomCardsStatusSlice';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -14,6 +15,7 @@ const makeStore = () => {
   const store = configureStore({
     reducer: {
       filters,
+      roomCardsStatus,
     },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });

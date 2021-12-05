@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectPrice, setPrice } from 'src/redux/Slices/Filters/FiltersSlice';
-import clamp from 'src/utils/Clamp';
 import formateToRuble from 'src/utils/FormateToRuble';
 
 import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
@@ -12,11 +11,15 @@ import styles from './RangeSlider.module.sass';
 const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
   const { min, max, from, to } = useSelector(selectPrice);
   const dispatch = useDispatch();
-  const [positions, setPositions] = useState(
-    [from, to].map((p) => clamp(min, p / (max - min), max))
-  );
+  const absoluteToRelative = useCallback((p: number) => p / (max - min), [max, min]);
+  const [positions, setPositions] = useState([from, to].map(absoluteToRelative));
   const container = useRef<HTMLDivElement>(null);
   const timer = useRef(0);
+
+  useEffect(
+    () => setPositions([from, to].map(absoluteToRelative)),
+    [from, to, absoluteToRelative]
+  );
 
   const relativeToAbsolute = (position: number) =>
     Math.min(

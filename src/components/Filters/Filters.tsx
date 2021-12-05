@@ -12,6 +12,7 @@ import {
   selectAdditionalConvenience,
 } from 'src/redux/Slices/Filters/FiltersSlice';
 import CheckboxButtons from 'src/components/CheckboxButtons/CheckboxButtons';
+import { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
 import DateDropdown from 'src/components/DateDropdown/DateDropdown';
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
 import DropdownRoom from 'src/components/DropdownRoom/DropdownRoom';
@@ -26,6 +27,7 @@ const Filters = (): JSX.Element => {
 
   const handleFiltersButtonClick = () => setIsOpen(!isOpen);
 
+  const handleRulesChange = (items: CheckboxButtonItemType[]) => dispatch(setRules(items));
   return (
     <div className={[style.filters, isOpen ? style.filtersOpen : ''].join(' ')}>
       <button
@@ -43,10 +45,7 @@ const Filters = (): JSX.Element => {
       </div>
       <div className={style.filtersGuests}>
         <h2 className={style.filtersGuestsTitle}>гости</h2>
-        <DropdownGuests
-          placeholder='Сколько гостей'
-          opened={false}
-        />
+        <DropdownGuests placeholder='Сколько гостей' opened={false} />
       </div>
       <div className={style.filtersPrice}>
         <RangeSlider />
@@ -58,11 +57,11 @@ const Filters = (): JSX.Element => {
         <CheckboxButtons
           title='правила дома'
           items={useSelector(selectRules)}
-          handleItemChange={(items) => dispatch(setRules(items))}
+          handleItemChange={handleRulesChange}
         />
       </div>
       <div className={style.filtersAvailability}>
-        <CheckboxButtons
+        <CheckboxButtons<Required<CheckboxButtonItemType>>
           title='доступность'
           isRich
           items={useSelector(selectAvailability)}
