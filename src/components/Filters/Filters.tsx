@@ -27,7 +27,6 @@ const Filters = (): JSX.Element => {
 
   const handleFiltersButtonClick = () => setIsOpen(!isOpen);
 
-  const handleRulesChange = (items: CheckboxButtonItemType[]) => dispatch(setRules(items));
   return (
     <div className={[style.filters, isOpen ? style.filtersOpen : ''].join(' ')}>
       <button
@@ -57,7 +56,7 @@ const Filters = (): JSX.Element => {
         <CheckboxButtons
           title='правила дома'
           items={useSelector(selectRules)}
-          handleItemChange={handleRulesChange}
+          handleItemChange={(items) => dispatch(setRules(items))}
         />
       </div>
       <div className={style.filtersAvailability}>
