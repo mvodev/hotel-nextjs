@@ -60,7 +60,7 @@ export const dateToTimeAgo = (date: Date): string => {
   return getValue(timeDelta, YER, ['год', 'года', 'лет']);
 };
 
-export const stringToDateString = (timestampDate: Timestamp): string => {
+export const timestampToDateString = (timestampDate: Timestamp): string => {
   const year = timestampDate.toDate().getFullYear();
   const month = timestampDate.toDate().getMonth();
   const day = timestampDate.toDate().getDay();

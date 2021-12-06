@@ -11,7 +11,7 @@ import {
 } from '../Slices/SignInCard/SignInCardActions';
 import { SUBMIT_SIGN_IN_FORM } from '../Slices/SignInCard/Types';
 import { SET_USER } from '../Slices/Authentication/Types';
-import { stringToDateString } from '../../utils/Utils';
+import { timestampToDateString } from '../../utils/Utils';
 
 type SignInFormReducerType = {
   type:string,
@@ -38,7 +38,7 @@ function* workerSignInSaga(form:SignInFormReducerType) {
       type: SET_USER,
       payload: { 
         ...isAuthorized,
-        birthday:stringToDateString((isAuthorized).birthday),
+        birthday:timestampToDateString((isAuthorized).birthday),
     }});
   }
 }
