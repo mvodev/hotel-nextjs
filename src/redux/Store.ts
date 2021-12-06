@@ -2,10 +2,10 @@ import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import rooms from './Rooms/Rooms';
-import RootSaga from './Sagas/RootSaga';
-import Authentication from './Slices/Authentication/Authentication';
-import filters from './Slices/Filters/FiltersSlice';
-import Pagination from 'src/redux/Slices/Pagination/Pagination';
+import RootSaga from './RootSaga';
+import Authentication from './Authentication/Authentication';
+import filters from './Filters/FiltersSlice';
+import Pagination from 'src/redux/Pagination/Pagination';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;

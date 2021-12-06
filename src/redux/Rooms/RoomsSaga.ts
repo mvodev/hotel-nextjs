@@ -3,8 +3,8 @@ import { call, put, takeEvery, select } from 'redux-saga/effects';
 import { FiltersAPIType } from 'src/firebaseAPI/Types';
 
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
-import { selectFilters } from '../Slices/Filters/FiltersSlice';
-import { SET_PAGINATION } from '../Slices/Pagination/Types';
+import { selectFilters } from '../Filters/FiltersSlice';
+import { SET_PAGINATION } from '../Pagination/Types';
 import { ActionType, UpdateRoomsResultType } from './Types';
 import { writeRooms } from './Rooms';
 

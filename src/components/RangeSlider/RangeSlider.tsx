@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectPrice, setPrice } from 'src/redux/Slices/Filters/FiltersSlice';
+import { selectPrice, setPrice } from 'src/redux/Filters/FiltersSlice';
 import formateToRuble from 'src/utils/FormateToRuble';
+import clamp from 'src/utils/Clamp';
 
 import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
 import Handle from './Handle';
@@ -11,8 +12,13 @@ import styles from './RangeSlider.module.sass';
 const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
   const { min, max, from, to } = useSelector(selectPrice);
   const dispatch = useDispatch();
-  const absoluteToRelative = useCallback((p: number) => p / (max - min), [max, min]);
-  const [positions, setPositions] = useState([from, to].map(absoluteToRelative));
+  const absoluteToRelative = useCallback(
+    (p: number) => clamp(min, p / (max - min), max),
+    [max, min]
+  );
+  const [positions, setPositions] = useState(
+    [from, to].map(absoluteToRelative)
+  );
   const container = useRef<HTMLDivElement>(null);
   const timer = useRef(0);
 
@@ -97,15 +103,15 @@ const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
       <div className={styles.rangeSlider}>
         <button
           className={styles.filler}
-          type='button'
-          aria-label='track'
+          type="button"
+          aria-label="track"
           onPointerDown={() => updatePositions([0, positions[1]])}
           tabIndex={-1}
         />
         <button
           className={styles.filler}
-          type='button'
-          aria-label='track'
+          type="button"
+          aria-label="track"
           onPointerDown={() => updatePositions([positions[0], 1])}
           tabIndex={-1}
         />
@@ -122,8 +128,8 @@ const RangeSlider = ({ step = 100 }: { step?: number }): JSX.Element => {
           />
           <button
             className={styles.track}
-            type='button'
-            aria-label='track'
+            type="button"
+            aria-label="track"
             onPointerDown={handleTrackPointerDown}
             tabIndex={-1}
           >
