@@ -11,7 +11,8 @@ type User = {
 
 const SET_AUTHENTICATED = 'SET-AUTHENTICATED';
 const SET_USER = 'SET-USER';
+const USER_AUTHENTICATE = 'USER-AUTHENTICATE';
 
 export default AuthenticationState;
 export type { User };
-export { SET_AUTHENTICATED, SET_USER };
+export { SET_AUTHENTICATED, SET_USER, USER_AUTHENTICATE };

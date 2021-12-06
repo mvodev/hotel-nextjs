@@ -10,6 +10,7 @@ import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import { UserType } from 'src/firebaseAPI/Types';
 import { stringToDate } from 'src/utils/Utils';
 import { FirebaseError } from 'firebase/app';
+import Cookie from 'js-cookie';
 import {
   EMAIL_ERROR,
   REGISTRATION_SUCCESS,
@@ -52,6 +53,7 @@ function* workerSaga(data: AnyAction) {
   } else {
     yield put({ type: REGISTRATION_SUCCESS });
     yield delay(5000);
+    Cookie.set('userData', JSON.stringify({ ...response }));
     yield put({ type: SET_AUTHENTICATED, payload: true });
     yield put({ type: SET_USER, payload: { ...response } });
   }

@@ -3,6 +3,7 @@
 
 import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
+import watchAuthenticationSaga from './Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 
 function* startSaga(
@@ -19,7 +20,10 @@ function* startSaga(
 }
 
 function* RootSaga(): Generator<any, any, any> {
-  const sagas: Saga<any>[] = [watchRegistrationSubmitSaga];
+  const sagas: Saga<any>[] = [
+    watchRegistrationSubmitSaga,
+    watchAuthenticationSaga,
+  ];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));
 

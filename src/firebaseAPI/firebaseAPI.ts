@@ -19,6 +19,7 @@ import {
   collection,
   query,
 } from 'firebase/firestore';
+import { FirebaseError } from '@firebase/util';
 import {
   UserDataType,
   UserType,
@@ -26,7 +27,6 @@ import {
   FiltersAPIType,
   ReturnedRoomType,
 } from './Types';
-import { FirebaseError } from '@firebase/util';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
