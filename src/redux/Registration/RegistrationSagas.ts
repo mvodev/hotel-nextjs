@@ -16,9 +16,9 @@ import {
   SET_SUBMITTING,
   SUBMIT_FORM,
   UNKNOWN_ERROR,
-} from '../Slices/Registration/Types';
+} from './Types';
 import FormData from '../../components/RegistrationCard/Types';
-import { SET_AUTHENTICATED, SET_USER } from '../Slices/Authentication/Types';
+import { SET_AUTHENTICATED, SET_USER } from '../Authentication/Types';
 
 async function userRegistration(
   data: FormData

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   CLOSE_MODAL_WINDOW,
   SUBMIT_FORM,
-} from 'src/redux/Slices/Registration/Types';
+} from 'src/redux/Registration/Types';
 import { AppState } from 'src/redux/Store';
 import Button from '../Button/Button';
 import DateTextField from '../DateTextField/DateTextField';

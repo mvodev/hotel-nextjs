@@ -3,7 +3,7 @@
 
 import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
-import watchRegistrationSubmitSaga from './RegistrationSagas';
+import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 
 function* startSaga(
   saga: Saga<any>

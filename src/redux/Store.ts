@@ -1,9 +1,9 @@
 import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
-import Authentication from './Slices/Authentication/Authentication';
-import RootSaga from './Sagas/RootSaga';
-import Registration from './Slices/Registration/Registration';
+import Authentication from './Authentication/Authentication';
+import RootSaga from './RootSaga';
+import Registration from './Registration/Registration';
 
 
 export interface SagaStore extends Store {
