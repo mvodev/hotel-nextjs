@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, Form, FieldMetaState } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
-import { setModalWindow, submitForm } from 'src/redux/Slices/SignInCard/SignInCardActions';
+import { setModalWindow, submitForm } from 'src/redux/SignInCard/SignInCardActions';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import FormData from './Types';
 import { RootState } from '../../redux/reduces';

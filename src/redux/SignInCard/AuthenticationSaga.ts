@@ -8,8 +8,8 @@ import {
   setModalWindow,
   setError,
   setSubmitting 
-} from '../Slices/SignInCard/SignInCardActions';
-import { SUBMIT_SIGN_IN_FORM } from '../Slices/SignInCard/Types';
+} from './SignInCardActions';
+import { SUBMIT_SIGN_IN_FORM } from './Types';
 import { SET_USER } from '../Slices/Authentication/Types';
 import { timestampToDateString } from '../../utils/Utils';
 

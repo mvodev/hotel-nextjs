@@ -3,7 +3,7 @@ import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 import Authentication from './Slices/Authentication/Authentication';
 import RootSaga from './Sagas/RootSaga';
-import signInCardReducer from './Slices/SignInCard/SignInCardReducer';
+import signInCardReducer from './SignInCard/SignInCardReducer';
 
 
 export interface SagaStore extends Store {

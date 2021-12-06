@@ -3,7 +3,7 @@
 
 import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
-import watchSubmitSignInSaga from './AuthenticationSaga';
+import watchSubmitSignInSaga from '../SignInCard/AuthenticationSaga';
 
 function* startSaga(
   saga: Saga<any>
