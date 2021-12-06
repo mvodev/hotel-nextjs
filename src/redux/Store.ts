@@ -22,7 +22,18 @@ const makeStore = () => {
     },
     middleware: [...getDefaultMiddleware({
       serializableCheck: { 
-        ignoredActions: ['rooms/writeRooms', 'SET-PAGINATION', 'app/mount'] 
+        ignoredActions: ['rooms/writeRooms', 
+        'SET-PAGINATION', 
+        'app/mount', 
+        'UPDATE_ROOMS', 
+        'filters/setRules',
+        'filters/setAvailability',
+        'filters/setAdditionalConvenience',
+        'filters/setPrice',
+        'filters/setGuests',
+        'filters/setDates',
+        'filters/setConveniences'
+      ] 
       }}), sagaMiddleware],
     });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);
