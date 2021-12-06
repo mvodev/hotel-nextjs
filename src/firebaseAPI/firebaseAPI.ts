@@ -119,7 +119,7 @@ class FirebaseAPI {
             itemsOnPage * page - itemsOnPage,
             itemsOnPage * page
           ),
-          esultsNumber: filtredRooms.length,
+          resultsNumber: filtredRooms.length,
           page,
           pagesNumber: Math.ceil(filtredRooms.length / itemsOnPage),
         };

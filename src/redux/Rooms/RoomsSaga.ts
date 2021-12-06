@@ -1,11 +1,12 @@
 import { call, put, takeEvery, select } from 'redux-saga/effects';
+
 import { FiltersAPIType } from 'src/firebaseAPI/Types';
+
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { selectFilters } from '../Slices/Filters/FiltersSlice';
-import { StateType, ActionType, UpdateRoomsResultType } from './Types';
+import { SET_PAGINATION } from '../Slices/Pagination/Types';
+import { ActionType, UpdateRoomsResultType } from './Types';
 import { writeRooms } from './Rooms';
-
-
 
 export function* updateRooms(action: ActionType) {
   try {
@@ -16,7 +17,16 @@ export function* updateRooms(action: ActionType) {
       action.payload, 
       12 
     )
-    yield put(writeRooms(roomsData.rooms))
+    yield put(writeRooms({ rooms: roomsData.rooms }))
+    yield put({
+      type: SET_PAGINATION, 
+      payload: {
+        roomsOnPage: 12,
+        pageCount: roomsData.pagesNumber,
+        activePage: roomsData.page,
+        roomsCount: roomsData.resultsNumber
+      }
+    })
   } catch (error) {
     yield put({ type: 'FETCH_FAILED', error })
   }

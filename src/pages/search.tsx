@@ -8,13 +8,13 @@ import roomCardProps from 'src/components/RoomCard/RoomCardProps';
 import styles from '@styles/pages/search.module.sass';
 import { StateType } from '../redux/Rooms/Types';
 import RecalculateRating from '../utils/RecalculateRating';
+import { RoomsType } from 'src/redux/Rooms/Types';
 
 
 const Search = (): JSX.Element => {
-  const roomCards = useSelector((state: StateType) => state.rooms);
-
-  const searchItems = roomCards.rooms.length 
-    ? (roomCards.rooms.map((item) => {
+  const roomCards = useSelector((state: StateType) => state.rooms.rooms);
+  const searchItems = roomCards.length 
+    ? (roomCards.map((item) => {
       const roomCardItem = {
         slides: item.gallery,
         infoSection: {
@@ -51,13 +51,7 @@ const Search = (): JSX.Element => {
           <div className={styles.searchResult}>
             {searchItems}
             <div className={styles.searchPagination}>
-              <Pagination
-                {...{
-                  buttonsCount: 15,
-                  currentPage: 1,
-                  text: '1 - 12 из 100+ вариантов аренды',
-                }}
-              />
+              <Pagination />
             </div>
           </div>
         </div>

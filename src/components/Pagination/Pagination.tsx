@@ -1,19 +1,18 @@
 /* eslint-disable arrow-body-style */
 
-import { useDispatch } from 'react-redux';
-import PaginationState, {
-} from 'src/redux/Slices/Pagination/Types';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { AppState } from 'src/redux/Store';
 import GetPaginationText from 'src/utils/GetPaginationText';
+
 import Button from '../Button/Button';
 import styles from './Pagination.module.scss';
 
-const Pagination = ({
-  roomsOnPage = 12,
-  pageCount,
-  activePage,
-  roomsCount,
-}: PaginationState): React.ReactElement => {
+const Pagination = (): React.ReactElement => {
   const dispatch = useDispatch();
+
+  const pagination = useSelector((state: AppState) => state.Pagination);
+  const { activePage, pageCount, roomsCount, roomsOnPage = 12 } = pagination;
 
   const handlePageButtonClick = (buttonNumber: number): void => {
     dispatch({ type: 'UPDATE_ROOMS', payload: buttonNumber });

@@ -5,6 +5,7 @@ import rooms from './Rooms/Rooms';
 import RootSaga from './Sagas/RootSaga';
 import Authentication from './Slices/Authentication/Authentication';
 import filters from './Slices/Filters/FiltersSlice';
+import Pagination from 'src/redux/Slices/Pagination/Pagination';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -16,10 +17,14 @@ const makeStore = () => {
     reducer: {
       Authentication,
       filters,
-      rooms
+      rooms,
+      Pagination
     },
-    middleware: [...getDefaultMiddleware(), sagaMiddleware],
-  });
+    middleware: [...getDefaultMiddleware({
+      serializableCheck: { 
+        ignoredActions: ['rooms/writeRooms', 'SET-PAGINATION', 'app/mount'] 
+      }}), sagaMiddleware],
+    });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);
   return store;
 };

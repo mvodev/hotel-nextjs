@@ -1,10 +1,10 @@
-import type { FiltersAPIType } from '../../firebaseAPI/Types';
 import { ReturnedRoomType } from "src/firebaseAPI/Types";
-import { type } from 'os';
+
+import type { FiltersAPIType } from '../../firebaseAPI/Types';
 
 type StateType = {
   filters: FiltersAPIType;
-  rooms: RoomsType;
+  rooms: { rooms: RoomsType };
 }
 
 type ActionType = {
@@ -20,7 +20,7 @@ type initialStateType = {
 
 type UpdateRoomsResultType = {
     rooms: RoomsType,
-    esultsNumber: number,
+    resultsNumber: number,
     page: number,
     pagesNumber: number,
 }
