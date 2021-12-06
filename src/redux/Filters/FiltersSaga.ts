@@ -1,4 +1,4 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, delay } from 'redux-saga/effects';
 
 import {
   setDates,
@@ -12,6 +12,7 @@ import {
 } from './FiltersSlice';
 
 function* handleFiltersChange(): Generator {
+  yield delay(3000);
   yield put({ type: 'UPDATE_ROOMS', payload: 1 });
 }
 
