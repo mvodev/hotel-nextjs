@@ -59,7 +59,9 @@ const SignInCard = (): React.ReactElement => {
                 </>
               )}
             </Field>
-            <span className={styles.signInCardError} style={error ? { display: "block"} : {}}>
+            <span 
+              className={styles.signInCardError}
+              style={error ? { display: "block"} : {display: "block"}}>
               Некорректное имя пользователя/пароль.
             </span>
             <div className={styles.signInCardButtonContainer}>
