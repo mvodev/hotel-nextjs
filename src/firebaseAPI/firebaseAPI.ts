@@ -19,14 +19,8 @@ import {
   collection,
   query,
 } from 'firebase/firestore';
-import {
-  UserDataType,
-  UserType,
-  RoomType,
-  FiltersAPIType,
-  ReturnedRoomType,
-} from './Types';
-import { FirebaseError } from '@firebase/util';
+import { FirebaseError } from "@firebase/util";
+import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -105,14 +99,10 @@ class FirebaseAPI {
     const roomsQuery = query(collection(this.db, 'rooms'));
     const rooms: ReturnedRoomType[] = [];
     const selectionOfRooms = getDocs(roomsQuery)
-      .then((result) =>
-        result.forEach((item) => {
-          rooms.push({ roomID: item.id, ...item.data() } as ReturnedRoomType);
-        })
-      )
-      .then(() => {
-        const filtredRooms = rooms.filter((item) => 
-          this.filterRoom(item, filters));
+      .then((result) => result.forEach((item) => {
+        rooms.push(({roomID: item.id, ...item.data()} as ReturnedRoomType));
+      })).then(() => {
+        const filtredRooms = rooms.filter((item) => this.filterRoom(item, filters));
 
         return {
           rooms: filtredRooms.slice(
