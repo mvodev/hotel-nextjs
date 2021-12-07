@@ -3,7 +3,6 @@ import { PieChart } from 'react-minimal-pie-chart';
 import ImpressionsProps from '../Types';
 
 const Diagram = ({ value }: ImpressionsProps): JSX.Element => {
-
   const colors = value.map((elem, index) => {
     if (elem.withGradient) {
       return (
@@ -17,7 +16,7 @@ const Diagram = ({ value }: ImpressionsProps): JSX.Element => {
     }
     return null;
   });
-  
+
   const valueWithGradient = value.map((elem, index) => {
     if (elem.withGradient) {
       return {

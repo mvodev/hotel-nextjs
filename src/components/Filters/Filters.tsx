@@ -10,9 +10,9 @@ import {
   selectConveniences,
   setAdditionalConvenience,
   selectAdditionalConvenience,
-} from 'src/redux/Filters/FiltersSlice';
+} from 'src/redux/Slices/Filters/FiltersSlice';
 import CheckboxButtons from 'src/components/CheckboxButtons/CheckboxButtons';
-import type { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
+import { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
 import DateDropdown from 'src/components/DateDropdown/DateDropdown';
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
 import DropdownRoom from 'src/components/DropdownRoom/DropdownRoom';
@@ -38,13 +38,13 @@ const Filters = (): JSX.Element => {
       <div className={style.filtersDate}>
         <DateDropdown
           titles={['даты пребывания в отеле']}
-          modifier='single'
+          modifier="single"
           isSmall
         />
       </div>
       <div className={style.filtersGuests}>
         <h2 className={style.filtersGuestsTitle}>гости</h2>
-        <DropdownGuests placeholder='Сколько гостей' opened={false} />
+        <DropdownGuests placeholder="Сколько гостей" opened={false} />
       </div>
       <div className={style.filtersPrice}>
         <RangeSlider />
@@ -54,14 +54,14 @@ const Filters = (): JSX.Element => {
       </div>
       <div className={style.filtersRules}>
         <CheckboxButtons
-          title='правила дома'
+          title="правила дома"
           items={useSelector(selectRules)}
           handleItemChange={(items) => dispatch(setRules(items))}
         />
       </div>
       <div className={style.filtersAvailability}>
         <CheckboxButtons<Required<CheckboxButtonItemType>>
-          title='доступность'
+          title="доступность"
           isRich
           items={useSelector(selectAvailability)}
           handleItemChange={(items) => dispatch(setAvailability(items))}
@@ -70,7 +70,7 @@ const Filters = (): JSX.Element => {
       <div className={style.filtersConveniences}>
         <h2 className={style.filtersConveniencesTitle}>удобства номера</h2>
         <DropdownRoom
-          placeholder='Выберите удобства'
+          placeholder="Выберите удобства"
           values={useSelector(selectConveniences)}
           handleCountersChange={(values) => dispatch(setConveniences(values))}
         />

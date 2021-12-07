@@ -2,9 +2,11 @@ import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 
-import RootSaga from './RootSaga';
+import RootSaga from './Sagas/RootSaga';
 import Authentication from './Slices/Authentication/Authentication';
-import filters from './Filters/FiltersSlice';
+import filters from './Slices/Filters/FiltersSlice';
+import roomCardsStatus from './Slices/RoomCardsStatus/RoomCardsStatusSlice';
+import signInCardReducer from './SignInCard/SignInCardReducer';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -16,6 +18,8 @@ const makeStore = () => {
     reducer: {
       Authentication,
       filters,
+      roomCardsStatus,
+      signInCardReducer,
     },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });

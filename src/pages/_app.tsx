@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import type { AppProps } from 'next/app';
 import { useDispatch } from 'react-redux';
 
-import appActions from 'src/redux/App/AppActions';
+import appActions from 'src/redux/Slices/App/AppActions';
 
 import wrapper from '../redux/Store';
 import '../styles/globals.sass';
