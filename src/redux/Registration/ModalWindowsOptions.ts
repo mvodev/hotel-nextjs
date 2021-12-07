@@ -1,9 +1,16 @@
 const ModalWindowOptions = {
-  emailError: {
+  emailExists: {
     image: 'mailbox.webp',
     title: 'УПС! Этот email уже занят',
     text: 'Вероятно вы уже зарегистрированы на сайте Toxin, попробуйте вспомнить регистрационные данные, либо укажите другой email.',
   },
+
+  incorrectEmail: {
+    image: 'mailbox.webp',
+    title: 'УПС! Данный email является некорректным',
+    text: 'Вероятно вы ошиблись при вводе. Перепроверьте корректность введенных данных',
+  },
+
   unknownError: {
     image: 'repair.webp',
     title: 'ОЙ! Что-то пошло не так',

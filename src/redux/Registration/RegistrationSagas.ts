@@ -12,7 +12,8 @@ import { stringToDate } from 'src/utils/Utils';
 import { FirebaseError } from 'firebase/app';
 import Cookie from 'js-cookie';
 import {
-  EMAIL_ERROR,
+  EMAIL_EXIST,
+  INCORRECT_EMAIL,
   REGISTRATION_SUCCESS,
   SET_SUBMITTING,
   SUBMIT_FORM,
@@ -34,7 +35,9 @@ async function userRegistration(
 
 function* createErrorWindowSaga(data: FirebaseError) {
   if (data.code === 'auth/email-already-in-use') {
-    yield put({ type: EMAIL_ERROR });
+    yield put({ type: EMAIL_EXIST });
+  } else if (data.code === 'auth/invalid-email') {
+    yield put({ type: INCORRECT_EMAIL });
   } else {
     yield put({ type: UNKNOWN_ERROR });
   }

@@ -1,7 +1,7 @@
 import { AnyAction } from 'redux';
 import {
   CLOSE_MODAL_WINDOW,
-  EMAIL_ERROR,
+  EMAIL_EXIST,
   REGISTRATION_SUCCESS,
   SET_SUBMITTING,
   SUBMIT_FORM,
@@ -18,7 +18,7 @@ const submitForm = (payload: FormData): AnyAction => ({
 });
 
 const showEmailErrorWindow = (): AnyAction => ({
-  type: EMAIL_ERROR,
+  type: EMAIL_EXIST,
 });
 
 const showRegistrationSuccessWindow = (): AnyAction => ({

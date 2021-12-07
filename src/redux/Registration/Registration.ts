@@ -4,7 +4,8 @@ import { AnyAction } from 'redux';
 import ModalWindowOptions from './ModalWindowsOptions';
 import RegistrationState, {
   CLOSE_MODAL_WINDOW,
-  EMAIL_ERROR,
+  EMAIL_EXIST,
+  INCORRECT_EMAIL,
   REGISTRATION_SUCCESS,
   SET_SUBMITTING,
   UNKNOWN_ERROR,
@@ -25,12 +26,20 @@ const Registration = (
         ...state,
         submitting: action.payload,
       };
-    case EMAIL_ERROR:
+    case EMAIL_EXIST:
       return {
         ...state,
         modalWindow: {
           isEnabled: true,
-          ...ModalWindowOptions.emailError,
+          ...ModalWindowOptions.emailExists,
+        },
+      };
+    case INCORRECT_EMAIL:
+      return {
+        ...state,
+        modalWindow: {
+          isEnabled: true,
+          ...ModalWindowOptions.incorrectEmail,
         },
       };
     case REGISTRATION_SUCCESS:
