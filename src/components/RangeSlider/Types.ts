@@ -1,9 +1,3 @@
-type TypeRangeSliderProps = {
-  min?: number;
-  max?: number;
-  step?: number;
-};
-
 type TypeCalcPositionArgs = {
   pageX: number;
   shift?: number;
@@ -20,9 +14,4 @@ type TypeHandleProps = {
   handleID: number;
 };
 
-export type {
-  TypeRangeSliderProps,
-  TypeHandleProps,
-  TypeHandleMoveArgs,
-  TypeCalcPositionArgs,
-};
+export type { TypeHandleProps, TypeHandleMoveArgs, TypeCalcPositionArgs };
