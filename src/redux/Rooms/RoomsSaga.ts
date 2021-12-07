@@ -18,7 +18,6 @@ export function* updateRooms(action: ActionType) {
       12 
     )
     yield put(writeRooms({ rooms: roomsData.rooms }))
-    console.log(roomsData)
     yield put({
       type: SET_PAGINATION, 
       payload: {

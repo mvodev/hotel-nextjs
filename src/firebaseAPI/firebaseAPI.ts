@@ -97,9 +97,9 @@ class FirebaseAPI {
     itemsOnPage: number
   ) => {
     const data = { 
-      filters: filters,
-      page: page,
-      itemsOnPage: itemsOnPage
+      filters,
+      page,
+      itemsOnPage
     }
     return  await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/getRooms',
