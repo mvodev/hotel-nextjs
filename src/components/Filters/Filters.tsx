@@ -1,58 +1,53 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
-import { ReactElement, useState } from 'react';
-import style from './Filters.module.sass';
-import CheckboxButtons from '../CheckboxButtons/CheckboxButtons';
-import DateDropdown from '../DateDropdown/DateDropdown';
-import DropdownGuests from '../DropdownGuests/DropdownGuests';
-import DropdownRoom from '../DropdownRoom/DropdownRoom';
-import RangeSlider from '../RangeSlider/RangeSlider';
-import ExpandableList from '../ExpandableList/ExpandableList';
-import type FiltersType from './Types';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Filters = ({
-  dateDropdown,
-  dropdownGuests,
-  rangeSlider,
-  checkboxButtons,
-  richCheckboxButtons,
-  dropdownRoom,
-  expandableList,
-}: FiltersType): ReactElement => {
+import {
+  setRules,
+  selectRules,
+  setAvailability,
+  selectAvailability,
+  setConveniences,
+  selectConveniences,
+  setAdditionalConvenience,
+  selectAdditionalConvenience,
+} from 'src/redux/Slices/Filters/FiltersSlice';
+import CheckboxButtons from 'src/components/CheckboxButtons/CheckboxButtons';
+import { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
+import DateDropdown from 'src/components/DateDropdown/DateDropdown';
+import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
+import DropdownRoom from 'src/components/DropdownRoom/DropdownRoom';
+import RangeSlider from 'src/components/RangeSlider/RangeSlider';
+import ExpandableList from 'src/components/ExpandableList/ExpandableList';
+
+import style from './Filters.module.sass';
+
+const Filters = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleFiltersButtonClick = () => setIsOpen(!isOpen);
 
-  const filtersClass = `${style.filters} ${isOpen ? style.filtersOpen : ''}`;
-
   return (
-    <div className={filtersClass}>
+    <div className={[style.filters, isOpen ? style.filtersOpen : ''].join(' ')}>
       <button
         type='button'
         className={style.filtersButton}
         onClick={handleFiltersButtonClick}
+        aria-label='filter button'
       />
       <div className={style.filtersDate}>
         <DateDropdown
           titles={['даты пребывания в отеле']}
           modifier='single'
-          initDate={dateDropdown.initDate}
           isSmall
         />
       </div>
       <div className={style.filtersGuests}>
         <h2 className={style.filtersGuestsTitle}>гости</h2>
-        <DropdownGuests
-          placeholder='Сколько гостей'
-          opened={false}
-          value={dropdownGuests.value}
-        />
+        <DropdownGuests placeholder='Сколько гостей' opened={false} />
       </div>
       <div className={style.filtersPrice}>
-        <RangeSlider
-          min={rangeSlider.min}
-          max={rangeSlider.max}
-          step={rangeSlider.step}
-        />
+        <RangeSlider />
         <p className={style.filtersPriceText}>
           Стоимость за сутки пребывания в номере
         </p>
@@ -60,27 +55,33 @@ const Filters = ({
       <div className={style.filtersRules}>
         <CheckboxButtons
           title='правила дома'
-          isRich={false}
-          items={checkboxButtons.items}
+          items={useSelector(selectRules)}
+          handleItemChange={(items) => dispatch(setRules(items))}
         />
       </div>
       <div className={style.filtersAvailability}>
-        <CheckboxButtons
+        <CheckboxButtons<Required<CheckboxButtonItemType>>
           title='доступность'
           isRich
-          items={richCheckboxButtons.items}
+          items={useSelector(selectAvailability)}
+          handleItemChange={(items) => dispatch(setAvailability(items))}
         />
       </div>
       <div className={style.filtersConveniences}>
         <h2 className={style.filtersConveniencesTitle}>удобства номера</h2>
-        <DropdownRoom placeholder='' values={dropdownRoom.values} />
+        <DropdownRoom
+          placeholder='Выберите удобства'
+          values={useSelector(selectConveniences)}
+          handleCountersChange={(values) => dispatch(setConveniences(values))}
+        />
       </div>
       <div className={style.filtersAdditionalConveniences}>
         <ExpandableList text='дополнительные удобства'>
           <CheckboxButtons
-            title=''
-            isRich={false}
-            items={expandableList.items}
+            items={useSelector(selectAdditionalConvenience)}
+            handleItemChange={(items) =>
+              dispatch(setAdditionalConvenience(items))
+            }
           />
         </ExpandableList>
       </div>
