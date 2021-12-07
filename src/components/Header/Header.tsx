@@ -6,7 +6,6 @@ import HeaderProps from './Types';
 
 const Header = ({
   logo,
-  user,
   navbarItems,
 }: HeaderProps): React.ReactElement => {
   const [hamburgerIsActive, setHamburger] = useState(false);
@@ -39,7 +38,6 @@ const Header = ({
           </Link>
           <Navbar
             items={navbarItems}
-            user={user}
             isOpened={hamburgerIsActive}
           />
           <button

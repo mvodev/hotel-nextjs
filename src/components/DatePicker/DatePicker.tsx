@@ -7,8 +7,8 @@ import 'react-calendar/dist/Calendar.css';
 const DatePicker = ({
   initDates,
   isSmall = false,
-  onChangeDate, 
-  onControlPanelUsed 
+  onChangeDate,
+  onControlPanelUsed,
 }: DatePickerType): JSX.Element => {
   const dateObject = new Date();
   const options = { year: 'numeric', month: 'long' };
@@ -29,13 +29,13 @@ const DatePicker = ({
   };
   const handleApplyButtonClick = () => onControlPanelUsed('apply');
 
-  const datePickerClass = `date-picker ${isSmall ? 'date-picker_small' : ''}`
+  const datePickerClass = `date-picker ${isSmall ? 'date-picker_small' : ''}`;
 
   return (
     <div className={datePickerClass}>
       <div className='date-picker__calendar'>
         <Calendar
-          locale='ru'
+          locale="ru"
           value={initDates}
           selectRange
           onChange={onChangeDate}
@@ -47,13 +47,13 @@ const DatePicker = ({
       </div>
       <div className='date-picker__control-panel'>
         <Button
-          type='button'
-          text='очистить'
+          type="button"
+          text="очистить"
           onClick={handleCleanButtonClick}
         />
         <Button
-          type='button'
-          text='применить'
+          type="button"
+          text="применить"
           onClick={handleApplyButtonClick}
         />
       </div>

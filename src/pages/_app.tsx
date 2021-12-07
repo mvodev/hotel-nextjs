@@ -8,6 +8,7 @@ import wrapper from '../redux/Store';
 import '../styles/globals.sass';
 import '../components/DatePicker/DatePicker.sass';
 
+// eslint-disable-next-line arrow-body-style
 const MyApp = ({ Component }: AppProps): ReactElement => {
   const dispatch = useDispatch();
   dispatch(appActions.mount);

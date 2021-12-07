@@ -10,8 +10,8 @@ import style from './DateDropdown.module.sass';
 
 const DateDropdown = ({
   titles = ['прибытие', 'выезд'],
-  modifier = 'double',
-  isSmall = false
+  modifier = "double",
+  isSmall = false,
 }: DateDropdownType): JSX.Element => {
   const value = useSelector(selectDates);
   const dispatch = useDispatch();
@@ -101,7 +101,7 @@ const DateDropdown = ({
           initDates={value as Date[]}
           onChangeDate={handleChangeDate}
           onControlPanelUsed={handleControlPanelUsed}
-          isSmall = {isSmall}
+          isSmall={isSmall}
         />
       </div>
     </div>

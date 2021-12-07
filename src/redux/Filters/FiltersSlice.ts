@@ -99,6 +99,10 @@ export const {
   setAdditionalConvenience,
 } = filtersSlice.actions;
 
+export const filtersActions = {
+  update: { type: 'filters/update' },
+};
+
 export const selectFilters = (state: AppState): Filters => state.filters;
 
 export const selectDates = (state: AppState): (Date | null)[] =>
