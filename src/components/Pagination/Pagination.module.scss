@@ -1,0 +1,54 @@
+@import '@styles/vars';
+
+.pagination {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    @media screen and (max-width: 320px) {
+      justify-content: space-evenly;
+    }
+  }
+
+  .buttonContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 40px;
+    width: 100%;
+
+    &:before {
+      content: '';
+      display: block;
+      padding-top: 100%;
+    }
+
+    @media screen and (max-width: 320px) {
+      display: none;
+    }
+
+    &IsMobileDisplayed {
+      @media screen and (max-width: 320px) {
+        display: flex;
+      }
+    }
+  }
+
+  .gap {
+    color: $color-additional-fg;
+    user-select: none;
+  }
+
+  .text {
+    text-align: center;
+    color: $color-main-fg;
+    padding-top: 13px;
+  }
+}

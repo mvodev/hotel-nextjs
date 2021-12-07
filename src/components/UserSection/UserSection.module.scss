@@ -1,0 +1,73 @@
+@import '../../styles/vars.sass';
+
+.userSection {
+  align-items: center;
+  display: flex;
+
+  @media screen and (max-width: 950px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    position: relative;
+    font-family: Montserrat;
+    font-size: 14px;
+    color: $color-additional-fg;
+    padding: 10px;
+    cursor: pointer;
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    @media screen and (max-width: 950px) {
+      align-items: flex-start;
+      color: $color-main-bg;
+      padding: 0;
+      margin: 0 0 30px 0;
+      font-size: 24px;
+
+      .link {
+        color: $color-main-bg;
+      }
+
+      &:hover {
+        .link {
+          color: $color-main-bg;
+          text-decoration: underline;
+        }
+      }
+
+      &ThemeStretched {
+        width: 100%;
+      }
+    }
+  }
+
+  .link {
+    color: $color-additional-fg;
+    text-decoration: none;
+
+    &:hover {
+      color: $color-main-fg;
+    }
+  }
+
+  .separator {
+    display: flex;
+    width: 1px;
+    min-height: 30px;
+    background: transparentize($color-title-fg, 0.95);
+
+    @media screen and (max-width: 950px) {
+      flex: none;
+      background: $color-main-bg;
+      width: 100%;
+      min-height: 1px;
+    }
+  }
+}

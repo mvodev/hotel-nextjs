@@ -1,0 +1,287 @@
+@import '../../styles/vars'
+@import '../../styles/mixins'
+  
+.date-picker
+  max-width: 320px
+  width: 100%
+  box-sizing: border-box
+  padding: 20px
+  border: 1px solid $color-unclaimed-fg
+  border-radius: 4px
+  background-color: $color-main-bg
+
+  & .react-calendar
+    width: 100%
+    box-sizing: border-box
+    border: none
+
+    &__navigation
+      padding: 0
+      margin: 0
+      height: fit-content
+      background-color: $color-main-bg
+
+      &__arrow.react-calendar__navigation__prev2-button,
+      &__arrow.react-calendar__navigation__next2-button
+        display: none
+
+      &__arrow.react-calendar__navigation__prev-button
+        width: fit-content
+        min-width: unset
+        padding: 0
+        transition: 0.5s
+
+        &:disabled
+          background-color: $color-main-bg
+          opacity: 0.5
+
+        &::before
+          content: 'arrow_back'
+          +material-icon
+          font-size: 24px
+          line-height: 20px
+          color: $color-primary
+          width: fit-content
+          transition: 0.25s
+
+        &:focus,
+        &:hover
+          background-color: $color-main-bg
+
+          &::before
+              color: $color-additional-fg
+
+      &__arrow.react-calendar__navigation__next-button
+        width: fit-content
+        min-width: unset
+        padding: 0
+
+        &:disabled
+          background-color: $color-main-bg
+          opacity: 0.5
+          transition: 0.5s
+
+        &::before
+          content: 'arrow_forward'
+          +material-icon
+          font-size: 24px
+          line-height: 20px
+          color: $color-primary
+          width: fit-content
+          transition: 0.25s
+
+        &:focus,
+        &:hover
+          background-color: $color-main-bg
+
+          &::before
+              color: $color-additional-fg
+
+      &__label
+        font-family: Montserrat
+        font-weight: bold
+        font-size: 19px
+        line-height: 23px
+        color: $color-title-fg
+        flex-direction: row-reverse
+        text-transform: capitalize 
+        padding: 0
+        pointer-events: none
+        cursor: default
+
+    &__month-view 
+      font-family: $main-font-family
+      font-size: 12px
+      font-weight: normal
+      color: $color-additional-fg
+
+      &__weekdays
+        padding-top: 29px
+
+        &__weekday
+          height: 37px
+          width: 40px
+          padding: 0
+          display: flex
+          justify-content: center
+          align-items: center
+          font-weight: bold
+          color: $color-primary
+          font-size: 12px
+          text-transform: capitalize
+
+          & abbr
+            text-decoration: none
+        
+      &__days
+        padding-top: 1px
+
+        &__day
+          width: 40px
+          height: 40px
+          padding: 0
+          color: $color-additional-fg
+
+          &--weekend
+            color: $color-additional-fg
+
+          &--neighboringMonth
+            color: $color-unclaimed-fg
+
+    &__tile
+      &:disabled
+        background-color: $color-main-bg
+        color: rgba(31, 32, 65, 0.35)
+
+      &--now
+        background: $color-main-bg 
+
+      &:enabled:hover
+        background: $color-main-bg
+        position: relative
+
+        &:before
+          background: $gradient-primary
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          opacity: 25%
+          content: ""
+          border-radius: 50%
+
+      &--range
+        background: $color-main-bg
+        position: relative
+
+        &:before
+          background: $gradient-primary
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          opacity: 25%
+          content: ""
+
+        &:enabled:hover
+          &::before
+            border-radius: 0
+          &::after
+            content: none
+
+      &--rangeStart,
+      &--rangeStart:enabled:hover
+        abbr
+          color: #fff
+          z-index: 3
+          position: relative
+
+        &:before
+          background: $gradient-primary
+          position: absolute
+          top: 0
+          left: 50%
+          z-index: 0
+          width: 50%
+          height: 100%
+          opacity: 25%
+          content: ""
+
+        &:after
+          background: $gradient-primary
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          content: ""
+          border-radius: 50%
+
+      &--rangeEnd,
+      &--rangeEnd:enabled:hover
+        abbr
+          color: #fff
+          z-index: 3
+          position: relative
+
+        &:before
+          background: $gradient-primary
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 0
+          width: 50%
+          height: 100%
+          opacity: 25%
+          content: ""
+
+        &:after
+          background: $gradient-primary
+          position: absolute
+          top: 0
+          left: 0
+          z-index: 1
+          width: 100%
+          height: 100%
+          content: ""
+          border-radius: 50%
+
+      &--rangeStart.react-calendar__tile--rangeEnd,
+      &--rangeStart.react-calendar__tile--rangeEnd:hover
+        &:before
+          display: none
+
+        &:after
+          background: $gradient-secondary
+
+      &--active:enabled:focus
+        background: $color-main-bg
+
+
+  & .react-calendar--selectRange
+    & .react-calendar__tile--rangeStart.react-calendar__tile--rangeEnd
+      &:hover
+        &:before
+          display: none
+
+      &:before
+        display: none
+
+      &:after
+        background: $gradient-primary
+    
+    & .react-calendar__tile--hover
+      position: relative
+      background: $color-main-bg 
+
+      &:before
+        background: $gradient-primary
+        position: absolute
+        top: 0
+        left: 0
+        z-index: 1
+        width: 100%
+        height: 100%
+        opacity: 25%
+        content: ""
+        border-radius: 50%
+
+      
+
+  &__control-panel
+    display: flex
+    justify-content: space-between
+    flex: 1 1 auto
+    margin-top: 20px
+
+  &.date-picker_small
+    & .react-calendar
+      &__month-view
+        &__days
+          &__day
+            height: 32px
