@@ -135,8 +135,7 @@ class FirebaseAPI {
   };
 
   private filterRoom = (item: ReturnedRoomType, filters: FiltersAPIType) => {
-    const inPricesRange =
-      item.price >= filters.price[0] && item.price <= filters.price[1];
+    const inPricesRange = item.price >= filters.price.from && item.price <= filters.price.to;
     if (!inPricesRange) return false;
 
     if (item.maxGuests < filters.guests.adult + filters.guests.child) {
@@ -145,10 +144,10 @@ class FirebaseAPI {
 
     if (filters.dates[0] !== null) {
       for (let i = 0; i < item.bookedDays.length; i += 1) {
-        const date = new Date(item.bookedDays[i].seconds * 1000);
+        const date = item.bookedDays[i].seconds * 1000;
         if (
-          date >= (filters.dates[0] as Date) &&
-          date <= (filters.dates[1] as Date)
+          date >= filters.dates[0] &&
+          date <= filters.dates[1]
         )
           return false;
       }

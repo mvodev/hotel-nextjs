@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import styles from './Carousel.module.sass';
 import TypeCarouselProps from './Types';
 
 const Carousel = ({
   names,
-  delay = 10000,
+  delay = 20000,
 }: TypeCarouselProps): React.ReactElement => {
   const [index, changeIndex] = useState(0);
+  const timer: React.MutableRefObject<number> = useRef(0);
 
   const getNext = () => (index === names.length - 1 ? 0 : index + 1);
 
   useEffect(() => {
-    const timeout = setTimeout(() => changeIndex(getNext()), delay);
+    timer.current = window.setTimeout(() => changeIndex(getNext()), delay);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  });
+    return (() => clearTimeout(timer.current));
+  })
 
   return (
     <div className={styles.carousel}>
