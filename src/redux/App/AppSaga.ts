@@ -1,9 +1,9 @@
 import { take, call, put } from 'redux-saga/effects';
 
-import appActions from 'src/redux/Slices/App/AppActions';
+import appActions from 'src/redux/App/AppActions';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
-import { setFilters } from 'src/redux/Slices/Filters/FiltersSlice';
-import type { Filters } from 'src/redux/Slices/Filters/Types';
+import { setFilters } from 'src/redux/Filters/FiltersSlice';
+import type { Filters } from 'src/redux/Filters/Types';
 
 function* appInit(): Generator {
   const filtersInitState = yield call(firebaseAPI.getFilters);
