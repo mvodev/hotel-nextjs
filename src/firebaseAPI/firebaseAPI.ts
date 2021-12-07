@@ -23,8 +23,6 @@ import {
 import { FirebaseError } from "@firebase/util";
 import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
 
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA",
   authDomain: "breaking-code-ebe74.firebaseapp.com",
