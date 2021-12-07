@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setGuests, selectGuests } from 'src/redux/Filters/FiltersSlice';
+import { setGuests, selectGuests } from 'src/redux/Slices/Filters/FiltersSlice';
 import DropdownCounter from 'src/components/DropdownCounter/DropdownCounter';
 import Button from 'src/components/Button/Button';
 import { getPosInSpellCasesArray } from 'src/utils/Utils';
@@ -90,22 +90,22 @@ const DropdownGuests = ({
         ].join(' ')}
       >
         <DropdownCounter
-          text='Взрослые'
+          text="Взрослые"
           number={adult}
           onChange={onChange}
-          type='adult'
+          type="adult"
         />
         <DropdownCounter
-          text='Дети'
+          text="Дети"
           number={child}
           onChange={onChange}
-          type='child'
+          type="child"
         />
         <DropdownCounter
-          text='Младенцы'
+          text="Младенцы"
           number={infants}
           onChange={onChange}
-          type='infants'
+          type="infants"
         />
         <div className={styles.dropdownGuestsBodyButtons}>
           <div
@@ -115,9 +115,9 @@ const DropdownGuests = ({
                 : styles.dropdownGuestsButtonIsHidden
             }
           >
-            <Button type='button' text='очистить' onClick={handleClearButton} />
+            <Button type="button" text="очистить" onClick={handleClearButton} />
           </div>
-          <Button type='button' text='применить' onClick={handleApplyButton} />
+          <Button type="button" text="применить" onClick={handleApplyButton} />
         </div>
       </div>
     </div>
