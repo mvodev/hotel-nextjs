@@ -23,9 +23,9 @@ type SignInFormReducerType = {
 
 function* workerSignInSaga(form:SignInFormReducerType) {
 
-  const isAuthorized: Promise<UserType | AuthError> = 
+  const result: Promise<UserType | AuthError> = 
   yield call(() => firebaseAPI.signIn(form.payload.email, form.payload.password));
-  if (isAuthorized.constructor.name === 'FirebaseError') {
+  if (result.constructor.name === 'FirebaseError') {
     yield put(setError(true));
     yield put(setSubmitting(false));
   } else {
@@ -37,8 +37,8 @@ function* workerSignInSaga(form:SignInFormReducerType) {
     yield put({ 
       type: SET_USER,
       payload: { 
-        ...isAuthorized,
-        birthday:timestampToDateString((isAuthorized).birthday),
+        ...result,
+        birthday:timestampToDateString((result).birthday),
     }});
   }
 }
