@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { initializeApp, FirebaseApp } from "firebase/app";
 import { getFunctions, httpsCallable, Functions } from "firebase/functions";
 import { 
@@ -19,8 +20,8 @@ import {
   collection, 
   query,
 } from 'firebase/firestore';
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
 import { FirebaseError } from "@firebase/util";
+import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA",
@@ -94,9 +95,7 @@ class FirebaseAPI {
       .then((result) => result.forEach((item) => {
         rooms.push(({roomID: item.id, ...item.data()} as ReturnedRoomType));
       })).then(() => {
-        const filtredRooms = rooms.filter((item) => {
-          return this.filterRoom(item, filters);
-        });
+        const filtredRooms = rooms.filter((item) => this.filterRoom(item, filters));
 
         return {
           rooms: filtredRooms.slice(
