@@ -13,7 +13,7 @@ const SignInCard = (): React.ReactElement => {
 
   const dispatch = useDispatch();
 
-  const { submitting, error, success } = useSelector((state: RootState) => state.signInCardReducer);
+  const { submitting, error, success } = {...useSelector((state: RootState) => state.signInCardReducer)};
 
   const handleModalWindowClose = ()=>{
     dispatch(setModalWindow(false));
