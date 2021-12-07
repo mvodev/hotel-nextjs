@@ -7,7 +7,6 @@ import watchAuthenticationSaga from './Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 
 import filtersWatcher from './Filters/FiltersSaga';
-import roomCardsSagaWatcher from './RoomCards/RoomCardsSaga';
 import appWatcher from './App/AppSaga';
 
 function* startSaga(
@@ -24,14 +23,12 @@ function* startSaga(
 }
 
 function* RootSaga(): Generator<any, any, any> {
-<<<<<<< HEAD:src/redux/Sagas/RootSaga.ts
-  const sagas: Saga<any>[] = [filtersWatcher, roomCardsSagaWatcher, appWatcher];
-=======
   const sagas: Saga<any>[] = [
     watchRegistrationSubmitSaga,
     watchAuthenticationSaga,
+    filtersWatcher,
+    appWatcher
   ];
->>>>>>> #46-add-registration-page:src/redux/RootSaga.ts
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));
 

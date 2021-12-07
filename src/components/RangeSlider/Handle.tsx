@@ -36,7 +36,7 @@ const Handle = ({
   return (
     <button
       className={styles.handle}
-      type='button'
+      type="button"
       aria-label={`${handleID === 0 ? 'left' : 'right'} handle`}
       onPointerDown={onPointerDown}
       onLostPointerCapture={() => {
