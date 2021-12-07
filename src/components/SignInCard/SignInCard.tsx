@@ -3,9 +3,9 @@ import { Field, Form, FieldMetaState } from 'react-final-form';
 import TextField from 'src/components/TextField/TextField';
 import Button from 'src/components/Button/Button';
 import { setModalWindow, submitForm } from 'src/redux/SignInCard/SignInCardActions';
+import { AppState } from 'src/redux/Store';
 import ModalWindow from '../ModalWindow/ModalWindow';
 import FormData from './Types';
-import { RootState } from '../../redux/reduces';
 import styles from './SignInCard.module.scss';
 import validate from './validate';
 
@@ -13,7 +13,7 @@ const SignInCard = (): React.ReactElement => {
 
   const dispatch = useDispatch();
 
-  const { submitting, error, success } = {...useSelector((state: RootState) => state.signInCardReducer)};
+  const { submitting, error, success } = {...useSelector((state: AppState) => state.signInCardReducer)};
 
   const handleModalWindowClose = ()=>{
     dispatch(setModalWindow(false));

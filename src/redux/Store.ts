@@ -6,6 +6,7 @@ import RootSaga from './Sagas/RootSaga';
 import Authentication from './Slices/Authentication/Authentication';
 import filters from './Slices/Filters/FiltersSlice';
 import roomCardsStatus from './Slices/RoomCardsStatus/RoomCardsStatusSlice';
+import signInCardReducer from './SignInCard/SignInCardReducer';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -18,6 +19,7 @@ const makeStore = () => {
       Authentication,
       filters,
       roomCardsStatus,
+      signInCardReducer,
     },
     middleware: [...getDefaultMiddleware(), sagaMiddleware],
   });

@@ -22,7 +22,6 @@ type SignInFormReducerType = {
 }
 
 function* workerSignInSaga(form:SignInFormReducerType) {
-
   const result: Promise<UserType | AuthError> = 
   yield call(() => firebaseAPI.signIn(form.payload.email, form.payload.password));
   if (result.constructor.name === 'FirebaseError') {

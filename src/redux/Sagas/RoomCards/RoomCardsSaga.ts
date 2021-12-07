@@ -20,7 +20,6 @@ function* roomCardsUpdate(): Generator {
     1,
     12
   );
-  console.log(rooms);
   // yield put(setRooms({ rooms }));
   yield put(turnOn());
 }
