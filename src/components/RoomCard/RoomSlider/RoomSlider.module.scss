@@ -1,5 +1,6 @@
 @use 'sass:color';
-@import '../../../styles/mixins';
+
+@import '@styles/mixins';
 
 .roomSlider {
   position: relative;

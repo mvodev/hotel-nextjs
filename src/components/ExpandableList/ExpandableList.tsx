@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import styles from './ExpandableList.module.scss';
 import ExpandableListProps from './Types';
 

@@ -1,10 +1,6 @@
 type DropdownGuestsProps = {
-  placeholder: string;
-  opened: boolean;
-  value: {
-    adult: number;
-    child: number;
-    infants: number;
-  };
+  placeholder?: string;
+  opened?: boolean;
 };
+
 export default DropdownGuestsProps;

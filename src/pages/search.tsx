@@ -1,31 +1,28 @@
-import type { ReactElement } from 'react';
-
-import Layout from '../components/Layout';
-import Filters from '../components/Filters/Filters';
-import RoomCard from '../components/RoomCard/RoomCard';
-import Pagination from '../components/Pagination/Pagination';
-import FiltersProps from '../components/Filters/FiltersProps';
-import roomCardProps from '../components/RoomCard/RoomCardProps';
-
-import styles from '../styles/pages/search.module.sass';
+import Layout from 'src/components/Layout';
+import Filters from 'src/components/Filters/Filters';
+import RoomCard from 'src/components/RoomCard/RoomCard';
+import Pagination from 'src/components/Pagination/Pagination';
+import roomCardProps from 'src/components/RoomCard/RoomCardProps';
+import styles from '@styles/pages/search.module.sass';
 
 const searchItems = roomCardProps.map((item) => (
   <div key={item.infoSection.roomNumber} className={styles.searchItem}>
-    <RoomCard {...item}/>
+    <RoomCard {...item} />
   </div>
-))
+));
 
-
-const Search = (): ReactElement => (
+const Search = (): JSX.Element => (
   <Layout title='search room' pageClass='search'>
     <section className={styles.pageContainer}>
-      <Filters {...FiltersProps} />
+      <Filters />
       <div className={styles.searchContent}>
-        <h1 className={styles.searchTitle}>Номера, которые мы для вас подобрали</h1>
+        <h1 className={styles.searchTitle}>
+          Номера, которые мы для вас подобрали
+        </h1>
         <div className={styles.searchResult}>
           {searchItems}
           <div className={styles.searchPagination}>
-            <Pagination 
+            <Pagination
               {...{
                 buttonsCount: 15,
                 currentPage: 1,
