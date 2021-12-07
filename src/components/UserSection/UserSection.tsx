@@ -25,20 +25,20 @@ const UserSection = (): React.ReactElement => {
 
   const entryButton =
     screenWidth <= PHONE_SCREEN_WIDTH ? (
-      <Link href='/signIn'>
+      <Link href="/signIn">
         <a className={styles.link}>Войти</a>
       </Link>
     ) : (
-      <Button link='/signIn' theme='bordered' size='small' text='Войти' />
+      <Button link="/signIn" theme="bordered" size="small" text="Войти" />
     );
 
   const registrationButton =
     screenWidth <= PHONE_SCREEN_WIDTH ? (
-      <Link href='/registration'>
+      <Link href="/registration">
         <a className={styles.link}>Зарегистрироваться</a>
       </Link>
     ) : (
-      <Button link='/registration' theme='filled' size='small' text='Зарегистрироваться' />
+      <Button link="/registration" theme="filled" size="small" text="Зарегистрироваться" />
     );
 
   const userSection = isAuthenticated ? (
@@ -47,7 +47,7 @@ const UserSection = (): React.ReactElement => {
         <div className={styles.separator} />
       </div>
       <div className={styles.item}>
-        <Link href='/'>
+        <Link href="/">
           <a className={styles.link}>{`${user.name} ${user.surname}`}</a>
         </Link>
       </div>

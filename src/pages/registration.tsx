@@ -24,7 +24,7 @@ const Registration = (): React.ReactElement => {
   }
 
   return (
-    <Layout title='registration page' pageClass={styles.registration}>
+    <Layout title="registration page" pageClass={styles.registration}>
       {content}
     </Layout>
   );
