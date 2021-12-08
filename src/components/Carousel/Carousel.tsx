@@ -28,7 +28,7 @@ const Carousel = ({
           ].join(' ')}
           key={name}
           src={`./images/${name}`}
-          alt='amaizing hotel room'
+          alt="amaizing hotel room"
         />
       ))}
     </div>

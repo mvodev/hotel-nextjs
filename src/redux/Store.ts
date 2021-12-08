@@ -1,11 +1,13 @@
 import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
+
 import rooms from './Rooms/Rooms';
 import RootSaga from './RootSaga';
 import Authentication from './Authentication/Authentication';
 import filters from './Filters/FiltersSlice';
 import Pagination from 'src/redux/Pagination/Pagination';
+import Registration from './Registration/Registration';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 
 
@@ -22,6 +24,7 @@ const makeStore = () => {
       rooms,
       Pagination,
       signInCardReducer,
+      Registration,
     },
     middleware: [...getDefaultMiddleware({
       serializableCheck: { 

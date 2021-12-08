@@ -1,6 +1,5 @@
 const HeaderDefaultProps = {
   logo: '/images/logo.svg',
-  user: undefined,
   navbarItems: [
     { id: 1, item: 'О нас', link: '/' },
     {

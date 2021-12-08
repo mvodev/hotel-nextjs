@@ -59,11 +59,17 @@ class FirebaseAPI {
           gender: userData.gender,
           birthday: userData.birthday,
         });
-        return {
-          uid: userCredential.user.uid,
-          email: userCredential.user.email,
-        };
+        return userCredential;
       })
+      .then((userCredential: UserCredential) =>
+        getDoc(doc(this.db, 'userData', userCredential.user.uid)).then(
+          (user) => ({
+            uid: userCredential.user.uid,
+            email: userCredential.user.email,
+            ...user.data(),
+          })
+        )
+      )
       .catch((error: FirebaseError) => error);
 
   public signIn = async (

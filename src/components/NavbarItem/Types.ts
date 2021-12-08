@@ -7,6 +7,7 @@ type NavbarItem = {
   item: string;
   link: string;
   hiddenItems?: NavbarItem[];
+  callback?: () => void;
 };
 
 export type { NavbarItemProps, NavbarItem };

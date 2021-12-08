@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import { selectUpdateStatus } from 'src/redux/Slices/RoomCardsStatus/RoomCardsStatusSlice';
+import { selectUpdateStatus } from 'src/redux/RoomCardsStatus/RoomCardsStatusSlice';
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
 import Button from 'src/components/Button/Button';
 import DateDropdown from 'src/components/DateDropdown/DateDropdown';

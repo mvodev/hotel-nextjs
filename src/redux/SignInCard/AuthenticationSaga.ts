@@ -3,14 +3,14 @@ import { call, delay } from '@redux-saga/core/effects';
 import { AuthError } from 'firebase/auth';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
-import { setAuthenticated } from '../Slices/Authentication/AuthenticationActions';
+import { setAuthenticated } from '../Authentication/AuthenticationActions';
 import { 
   setModalWindow,
   setError,
   setSubmitting 
 } from './SignInCardActions';
 import { SUBMIT_SIGN_IN_FORM } from './Types';
-import { SET_USER } from '../Slices/Authentication/Types';
+import { SET_USER } from '../Authentication/Types';
 import { timestampToDateString } from '../../utils/Utils';
 
 type SignInFormReducerType = {

@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 import prices from './Prices/PricesSlice';
-import Authentication from './Slices/Authentication/Authentication';
+import Authentication from './Authentication/Authentication';
 
 const reducers = combineReducers({
   signInCardReducer,
