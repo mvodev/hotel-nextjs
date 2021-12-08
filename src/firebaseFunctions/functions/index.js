@@ -1,26 +1,13 @@
 const functions = require("firebase-functions");
-const {
-  getFirestore, query, getDocs, collection,
-} = require("firebase/firestore");
-const {initializeApp} = require("firebase/app");
+const cors = require("cors");
+const admin = require("firebase-admin");
+admin.initializeApp();
+const db = admin.firestore();
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA",
-  authDomain: "breaking-code-ebe74.firebaseapp.com",
-  databaseURL: "https://breaking-code-ebe74-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "breaking-code-ebe74",
-  storageBucket: "breaking-code-ebe74.appspot.com",
-  messagingSenderId: "770591862991",
-  appId: "1:770591862991:web:4dea4eda027fcf69ef07ba",
-  measurementId: "G-42H384R7P3",
-};
-
-const app = initializeApp(firebaseConfig);
-const firestore = getFirestore(app);
 
 const filterRoom = (item, filters) => {
-  const inPricesRange = (item.price >= filters.price[0]) &&
-    (item.price <= filters.price[1]);
+  const inPricesRange =
+    ((item.price >= filters.price.from) && (item.price <= filters.price.to));
   if (!inPricesRange) return false;
 
   if (item.maxGuests < (filters.guests.adult + filters.guests.child)) {
@@ -78,29 +65,30 @@ const filterRoom = (item, filters) => {
   return true;
 };
 
-exports.getRooms = functions
-    .region("europe-west")
-    .https.onCall(({filters, page, itemsOnPage}) => {
-      const roomsQuery = query(collection(firestore, "rooms"));
+exports.getRooms = functions.region("europe-west3")
+  .https.onRequest((req, res) => {
+    const roomsQuery = db.collection("rooms");
+    roomsQuery.get().then((docs) => {
+      const {filters, page, itemsOnPage} =JSON.parse(req.body);
       const rooms = [];
+      docs.forEach((doc) => rooms.push({roomID: doc.id, ...doc.data()}));
 
-      const selectionOfRooms = getDocs(roomsQuery)
-          .then((result) => result.forEach((item) => {
-            rooms.push({roomID: item.id, ...item.data()});
-          })).then(() => {
-            const filtredRooms = rooms.filter((item) => {
-              return filterRoom(item, filters);
-            });
-
-            return {
-              rooms: filtredRooms.slice(
-                  ((itemsOnPage * page) - itemsOnPage), (itemsOnPage * page),
-              ),
-              esultsNumber: filtredRooms.length,
-              page,
-              pagesNumber: Math.ceil(filtredRooms.length / itemsOnPage),
-            };
-          });
-
-      return selectionOfRooms;
+      const filtredRooms = rooms.filter((item) => {
+        return filterRoom(item, filters);
+      });
+      
+      const result = {
+        rooms: filtredRooms.slice(
+            ((itemsOnPage * page) - itemsOnPage),
+            (itemsOnPage * page),
+        ),
+        resultsNumber: filtredRooms.length,
+        page,
+        pagesNumber: Math.ceil(filtredRooms.length / itemsOnPage),
+      };
+      
+      cors()(req, res, () => {
+        return res.send(result);
+      });
     });
+  });
