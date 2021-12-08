@@ -1,24 +1,32 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'src/redux/reduces';
+import { USER_LOG_OUT } from 'src/redux/Authentication/Types';
+import NavbarItem from '../NavbarItem/NavbarItem';
 import Button from '../Button/Button';
 import styles from './UserSection.module.scss';
 
 const UserSection = (): React.ReactElement => {
-
-  const { user, isAuthenticated } = useSelector((state: RootState) => state.Authentication);
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector(
+    (state: RootState) => state.Authentication
+  );
 
   const [screenWidth, setWidth] = useState(0);
 
   const updateWidth = () => {
     setWidth(window.innerWidth);
   };
-  
+
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
     updateWidth();
   }, []);
+
+  const handleExitClick = (): void => {
+    dispatch({ type: USER_LOG_OUT });
+  };
 
   const PHONE_SCREEN_WIDTH = 950;
   const separatorItemClasses = `${styles.item} ${styles.itemThemeStretched}`;
@@ -38,7 +46,12 @@ const UserSection = (): React.ReactElement => {
         <a className={styles.link}>Зарегистрироваться</a>
       </Link>
     ) : (
-      <Button link="/registration" theme="filled" size="small" text="Зарегистрироваться" />
+      <Button
+        link="/registration"
+        theme="filled"
+        size="small"
+        text="Зарегистрироваться"
+      />
     );
 
   const userSection = isAuthenticated ? (
@@ -47,9 +60,16 @@ const UserSection = (): React.ReactElement => {
         <div className={styles.separator} />
       </div>
       <div className={styles.item}>
-        <Link href="/">
-          <a className={styles.link}>{`${user.name} ${user.surname}`}</a>
-        </Link>
+        <NavbarItem
+          item={{
+            id: 1,
+            item: `${user.name} ${user.surname}`,
+            link: '/',
+            hiddenItems: [
+              { id: 1, item: 'Выход', link: '/', callback: handleExitClick },
+            ],
+          }}
+        />
       </div>
     </>
   ) : (

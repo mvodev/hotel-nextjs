@@ -3,7 +3,9 @@
 
 import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
-import watchAuthenticationSaga from '../Authentication/AuthenticationSagas';
+import watchAuthenticationSaga, {
+  watchUserLogOutSaga,
+} from '../Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from '../Registration/RegistrationSagas';
 import watchSubmitSignInSaga from '../SignInCard/AuthenticationSaga';
 
@@ -31,7 +33,8 @@ function* RootSaga(): Generator<any, any, any> {
     appWatcher,
     watchSubmitSignInSaga,
     watchRegistrationSubmitSaga,
-    watchAuthenticationSaga
+    watchAuthenticationSaga,
+    watchUserLogOutSaga,
   ];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));
