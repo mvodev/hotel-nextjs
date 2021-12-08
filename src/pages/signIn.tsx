@@ -15,7 +15,7 @@ const SignIn = (): React.ReactElement => {
     ...useSelector((state: RootState) => state.Authentication),
   };
 
-    useEffect(()=>{
+  useEffect(()=>{
     if(isAuthenticated){
       router.push('/');
     }

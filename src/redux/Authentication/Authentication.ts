@@ -1,5 +1,9 @@
 import { AnyAction } from 'redux';
-import AuthenticationState, { SET_AUTHENTICATED, SET_USER } from './Types';
+import AuthenticationState, {
+  RESET_USER_DATA,
+  SET_AUTHENTICATED,
+  SET_USER,
+} from './Types';
 
 const initialState = {
   isAuthenticated: false,
@@ -25,6 +29,8 @@ const Authentication = (
         ...state,
         user: action.payload,
       };
+    case RESET_USER_DATA:
+      return initialState;
     default:
       return state;
   }

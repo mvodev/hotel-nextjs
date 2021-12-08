@@ -10,7 +10,7 @@ import {
   setAdditionalConvenience,
   setFilters,
   filtersActions,
-} from 'src/redux/Slices/Filters/FiltersSlice';
+} from 'src/redux/Filters/FiltersSlice';
 
 function* handleFiltersChange(): Generator {
   yield put(filtersActions.update);
