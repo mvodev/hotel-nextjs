@@ -1,12 +1,16 @@
 import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
-import Authentication from './Authentication/Authentication';
-import Registration from './Registration/Registration';
-import filters from './Filters/FiltersSlice';
+
+import rooms from './Rooms/Rooms';
 import RootSaga from './RootSaga';
+import Authentication from './Authentication/Authentication';
+import filters from './Filters/FiltersSlice';
+import Pagination from 'src/redux/Pagination/Pagination';
+import Registration from './Registration/Registration';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
+
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -18,12 +22,28 @@ const makeStore = () => {
     reducer: {
       Authentication,
       filters,
-      roomCardsStatus,
+      rooms,
+      Pagination,
       signInCardReducer,
       Registration,
+      roomCardsStatus,
     },
-    middleware: [...getDefaultMiddleware(), sagaMiddleware],
-  });
+    middleware: [...getDefaultMiddleware({
+      serializableCheck: { 
+        ignoredActions: ['rooms/writeRooms', 
+        'SET-PAGINATION', 
+        'app/mount', 
+        'UPDATE_ROOMS', 
+        'filters/setRules',
+        'filters/setAvailability',
+        'filters/setAdditionalConvenience',
+        'filters/setPrice',
+        'filters/setGuests',
+        'filters/setDates',
+        'filters/setConveniences'
+      ] 
+      }}), sagaMiddleware],
+    });
   (store as SagaStore).sagaTask = sagaMiddleware.run(RootSaga);
   return store;
 };

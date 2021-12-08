@@ -8,10 +8,9 @@ import watchAuthenticationSaga, {
 } from './Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 import watchSubmitSignInSaga from './SignInCard/AuthenticationSaga';
-
-import filtersWatcher from './Sagas/Filters/FiltersSaga';
-import roomCardsSagaWatcher from './Sagas/RoomCards/RoomCardsSaga';
-import appWatcher from './Sagas/App/AppSaga';
+import filtersWatcher from './Filters/FiltersSaga';
+import { watchUpdateRooms } from './Rooms/RoomsSaga';
+import appWatcher from './App/AppSaga';
 
 function* startSaga(
   saga: Saga<any>
@@ -29,7 +28,7 @@ function* startSaga(
 function* RootSaga(): Generator<any, any, any> {
   const sagas: Saga<any>[] = [
     filtersWatcher,
-    roomCardsSagaWatcher,
+    watchUpdateRooms,
     appWatcher,
     watchSubmitSignInSaga,
     watchRegistrationSubmitSaga,
