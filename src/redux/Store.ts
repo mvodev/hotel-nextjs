@@ -8,6 +8,7 @@ import Authentication from './Authentication/Authentication';
 import filters from './Filters/FiltersSlice';
 import Pagination from 'src/redux/Pagination/Pagination';
 import Registration from './Registration/Registration';
+import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 
 
@@ -25,6 +26,7 @@ const makeStore = () => {
       Pagination,
       signInCardReducer,
       Registration,
+      roomCardsStatus,
     },
     middleware: [...getDefaultMiddleware({
       serializableCheck: { 

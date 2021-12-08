@@ -8,9 +8,9 @@ import watchAuthenticationSaga, {
 } from './Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 import watchSubmitSignInSaga from './SignInCard/AuthenticationSaga';
-import filtersWatcher from './Sagas/Filters/FiltersSaga';
+import filtersWatcher from './Filters/FiltersSaga';
 import { watchUpdateRooms } from './Rooms/RoomsSaga';
-import appWatcher from './Sagas/App/AppSaga';
+import appWatcher from './App/AppSaga';
 
 function* startSaga(
   saga: Saga<any>
