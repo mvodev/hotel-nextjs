@@ -5,13 +5,13 @@ import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
 import watchAuthenticationSaga, {
   watchUserLogOutSaga,
-} from '../Authentication/AuthenticationSagas';
-import watchRegistrationSubmitSaga from '../Registration/RegistrationSagas';
-import watchSubmitSignInSaga from '../SignInCard/AuthenticationSaga';
+} from './Authentication/AuthenticationSagas';
+import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
+import watchSubmitSignInSaga from './SignInCard/AuthenticationSaga';
 
-import filtersWatcher from './Filters/FiltersSaga';
-import roomCardsSagaWatcher from './RoomCards/RoomCardsSaga';
-import appWatcher from './App/AppSaga';
+import filtersWatcher from './Sagas/Filters/FiltersSaga';
+import roomCardsSagaWatcher from './Sagas/RoomCards/RoomCardsSaga';
+import appWatcher from './Sagas/App/AppSaga';
 
 function* startSaga(
   saga: Saga<any>

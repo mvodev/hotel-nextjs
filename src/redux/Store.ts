@@ -4,7 +4,7 @@ import { createWrapper } from 'next-redux-wrapper';
 import Authentication from './Authentication/Authentication';
 import Registration from './Registration/Registration';
 import filters from './Filters/FiltersSlice';
-import RootSaga from './Sagas/RootSaga';
+import RootSaga from './RootSaga';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 
