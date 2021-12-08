@@ -1,15 +1,15 @@
 import { takeEvery, put, select, call } from 'redux-saga/effects';
 
+import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
+import type { FiltersAPIType } from 'src/firebaseAPI/Types';
 import {
   filtersActions,
   selectFilters,
-} from 'src/redux/Slices/Filters/FiltersSlice';
+} from '../../Filters/FiltersSlice';
 import {
   turnOn,
   turnOff,
-} from 'src/redux/Slices/RoomCardsStatus/RoomCardsStatusSlice';
-import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
-import type { FiltersAPIType } from 'src/firebaseAPI/Types';
+} from '../../RoomCardsStatus/RoomCardsStatusSlice';
 
 function* roomCardsUpdate(): Generator {
   yield put(turnOff());

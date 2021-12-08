@@ -10,7 +10,7 @@ import {
   selectConveniences,
   setAdditionalConvenience,
   selectAdditionalConvenience,
-} from 'src/redux/Slices/Filters/FiltersSlice';
+} from 'src/redux/Filters/FiltersSlice';
 import CheckboxButtons from 'src/components/CheckboxButtons/CheckboxButtons';
 import { CheckboxButtonItemType } from 'src/components/CheckboxButtons/Types';
 import DateDropdown from 'src/components/DateDropdown/DateDropdown';

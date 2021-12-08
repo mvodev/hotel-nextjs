@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setGuests, selectGuests } from 'src/redux/Slices/Filters/FiltersSlice';
+import { setGuests, selectGuests } from 'src/redux/Filters/FiltersSlice';
 import DropdownCounter from 'src/components/DropdownCounter/DropdownCounter';
 import Button from 'src/components/Button/Button';
 import { getPosInSpellCasesArray } from 'src/utils/Utils';

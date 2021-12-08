@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { selectPrice, setPrice } from 'src/redux/Slices/Filters/FiltersSlice';
+import { selectPrice, setPrice } from 'src/redux/Filters/FiltersSlice';
 import formateToRuble from 'src/utils/FormateToRuble';
 
 import type { TypeHandleMoveArgs, TypeCalcPositionArgs } from './Types';
