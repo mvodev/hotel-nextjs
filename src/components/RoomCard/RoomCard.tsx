@@ -7,6 +7,7 @@ import styles from './RoomCard.module.scss';
 import RoomCardProps from './Types';
 
 const RoomCard = ({
+  id,
   infoSection,
   link,
   slides,
