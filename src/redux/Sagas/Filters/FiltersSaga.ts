@@ -9,10 +9,11 @@ import {
   setConveniences,
   setAdditionalConvenience,
   setFilters,
-} from './FiltersSlice';
+  filtersActions,
+} from 'src/redux/Slices/Filters/FiltersSlice';
 
 function* handleFiltersChange(): Generator {
-  yield put({ type: 'UPDATE_ROOMS', payload: 1 });
+  yield put(filtersActions.update);
 }
 
 function* filtersWatcher(): Generator {

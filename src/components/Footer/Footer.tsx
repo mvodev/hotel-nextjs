@@ -14,7 +14,7 @@ const Footer = ({
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.column}>
-          <Link href='/' passHref>
+          <Link href="/" passHref>
             <a href='replace' className={styles.link} title='домашняя страница'>
               <img src='./images/logo.svg' alt='toxin logo' />
             </a>
@@ -58,11 +58,11 @@ const Footer = ({
           {socials.map(({ id, href, src }) => (
             <Link key={id} href={href} passHref>
               <a
-                href='replace'
+                href="replace"
                 className={styles.socialLink}
                 title={id}
-                target='_blank'
-                rel='noopener, noreferrer'
+                target="_blank"
+                rel="noopener, noreferrer"
               >
                 <img src={src} alt={`${id} icon`} />
               </a>

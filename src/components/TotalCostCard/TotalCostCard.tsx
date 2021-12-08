@@ -47,7 +47,9 @@ const TotalCostCard = ({
           >
             {roomNumber}
           </h1>
-          <span className={styles.costPerDay}>{formatInRubles(costPerDay)}</span>
+          <span className={styles.costPerDay}>
+            {formatInRubles(costPerDay)}
+          </span>
         </div>
         <div className={styles.dateDropdownWrapper}>
           <DateDropdown
@@ -79,9 +81,7 @@ const TotalCostCard = ({
             </span>
           </div>
           <div className={styles.costTableInfo} title='info' />
-          <div className={styles.costTableCost}>
-            {formatInRubles(preTotal)}
-          </div>
+          <div className={styles.costTableCost}>{formatInRubles(preTotal)}</div>
           <div className={styles.costTableServiceDescription}>
             {`Сбор за услуги: скидка ${formatInRubles(discount)}`}
           </div>

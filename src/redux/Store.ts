@@ -6,6 +6,8 @@ import RootSaga from './RootSaga';
 import Authentication from './Authentication/Authentication';
 import filters from './Filters/FiltersSlice';
 import Pagination from 'src/redux/Pagination/Pagination';
+import signInCardReducer from './SignInCard/SignInCardReducer';
+
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -18,7 +20,8 @@ const makeStore = () => {
       Authentication,
       filters,
       rooms,
-      Pagination
+      Pagination,
+      signInCardReducer,
     },
     middleware: [...getDefaultMiddleware({
       serializableCheck: { 
