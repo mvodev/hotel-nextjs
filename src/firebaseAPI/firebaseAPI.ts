@@ -107,21 +107,21 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'comments'),commentData);
   }
 
-  public getComments = async () => getDocs(collection(this.db,'comments'))
+  public getComments = ():Promise< Array<CommentType> | FirebaseError> => getDocs(collection(this.db,'comments'))
   .then((result)=>{
-    const comments:Array<unknown>=[];
+    const comments:Array<CommentType>=[];
     result.forEach((res)=>{
-      comments.push(res.data())
+      comments.push(res.data() as CommentType);
     });
     return comments;
   }).catch((error: FirebaseError): FirebaseError => error);
 
-  public getCommentsByUID = async (uid:string) => {
+  public getCommentsByUID = async (uid:string): Promise< Array<CommentType> | FirebaseError> => {
     const comments = query(collectionGroup(this.db, 'comments'), where('uid', '==', uid));
     const querySnapshot = await getDocs(comments);
-    const commentsByUID:Array<unknown> = [];
+    const commentsByUID:Array<CommentType> = [];
     querySnapshot.forEach((res) => {
-      commentsByUID.push(res.data());
+      commentsByUID.push(res.data() as CommentType);
     });
     return commentsByUID;
   };
