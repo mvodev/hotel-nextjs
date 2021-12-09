@@ -9,11 +9,10 @@ import RoomCardProps from './Types';
 const RoomCard = ({
   id,
   infoSection,
-  link,
   slides,
 }: RoomCardProps): React.ReactElement => {
   return (
-    <Link href={link}>
+    <Link href={`/room/${id}`}>
       <a className={styles.roomCard}>
         <RoomSlider {...{ slides }} />
         <InfoSection {...infoSection} />

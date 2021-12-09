@@ -25,7 +25,6 @@ const Search = (): JSX.Element => {
               item.impressions.satisfactory +
               item.impressions.poor,
           },
-          link: "details",
         };
         return (
           <div key={item.roomID} className={styles.searchItem}>
@@ -36,7 +35,7 @@ const Search = (): JSX.Element => {
     : '';
 
   return (
-    <Layout title="search room" pageClass="search">
+    <Layout title='search room' pageClass='search'>
       <section className={styles.pageContainer}>
         <Filters />
         <div className={styles.searchContent}>
