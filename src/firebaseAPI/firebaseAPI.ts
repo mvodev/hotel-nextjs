@@ -22,6 +22,8 @@ import {
   getDocsFromServer,
   QuerySnapshot,
   DocumentData,
+  collectionGroup,
+  where,
 } from 'firebase/firestore';
 import { async, FirebaseError } from "@firebase/util";
 import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType, CommentType } from './Types';
@@ -105,14 +107,24 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'comments'),commentData);
   }
 
-  public getComments = () => getDocs(collection(this.db,'comments'))
+  public getComments = async () => getDocs(collection(this.db,'comments'))
   .then((result)=>{
     const comments:Array<unknown>=[];
     result.forEach((res)=>{
       comments.push(res.data())
     });
     return comments;
-  });
+  }).catch((error: FirebaseError): FirebaseError => error);
+
+  public getCommentsByUID = async (uid:string) => {
+    const comments = query(collectionGroup(this.db, 'comments'), where('uid', '==', uid));
+    const querySnapshot = await getDocs(comments);
+    const commentsByUID:Array<unknown> = [];
+    querySnapshot.forEach((res) => {
+      commentsByUID.push(res.data());
+    });
+    return commentsByUID;
+  };
 
   public getRooms = async (
     filters: FiltersAPIType,
