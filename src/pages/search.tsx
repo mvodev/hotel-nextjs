@@ -1,15 +1,11 @@
 import { useSelector } from 'react-redux';
-import { select } from 'redux-saga/effects'
 import Layout from 'src/components/Layout';
 import Filters from 'src/components/Filters/Filters';
 import RoomCard from 'src/components/RoomCard/RoomCard';
 import Pagination from 'src/components/Pagination/Pagination';
-import roomCardProps from 'src/components/RoomCard/RoomCardProps';
 import styles from '@styles/pages/search.module.sass';
 import { StateType } from '../redux/Rooms/Types';
 import RecalculateRating from '../utils/RecalculateRating';
-import { RoomsType } from 'src/redux/Rooms/Types';
-
 
 const Search = (): JSX.Element => {
   const roomCards = useSelector((state: StateType) => state.rooms.rooms);

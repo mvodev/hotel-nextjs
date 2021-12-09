@@ -19,8 +19,8 @@ import {
   collection,
   query,
 } from 'firebase/firestore';
-import { FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
+import { async, FirebaseError } from "@firebase/util";
+import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType, CommentType } from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -96,6 +96,10 @@ class FirebaseAPI {
   public addRoom = async (roomData: RoomType) => {
     addDoc(collection(this.db, 'rooms'), roomData);
   };
+
+  public addComment = async (commentData: CommentType) => {
+    addDoc(collection(this.db, 'comments'),commentData);
+  }
 
   public getRooms = async (
     filters: FiltersAPIType,

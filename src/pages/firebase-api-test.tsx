@@ -3,6 +3,7 @@ import { RoomType } from 'src/firebaseAPI/Types';
 import Layout from '../components/Layout';
 import firebaseAPI from '../firebaseAPI/firebaseAPI';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const rooms: RoomType[] = [
   {
     gallery: ['room-2.webp', 'room-8.webp', 'room-4.webp', 'room-5.webp'],

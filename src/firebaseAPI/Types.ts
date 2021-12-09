@@ -15,6 +15,13 @@ type UserType = {
   email: string | null;
 };
 
+type CommentType = {
+  uid: string;
+  roomID:string;
+  isLiked:boolean;
+  text:string;
+}
+
 type RoomType = {
   gallery: string[];
   information: {
@@ -192,4 +199,5 @@ export type {
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
+  CommentType,
 };
