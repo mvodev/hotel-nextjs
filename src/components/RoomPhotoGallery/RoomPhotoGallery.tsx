@@ -1,14 +1,15 @@
 /* eslint-disable arrow-body-style */
 
+import { useSelector } from 'react-redux';
+import { AppState } from 'src/redux/Store';
 import styles from './RoomPhotoGallery.module.scss';
-import RoomPhotoGalleryProps from './Types';
 
-const RoomPhotoGallery = ({
-  mainPhoto,
-  firstAdditionalPhoto,
-  secondAdditionalPhoto,
-}: RoomPhotoGalleryProps): React.ReactElement => {
-  return (
+const RoomPhotoGallery = (): React.ReactElement | null => {
+  const [mainPhoto, firstAdditionalPhoto, secondAdditionalPhoto] = useSelector(
+    (state: AppState) => [...state.CurrentRoom.gallery ]
+  );
+
+  const gallery = (
     <div className={styles.roomPhotoGallery}>
       <div className={styles.mainPhotoSection}>
         <img
@@ -35,6 +36,10 @@ const RoomPhotoGallery = ({
       </div>
     </div>
   );
+
+  return mainPhoto && firstAdditionalPhoto && secondAdditionalPhoto
+    ? gallery
+    : null;
 };
 
 export default RoomPhotoGallery;

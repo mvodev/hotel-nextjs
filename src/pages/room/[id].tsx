@@ -15,11 +15,7 @@ import Layout from 'src/components/Layout';
 const Details = (): ReactElement => (
   <Layout title='room details' pageClass='details'>
     <div className={styles.detailsImages}>
-      <RoomPhotoGallery
-        mainPhoto='gallery-room-1.webp'
-        firstAdditionalPhoto='gallery-room-2.webp'
-        secondAdditionalPhoto='gallery-room-3.webp'
-      />
+      <RoomPhotoGallery />
     </div>
     <div className={styles.detailsWrapper}>
       <div className={styles.detailsContent}>

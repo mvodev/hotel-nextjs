@@ -6,7 +6,7 @@ import { SET_CURRENT_ROOM } from './Types';
 const CurrentRoom = (
   state: ReturnedRoomType = DefaultState,
   action: AnyAction
-): ReturnedRoomType | null => {
+): ReturnedRoomType => {
   switch (action.type) {
     case SET_CURRENT_ROOM:
       return action.payload.id.length > 0
