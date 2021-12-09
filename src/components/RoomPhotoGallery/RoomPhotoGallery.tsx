@@ -13,23 +13,23 @@ const RoomPhotoGallery = ({
       <div className={styles.mainPhotoSection}>
         <img
           className={styles.roomPhoto}
-          src={`./images/${mainPhoto}`}
-          alt='room'
+          src={`/images/${mainPhoto}`}
+          alt="room"
         />
       </div>
       <div className={styles.additionalPhotosSection}>
         <div className={styles.additionalPhotoContainer}>
           <img
             className={styles.roomPhoto}
-            src={`./images/${firstAdditionalPhoto}`}
-            alt='room'
+            src={`/images/${firstAdditionalPhoto}`}
+            alt="room"
           />
         </div>
         <div className={styles.additionalPhotoContainer}>
           <img
             className={styles.roomPhoto}
-            src={`./images/${secondAdditionalPhoto}`}
-            alt='room'
+            src={`/images/${secondAdditionalPhoto}`}
+            alt="room"
           />
         </div>
       </div>
