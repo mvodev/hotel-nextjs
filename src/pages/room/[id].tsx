@@ -4,7 +4,6 @@ import RoomPhotoGallery from 'src/components/RoomPhotoGallery/RoomPhotoGallery';
 import Reviews from 'src/components/Reviews/Reviews';
 import ReviewDefaultProps from 'src/components/Reviews/ReviewDefaultProps';
 import Impressions from 'src/components/Impressions/Impressions';
-import impressionsDefaultProps from 'src/components/Impressions/ImpressionsDefaultProps';
 import AboutRoom from 'src/components/AboutRoom/AboutRoom';
 import TotalCostCard from 'src/components/TotalCostCard/TotalCostCard';
 import totalCostCardDefaultProps from 'src/components/TotalCostCard/DefaultProps';
@@ -22,7 +21,7 @@ const Details = (): ReactElement => (
         <section className={styles.detailsDescription}>
           <article className={styles.detailsInfo}>
             <AboutRoom />
-            <Impressions {...impressionsDefaultProps} />
+            <Impressions header='Впечатления от номера' />
           </article>
           <article className={styles.detailsReview}>
             <Reviews {...ReviewDefaultProps} />
