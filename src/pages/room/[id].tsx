@@ -28,27 +28,9 @@ const Details = (): ReactElement => (
           </article>
           <article className={styles.detailsRules}>
             <div className={styles.detailsRulesWrapper}>
-              <BulletList
-                title='Правила'
-                items={[
-                  { id: 1, text: 'Можно с питомцами' },
-                  { id: 2, text: 'Без вечеринок и мероприятий' },
-                  {
-                    id: 3,
-                    text: 'Время прибытия — после 13:00,а выезд до 12:00',
-                  },
-                ]}
-              />
+              <BulletList title='Правила' type='rules' />
             </div>
-            <BulletList
-              title='Отмена'
-              items={[
-                {
-                  id: 1,
-                  text: 'Бесплатная отмена в течение 48 ч. После этого при отмене не позднее чем за 5 дн. до прибытия вы получите полный возврат за вычетом сбора за услуги.',
-                },
-              ]}
-            />
+            <BulletList title='Отмена' type='cancellation' />
           </article>
         </section>
         <section className={styles.detailsForm}>
