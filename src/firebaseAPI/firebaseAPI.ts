@@ -19,8 +19,14 @@ import {
   collection,
   query,
 } from 'firebase/firestore';
-import { FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
+import { FirebaseError } from '@firebase/util';
+import {
+  UserDataType,
+  UserType,
+  RoomType,
+  FiltersAPIType,
+  ReturnedRoomType,
+} from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -102,22 +108,28 @@ class FirebaseAPI {
     page: number,
     itemsOnPage: number
   ) => {
-    const data = { 
+    const data = {
       filters,
       page,
-      itemsOnPage
-    }
-    return  await fetch(
+      itemsOnPage,
+    };
+    return await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/getRooms',
       {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       }
-    )
-    .then((result) => {
-      return result.json()
-    })
+    ).then((result) => {
+      return result.json();
+    });
   };
+
+  public getCurrentRoom = async (
+    id: string
+  ): Promise<ReturnedRoomType | null> =>
+    getDoc(doc(this.db, 'rooms', id)).then(
+      (room) => (room.data() as ReturnedRoomType) || null
+    );
 }
 
 const firebaseAPI = new FirebaseAPI();
