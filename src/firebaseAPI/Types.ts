@@ -186,10 +186,17 @@ type ReturnedRoomType = {
   haveShampoo: boolean;
 };
 
+type BookDataType = {
+  userID: string,
+  roomID: string,
+  dates: [Date, Date],
+}
+
 export type {
   UserDataType,
   UserType,
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
+  BookDataType,
 };

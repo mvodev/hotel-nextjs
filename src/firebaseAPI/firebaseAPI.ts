@@ -20,7 +20,10 @@ import {
   query,
 } from 'firebase/firestore';
 import { FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
+import { AddBookResultType } from 'src/redux/AddBook/Types';
+import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
+import { UserDataType, UserType, RoomType, FiltersAPIType, BookDataType } from './Types';
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -101,7 +104,7 @@ class FirebaseAPI {
     filters: FiltersAPIType,
     page: number,
     itemsOnPage: number
-  ) => {
+  ): Promise<UpdateRoomsResultType> => {
     const data = { 
       filters,
       page,
@@ -112,6 +115,19 @@ class FirebaseAPI {
       {
         method: 'POST',
         body: JSON.stringify(data)
+      }
+    )
+    .then((result) => {
+      return result.json()
+    })
+  };
+
+  public addBook = async (bookData: BookDataType): Promise<AddBookResultType> => {
+    return  await fetch(
+      'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/addBook',
+      {
+        method: 'POST',
+        body: JSON.stringify(bookData)
       }
     )
     .then((result) => {
