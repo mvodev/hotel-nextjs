@@ -9,10 +9,11 @@ const CurrentRoom = (
 ): ReturnedRoomType => {
   switch (action.type) {
     case SET_CURRENT_ROOM:
-      return action.payload.id.length > 0
+      console.dir(JSON.parse(action.payload));
+      return JSON.parse(action.payload).roomID.length > 0
         ? {
             ...state,
-            ...action.payload,
+            ...JSON.parse(action.payload),
           }
         : DefaultState;
     default:

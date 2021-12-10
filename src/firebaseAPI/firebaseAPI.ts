@@ -27,6 +27,7 @@ import {
   FiltersAPIType,
   ReturnedRoomType,
 } from './Types';
+import roomCardProps from 'src/components/RoomCard/RoomCardProps';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -128,7 +129,7 @@ class FirebaseAPI {
     id: string
   ): Promise<ReturnedRoomType | null> =>
     getDoc(doc(this.db, 'rooms', id)).then(
-      (room) => (room.data() as ReturnedRoomType) || null
+      (room) => ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
     );
 }
 
