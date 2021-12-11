@@ -1,12 +1,10 @@
 import { initializeApp, FirebaseApp } from 'firebase/app';
-import { getFunctions, httpsCallable, Functions } from 'firebase/functions';
 import {
   getAuth,
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   UserCredential,
-  AuthError,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -18,15 +16,11 @@ import {
   getDocs,
   collection,
   query,
-  getDocFromServer,
-  getDocsFromServer,
-  QuerySnapshot,
-  DocumentData,
   collectionGroup,
   where,
 } from 'firebase/firestore';
-import { async, FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType, CommentType } from './Types';
+import { FirebaseError } from "@firebase/util";
+import { UserDataType, UserType, RoomType, FiltersAPIType, CommentType, } from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -126,6 +120,16 @@ class FirebaseAPI {
     return commentsByUID;
   };
 
+  public getCommentsByRoomID = async (roomID:string): Promise< Array<CommentType> | FirebaseError> => {
+    const comments = query(collectionGroup(this.db, 'comments'), where('roomID', '==', roomID));
+    const querySnapshot = await getDocs(comments);
+    const commentsByUID:Array<CommentType> = [];
+    querySnapshot.forEach((res) => {
+      commentsByUID.push(res.data() as CommentType);
+    });
+    return commentsByUID;
+  };
+
   public getRooms = async (
     filters: FiltersAPIType,
     page: number,
@@ -136,6 +140,7 @@ class FirebaseAPI {
       page,
       itemsOnPage
     }
+    // eslint-disable-next-line @typescript-eslint/return-await
     return  await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/getRooms',
       {
@@ -143,9 +148,7 @@ class FirebaseAPI {
         body: JSON.stringify(data)
       }
     )
-    .then((result) => {
-      return result.json()
-    })
+    .then((result) => result.json())
   };
 }
 

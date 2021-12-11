@@ -18,7 +18,7 @@ type UserType = {
 type CommentType = {
   uid: string;
   roomID:string;
-  isLiked:boolean;
+  score:0|1|2|3|4|5;
   text:string;
 }
 

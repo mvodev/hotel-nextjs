@@ -4,7 +4,7 @@ import type { ReactElement } from 'react';
 import firebaseAPI from '../firebaseAPI/firebaseAPI';
 
 const CommentTest = (): ReactElement => {
-  console.log(firebaseAPI.getCommentsByUID('gZvKuhNy9YgeDThAHr2xLapCFFT2'));
+  console.log(firebaseAPI.getCommentsByRoomID('94uSjhZzhOdYdPaccnlL'));
   return <span />;
 }
 
