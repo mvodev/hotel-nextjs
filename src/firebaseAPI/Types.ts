@@ -10,6 +10,15 @@ type UserDataType = {
   birthday: Date
 }
 
+type ImpressionsType = {
+  total:number,
+  perfect:number,
+  good:number,
+  satisfactory:number,
+  poor:number,
+  bad:number,
+}
+
 type UserType = {
   uid: string;
   email: string | null;
@@ -200,4 +209,5 @@ export type {
   FiltersAPIType,
   ReturnedRoomType,
   CommentType,
+  ImpressionsType,
 };

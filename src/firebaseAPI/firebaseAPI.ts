@@ -20,7 +20,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, CommentType, } from './Types';
+import { UserDataType, UserType, RoomType, FiltersAPIType, CommentType, ImpressionsType, } from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -129,6 +129,44 @@ class FirebaseAPI {
     });
     return commentsByUID;
   };
+
+  public getImpressions = async (roomID:string):Promise<ImpressionsType> => {
+    // eslint-disable-next-line prefer-const
+    let result: ImpressionsType = {
+      total:0,
+      perfect:0,
+      good:0,
+      satisfactory:0,
+      poor:0,
+      bad:0,
+    }
+    const comments = query(collectionGroup(this.db, 'comments'), where('roomID', '==', roomID));
+    const querySnapshot = await getDocs(comments);
+    // eslint-disable-next-line consistent-return
+    querySnapshot.forEach((res) => {
+      result.total += 1;
+      switch ((res.data() as CommentType).score) {
+        case 5:
+          result.perfect += 1;
+          break;
+        case 4:
+          result.good += 1;
+          break;
+        case 3:
+          result.satisfactory += 1;
+          break;
+        case 2:
+          result.poor += 1;
+          break;
+        case 1:
+          result.bad += 1;
+          break;
+        default:
+          return result;
+      }
+    });
+    return result;
+  }
 
   public getRooms = async (
     filters: FiltersAPIType,
