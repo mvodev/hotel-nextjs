@@ -128,8 +128,10 @@ class FirebaseAPI {
   public getCurrentRoom = async (
     id: string
   ): Promise<ReturnedRoomType | null> =>
-    getDoc(doc(this.db, 'rooms', id)).then(
-      (room) => ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
+    getDoc(doc(this.db, 'rooms', id)).then((room) =>
+      room.data()
+        ? ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
+        : null
     );
 }
 

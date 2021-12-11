@@ -1,8 +1,8 @@
-import { call, ForkEffect, put, takeEvery } from '@redux-saga/core/effects';
+import { call, ForkEffect, put, takeLatest } from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import { ReturnedRoomType } from 'src/firebaseAPI/Types';
-import { SET_CURRENT_ROOM, GET_CURRENT_ROOM } from './Types';
+import { SET_CURRENT_ROOM, GET_CURRENT_ROOM, SET_ROOM_LOADING } from './Types';
 
 async function getCurrentRoom(id: string): Promise<ReturnedRoomType | null> {
   const response = await firebaseAPI.getCurrentRoom(id);
@@ -10,6 +10,8 @@ async function getCurrentRoom(id: string): Promise<ReturnedRoomType | null> {
 }
 
 function* workerSaga({ payload }: AnyAction) {
+  yield put({ type: SET_ROOM_LOADING, payload: true });
+
   const response: Promise<ReturnedRoomType | null> = yield call(
     getCurrentRoom,
     payload
@@ -17,7 +19,11 @@ function* workerSaga({ payload }: AnyAction) {
 
   if (response) {
     yield put({ type: SET_CURRENT_ROOM, payload: JSON.stringify(response) });
+  } else {
+    yield put({ type: SET_CURRENT_ROOM, payload: null });
   }
+
+  yield put({ type: SET_ROOM_LOADING, payload: false });
 }
 
 function* watchGetCurrentRoomSaga(): Generator<
@@ -25,7 +31,7 @@ function* watchGetCurrentRoomSaga(): Generator<
   void,
   unknown
 > {
-  yield takeEvery(GET_CURRENT_ROOM, workerSaga);
+  yield takeLatest(GET_CURRENT_ROOM, workerSaga);
 }
 
 export default watchGetCurrentRoomSaga;

@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 
 import RoomPhotoGallery from 'src/components/RoomPhotoGallery/RoomPhotoGallery';
 import Reviews from 'src/components/Reviews/Reviews';
@@ -12,21 +12,34 @@ import styles from '@styles/pages/details.module.scss';
 import Layout from 'src/components/Layout';
 import { useRouter } from 'next/router';
 import { GET_CURRENT_ROOM } from 'src/redux/CurrentRoom/Types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from 'src/redux/Store';
+import { NextPageContext } from 'next';
+import Preloader from 'src/components/Preloader/Preloader';
 
-const Details = (): ReactElement => {
-  const dispatch = useDispatch();
-  const [isRoomReceived, setRoomRecived] = useState(false);
+const Room = ({ id }: { id: string }): ReactElement => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [isDataRequested, setDataRequested] = useState(false);
 
-  if (router.query.id && !isRoomReceived) {
-    const { id } = router.query;
-    setRoomRecived(true);
+  const roomID = useSelector((state: AppState) => state.CurrentRoom.roomID);
+  const isLoading = useSelector(
+    (state: AppState) => state.CurrentRoom.isLoading
+  );
+
+  if (!isDataRequested) {
     dispatch({ type: GET_CURRENT_ROOM, payload: id });
+    setDataRequested(true);
   }
 
-  return (
-    <Layout title='room details' pageClass='details'>
+  useEffect(() => {
+    if (!isLoading && roomID === '') {
+      router.push('/404');
+    }
+  });
+
+  const pageContent = (
+    <>
       <div className={styles.detailsImages}>
         <RoomPhotoGallery />
       </div>
@@ -52,8 +65,16 @@ const Details = (): ReactElement => {
           </section>
         </div>
       </div>
+    </>
+  );
+
+  return (
+    <Layout title='room details' pageClass='details'>
+      {isLoading ? <Preloader /> : pageContent}
     </Layout>
   );
 };
 
-export default Details;
+export default Room;
+
+Room.getInitialProps = async ({ query }: NextPageContext) => ({ id: query.id });

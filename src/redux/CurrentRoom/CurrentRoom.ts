@@ -1,21 +1,29 @@
 import { AnyAction } from 'redux';
-import { ReturnedRoomType } from 'src/firebaseAPI/Types';
 import DefaultState from './DefaultState';
-import { SET_CURRENT_ROOM } from './Types';
+import CurrentRoomState, { SET_CURRENT_ROOM, SET_ROOM_LOADING } from './Types';
+
+const initialState = {
+  isLoading: false,
+  ...DefaultState,
+};
 
 const CurrentRoom = (
-  state: ReturnedRoomType = DefaultState,
+  state: CurrentRoomState = initialState,
   action: AnyAction
-): ReturnedRoomType => {
+): CurrentRoomState => {
   switch (action.type) {
     case SET_CURRENT_ROOM:
-      console.dir(JSON.parse(action.payload));
-      return JSON.parse(action.payload).roomID.length > 0
+      return action.payload
         ? {
             ...state,
             ...JSON.parse(action.payload),
           }
-        : DefaultState;
+        : {
+            ...state,
+            ...DefaultState,
+          };
+    case SET_ROOM_LOADING:
+      return { ...state, isLoading: action.payload };
     default:
       return state;
   }
