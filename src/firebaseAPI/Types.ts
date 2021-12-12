@@ -29,6 +29,9 @@ type CommentType = {
   roomID:string;
   score:0|1|2|3|4|5;
   text:string;
+  avatar: string;
+  userName: string;
+  publicationDate: Date;
 }
 
 type RoomType = {
