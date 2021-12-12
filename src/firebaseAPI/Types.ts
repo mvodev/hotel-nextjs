@@ -1,14 +1,14 @@
 import { Timestamp } from '@firebase/firestore';
 
 type UserDataType = {
-  email: string,
-  password: string,
-  name: string,
-  surname: string,
-  photo?: string,
-  gender: 'man' | 'woman',
-  birthday: Date
-}
+  email: string;
+  password: string;
+  name: string;
+  surname: string;
+  photo?: string;
+  gender: 'man' | 'woman';
+  birthday: Date;
+};
 
 type UserType = {
   uid: string;

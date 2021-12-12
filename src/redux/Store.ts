@@ -10,6 +10,7 @@ import Pagination from 'src/redux/Pagination/Pagination';
 import Registration from './Registration/Registration';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
+import booking from './Booking/BookingSlice';
 
 
 export interface SagaStore extends Store {
@@ -27,6 +28,7 @@ const makeStore = () => {
       signInCardReducer,
       Registration,
       roomCardsStatus,
+      booking,
     },
     middleware: [...getDefaultMiddleware({
       serializableCheck: { 
@@ -40,7 +42,10 @@ const makeStore = () => {
         'filters/setPrice',
         'filters/setGuests',
         'filters/setDates',
-        'filters/setConveniences'
+        'filters/setConveniences',
+        'booking/setRooms',
+        'booking/toggleFetchingStatus',
+        'booking/updateRooms',
       ] 
       }}), sagaMiddleware],
     });

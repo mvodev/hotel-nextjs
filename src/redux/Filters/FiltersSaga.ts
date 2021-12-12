@@ -9,7 +9,6 @@ import {
   setConveniences,
   setAdditionalConvenience,
   setFilters,
-  filtersActions,
 } from 'src/redux/Filters/FiltersSlice';
 
 function* handleFiltersChange(): Generator {

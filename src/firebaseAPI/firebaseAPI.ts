@@ -18,9 +18,17 @@ import {
   getDocs,
   collection,
   query,
+  where,
+  orderBy,
 } from 'firebase/firestore';
-import { FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
+import { FirebaseError } from '@firebase/util';
+import {
+  UserDataType,
+  UserType,
+  RoomType,
+  FiltersAPIType,
+  ReturnedRoomType,
+} from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -102,21 +110,37 @@ class FirebaseAPI {
     page: number,
     itemsOnPage: number
   ) => {
-    const data = { 
+    const data = {
       filters,
       page,
-      itemsOnPage
-    }
-    return  await fetch(
+      itemsOnPage,
+    };
+    return await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/getRooms',
       {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       }
-    )
-    .then((result) => {
-      return result.json()
-    })
+    ).then((result) => {
+      return result.json();
+    });
+  };
+
+  public getBookedRooms = async (uid = '') => {
+    const bookedDocs = await getDocs(
+      query(
+        collection(this.db, 'bookingList'),
+        where('userID', '==', uid),
+        orderBy('dates', 'desc')
+      )
+    );
+    const roomIDs = [
+      ...new Set(bookedDocs.docs.map((bookedDoc) => bookedDoc.data().roomID)),
+    ];
+    const roomDocs = await Promise.all(
+      roomIDs.map((id) => getDoc(doc(this.db, 'rooms', id)))
+    );
+    return roomDocs.map((roomDoc) => roomDoc.data());
   };
 }
 
