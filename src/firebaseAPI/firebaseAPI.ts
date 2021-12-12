@@ -131,8 +131,7 @@ class FirebaseAPI {
   };
 
   public getImpressions = async (roomID:string):Promise<ImpressionsType> => {
-    // eslint-disable-next-line prefer-const
-    let result: ImpressionsType = {
+    const result: ImpressionsType = {
       total:0,
       perfect:0,
       good:0,
@@ -162,7 +161,7 @@ class FirebaseAPI {
           result.bad += 1;
           break;
         default:
-          return result;
+          break;
       }
     });
     return result;
