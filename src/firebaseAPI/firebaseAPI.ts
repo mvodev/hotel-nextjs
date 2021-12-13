@@ -19,11 +19,18 @@ import {
   collection,
   query,
 } from 'firebase/firestore';
-import { FirebaseError } from "@firebase/util";
+
+import { FirebaseError } from '@firebase/util';
 import { AddBookResultType } from 'src/redux/AddBook/Types';
 import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
-import { UserDataType, UserType, RoomType, FiltersAPIType, BookDataType } from './Types';
-
+import {
+  UserDataType,
+  UserType,
+  RoomType,
+  FiltersAPIType,
+  ReturnedRoomType,
+  BookDataType
+} from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -108,18 +115,17 @@ class FirebaseAPI {
     const data = { 
       filters,
       page,
-      itemsOnPage
-    }
-    return  await fetch(
+      itemsOnPage,
+    };
+    return await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/getRooms',
       {
         method: 'POST',
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
       }
-    )
-    .then((result) => {
-      return result.json()
-    })
+    ).then((result) => {
+      return result.json();
+    });
   };
 
   public addBook = async (bookData: BookDataType): Promise<AddBookResultType> => {
@@ -134,6 +140,14 @@ class FirebaseAPI {
       return result.json()
     })
   };
+  public getCurrentRoom = async (
+    id: string
+  ): Promise<ReturnedRoomType | null> =>
+    getDoc(doc(this.db, 'rooms', id)).then((room) =>
+      room.data()
+        ? ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
+        : null
+    );
 }
 
 const firebaseAPI = new FirebaseAPI();

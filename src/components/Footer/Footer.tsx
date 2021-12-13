@@ -15,8 +15,8 @@ const Footer = ({
       <div className={styles.content}>
         <div className={styles.column}>
           <Link href="/" passHref>
-            <a href='replace' className={styles.link} title='домашняя страница'>
-              <img src='./images/logo.svg' alt='toxin logo' />
+            <a href="replace" className={styles.link} title="домашняя страница">
+              <img src="/images/logo.svg" alt="toxin logo" />
             </a>
           </Link>
           <p className={styles.chapter}>
@@ -31,7 +31,7 @@ const Footer = ({
               {links.map(({ name, href, id: itemID }) => (
                 <li className={styles.listItem} key={itemID}>
                   <Link href={href} passHref>
-                    <a href='replace' className={styles.listLink} title={name}>
+                    <a href="replace" className={styles.listLink} title={name}>
                       {name}
                     </a>
                   </Link>

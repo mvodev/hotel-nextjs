@@ -9,11 +9,11 @@ import '../styles/globals.sass';
 import '../components/DatePicker/DatePicker.sass';
 
 // eslint-disable-next-line arrow-body-style
-const MyApp = ({ Component }: AppProps): ReactElement => {
+const MyApp = ({ Component, pageProps }: AppProps): ReactElement => {
   const dispatch = useDispatch();
   dispatch(appActions.mount);
 
-  return <Component />;
+  return <Component {...pageProps} />;
 };
 
 export default wrapper.withRedux(MyApp);
