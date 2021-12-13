@@ -34,6 +34,7 @@ const makeStore = () => {
       serializableCheck: { 
         ignoredActions: ['rooms/writeRooms', 
         'SET-PAGINATION', 
+        'USER-AUTHENTICATE',
         'app/mount', 
         'UPDATE_ROOMS', 
         'filters/setRules',

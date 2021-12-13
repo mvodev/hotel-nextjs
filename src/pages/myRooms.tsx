@@ -42,7 +42,7 @@ const MyRooms = (): JSX.Element => {
             {rooms.map((room) => (
               <RoomCard
                 key={room.roomID}
-                link={`/details/${room.roomID}`}
+                id={room.roomID}
                 slides={room.gallery}
                 infoSection={{
                   roomNumber: room.roomNumber,
