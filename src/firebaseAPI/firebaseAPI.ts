@@ -20,7 +20,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, CommentType, ImpressionsType, } from './Types';
+import { UserDataType, UserType, RoomType, FiltersAPIType, CommentType, ImpressionsType, CommentInputType, } from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -97,7 +97,7 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'rooms'), roomData);
   };
 
-  public addComment = async (commentData: CommentType) => {
+  public addComment = async (commentData: CommentInputType) => {
     addDoc(collection(this.db, 'comments'),commentData);
   }
 
@@ -105,7 +105,7 @@ class FirebaseAPI {
   .then((result)=>{
     const comments:Array<CommentType>=[];
     result.forEach((res)=>{
-      comments.push(res.data() as CommentType);
+      comments.push({ ...res.data(), commentID: res.ref.id } as CommentType);
     });
     return comments;
   }).catch((error: FirebaseError): FirebaseError => error);
@@ -115,49 +115,41 @@ class FirebaseAPI {
     const querySnapshot = await getDocs(comments);
     const commentsByUID:Array<CommentType> = [];
     querySnapshot.forEach((res) => {
-      commentsByUID.push(res.data() as CommentType);
+      commentsByUID.push({ ...res.data(), commentID: res.ref.id } as CommentType);
     });
     return commentsByUID;
   };
 
-  public addLikeToComment = async (uidOfCommentOwner:string, roomID:string, uidWhoLikedComment:string): Promise< boolean | FirebaseError> => {
-    const comments = query(
-      collectionGroup(this.db, 'comments'),
-      where('roomID', '==', roomID),
-      where('uid', '==', uidOfCommentOwner));
-    const querySnapshot = await getDocs(comments);
-    if(querySnapshot.empty){
-      throw new FirebaseError('INVALID_ARGUMENT','No comment for this arguments in database');
+  public addLikeToComment = async (commentID:string, uidWhoLikedComment:string): Promise< boolean | FirebaseError> => {
+    const commentRef = doc(this.db, 'comments', commentID);
+    const commentSnap = await getDoc(commentRef);
+    if(!commentSnap.exists()){
+      throw new FirebaseError('INVALID_ARGUMENT','No comment for this argument in database');
     } else{
-      querySnapshot.forEach(async (res)=>{
-        const dataToSave:CommentType = (res.data() as CommentType);
-        if(dataToSave.likedBy.includes(uidWhoLikedComment)){
-          throw new FirebaseError('INVALID_ARGUMENT','This user has already liked this comment');
-        } else {
-          dataToSave.likedBy.push(uidWhoLikedComment);
-          await setDoc(doc(this.db, 'comments', res.ref.id),dataToSave);
-        }
-      });
+      const dataToSave:CommentType = (
+        { ...commentSnap.data(), 
+          commentID: commentSnap.ref.id } as CommentType);
+      if( !dataToSave.likedBy.includes(uidWhoLikedComment) ) {
+        dataToSave.likedBy.push(uidWhoLikedComment);
+        await setDoc(doc(this.db, 'comments', commentSnap.ref.id),dataToSave);
+      }
     }
     return true;
   }
 
-  public removeLikeFromComment = async (uidOfCommentOwner:string, roomID:string, uidUserToRemove:string): Promise< boolean | FirebaseError> => {
-    const comments = query(
-      collectionGroup(this.db, 'comments'),
-      where('roomID', '==', roomID),
-      where('uid', '==', uidOfCommentOwner));
-    const querySnapshot = await getDocs(comments);
-    if(querySnapshot.empty){
-      throw new FirebaseError('INVALID_ARGUMENT','No comment for this arguments in database');
+  public removeLikeFromComment = async (commentID:string, uidUserToRemove:string): Promise< boolean | FirebaseError> => {
+    const commentRef = doc(this.db, 'comments', commentID);
+    const commentSnap = await getDoc(commentRef);
+    if(!commentSnap.exists()){
+      throw new FirebaseError('INVALID_ARGUMENT','No comment for this argument in database');
     } else{
-      querySnapshot.forEach(async (res)=>{
-        const dataToSave:CommentType =(res.data() as CommentType);
-        if(dataToSave.likedBy.includes(uidUserToRemove)){
-          dataToSave.likedBy = dataToSave.likedBy.filter((elem)=>elem!==uidUserToRemove);
-          await setDoc(doc(this.db, 'comments', res.ref.id),dataToSave);
-        }
-      });
+      const dataToSave:CommentType = (
+        { ...commentSnap.data(), 
+          commentID: commentSnap.ref.id } as CommentType);
+      if(dataToSave.likedBy.includes(uidUserToRemove)){
+        dataToSave.likedBy = dataToSave.likedBy.filter((elem)=>elem!==uidUserToRemove);
+        await setDoc(doc(this.db, 'comments', commentSnap.ref.id),dataToSave);
+      }
     }
     return true;
   }
@@ -167,7 +159,7 @@ class FirebaseAPI {
     const querySnapshot = await getDocs(comments);
     const commentsByUID:Array<CommentType> = [];
     querySnapshot.forEach((res) => {
-      commentsByUID.push(res.data() as CommentType);
+      commentsByUID.push({ ...res.data(), commentID: res.ref.id } as CommentType);
     });
     return commentsByUID;
   };

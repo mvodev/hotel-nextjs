@@ -23,6 +23,18 @@ type UserType = {
 };
 
 type CommentType = {
+  commentID:string;
+  uid: string;
+  roomID:string;
+  score: 'perfect' | 'good' | 'satisfactory' | 'poor';
+  text:string;
+  avatar: string;
+  userName: string;
+  publicationDate: Date;
+  likedBy:Array<string>;
+}
+
+type CommentInputType = {
   uid: string;
   roomID:string;
   score: 'perfect' | 'good' | 'satisfactory' | 'poor';
@@ -212,4 +224,5 @@ export type {
   ReturnedRoomType,
   CommentType,
   ImpressionsType,
+  CommentInputType,
 };
