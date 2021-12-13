@@ -120,23 +120,41 @@ class FirebaseAPI {
     return commentsByUID;
   };
 
-  public addLikeToComment = async (rootUidOfComment:string, roomID:string, uidWhoLikedComment:string): Promise< boolean | FirebaseError> => {
-    const commentsByUIDAndRoomID:Array<CommentType> = [];
+  public addLikeToComment = async (uidOfCommentOwner:string, roomID:string, uidWhoLikedComment:string): Promise< boolean | FirebaseError> => {
     const comments = query(
       collectionGroup(this.db, 'comments'),
       where('roomID', '==', roomID),
-      where('uid', '==', rootUidOfComment));
+      where('uid', '==', uidOfCommentOwner));
     const querySnapshot = await getDocs(comments);
     if(querySnapshot.empty){
-      throw new FirebaseError('INVALID_ARGUMENT','No data for this arguments in database');
+      throw new FirebaseError('INVALID_ARGUMENT','No comment for this arguments in database');
     } else{
       querySnapshot.forEach(async (res)=>{
-        const dataToSave:CommentType =(res.data() as CommentType);
+        const dataToSave:CommentType = (res.data() as CommentType);
         if(dataToSave.likedBy.includes(uidWhoLikedComment)){
           throw new FirebaseError('INVALID_ARGUMENT','This user has already liked this comment');
         } else {
           dataToSave.likedBy.push(uidWhoLikedComment);
-          commentsByUIDAndRoomID.push(dataToSave);
+          await setDoc(doc(this.db, 'comments', res.ref.id),dataToSave);
+        }
+      });
+    }
+    return true;
+  }
+
+  public removeLikeFromComment = async (uidOfCommentOwner:string, roomID:string, uidUserToRemove:string): Promise< boolean | FirebaseError> => {
+    const comments = query(
+      collectionGroup(this.db, 'comments'),
+      where('roomID', '==', roomID),
+      where('uid', '==', uidOfCommentOwner));
+    const querySnapshot = await getDocs(comments);
+    if(querySnapshot.empty){
+      throw new FirebaseError('INVALID_ARGUMENT','No comment for this arguments in database');
+    } else{
+      querySnapshot.forEach(async (res)=>{
+        const dataToSave:CommentType =(res.data() as CommentType);
+        if(dataToSave.likedBy.includes(uidUserToRemove)){
+          dataToSave.likedBy = dataToSave.likedBy.filter((elem)=>elem!==uidUserToRemove);
           await setDoc(doc(this.db, 'comments', res.ref.id),dataToSave);
         }
       });
