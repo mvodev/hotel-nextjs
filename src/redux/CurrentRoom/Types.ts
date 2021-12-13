@@ -1,6 +1,6 @@
 import { ReturnedRoomType } from 'src/firebaseAPI/Types';
 
-type CurrentRoomState = { isLoading: boolean } & ReturnedRoomType;
+type CurrentRoomState = { isLoading: boolean, isBookBlock: boolean } & ReturnedRoomType;
 
 const SET_CURRENT_ROOM = 'SET-CURRENT-ROOM';
 const GET_CURRENT_ROOM = 'GET-CURRENT-ROOM';

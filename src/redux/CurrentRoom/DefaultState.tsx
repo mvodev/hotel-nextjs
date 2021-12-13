@@ -1,4 +1,6 @@
 const DefaultState = {
+  isLoading: false,
+  isBookBlock: false,
   roomID: '',
   gallery: ['', '', ''],
   information: [],
