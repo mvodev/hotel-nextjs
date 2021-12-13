@@ -25,13 +25,12 @@ type UserType = {
 type CommentType = {
   uid: string;
   roomID:string;
-  score:'perfect' | 'good' | 'satisfactory' | 'poor';
+  score: 'perfect' | 'good' | 'satisfactory' | 'poor';
   text:string;
   avatar: string;
   userName: string;
   publicationDate: Date;
-  likesNumber:number;
-  likedBy?:Array<string>;
+  likedBy:Array<string>;
 }
 
 type RoomType = {

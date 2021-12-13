@@ -120,24 +120,28 @@ class FirebaseAPI {
     return commentsByUID;
   };
 
-  public addLikeToComment = async (uid:string,roomID:string): Promise< Array<CommentType> | FirebaseError> => {
+  public addLikeToComment = async (uid:string,roomID:string,uidToAdd:string): Promise< boolean | FirebaseError> => {
     const commentsByUIDAndRoomID:Array<CommentType> = [];
-    const comment = query(
+    const comments = query(
       collectionGroup(this.db, 'comments'),
       where('roomID', '==', roomID),
       where('uid', '==', uid));
-    const querySnapshot = await getDocs(comment);
-    querySnapshot.forEach((res)=>{
-      const dataToSave:CommentType =(res.data() as CommentType);
-      dataToSave.likesNumber += 1; 
-      dataToSave.likedBy?.push(uid);
-      commentsByUIDAndRoomID.push(dataToSave);
-    });
-    commentsByUIDAndRoomID.forEach((elem)=>{
-      console.log(`inside ${JSON.stringify(elem)}`);
-      // this.addComment(elem);
-    });
-    return commentsByUIDAndRoomID;
+    const querySnapshot = await getDocs(comments);
+    if(querySnapshot.empty){
+      throw new FirebaseError('INVALID_ARGUMENT','No data for this arguments in database');
+    } else{
+      querySnapshot.forEach(async (res)=>{
+        const dataToSave:CommentType =(res.data() as CommentType);
+        if(dataToSave.likedBy.includes(uidToAdd)){
+          throw new FirebaseError('INVALID_ARGUMENT','This user has already liked this comment');
+        } else {
+          dataToSave.likedBy.push(uidToAdd);
+          commentsByUIDAndRoomID.push(dataToSave);
+          await setDoc(doc(this.db, 'comments', res.ref.id),dataToSave);
+        }
+      });
+    }
+    return true;
   }
 
   public getCommentsByRoomID = async (roomID:string): Promise< Array<CommentType> | FirebaseError> => {
