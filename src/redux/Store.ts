@@ -11,6 +11,7 @@ import Registration from './Registration/Registration';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 import CurrentRoom from './CurrentRoom/CurrentRoom';
+import currentRoomComments from './CurrentRoomComments/CurrentRoomComments';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -28,6 +29,7 @@ const makeStore = () => {
       Registration,
       roomCardsStatus,
       CurrentRoom,
+      currentRoomComments,
     },
     middleware: [
       ...getDefaultMiddleware({

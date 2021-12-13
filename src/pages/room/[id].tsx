@@ -51,7 +51,7 @@ const Room = ({ id }: { id: string }): ReactElement => {
               <Impressions header='Впечатления от номера' />
             </article>
             <article className={styles.detailsReview}>
-              <Reviews {...ReviewDefaultProps} />
+              <Reviews title='Отзывы посетителей номера' />
             </article>
             <article className={styles.detailsRules}>
               <div className={styles.detailsRulesWrapper}>
