@@ -120,6 +120,26 @@ class FirebaseAPI {
     return commentsByUID;
   };
 
+  public addLikeToComment = async (uid:string,roomID:string): Promise< Array<CommentType> | FirebaseError> => {
+    const commentsByUIDAndRoomID:Array<CommentType> = [];
+    const comment = query(
+      collectionGroup(this.db, 'comments'),
+      where('roomID', '==', roomID),
+      where('uid', '==', uid));
+    const querySnapshot = await getDocs(comment);
+    querySnapshot.forEach((res)=>{
+      const dataToSave:CommentType =(res.data() as CommentType);
+      dataToSave.likesNumber += 1; 
+      dataToSave.likedBy?.push(uid);
+      commentsByUIDAndRoomID.push(dataToSave);
+    });
+    commentsByUIDAndRoomID.forEach((elem)=>{
+      console.log(`inside ${JSON.stringify(elem)}`);
+      // this.addComment(elem);
+    });
+    return commentsByUIDAndRoomID;
+  }
+
   public getCommentsByRoomID = async (roomID:string): Promise< Array<CommentType> | FirebaseError> => {
     const comments = query(collectionGroup(this.db, 'comments'), where('roomID', '==', roomID));
     const querySnapshot = await getDocs(comments);
@@ -132,33 +152,27 @@ class FirebaseAPI {
 
   public getImpressions = async (roomID:string):Promise<ImpressionsType> => {
     const result: ImpressionsType = {
-      total:0,
       perfect:0,
       good:0,
       satisfactory:0,
       poor:0,
-      bad:0,
     }
     const comments = query(collectionGroup(this.db, 'comments'), where('roomID', '==', roomID));
     const querySnapshot = await getDocs(comments);
     // eslint-disable-next-line consistent-return
     querySnapshot.forEach((res) => {
-      result.total += 1;
       switch ((res.data() as CommentType).score) {
-        case 5:
+        case 'perfect':
           result.perfect += 1;
           break;
-        case 4:
+        case 'good':
           result.good += 1;
           break;
-        case 3:
+        case 'satisfactory':
           result.satisfactory += 1;
           break;
-        case 2:
+        case 'poor':
           result.poor += 1;
-          break;
-        case 1:
-          result.bad += 1;
           break;
         default:
           break;

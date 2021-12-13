@@ -11,12 +11,10 @@ type UserDataType = {
 }
 
 type ImpressionsType = {
-  total:number,
   perfect:number,
   good:number,
   satisfactory:number,
   poor:number,
-  bad:number,
 }
 
 type UserType = {
@@ -27,11 +25,13 @@ type UserType = {
 type CommentType = {
   uid: string;
   roomID:string;
-  score:0|1|2|3|4|5;
+  score:'perfect' | 'good' | 'satisfactory' | 'poor';
   text:string;
   avatar: string;
   userName: string;
   publicationDate: Date;
+  likesNumber:number;
+  likedBy?:Array<string>;
 }
 
 type RoomType = {
