@@ -7,14 +7,9 @@ const CommentTest = (): ReactElement => {
   // console.log(firebaseAPI.getCommentsByRoomID('94uSjhZzhOdYdPaccnlL'));
   console.log(firebaseAPI.getCommentsByUID('gZvKuhNy9YgeDThAHr2xLapCFFT2'));
   // console.log(firebaseAPI.getImpressions('0L36vxMETKuBYt3i8BqU'));
-  // firebaseAPI.addLikeToComment(
-  //   'gZvKuhNy9YgeDThAHr2xLapCFFT2',
-  //   '0L36vxMETKuBYt3i8BqU',
-  //   'gZvKuhNy9YgeDThAHr2xLapCFFT2',);
   // firebaseAPI.removeLikeFromComment(
-  //   'gZvKuhNy9YgeDThAHr2xLapCFFT2',
-  //   '0L36vxMETKuBYt3i8BqU',
-  //   'BewEQvryyGVOUTvVwoBWUCZSxW43');
+  //   'UcdZE32DFDnAPLFUtRrl',
+  //   'test');
   return <span />;
 }
 
