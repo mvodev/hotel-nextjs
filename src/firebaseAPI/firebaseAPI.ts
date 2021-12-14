@@ -124,15 +124,12 @@ class FirebaseAPI {
     const commentRef = doc(this.db, 'comments', commentID);
     const commentSnap = await getDoc(commentRef);
     if(!commentSnap.exists()){
-      throw new FirebaseError('INVALID_ARGUMENT','No comment for this argument in database');
-    } else{
-      const dataToSave:CommentType = (
-        { ...commentSnap.data(), 
-          commentID: commentSnap.ref.id } as CommentType);
-      if( !dataToSave.likedBy.includes(uidWhoLikedComment) ) {
-        dataToSave.likedBy.push(uidWhoLikedComment);
-        await setDoc(doc(this.db, 'comments', commentSnap.ref.id),dataToSave);
-      }
+      return new FirebaseError('INVALID_ARGUMENT','No comment for this argument in database');
+    } 
+    const dataToSave:CommentInputType = (commentSnap.data() as CommentInputType);
+    if( !dataToSave.likedBy.includes(uidWhoLikedComment) ) {
+      dataToSave.likedBy.push(uidWhoLikedComment);
+      await setDoc(doc(this.db, 'comments', commentSnap.ref.id),dataToSave);
     }
     return true;
   }
@@ -141,15 +138,12 @@ class FirebaseAPI {
     const commentRef = doc(this.db, 'comments', commentID);
     const commentSnap = await getDoc(commentRef);
     if(!commentSnap.exists()){
-      throw new FirebaseError('INVALID_ARGUMENT','No comment for this argument in database');
-    } else{
-      const dataToSave:CommentType = (
-        { ...commentSnap.data(), 
-          commentID: commentSnap.ref.id } as CommentType);
-      if(dataToSave.likedBy.includes(uidUserToRemove)){
-        dataToSave.likedBy = dataToSave.likedBy.filter((elem)=>elem!==uidUserToRemove);
-        await setDoc(doc(this.db, 'comments', commentSnap.ref.id),dataToSave);
-      }
+      return new FirebaseError('INVALID_ARGUMENT','No comment for this argument in database');
+    } 
+    const dataToSave:CommentInputType = (commentSnap.data() as CommentInputType);
+    if(dataToSave.likedBy.includes(uidUserToRemove)){
+      dataToSave.likedBy = dataToSave.likedBy.filter((elem)=>elem!==uidUserToRemove);
+      await setDoc(doc(this.db, 'comments', commentSnap.ref.id),dataToSave);
     }
     return true;
   }
