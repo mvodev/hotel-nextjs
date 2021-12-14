@@ -15,7 +15,7 @@ type TypeSocialSources = 'twitter' | 'facebook' | 'instagram';
 type TypeSocialProps<T extends TypeSocialSources> = {
   id: T;
   href: string;
-  src: `./images/${T}-icon.svg`;
+  src: `/images/${T}-icon.svg`;
 };
 
 type TypeFooterProps = {
