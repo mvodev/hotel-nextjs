@@ -10,40 +10,10 @@ type UserDataType = {
   birthday: Date
 }
 
-type ImpressionsType = {
-  perfect:number,
-  good:number,
-  satisfactory:number,
-  poor:number,
-}
-
 type UserType = {
   uid: string;
   email: string | null;
 };
-
-type CommentType = {
-  commentID:string;
-  uid: string;
-  roomID:string;
-  score: 'perfect' | 'good' | 'satisfactory' | 'poor';
-  text:string;
-  avatar: string;
-  userName: string;
-  publicationDate: Date;
-  likedBy:Array<string>;
-}
-
-type CommentInputType = {
-  uid: string;
-  roomID:string;
-  score: 'perfect' | 'good' | 'satisfactory' | 'poor';
-  text:string;
-  avatar: string;
-  userName: string;
-  publicationDate: Date;
-  likedBy:Array<string>;
-}
 
 type RoomType = {
   gallery: string[];
@@ -222,7 +192,4 @@ export type {
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
-  CommentType,
-  ImpressionsType,
-  CommentInputType,
 };
