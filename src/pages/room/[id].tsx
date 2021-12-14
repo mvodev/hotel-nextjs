@@ -2,7 +2,6 @@ import { ReactElement, useEffect, useState } from 'react';
 
 import RoomPhotoGallery from 'src/components/RoomPhotoGallery/RoomPhotoGallery';
 import Reviews from 'src/components/Reviews/Reviews';
-import ReviewDefaultProps from 'src/components/Reviews/ReviewDefaultProps';
 import Impressions from 'src/components/Impressions/Impressions';
 import AboutRoom from 'src/components/AboutRoom/AboutRoom';
 import TotalCostCard from 'src/components/TotalCostCard/TotalCostCard';

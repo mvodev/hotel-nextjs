@@ -1,5 +1,5 @@
 type ReviewType = {
-  id: string;
+  commentID: string;
   avatar: string;
   userName: string;
   publicationDate: Date;

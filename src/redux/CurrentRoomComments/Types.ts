@@ -1,11 +1,5 @@
-import { ReturnedRoomType } from 'src/firebaseAPI/Types';
-
-type CurrentRoomState = {
-  isLoading: boolean;
-  isBookBlock: boolean;
-} & ReturnedRoomType;
-
 const SET_ROOM_COMMENTS = 'SET-ROOM-COMMENTARIES';
+const ADD_LIKE = 'ADD-LIKE';
+const REMOVE_LIKE = 'REMOVE-LIKE';
 
-export default CurrentRoomState;
-export { SET_ROOM_COMMENTS };
+export { SET_ROOM_COMMENTS, ADD_LIKE, REMOVE_LIKE };

@@ -1,26 +1,25 @@
 import { ReactElement } from 'react';
+import { useSelector } from 'react-redux';
+import { AppState } from 'src/redux/Store';
 import Review from './Review/Review';
 import { getDeclension } from '../../utils/Utils';
 import style from './Reviews.module.sass';
-import { useSelector } from 'react-redux';
-import { AppState } from 'src/redux/Store';
 
 const Reviews = ({ title }: { title: string }): ReactElement => {
   const reviews = useSelector((state: AppState) => state.currentRoomComments);
+  const uid = useSelector((state: AppState) => state.Authentication.user.uid);
 
   const reviewsNumber = reviews.length;
-  debugger;
   const getReviews = reviews.map((review) => (
-    <div className={style.reviewsItem} key={review.uid}>
-      ///////
+    <div className={style.reviewsItem} key={review.commentID}>
       <Review
-        id={review.uid} ////////////////
+        commentID={review.commentID}
         avatar={review.avatar}
         userName={review.userName}
-        publicationDate={review.publicationDate}
+        publicationDate={new Date(review.publicationDate.seconds * 1000)}
         text={review.text}
         likesNumber={review.likedBy.length}
-        liked={false} //////////////
+        liked={uid ? review.likedBy.includes(uid) : false}
       />
     </div>
   ));
