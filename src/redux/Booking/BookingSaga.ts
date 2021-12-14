@@ -14,8 +14,7 @@ function* updateBookedRooms(): Generator {
   const uid = yield select((state: AppState) => state.Authentication.user.uid);
   const rooms = yield call(
     { context: firebaseAPI, fn: firebaseAPI.getBookedRooms },
-    // демо
-    (uid || '0n0juvZREvSNDNYJvS2rQjcf3Ei1') as string
+    uid as string
   );
   yield put(setRooms(rooms as BookedRoom[]));
   yield put(toggleFetchingStatus(false));
