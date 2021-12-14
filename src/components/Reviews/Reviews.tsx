@@ -6,11 +6,13 @@ import { getDeclension } from '../../utils/Utils';
 import style from './Reviews.module.sass';
 
 const Reviews = ({ title }: { title: string }): ReactElement => {
-  const reviews = useSelector((state: AppState) => state.currentRoomComments);
+  const reviewsCollection = useSelector(
+    (state: AppState) => state.currentRoomComments
+  );
   const uid = useSelector((state: AppState) => state.Authentication.user.uid);
 
-  const reviewsNumber = reviews.length;
-  const getReviews = reviews.map((review) => (
+  const reviewsNumber = reviewsCollection.length;
+  const reviews = reviewsCollection.map((review) => (
     <div className={style.reviewsItem} key={review.commentID}>
       <Review
         commentID={review.commentID}
@@ -24,17 +26,28 @@ const Reviews = ({ title }: { title: string }): ReactElement => {
     </div>
   ));
 
+  const reviewsContent =
+    reviewsNumber > 0 ? (
+      <>
+        <p className={style.reviewsNumberOfReviews}>
+          {`${reviewsNumber} ${getDeclension(reviewsNumber, [
+            'отзыв',
+            'отзыва',
+            'отзывов',
+          ])}`}
+        </p>
+        <div className={style.reviewsContent}>{reviews}</div>{' '}
+      </>
+    ) : (
+      <div className={style.reviewsContent}>
+        <div className={style.reviewsItem}>Отзывов пока нет</div>
+      </div>
+    );
+
   return (
     <section className={style.reviews}>
       <h2 className={style.reviewsTitle}>{title}</h2>
-      <p className={style.reviewsNumberOfReviews}>
-        {`${reviewsNumber} ${getDeclension(reviewsNumber, [
-          'отзыв',
-          'отзыва',
-          'отзывов',
-        ])}`}
-      </p>
-      <div className={style.reviewsContent}>{getReviews}</div>
+      {reviewsContent}
     </section>
   );
 };
