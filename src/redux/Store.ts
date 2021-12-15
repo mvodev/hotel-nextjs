@@ -2,11 +2,11 @@ import { configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import createSagaMiddleware, { Task } from 'redux-saga';
 import { createWrapper } from 'next-redux-wrapper';
 
+import Pagination from 'src/redux/Pagination/Pagination';
 import rooms from './Rooms/Rooms';
 import RootSaga from './RootSaga';
 import Authentication from './Authentication/Authentication';
 import filters from './Filters/FiltersSlice';
-import Pagination from 'src/redux/Pagination/Pagination';
 import Registration from './Registration/Registration';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';

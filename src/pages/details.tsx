@@ -9,10 +9,33 @@ import AboutRoom from 'src/components/AboutRoom/AboutRoom';
 import TotalCostCard from 'src/components/TotalCostCard/TotalCostCard';
 import totalCostCardDefaultProps from 'src/components/TotalCostCard/DefaultProps';
 import BulletList from 'src/components/BulletList/BulletList';
-import styles from '../styles/pages/details.module.scss';
+import ModalWindow from 'src/components/ModalWindow/ModalWindow';
+import { AppState } from 'src/redux/Store';
+import router from 'next/router';
+import { useSelector } from 'react-redux';
 import Layout from '../components/Layout';
+import styles from '../styles/pages/details.module.scss';
 
-const Details = (): ReactElement => (
+const Details = (): ReactElement => {
+
+  const {isAuthenticated} = useSelector(
+    (state: AppState) => state.Authentication
+  );
+
+  const handleModalWindowClose = ()=>{
+    router.push('/');
+  }
+
+  if(!isAuthenticated) return (
+    <ModalWindow 
+      title="Пожалуйста авторизуйтесь или зарегистрируйтесь!" 
+      text="Пожалуйста авторизуйтесь или зарегистрируйтесь для перехода на данную страницу."
+      isEnabled
+      handleCloseClick={handleModalWindowClose}
+      />
+  )
+
+  return (
   <Layout title='room details' pageClass='details'>
     <div className={styles.detailsImages}>
       <RoomPhotoGallery
@@ -61,7 +84,7 @@ const Details = (): ReactElement => (
         </section>
       </div>
     </div>
-  </Layout>
-);
+  </Layout>)
+};
 
 export default Details;

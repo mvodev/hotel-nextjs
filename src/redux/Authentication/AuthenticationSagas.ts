@@ -29,7 +29,6 @@ function* watchAuthenticationSaga(): Generator<
 
 function* userLogOutSaga() {
   Cookie.remove('userData');
-  console.log('sdgfghgjh')
   yield put({ type: RESET_USER_DATA });
 }
 

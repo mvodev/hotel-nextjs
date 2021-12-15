@@ -4,11 +4,33 @@ import Filters from 'src/components/Filters/Filters';
 import RoomCard from 'src/components/RoomCard/RoomCard';
 import Pagination from 'src/components/Pagination/Pagination';
 import styles from '@styles/pages/search.module.sass';
+import ModalWindow from 'src/components/ModalWindow/ModalWindow';
+import router from 'next/router';
+import { AppState } from 'src/redux/Store';
 import { StateType } from '../redux/Rooms/Types';
 import RecalculateRating from '../utils/RecalculateRating';
 
 const Search = (): JSX.Element => {
+
+  const {isAuthenticated} = useSelector(
+    (state: AppState) => state.Authentication
+  );
+
+  const handleModalWindowClose = ()=>{
+    router.push('/');
+  }
+
   const roomCards = useSelector((state: StateType) => state.rooms.rooms);
+
+  if(!isAuthenticated) return (
+    <ModalWindow 
+      title="Пожалуйста авторизуйтесь или зарегистрируйтесь!" 
+      text="Пожалуйста авторизуйтесь или зарегистрируйтесь для перехода на данную страницу."
+      isEnabled
+      handleCloseClick={handleModalWindowClose}
+      />
+  )
+
   const searchItems = roomCards.length 
     ? (roomCards.map((item) => {
       const roomCardItem = {
