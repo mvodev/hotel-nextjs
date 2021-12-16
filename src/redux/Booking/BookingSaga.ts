@@ -1,28 +1,50 @@
 import { call, put, select, take } from 'redux-saga/effects';
 
 import { AppState } from 'src/redux/Store';
+import { SET_USER } from 'src/redux/Authentication/Types';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import {
+  setList,
   setRooms,
-  updateRooms,
   toggleFetchingStatus,
+  selectBookingList,
 } from 'src/redux/Booking/BookingSlice';
-import type { BookedRoom } from 'src/redux/Booking/Types';
+
+import type { BookingList, BookedRoom } from './Types';
 
 function* updateBookedRooms(): Generator {
-  yield put(toggleFetchingStatus(true));
-  const uid = yield select((state: AppState) => state.Authentication.user.uid);
+  const list = yield select(selectBookingList);
   const rooms = yield call(
     { context: firebaseAPI, fn: firebaseAPI.getBookedRooms },
-    uid as string
+    list as BookingList[]
   );
   yield put(setRooms(rooms as BookedRoom[]));
-  yield put(toggleFetchingStatus(false));
 }
 
-function* watchBookedRoomsUpdate(): Generator {
-  yield take(updateRooms.type);
-  yield call(updateBookedRooms);
+function* updateBookingList(): Generator {
+  const uid = yield select((state: AppState) => state.Authentication.user.uid);
+  const list = yield call(
+    { context: firebaseAPI, fn: firebaseAPI.getBookingList },
+    uid as string
+  );
+  yield put(setList(list as BookingList[]));
 }
 
-export default watchBookedRoomsUpdate;
+function* updateFetchingStatus(status: boolean): Generator {
+  yield put(toggleFetchingStatus(status));
+}
+
+function* watchBookingUpdate(): Generator {
+  let status = true;
+
+  while (true) {
+    yield take(SET_USER);
+    yield call(updateFetchingStatus, status);
+    yield call(updateBookingList);
+    yield call(updateBookedRooms);
+    status = false;
+    yield call(updateFetchingStatus, status);
+  }
+}
+
+export default watchBookingUpdate;

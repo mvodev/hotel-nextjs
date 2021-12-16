@@ -1,8 +1,9 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 import RecalculateRating from 'src/utils/RecalculateRating';
 import {
-  updateRooms,
   selectBookedRooms,
   selectFetching,
 } from 'src/redux/Booking/BookingSlice';
@@ -15,9 +16,24 @@ const MyRooms = (): JSX.Element => {
   const rooms = useSelector(selectBookedRooms);
   const isFetching = useSelector(selectFetching);
   const isEmpty = rooms.length === 0;
-  const dispatch = useDispatch();
+  const isTransition = useRef(false);
+  const router = useRouter();
 
-  dispatch(updateRooms());
+  useEffect(() => {
+    const handleBeforeRouteChange = (url: string) => {
+      if (!isTransition.current) {
+        router.events.emit('routeChangeError');
+        console.log(url.replace(/\/.*\//, ''));
+        throw 'Abort route change. Please ignore this error.';
+      }
+    };
+
+    router.events.on('routeChangeStart', handleBeforeRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleBeforeRouteChange);
+    };
+  });
 
   return (
     <Layout title="my rooms" pageClass={styles.myRooms}>

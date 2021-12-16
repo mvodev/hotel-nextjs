@@ -42,6 +42,6 @@ module.exports = {
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
     "no-param-reassign": "off",
-    "no-console": "off",
+    "@typescript-eslint/no-throw-literal": "off",
   },
 };

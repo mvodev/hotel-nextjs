@@ -20,6 +20,7 @@ import {
   query,
   where,
   orderBy,
+  OrderByDirection,
 } from 'firebase/firestore';
 import { FirebaseError } from '@firebase/util';
 import {
@@ -27,6 +28,7 @@ import {
   UserType,
   RoomType,
   FiltersAPIType,
+  BookingType,
   ReturnedRoomType,
 } from './Types';
 
@@ -126,22 +128,30 @@ class FirebaseAPI {
     });
   };
 
-  public getBookedRooms = async (uid = '') => {
-    const bookedDocs = await getDocs(
+  public getBookingList = async (
+    uid = '',
+    field: 'dates' | 'totalCost' = 'dates',
+    direction: OrderByDirection = 'desc'
+  ) => {
+    const bookingDocs = await getDocs(
       query(
         collection(this.db, 'bookingList'),
-        where('userID', '==', uid),
-        orderBy('dates', 'desc')
+        where('userID', '==', null),
+        orderBy(field, direction)
       )
     );
-    const roomIDs = [
-      ...new Set(bookedDocs.docs.map((bookedDoc) => bookedDoc.data().roomID)),
-    ];
+
+    return bookingDocs.docs.map((d) => d.data() as BookingType);
+  };
+
+  public getBookedRooms = async (booking: BookingType[] = []) => {
+    const roomIDs = [...new Set(booking.map((i) => i.roomID))];
     const roomDocs = await Promise.all(
       roomIDs.map((id) => getDoc(doc(this.db, 'rooms', id)))
     );
+
     return roomDocs.map((roomDoc, idx) => ({
-      ...roomDoc.data(),
+      ...(roomDoc.data() as RoomType),
       roomID: roomIDs[idx],
     }));
   };

@@ -186,10 +186,18 @@ type ReturnedRoomType = {
   haveShampoo: boolean;
 };
 
+type BookingType = {
+  dates: Timestamp[];
+  userID: string;
+  roomID: string;
+  totalCost: number;
+};
+
 export type {
   UserDataType,
   UserType,
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
+  BookingType,
 };

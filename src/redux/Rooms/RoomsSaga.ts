@@ -33,5 +33,5 @@ export function* updateRooms(action: ActionType) {
 }
 
 export function* watchUpdateRooms(){
-  yield takeEvery('UPDATE_ROOMS', updateRooms)
+  // yield takeEvery('UPDATE_ROOMS', updateRooms)
 }
