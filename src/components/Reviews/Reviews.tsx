@@ -22,6 +22,7 @@ const Reviews = ({ title }: { title: string }): ReactElement => {
         text={review.text}
         likesNumber={review.likedBy.length}
         liked={uid ? review.likedBy.includes(uid) : false}
+        score={review.score}
       />
     </div>
   ));
