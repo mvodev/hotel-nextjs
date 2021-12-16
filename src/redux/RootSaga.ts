@@ -8,11 +8,13 @@ import watchAuthenticationSaga, {
 } from './Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 import watchSubmitSignInSaga from './SignInCard/AuthenticationSaga';
-import filtersWatcher from './Filters/FiltersSaga';
 import { watchUpdateRooms } from './Rooms/RoomsSaga';
 import appWatcher from './App/AppSaga';
 import { watchAddBook } from './AddBook/AddBookSaga';
-import watchGetCurrentRoomSaga from './CurrentRoom/CurrentRoomSagas';
+import {
+  watchGetCurrentRoomSaga,
+  watchCheckBookingBloked
+} from './CurrentRoom/CurrentRoomSagas';
 
 function* startSaga(
   saga: Saga<any>
@@ -29,7 +31,6 @@ function* startSaga(
 
 function* RootSaga(): Generator<any, any, any> {
   const sagas: Saga<any>[] = [
-    filtersWatcher,
     watchUpdateRooms,
     appWatcher,
     watchSubmitSignInSaga,
@@ -38,6 +39,7 @@ function* RootSaga(): Generator<any, any, any> {
     watchUserLogOutSaga,
     watchAddBook,
     watchGetCurrentRoomSaga,
+    watchCheckBookingBloked
   ];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));

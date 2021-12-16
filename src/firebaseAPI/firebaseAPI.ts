@@ -29,8 +29,10 @@ import {
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
-  BookDataType
+  BookDataType,
+  ReturnedRoomTypeWithDates,
 } from './Types';
+import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -142,11 +144,15 @@ class FirebaseAPI {
   };
   public getCurrentRoom = async (
     id: string
-  ): Promise<ReturnedRoomType | null> =>
-    getDoc(doc(this.db, 'rooms', id)).then((room) =>
-      room.data()
-        ? ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
-        : null
+  ): Promise<ReturnedRoomTypeWithDates | null> =>
+    getDoc(doc(this.db, 'rooms', id)).then((room) => {
+      if (room.data()) {
+        const result = ({ ...room.data(), roomID: room.id } as ReturnedRoomType) 
+        const bookedDays = result.bookedDays.map((item) => new Date(item.seconds * 1000))
+        return ({...result, bookedDays})  
+      }
+      return null
+    }
     );
 }
 

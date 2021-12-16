@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 
 const DatePicker = ({
   initDates,
+  disabledDates,
   isSmall = false,
   onChangeDate,
   onControlPanelUsed,
@@ -43,6 +44,13 @@ const DatePicker = ({
           nextLabel=''
           formatMonthYear={formate}
           minDate={minDate}
+          tileDisabled={(options) => {
+            const result = disabledDates.filter((item) => 
+              item.getTime() === options.date.getTime()
+            )
+            if (result.length) return true
+            else return false
+          }}
         />
       </div>
       <div className='date-picker__control-panel'>

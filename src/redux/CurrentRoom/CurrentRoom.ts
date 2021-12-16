@@ -1,10 +1,16 @@
 import { AnyAction } from 'redux';
 import DefaultState from './DefaultState';
-import CurrentRoomState, { SET_CURRENT_ROOM, SET_ROOM_LOADING } from './Types';
+import CurrentRoomState, {
+  SET_CURRENT_ROOM,
+  SET_ROOM_LOADING,
+  SET_IS_BOOKING_BLOCKED,
+  SET_IS_BOOKED,
+  SET_IN_BOOKING_PROCESS,
+} from './Types';
 
 const initialState = {
-  isLoading: false,
   ...DefaultState,
+  isLoading: false,
 };
 
 const CurrentRoom = (
@@ -16,14 +22,25 @@ const CurrentRoom = (
       return action.payload
         ? {
             ...state,
-            ...JSON.parse(action.payload),
+            ...action.payload,
           }
         : {
             ...state,
             ...DefaultState,
           };
+
     case SET_ROOM_LOADING:
       return { ...state, isLoading: action.payload };
+
+    case SET_IS_BOOKING_BLOCKED:
+      return { ...state, isBookingBlocked: action.payload };
+
+    case SET_IS_BOOKED:
+      return { ...state, isBooked: action.payload };
+
+    case SET_IN_BOOKING_PROCESS:
+      return { ...state, inBookingProcess: action.payload };
+
     default:
       return state;
   }

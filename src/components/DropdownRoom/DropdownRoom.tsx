@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { getPosInSpellCasesArray } from 'src/utils/Utils';
 
@@ -13,6 +14,8 @@ const DropdownRoom = ({
 }: DropdownRoomProps): JSX.Element => {
   const [isOpened, setOpened] = useState(false);
   const [counterItems, setCounterItems] = useState(values);
+
+  const dispatch = useDispatch();
 
   useEffect(() => setCounterItems(values), [values]);
 
@@ -44,6 +47,7 @@ const DropdownRoom = ({
     if (!(target as Element).closest(`.${styles.dropdownRoom}`)) {
       setOpened(false);
       window.removeEventListener('click', handleOutsideClick);
+      dispatch({ type: 'UPDATE_ROOMS', payload: 1 });
     }
   };
 

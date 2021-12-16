@@ -23,6 +23,12 @@ const getNewBookedDays = (dates, bookedDays) => {
   return newBookedDays;
 };
 
+const getDaysNumber = (dates) => {
+  const DAY = 24 * 60 * 60 * 1000;
+  return Math.ceil((dates[1].getTime() - dates[0].getTime()) / DAY)
+}
+
+
 exports.addBook = functions.region("europe-west3")
     .https.onRequest((req, res) => {
       const {userID, roomID, dates} =JSON.parse(req.body);
@@ -30,12 +36,14 @@ exports.addBook = functions.region("europe-west3")
 
       db.doc(`rooms/${roomID}`).get().then((doc) => {
         const room = doc.data();
+        const totalCost = room.price * getDaysNumber(transformedDates) - room.discount + room.serviceFee + room.additionalServicesFee;
 
         if (checkDates(transformedDates, room.bookedDays)) {
           db.collection("bookingList").add({
             dates: transformedDates, 
             roomID, 
-            userID
+            userID,
+            totalCost,
           })
             .then(() => {
                 db.doc(`rooms/${roomID}`)

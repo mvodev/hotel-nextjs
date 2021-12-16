@@ -11,6 +11,7 @@ import Registration from './Registration/Registration';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 import CurrentRoom from './CurrentRoom/CurrentRoom';
+import modalWindiw from './ModalWindow/ModalWindow';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -28,6 +29,7 @@ const makeStore = () => {
       Registration,
       roomCardsStatus,
       CurrentRoom,
+      modalWindiw,
     },
     middleware: [
       ...getDefaultMiddleware({
@@ -44,6 +46,25 @@ const makeStore = () => {
             'filters/setGuests',
             'filters/setDates',
             'filters/setConveniences',
+            'SET_IS_BOOKING_BLOCKED',
+            'SET-CURRENT-ROOM',
+            'CHECK_BOOKING_BLOCKED',
+            'SET-ROOM-LOADING',
+            'SET_IS_BOOKING_BLOCKED',
+            'USER-AUTHENTICATE',
+            'SUBMIT_SIGN_IN_FORM',
+            'SET_ERROR',
+            'SET-SUBMITTING',
+            'SET_AUTHENTICATION_SUCCESS',
+            'SET-USER',
+            'SET-AUTHENTICATED',
+            'SET-ROOM-LOADING',
+            'GET-CURRENT-ROOM',
+            'SET_IN_BOOKING_PROCESS',
+            'ADD_BOOK',
+            'modalWindow/setModalWindiwData',
+            'modalWindow/switchModelWindow',
+            'SET_IS_BOOKED'
           ],
         },
       }),

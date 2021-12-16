@@ -16,16 +16,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'src/redux/Store';
 import { NextPageContext } from 'next';
 import Preloader from 'src/components/Preloader/Preloader';
+import ModalWindow from 'src/components/ModalWindow/ModalWindow';
+import { switchModelWindow } from 'src/redux/ModalWindow/ModalWindow';
 
 const Room = ({ id }: { id: string }): ReactElement => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isDataRequested, setDataRequested] = useState(false);
-
+  
   const roomID = useSelector((state: AppState) => state.CurrentRoom.roomID);
   const isLoading = useSelector(
     (state: AppState) => state.CurrentRoom.isLoading
   );
+  const modalWindow = useSelector((state: AppState) => state.modalWindiw);
 
   if (!isDataRequested) {
     dispatch({ type: GET_CURRENT_ROOM, payload: id });
@@ -40,6 +43,10 @@ const Room = ({ id }: { id: string }): ReactElement => {
 
   const pageContent = (
     <>
+      <ModalWindow
+        handleCloseClick={() => dispatch(switchModelWindow(false))}
+        {...modalWindow}
+      />
       <div className={styles.detailsImages}>
         <RoomPhotoGallery />
       </div>
@@ -61,7 +68,7 @@ const Room = ({ id }: { id: string }): ReactElement => {
             </article>
           </section>
           <section className={styles.detailsForm}>
-            <TotalCostCard {...totalCostCardDefaultProps} />
+            <TotalCostCard />
           </section>
         </div>
       </div>

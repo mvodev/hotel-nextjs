@@ -1,3 +1,7 @@
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { Form } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import getPosInSpellCasesArray from 'src/utils/Utils';
 import DateDropdown from 'src/components/DateDropdown/DateDropdown';
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
@@ -5,21 +9,33 @@ import Button from 'src/components/Button/Button';
 
 import styles from './TotalCostCard.module.sass';
 import TypeTotalCostCardProps from './Types';
+import { AppState } from 'src/redux/Store';
+import { CHECK_BOOKING_BLOCKED, SET_IS_BOOKED } from 'src/redux/CurrentRoom/Types';
 
-const TotalCostCard = ({
-  roomNumber,
-  isLuxury,
-  costPerDay,
-  discount,
-  fee,
-  initDate,
-  adult,
-  child,
-  infants,
-}: TypeTotalCostCardProps): JSX.Element => {
-  const nDays = Math.ceil(
-    (initDate[1].getTime() - initDate[0].getTime()) / (24 * 60 * 60 * 1000)
-  );
+const TotalCostCard = (): JSX.Element => {
+  const router = useRouter()
+  const dispatch = useDispatch();
+  const isBookingBlocked = useSelector((state: AppState) => state.CurrentRoom.isBookingBlocked);
+  const isBooked = useSelector((state: AppState) => state.CurrentRoom.isBooked);
+  const inBookingProcess = useSelector((state: AppState) => state.CurrentRoom.inBookingProcess);
+
+  const dates = useSelector((state: AppState) => state.filters.dates);
+  const guests = useSelector((state: AppState) => state.filters.guests);
+
+  const roomNumber = useSelector((state: AppState) => state.CurrentRoom.roomNumber);
+  const isLuxury = useSelector((state: AppState) => state.CurrentRoom.isLux);
+  const costPerDay = useSelector((state: AppState) => state.CurrentRoom.price);
+  const discount = useSelector((state: AppState) => state.CurrentRoom.discount);
+  const serviceFee = useSelector((state: AppState) => state.CurrentRoom.serviceFee);
+  const fee = useSelector((state: AppState) => state.CurrentRoom.additionalServicesFee);
+  const bookedDays = useSelector((state: AppState) => state.CurrentRoom.bookedDays);
+
+  dispatch({ type: CHECK_BOOKING_BLOCKED })
+
+  const DAY = 24 * 60 * 60 * 1000;
+  const nDays = (dates[0] !== null)
+    ? Math.ceil((dates[1].getTime() - dates[0].getTime()) / DAY)
+    : 0
 
   const preTotal = costPerDay * nDays;
 
@@ -35,74 +51,92 @@ const TotalCostCard = ({
       .format(value)
       .replace(/\s(?!\d)/, '');
 
+  if (isBooked) {
+    dispatch({ type: SET_IS_BOOKED, payload: false })
+    router.push('/search');
+    
+  }
+
+  const handleFormSubmit = () => {
+    dispatch({ type: 'ADD_BOOK' })
+  }
+
   return (
-    <form className={styles.totalCostCard}>
-      <div className={styles.container}>
-        <div className={styles.heading}>
-          <h1
-            className={[
-              styles.roomNumber,
-              isLuxury ? styles.roomNumberDeluxe : '',
-            ].join(' ')}
-          >
-            {roomNumber}
-          </h1>
-          <span className={styles.costPerDay}>
-            {formatInRubles(costPerDay)}
-          </span>
-        </div>
-        <div className={styles.dateDropdownWrapper}>
-          <DateDropdown
-            titles={['прибытие', 'выезд']}
-            modifier='double'
-            initDate={initDate}
-          />
-        </div>
-        <div className={styles.dropdownGuestsWrapper}>
-          <h3 className={styles.dropdownGuestsTitle}>гости</h3>
-          <DropdownGuests
-            placeholder='Сколько гостей'
-            opened={false}
-            value={{
-              adult,
-              child,
-              infants,
-            }}
-          />
-        </div>
-        <div className={styles.costTable}>
-          <div className={styles.costTableServiceDescription}>
-            <span className={styles.costTableCostPerDay}>
-              {formatInRubles(costPerDay)}
-            </span>
-            {' x '}
-            <span className={styles.costTableNDays}>
-              {nDays} {spells[getPosInSpellCasesArray(nDays)]}
-            </span>
+    <Form onSubmit={handleFormSubmit}
+      render={({ handleSubmit }) => (
+        <form className={styles.totalCostCard} onSubmit={handleSubmit}>
+          <div className={styles.container}>
+            <div className={styles.heading}>
+              <h1
+                className={[
+                  styles.roomNumber,
+                  isLuxury ? styles.roomNumberDeluxe : '',
+                ].join(' ')}
+              >
+                {roomNumber}
+              </h1>
+              <span className={styles.costPerDay}>
+                {formatInRubles(costPerDay)}
+              </span>
+            </div>
+            <div className={styles.dateDropdownWrapper}>
+              <DateDropdown
+                titles={['прибытие', 'выезд']}
+                modifier="double"
+                initDate={dates}
+                from='bookingCard'
+                disabledDates={bookedDays}
+              />
+            </div>
+            <div className={styles.dropdownGuestsWrapper}>
+              <h3 className={styles.dropdownGuestsTitle}>гости</h3>
+              <DropdownGuests
+                placeholder="Сколько гостей"
+                opened={false}
+                value={guests}
+                from='bookingCard'
+              />
+            </div>
+            <div className={styles.costTable}>
+              <div className={styles.costTableServiceDescription}>
+                <span className={styles.costTableCostPerDay}>
+                  {formatInRubles(costPerDay)}
+                </span>
+                {' x '}
+                <span className={styles.costTableNDays}>
+                  {nDays} {spells[getPosInSpellCasesArray(nDays)]}
+                </span>
+              </div>
+              <div className={styles.costTableInfo} title="info" />
+              <div className={styles.costTableCost}>{formatInRubles(preTotal)}</div>
+              <div className={styles.costTableServiceDescription}>
+                {`Сбор за услуги: скидка ${formatInRubles(discount)}`}
+              </div>
+              <div className={styles.costTableInfo} title="info" />
+              <div className={styles.costTableCost}>{serviceFee}₽</div>
+              <div className={styles.costTableServiceDescription}>
+                Сбор за дополнительные {'\n'} услуги
+              </div>
+              <div className={styles.costTableInfo} title="info" />
+              <div className={styles.costTableCost}>{formatInRubles(fee)}</div>
+            </div>
+            <div className={styles.total}>
+              <span className={styles.totalCaption}>Итого</span>
+              <div className={styles.totalDashedLine} />
+              <span className={styles.totalCost}>
+                {formatInRubles(preTotal - discount + fee + serviceFee)}
+              </span>
+            </div>
+            <Button 
+              text="ЗАБРОНИРОВАТЬ" 
+              type="submit" 
+              theme="filled" 
+              isDisabled={isBookingBlocked || inBookingProcess} 
+            />
           </div>
-          <div className={styles.costTableInfo} title='info' />
-          <div className={styles.costTableCost}>{formatInRubles(preTotal)}</div>
-          <div className={styles.costTableServiceDescription}>
-            {`Сбор за услуги: скидка ${formatInRubles(discount)}`}
-          </div>
-          <div className={styles.costTableInfo} title='info' />
-          <div className={styles.costTableCost}>0₽</div>
-          <div className={styles.costTableServiceDescription}>
-            Сбор за дополнительные {'\n'} услуги
-          </div>
-          <div className={styles.costTableInfo} title='info' />
-          <div className={styles.costTableCost}>{formatInRubles(fee)}</div>
-        </div>
-        <div className={styles.total}>
-          <span className={styles.totalCaption}>Итого</span>
-          <div className={styles.totalDashedLine} />
-          <span className={styles.totalCost}>
-            {formatInRubles(preTotal - discount + fee)}
-          </span>
-        </div>
-        <Button text='ЗАБРОНИРОВАТЬ' type='submit' theme='filled' />
-      </div>
-    </form>
+        </form>
+      )}
+    />
   );
 };
 
