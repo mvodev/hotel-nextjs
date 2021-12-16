@@ -1,6 +1,7 @@
 import { takeEvery, put } from 'redux-saga/effects';
 import { call, delay } from '@redux-saga/core/effects';
 import { AuthError } from 'firebase/auth';
+import Cookie from 'js-cookie';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
 import { setAuthenticated } from '../Authentication/AuthenticationActions';
@@ -31,6 +32,7 @@ function* workerSignInSaga(form:SignInFormReducerType) {
     yield put(setError(false));
     yield put(setSubmitting(false));
     yield put(setModalWindow(true));
+    Cookie.set('userData', JSON.stringify({ ...result }));
     yield delay(5000);
     yield put(setAuthenticated(true));
     yield put({ 
