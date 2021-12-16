@@ -1,5 +1,4 @@
 import { initializeApp, FirebaseApp } from 'firebase/app';
-import { getFunctions, httpsCallable, Functions } from 'firebase/functions';
 import {
   getAuth,
   Auth,
@@ -18,8 +17,10 @@ import {
   getDocs,
   collection,
   query,
+  deleteDoc,
+  updateDoc
 } from 'firebase/firestore';
-import { FirebaseError } from "@firebase/util";
+import { async, FirebaseError } from "@firebase/util";
 import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
 
 const firebaseConfig = {
@@ -118,6 +119,25 @@ class FirebaseAPI {
       return result.json()
     })
   };
+
+  public cancelBooking = (
+    bookingID: string, 
+    roomID: string,
+    dates: [number, number]
+  ): void => {
+    deleteDoc(doc(this.db, 'bookingList', bookingID));
+    const docRef = doc(this.db, 'rooms', roomID);
+    getDoc(docRef)
+      .then((doc) => {
+        const room  = doc.data();
+        const newBookedDays = room.bookedDays.filter((item) => (
+          (item.seconds * 1000 < dates[0]) || ((item.seconds * 1000 > dates[1])) 
+        ));
+        
+        updateDoc(docRef, { bookedDays: newBookedDays });
+      })
+
+  }
 }
 
 const firebaseAPI = new FirebaseAPI();
