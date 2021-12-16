@@ -3,8 +3,8 @@ import DefaultState from './DefaultState';
 import CurrentRoomState, { SET_CURRENT_ROOM, SET_ROOM_LOADING } from './Types';
 
 const initialState = {
-  isLoading: false,
   ...DefaultState,
+  isLoading: false,
 };
 
 const CurrentRoom = (
