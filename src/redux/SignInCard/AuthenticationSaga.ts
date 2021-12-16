@@ -39,6 +39,7 @@ function* workerSignInSaga(form:SignInFormReducerType) {
         ...result,
         birthday:timestampToDateString((result).birthday),
     }});
+    yield put(setModalWindow(false));
   }
 }
 
