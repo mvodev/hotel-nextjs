@@ -1,11 +1,14 @@
 import { ReactElement, PropsWithChildren, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 import { USER_AUTHENTICATE } from 'src/redux/Authentication/Types';
 
 import Head from 'next/head';
+import { AppState } from 'src/redux/Store';
 import Header from './Header/Header';
 import HeaderDefaultProps from './Header/HeaderDefaultProps';
 import Footer from './Footer/Footer';
+import ModalWindow from './ModalWindow/ModalWindow';
 
 interface ILayoutProps {
   pageClass: string;
@@ -17,8 +20,14 @@ const Layout = ({
   pageClass,
   title = 'toxin page',
 }: PropsWithChildren<ILayoutProps>): ReactElement => {
+
   const [isCookies, setCookies] = useState(false);
+
   const dispatch = useDispatch();
+
+  const { isAuthenticated } = {
+    ...useSelector((state: AppState) => state.Authentication),
+  };
 
   useEffect(() => {
     if (!isCookies) {
@@ -26,6 +35,25 @@ const Layout = ({
       dispatch({ type: USER_AUTHENTICATE });
     }
   }, [isCookies, dispatch]);
+
+  const router = useRouter();
+  const routeIsPossible = router.pathname==='/'
+    ||router.pathname==='/signIn'
+    ||router.pathname==='/registration';
+
+  const handleModalWindowClose = ()=>{
+    router.push('/');
+  }
+
+  if(!isAuthenticated && !routeIsPossible)
+    return(
+      <ModalWindow 
+        title="Пожалуйста авторизуйтесь!" 
+        text="Пожалуйста авторизуйтесь для перехода на данную страницу."
+        isEnabled
+        handleCloseClick={handleModalWindowClose}
+        />
+    )
 
   return (
     <>
