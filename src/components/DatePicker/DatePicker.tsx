@@ -46,7 +46,7 @@ const DatePicker = ({
           minDate={minDate}
           tileDisabled={(options) => {
             const result = disabledDates.filter((item) => 
-              item.getTime() === options.date.getTime()
+              item === options.date.getTime()
             )
             if (result.length) return true
             else return false

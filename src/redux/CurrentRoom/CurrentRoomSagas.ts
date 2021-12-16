@@ -36,7 +36,7 @@ function* workerSaga({ payload }: AnyAction) {
   if (roomResponse) {
     yield put({
       type: SET_CURRENT_ROOM,
-      payload: JSON.stringify(roomResponse),
+      payload: roomResponse,
     });
   } else {
     yield put({ type: SET_CURRENT_ROOM, payload: null });
@@ -49,10 +49,10 @@ function* checkBookingBloked() {
   const guests: Guests = yield select(selectGuests);
   const dates: Dates = yield select(selectDates);
   const maxGuests: number = yield select((state: AppState) => state.CurrentRoom.maxGuests);
-  const bookedDates: Date[] = yield select((state: AppState) => state.CurrentRoom.bookedDays);
+  const bookedDates: number[] = yield select((state: AppState) => state.CurrentRoom.bookedDays);
   const filtredBookedDays = (dates[0] !== null) 
     ? bookedDates.filter((item) => (
-      (item.getTime() >= dates[0].getTime()) && (item.getTime() <= dates[1].getTime())
+      (item >= dates[0]) && (item <= dates[1])
     ))
     : []
   const isBookingBloked = (

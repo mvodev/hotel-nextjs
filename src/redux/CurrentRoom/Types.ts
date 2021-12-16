@@ -1,11 +1,11 @@
-import { ReturnedRoomTypeWithDates, RoomType } from 'src/firebaseAPI/Types';
+import { ReturnedRoomType, RoomType } from 'src/firebaseAPI/Types';
 
 type CurrentRoomState = { 
   isLoading: boolean,
   inBookingProcess: boolean,
   isBookingBlocked: boolean,
   isBooked: boolean
-} & ReturnedRoomTypeWithDates;
+} & ReturnedRoomType;
 
 const SET_CURRENT_ROOM = 'SET-CURRENT-ROOM';
 const GET_CURRENT_ROOM = 'GET-CURRENT-ROOM';

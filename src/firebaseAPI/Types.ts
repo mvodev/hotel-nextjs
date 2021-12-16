@@ -89,7 +89,7 @@ type RoomType = {
 };
 
 type FiltersAPIType = {
-  dates: [Date, Date] | [null, null];
+  dates: [number, number] | [null, null];
   guests: {
     adult: number;
     child: number;
@@ -216,7 +216,7 @@ type ReturnedRoomType = {
   haveShampoo: boolean;
 };
 
-type ReturnedRoomTypeWithDates = {
+type ReturnedRoomTypeWithTimestamp = {
   roomID: string;
   gallery: string[];
   information: {
@@ -235,7 +235,7 @@ type ReturnedRoomTypeWithDates = {
   price: number;
   roomNumber: number;
   isLux: boolean;
-  bookedDays: Date[];
+  bookedDays: Timestamp[];
   maxGuests: number;
   discount: number;
   serviceFee: number;
@@ -273,7 +273,7 @@ export type {
   FiltersAPIType,
   ReturnedRoomType,
   BookDataType,
-  ReturnedRoomTypeWithDates,
+  ReturnedRoomTypeWithTimestamp,
   CommentType,
   ImpressionsType,
   CommentInputType,

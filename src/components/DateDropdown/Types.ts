@@ -3,7 +3,7 @@ type DateDropdownType = {
   modifier?: 'single' | 'double';
   isSmall?: boolean;
   from: 'filtersCard' | 'searchCard' | 'bookingCard';
-  disabledDates: Date[];
+  disabledDates: number[];
 };
 
 export default DateDropdownType;

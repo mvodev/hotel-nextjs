@@ -11,13 +11,13 @@ export function* addBook(action: AddBookActionType) {
   try {
     const userID: string = yield select((state: AppState) => state.Authentication.user.uid);
     const roomID: string = yield select((state: AppState) => state.CurrentRoom.roomID);
-    const dates: [Date, Date] = yield select((state: AppState) => state.filters.dates);
+    const dates: [number, number] = yield select((state: AppState) => state.filters.dates);
 
     yield put({ type: SET_IN_BOOKING_PROCESS, payload: true });
 
     const addBookResult: AddBookResultType = yield call(
       firebaseAPI.addBook,
-      {userID, roomID, dates}
+      {userID, roomID, dates: dates.map((item) => new Date(item))}
     );
     yield put(setModalWindiwData({
       isEnabled: true,

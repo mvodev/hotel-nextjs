@@ -32,7 +32,8 @@ import {
   BookDataType,
   CommentType, 
   ImpressionsType, 
-  CommentInputType
+  CommentInputType,
+  ReturnedRoomTypeWithTimestamp
 } from './Types';
 import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
 
@@ -243,9 +244,9 @@ class FirebaseAPI {
   ): Promise<ReturnedRoomType | null> =>
     getDoc(doc(this.db, 'rooms', id)).then((room) => {
       if (room.data()) {
-        const result = ({ ...room.data(), roomID: room.id } as ReturnedRoomType) 
+        const result = ({ ...room.data(), roomID: room.id } as ReturnedRoomTypeWithTimestamp) 
         const bookedDays = result.bookedDays.map((item) => item.seconds * 1000)
-        return ({...result, bookedDays})  
+        return {...result, bookedDays}  
       }
       return null
     }

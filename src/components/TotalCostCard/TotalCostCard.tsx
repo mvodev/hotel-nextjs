@@ -20,7 +20,6 @@ const TotalCostCard = (): JSX.Element => {
   const inBookingProcess = useSelector((state: AppState) => state.CurrentRoom.inBookingProcess);
 
   const dates = useSelector((state: AppState) => state.filters.dates);
-  const guests = useSelector((state: AppState) => state.filters.guests);
 
   const roomNumber = useSelector((state: AppState) => state.CurrentRoom.roomNumber);
   const isLuxury = useSelector((state: AppState) => state.CurrentRoom.isLux);
@@ -34,7 +33,7 @@ const TotalCostCard = (): JSX.Element => {
 
   const DAY = 24 * 60 * 60 * 1000;
   const nDays = (dates[0] !== null)
-    ? Math.ceil((dates[1].getTime() - dates[0].getTime()) / DAY)
+    ? Math.ceil((dates[1] - dates[0]) / DAY)
     : 0
 
   const preTotal = costPerDay * nDays;
@@ -83,7 +82,6 @@ const TotalCostCard = (): JSX.Element => {
               <DateDropdown
                 titles={['прибытие', 'выезд']}
                 modifier="double"
-                initDate={dates}
                 from='bookingCard'
                 disabledDates={bookedDays}
               />
@@ -93,7 +91,6 @@ const TotalCostCard = (): JSX.Element => {
               <DropdownGuests
                 placeholder="Сколько гостей"
                 opened={false}
-                value={guests}
                 from='bookingCard'
               />
             </div>

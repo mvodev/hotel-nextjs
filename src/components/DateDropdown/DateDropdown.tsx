@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectDates, setDates } from 'src/redux/Filters/FiltersSlice';
@@ -16,7 +16,11 @@ const DateDropdown = ({
   from = 'filtersCard',
   disabledDates = [],
 }: DateDropdownType): JSX.Element => {
-  const value = useSelector(selectDates);
+  const dates = useSelector(selectDates);
+  const value: [Date, Date] | [null, null] = (dates[0] !== null) 
+    ? (dates.map((item) => new Date(item)) as [Date, Date])
+    : [null, null] 
+  
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -72,7 +76,8 @@ const DateDropdown = ({
   );
 
   const handleChangeDate = (dates: [Date, Date]) => {
-    dispatch(setDates(dates));
+    const newDates = (dates.map((item) => item.getTime()) as [number, number])
+    dispatch(setDates(newDates));
     if (from === 'bookingCard') dispatch({ type: CHECK_BOOKING_BLOCKED })
   }
 
