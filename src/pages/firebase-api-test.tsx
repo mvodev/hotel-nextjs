@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
 import type { ReactElement } from 'react';
 import { RoomType } from 'src/firebaseAPI/Types';
 import Layout from '../components/Layout';
 import firebaseAPI from '../firebaseAPI/firebaseAPI';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const rooms: RoomType[] = [
   {
     gallery: ['room-2.webp', 'room-8.webp', 'room-4.webp', 'room-5.webp'],
@@ -1934,6 +1936,7 @@ const rooms: RoomType[] = [
   },
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filters = {
   dates: [new Date(2021, 11, 10), new Date(2021, 11, 15)],
   guests: {
@@ -2014,7 +2017,9 @@ const filters = {
 };
 
 const Index = (): ReactElement => (
+  // eslint-disable-next-line react/jsx-no-comment-textnodes
   <Layout title='landing page' pageClass='landing'>
+    // eslint-disable-next-line no-console
     {console.log(
       firebaseAPI.signIn('dxcgfghcffgxjxfgxgffbx@mail.ru', 'lkjhgfdsa')
     )}
