@@ -35,7 +35,7 @@ const Search = (): JSX.Element => {
     : '';
 
   return (
-    <Layout title='search room' pageClass='search'>
+    <Layout title="search room" pageClass="search">
       <section className={styles.pageContainer}>
         <Filters />
         <div className={styles.searchContent}>

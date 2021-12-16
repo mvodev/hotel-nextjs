@@ -10,10 +10,40 @@ type UserDataType = {
   birthday: Date
 }
 
+type ImpressionsType = {
+  perfect:number,
+  good:number,
+  satisfactory:number,
+  poor:number,
+}
+
 type UserType = {
   uid: string;
   email: string | null;
 };
+
+type CommentType = {
+  commentID:string;
+  uid: string;
+  roomID:string;
+  score: 'perfect' | 'good' | 'satisfactory' | 'poor';
+  text:string;
+  avatar: string;
+  userName: string;
+  publicationDate: Timestamp;
+  likedBy:Array<string>;
+}
+
+type CommentInputType = {
+  uid: string;
+  roomID:string;
+  score: 'perfect' | 'good' | 'satisfactory' | 'poor';
+  text:string;
+  avatar: string;
+  userName: string;
+  publicationDate: Date;
+  likedBy:Array<string>;
+}
 
 type RoomType = {
   gallery: string[];
@@ -161,7 +191,7 @@ type ReturnedRoomType = {
   price: number;
   roomNumber: number;
   isLux: boolean;
-  bookedDays: Timestamp[];
+  bookedDays: number[];
   maxGuests: number;
   discount: number;
   serviceFee: number;
@@ -244,4 +274,7 @@ export type {
   ReturnedRoomType,
   BookDataType,
   ReturnedRoomTypeWithDates,
+  CommentType,
+  ImpressionsType,
+  CommentInputType,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import type { ReactElement } from 'react';
 import { RoomType } from 'src/firebaseAPI/Types';
 import Layout from '../components/Layout';

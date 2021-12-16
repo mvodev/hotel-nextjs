@@ -1,8 +1,7 @@
-import FiltersType from './Types';
-import DropdownGuestsDefaultProps from '../DropdownGuests/DropdownGuestsDefaultProps';
+import DropdownGuestsDefaultProps from '../DropdownGuests/DropdownGuests';
 import DropdownRoomDefaultProps from '../DropdownRoom/DropdownRoomDefaultProps';
 
-const FiltersProps: FiltersType = {
+const FiltersProps = {
   dateDropdown: {
     initDate: [new Date(2022, 7, 19), new Date(2022, 7, 23)],
     titles: ['даты пребывания в отеле'] as [string],

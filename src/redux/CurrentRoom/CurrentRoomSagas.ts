@@ -1,7 +1,6 @@
 import { call, ForkEffect, put, takeLatest, select } from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
-import { ReturnedRoomTypeWithDates } from 'src/firebaseAPI/Types';
 import { selectDates, selectGuests } from '../Filters/FiltersSlice';
 import { Dates, Guests } from '../Filters/Types';
 import { AppState } from '../Store';
@@ -13,7 +12,10 @@ import {
   CHECK_BOOKING_BLOCKED,
 } from './Types';
 
-async function getCurrentRoom(id: string): Promise<ReturnedRoomTypeWithDates | null> {
+import { ReturnedRoomType } from 'src/firebaseAPI/Types';
+import { ROOM_COMMENTS_TO_STATE } from '../CurrentRoomComments/Types';
+
+async function getCurrentRoom(id: string): Promise<ReturnedRoomType | null> {
   const response = await firebaseAPI.getCurrentRoom(id);
   return response;
 }
@@ -21,13 +23,21 @@ async function getCurrentRoom(id: string): Promise<ReturnedRoomTypeWithDates | n
 function* workerSaga({ payload }: AnyAction) {
   yield put({ type: SET_ROOM_LOADING, payload: true });
 
-  const response: ReturnedRoomTypeWithDates | null = yield call(
+  const roomResponse: Promise<ReturnedRoomType | null> = yield call(
     getCurrentRoom,
     payload
   );
 
-  if (response) {
-    yield put({ type: SET_CURRENT_ROOM, payload: response });
+  yield put({
+    type: ROOM_COMMENTS_TO_STATE,
+    payload: { roomID: payload },
+  });
+
+  if (roomResponse) {
+    yield put({
+      type: SET_CURRENT_ROOM,
+      payload: JSON.stringify(roomResponse),
+    });
   } else {
     yield put({ type: SET_CURRENT_ROOM, payload: null });
   }
