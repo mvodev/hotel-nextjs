@@ -5,6 +5,7 @@ const ImpressionsRadio = (): React.ReactElement => {
   const radios = Values.map((radio) => {
     return (
       <label
+        key={radio.key}
         className={[
           styles.label,
           styles[
