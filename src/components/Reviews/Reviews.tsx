@@ -4,6 +4,7 @@ import { AppState } from 'src/redux/Store';
 import Review from './Review/Review';
 import { getDeclension } from '../../utils/Utils';
 import style from './Reviews.module.sass';
+import ReviewForm from '../ReviewForm/ReviewForm';
 
 const Reviews = ({ title }: { title: string }): ReactElement => {
   const reviewsCollection = useSelector(
@@ -49,6 +50,7 @@ const Reviews = ({ title }: { title: string }): ReactElement => {
     <section className={style.reviews}>
       <h2 className={style.reviewsTitle}>{title}</h2>
       {reviewsContent}
+      <ReviewForm />
     </section>
   );
 };

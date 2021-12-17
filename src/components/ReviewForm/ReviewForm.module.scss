@@ -1,0 +1,22 @@
+@import '@styles/mixins';
+
+.reviewForm {
+  width: 100%;
+}
+
+.title {
+  @include h2();
+  font-size: 19px;
+  line-height: 23px;
+}
+
+.textarea {
+  @include text-field();
+  max-width: 100%;
+  min-height: 100px;
+}
+
+.submitContainer {
+  margin: 15px 0;
+  max-width: 300px;
+}
