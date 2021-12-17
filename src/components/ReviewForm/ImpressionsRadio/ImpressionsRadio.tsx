@@ -6,20 +6,32 @@ const ImpressionsRadio = (): React.ReactElement => {
     return (
       <label
         key={radio.key}
-        className={[
-          styles.label,
-          styles[
-            `label${radio.key.charAt(0).toUpperCase()}${radio.key.slice(1)}`
-          ],
-        ].join(' ')}
+        // className={[
+        //   styles.label,
+        //   styles[
+        //     `label${radio.key.charAt(0).toUpperCase()}${radio.key.slice(1)}`
+        //   ],
+        // ].join(' ')}
       >
-        {radio.value}
+        {/* {radio.value} */}
         <input
           className={styles.radio}
           type='radio'
           name='impressions'
           value={radio.key}
         />
+        <span
+          className={[
+            styles.radioText,
+            styles[
+              `radioText${radio.key.charAt(0).toUpperCase()}${radio.key.slice(
+                1
+              )}`
+            ],
+          ].join(' ')}
+        >
+          {radio.value}
+        </span>
       </label>
     );
   });
