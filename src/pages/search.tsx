@@ -10,36 +10,33 @@ import RecalculateRating from '../utils/RecalculateRating';
 const Search = (): JSX.Element => {
 
   const roomCards = useSelector((state: StateType) => state.rooms.rooms);
+  const searchItems = roomCards.length
+    ? roomCards.map((item) => {
+        const roomCardItem = {
+          id: item.roomID,
+          slides: item.gallery,
+          infoSection: {
+            roomNumber: item.roomNumber,
+            isLux: item.isLux,
+            rating: RecalculateRating(item.impressions),
+            price: item.price,
+            reviewsCount:
+              item.impressions.perfect +
+              item.impressions.good +
+              item.impressions.satisfactory +
+              item.impressions.poor,
+          },
+        };
+        return (
+          <div key={item.roomID} className={styles.searchItem}>
+            <RoomCard {...roomCardItem} />
+          </div>
+        );
+      })
+    : '';
 
-  const searchItems = roomCards.length 
-    ? (roomCards.map((item) => {
-      const roomCardItem = {
-        slides: item.gallery,
-        infoSection: {
-          roomNumber: item.roomNumber,
-          isLux: item.isLux,
-          rating: RecalculateRating(item.impressions),
-          price: item.price,
-          reviewsCount: (
-            item.impressions.perfect
-            + item.impressions.good
-            + item.impressions.satisfactory
-            + item.impressions.poor
-          )
-        },
-        link: 'details'
-      }
-      return(
-        <div key={item.roomID} className={styles.searchItem}>
-          <RoomCard {...roomCardItem} />
-        </div>
-      );
-    }))
-    : ''
-
-
-  return(
-    <Layout title='search room' pageClass='search'>
+  return (
+    <Layout title="search room" pageClass="search">
       <section className={styles.pageContainer}>
         <Filters />
         <div className={styles.searchContent}>
@@ -56,6 +53,6 @@ const Search = (): JSX.Element => {
       </section>
     </Layout>
   );
-}
+};
 
 export default Search;

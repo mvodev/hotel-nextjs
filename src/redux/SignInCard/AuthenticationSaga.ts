@@ -5,26 +5,23 @@ import Cookie from 'js-cookie';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
 import { setAuthenticated } from '../Authentication/AuthenticationActions';
-import { 
-  setModalWindow,
-  setError,
-  setSubmitting 
-} from './SignInCardActions';
+import { setModalWindow, setError, setSubmitting } from './SignInCardActions';
 import { SUBMIT_SIGN_IN_FORM } from './Types';
 import { SET_USER } from '../Authentication/Types';
 import { timestampToDateString } from '../../utils/Utils';
 
 type SignInFormReducerType = {
-  type:string,
-  payload:{
-    email:string,
-    password:string,
-  }
-}
+  type: string;
+  payload: {
+    email: string;
+    password: string;
+  };
+};
 
-function* workerSignInSaga(form:SignInFormReducerType) {
-  const result: Promise<UserType | AuthError> = 
-  yield call(() => firebaseAPI.signIn(form.payload.email, form.payload.password));
+function* workerSignInSaga(form: SignInFormReducerType) {
+  const result: Promise<UserType | AuthError> = yield call(() =>
+    firebaseAPI.signIn(form.payload.email, form.payload.password)
+  );
   if (result.constructor.name === 'FirebaseError') {
     yield put(setError(true));
     yield put(setSubmitting(false));
@@ -34,10 +31,11 @@ function* workerSignInSaga(form:SignInFormReducerType) {
     yield put(setModalWindow(true));
     Cookie.set('userData', JSON.stringify({ ...result }));
     yield delay(5000);
+    Cookie.set('userData', JSON.stringify({ ...result }));
     yield put(setAuthenticated(true));
-    yield put({ 
+    yield put({
       type: SET_USER,
-      payload: { 
+      payload: {
         ...result,
         birthday:timestampToDateString((result).birthday),
     }});

@@ -1,7 +1,8 @@
 type ReviewType = {
-  id: number;
+  commentID: string;
   avatar: string;
   userName: string;
+  score: 'perfect' | 'good' | 'satisfactory' | 'poor';
   publicationDate: Date;
   text: string;
   likesNumber: number;

@@ -1,10 +1,5 @@
-type ImpressionsProps = {
-  header: string;
-  value: Array<ImpressionsItem>;
-};
-
-type ImpressionsItem = {
-  title: string;
+type DiagramSegment = {
+  type: 'perfect' | 'good' | 'satisfactory' | 'poor';
   value: number;
   color: string;
   description: string;
@@ -12,4 +7,4 @@ type ImpressionsItem = {
   stopColor?: string;
 };
 
-export default ImpressionsProps;
+export default DiagramSegment;

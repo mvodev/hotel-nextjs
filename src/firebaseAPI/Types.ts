@@ -30,7 +30,7 @@ type CommentType = {
   text:string;
   avatar: string;
   userName: string;
-  publicationDate: Date;
+  publicationDate: Timestamp;
   likedBy:Array<string>;
 }
 

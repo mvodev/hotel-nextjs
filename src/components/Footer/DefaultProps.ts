@@ -46,17 +46,17 @@ const defaultSocials: TypeSocialProps<TypeSocialSources>[] = [
   {
     id: 'twitter',
     href: 'https://twitter.com',
-    src: './images/twitter-icon.svg',
+    src: '/images/twitter-icon.svg',
   },
   {
     id: 'facebook',
     href: 'https://facebook.com',
-    src: './images/facebook-icon.svg',
+    src: '/images/facebook-icon.svg',
   },
   {
     id: 'instagram',
     href: 'https://instagram.com',
-    src: './images/instagram-icon.svg',
+    src: '/images/instagram-icon.svg',
   },
 ];
 
