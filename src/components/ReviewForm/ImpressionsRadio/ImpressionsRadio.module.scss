@@ -10,50 +10,29 @@
   color: $color-unclaimed-fg;
   margin: 0 5px;
   padding: 8px;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 20px;
-    padding: 1px;
-    -webkit-mask: linear-gradient($color-main-bg 0 0) content-box,
-      linear-gradient($color-main-bg 0 0);
-    background: $color-unclaimed-fg;
-    -webkit-mask-composite: destination-out;
-    mask-composite: exclude;
-  }
+  border-radius: 20px;
+  outline: 1px solid $color-unclaimed-fg;
+  font-size: 12px;
 
   &:hover {
-    color: $color-main-fg;
-    border-color: $color-main-fg;
+    color: $color-main-bg;
+    outline: none;
   }
 
   &Perfect:hover {
-    &:before {
-      background: $gradient-perfect;
-    }
+    background: $gradient-perfect;
   }
 
   &Good:hover {
-    &:before {
-      background: $gradient-good;
-    }
+    background: $gradient-good;
   }
 
   &Satisfactory:hover {
-    &:before {
-      background: $gradient-satisfactory;
-    }
+    background: $gradient-satisfactory;
   }
 
   &Poor:hover {
-    &:before {
-      background: $gradient-poor;
-    }
+    background: $gradient-poor;
   }
 
   &:first-child {
