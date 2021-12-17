@@ -1,11 +1,6 @@
 type BulletListProps = {
   title: string;
-  items: BulletItem[];
-};
-
-type BulletItem = {
-  id: number;
-  text: string;
+  type: 'rules' | 'cancellation';
 };
 
 export default BulletListProps;

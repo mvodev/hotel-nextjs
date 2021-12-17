@@ -1,32 +1,27 @@
 import { PieChart } from 'react-minimal-pie-chart';
+import DiagramSegment from '../Types';
 
-import ImpressionsProps from '../Types';
+const Diagram = ({ segments }: { segments: DiagramSegment[] }): JSX.Element => {
+  const colors = segments.map((segment, index) =>
+    segment.withGradient ? (
+      <defs key={segment.description}>
+        <linearGradient id={`gradient${index}`}>
+          <stop offset="0%" stopColor={`${segment.color}`} />
+          <stop offset="100%" stopColor={`${segment.stopColor}`} />
+        </linearGradient>
+      </defs>
+    ) : null
+  );
 
-const Diagram = ({ value }: ImpressionsProps): JSX.Element => {
-  const colors = value.map((elem, index) => {
-    if (elem.withGradient) {
-      return (
-        <defs key={elem.description}>
-          <linearGradient id={`gradient${index}`}>
-            <stop offset='0%' stopColor={`${elem.color}`} />
-            <stop offset='100%' stopColor={`${elem.stopColor}`} />
-          </linearGradient>
-        </defs>
-      );
-    }
-    return null;
-  });
-
-  const valueWithGradient = value.map((elem, index) => {
-    if (elem.withGradient) {
-      return {
-        value: elem.value,
-        color: `url(#gradient${index})`,
-        key: elem.description,
-      };
-    }
-    return elem;
-  });
+  const valueWithGradient = segments.map((segment, index) =>
+    segment.withGradient
+      ? {
+          value: segment.value,
+          color: `url(#gradient${index})`,
+          key: segment.description,
+        }
+      : segment
+  );
 
   return (
     <PieChart
