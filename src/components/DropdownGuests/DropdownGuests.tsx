@@ -8,10 +8,12 @@ import { getPosInSpellCasesArray } from 'src/utils/Utils';
 
 import styles from './DropdownGuests.module.scss';
 import DropdownGuestsProps from './Types';
+import { CHECK_BOOKING_BLOCKED } from 'src/redux/CurrentRoom/Types';
 
 const DropdownGuests = ({
   placeholder = 'Сколько гостей',
   opened = false,
+  from = 'filtersCard',
 }: DropdownGuestsProps): JSX.Element => {
   const spellCases = {
     guests: ['гость', 'гостя', 'гостей'],
@@ -21,17 +23,32 @@ const DropdownGuests = ({
   const { adult, child, infants } = useSelector(selectGuests);
   const dispatch = useDispatch();
 
-  const handleApplyButton = () => setOpened(false);
+  const closeDropdownByFiltersCard = () => {
+    dispatch({ type: 'UPDATE_ROOMS', payload: 1 });
+    setOpened(false);
+  }
+
+  const closeDropdownByNotFiltersCard = () => {
+    setOpened(false);
+  }
+
+  const closeDropdown = (from === 'filtersCard')
+    ? closeDropdownByFiltersCard
+    : closeDropdownByNotFiltersCard
+
+  const handleApplyButton = () => {
+    closeDropdown();
+  }
 
   const handleClearButton = () => {
-    setOpened(false);
     dispatch(setGuests({ adult: 0, child: 0, infants: 0 }));
+    closeDropdown();
   };
 
   const handleOutsideClick = (event: Event) => {
     const { target } = event;
     if (!(target as Element).closest(`.${styles.dropdownGuests}`)) {
-      setOpened(false);
+      closeDropdown();
       window.removeEventListener('click', handleOutsideClick);
     }
   };
@@ -43,6 +60,7 @@ const DropdownGuests = ({
 
   const onChange = (data: number, type: string): void => {
     dispatch(setGuests({ adult, child, infants, [type]: data }));
+    if (from === 'bookingCard') dispatch({ type: CHECK_BOOKING_BLOCKED })
   };
 
   const getValueForInputField = (): string => {
