@@ -226,7 +226,7 @@ class FirebaseAPI {
         : null
     );
 
-  public addCommentAndUpdateInpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {
+  public addCommentAndUpdateImpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {
     this.addComment(commentData);
     const roomRef = doc(this.db, 'rooms', commentData.roomID);
     const roomSnap = await getDoc(roomRef);
