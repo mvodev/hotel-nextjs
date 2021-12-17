@@ -18,6 +18,7 @@ import {
   query,
   collectionGroup,
   where,
+  updateDoc,
 } from 'firebase/firestore';
 import { FirebaseError } from '@firebase/util';
 import {
@@ -234,7 +235,9 @@ class FirebaseAPI {
     }
     const dataToSave: RoomType = (roomSnap.data() as RoomType);
     dataToSave.impressions[commentData.score]+=1;
-    await setDoc(doc(this.db, 'rooms', roomSnap.ref.id), dataToSave);
+    await updateDoc(doc(this.db, 'rooms', roomSnap.ref.id), {
+      impressions:dataToSave.impressions
+    });
     return true;
   }
 }
