@@ -136,7 +136,7 @@ class FirebaseAPI {
     const dataToSave: CommentInputType = (commentSnap.data() as CommentInputType);
     if (!dataToSave.likedBy.includes(uidWhoLikedComment)) {
       dataToSave.likedBy.push(uidWhoLikedComment);
-      await setDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
+      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
     }
     return true;
   }
@@ -150,7 +150,7 @@ class FirebaseAPI {
     const dataToSave: CommentInputType = (commentSnap.data() as CommentInputType);
     if (dataToSave.likedBy.includes(uidUserToRemove)) {
       dataToSave.likedBy = dataToSave.likedBy.filter((elem) => elem !== uidUserToRemove);
-      await setDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
+      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
     }
     return true;
   }
