@@ -2021,8 +2021,17 @@ const Index = (): ReactElement => (
   <Layout title='landing page' pageClass='landing'>
     // eslint-disable-next-line no-console
     {console.log(
-      firebaseAPI.signIn('dxcgfghcffgxjxfgxgffbx@mail.ru', 'lkjhgfdsa')
-    )}
+      firebaseAPI.addCommentAndUpdateInpressions({
+        uid:'',
+        roomID:'1GIK6z75Unitldt5NBiH',
+        score: 'perfect',
+        text:'addCommentAndUpdateInpressions test',
+        avatar: '',
+        userName: 'addCommentAndUpdateInpressions test',
+        publicationDate: new Date(),
+        likedBy:[],
+      }
+    ))}
   </Layout>
 );
 

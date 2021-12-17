@@ -224,6 +224,19 @@ class FirebaseAPI {
         ? ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
         : null
     );
+
+  public addCommentAndUpdateInpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {
+    this.addComment(commentData);
+    const roomRef = doc(this.db, 'rooms', commentData.roomID);
+    const roomSnap = await getDoc(roomRef);
+    if (!roomSnap.exists()) {
+      return new FirebaseError('INVALID_ARGUMENT', 'No room for this argument in database');
+    }
+    const dataToSave: ReturnedRoomType = (roomSnap.data() as ReturnedRoomType);
+    dataToSave.impressions[commentData.score]+=1;
+    await setDoc(doc(this.db, 'rooms', roomSnap.ref.id), dataToSave);
+    return true;
+  }
 }
 
 const firebaseAPI = new FirebaseAPI();
