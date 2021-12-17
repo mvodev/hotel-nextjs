@@ -232,7 +232,7 @@ class FirebaseAPI {
     if (!roomSnap.exists()) {
       return new FirebaseError('INVALID_ARGUMENT', 'No room for this argument in database');
     }
-    const dataToSave: ReturnedRoomType = (roomSnap.data() as ReturnedRoomType);
+    const dataToSave: RoomType = (roomSnap.data() as RoomType);
     dataToSave.impressions[commentData.score]+=1;
     await setDoc(doc(this.db, 'rooms', roomSnap.ref.id), dataToSave);
     return true;
