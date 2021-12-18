@@ -1,6 +1,7 @@
 import { Field, FieldMetaState, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SUBMIT_REVIEW } from 'src/redux/Review/Types';
+import { AppState } from 'src/redux/Store';
 import styles from './ReviewForm.module.scss';
 import Button from '../Button/Button';
 import ImpressionsRadio from './ImpressionsRadio/ImpressionsRadio';
@@ -8,10 +9,19 @@ import ReviewData from './Types';
 import validate from './validate';
 
 const ReviewForm = (): React.ReactElement => {
+  const roomID = useSelector((state: AppState) => state.CurrentRoom.roomID);
+  const user = useSelector((state: AppState) => state.Authentication.user);
   const dispatch = useDispatch();
 
   const handleFormSubmit = (values: ReviewData) => {
-    dispatch({ type: SUBMIT_REVIEW, payload: values });
+    const reviewData = {
+      uid: user.uid,
+      roomID,
+      score: values.impression,
+      text: values.review,
+      userName: user.name,
+    };
+    dispatch({ type: SUBMIT_REVIEW, payload: reviewData });
   };
 
   const validationBlock = (meta: FieldMetaState<any>) =>
