@@ -104,16 +104,7 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'rooms'), roomData);
   };
 
-  public addComment = async (commentData: CommentInputType = {
-    likedBy: [],
-    avatar: '/images/avatar-user-1.webp',
-    uid: '',
-    roomID: '',
-    text: '',
-    score: 'perfect',
-    userName: '',
-    publicationDate: new Date(),
-  }) => {
+  public addComment = async (commentData: CommentInputType) => {
     addDoc(collection(this.db, 'comments'), commentData);
   }
 
@@ -235,17 +226,7 @@ class FirebaseAPI {
         : null
     );
 
-  public addCommentAndUpdateImpressions = 
-  async (commentData: CommentInputType = {
-    likedBy: [],
-    avatar: '/images/avatar-user-1.webp',
-    uid: '',
-    roomID: '',
-    text: '',
-    score: 'perfect',
-    userName: '',
-    publicationDate: new Date(),
-  }): Promise<boolean | FirebaseError> => {
+  public addCommentAndUpdateImpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {
     this.addComment(commentData);
     const roomRef = doc(this.db, 'rooms', commentData.roomID);
     const roomSnap = await getDoc(roomRef);
