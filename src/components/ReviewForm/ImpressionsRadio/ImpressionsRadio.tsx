@@ -8,7 +8,7 @@ const ImpressionsRadio = (
   props: InputHTMLAttributes<HTMLInputElement>
 ): React.ReactElement => {
   const radios = Values.map((radio) => (
-    <label key={radio.key}>
+    <label key={radio.key} className={styles.radioContainer}>
       <input
         className={styles.radio}
         type='radio'

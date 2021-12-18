@@ -2,37 +2,62 @@
 
 .impressionsRadio {
   margin: 5px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .radioText {
   position: relative;
   display: inline-block;
   color: $color-unclaimed-fg;
-  margin: 0 5px;
   padding: 8px;
   border-radius: 20px;
-  outline: 1px solid $color-unclaimed-fg;
-  outline-offset: -1px;
+  font-weight: 500;
   font-size: 12px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: $color-unclaimed-fg;
+    -webkit-mask: linear-gradient($color-main-bg 0 0) content-box,
+      linear-gradient($color-main-bg 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+  }
 
   &:hover {
     color: $color-additional-fg;
   }
 
   &Perfect:hover {
-    outline-color: #ffe39c;
+    &:before {
+      background: $gradient-perfect;
+    }
   }
 
   &Good:hover {
-    outline-color: $color-secondary;
+    &:before {
+      background: $gradient-good;
+    }
   }
 
   &Satisfactory:hover {
-    outline-color: $color-primary;
+    &:before {
+      background: $gradient-satisfactory;
+    }
   }
 
   &Poor:hover {
-    outline-color: #909090;
+    &:before {
+      background: $gradient-poor;
+    }
   }
 
   &:first-child {
@@ -50,7 +75,6 @@
   &:checked {
     & + .radioText {
       color: $color-main-bg;
-      outline: none;
 
       &Perfect {
         background: $gradient-perfect;
@@ -66,6 +90,10 @@
 
       &Poor {
         background: $gradient-poor;
+      }
+
+      &:before {
+        background: none;
       }
     }
   }
