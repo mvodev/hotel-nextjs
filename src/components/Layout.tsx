@@ -45,18 +45,18 @@ const Layout = ({
     router.push('/');
   }
 
-  if(!isAuthenticated && !routeIsPossible)
-    return(
+    const modalWindow = (!isAuthenticated && !routeIsPossible)?
       <ModalWindow 
         title="Пожалуйста авторизуйтесь!" 
         text="Пожалуйста авторизуйтесь для перехода на данную страницу."
         isEnabled
         handleCloseClick={handleModalWindowClose}
-        />
-    )
+      />
+      :null;
 
   return (
     <>
+      {modalWindow}
       <Head>
         <title>{title}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
