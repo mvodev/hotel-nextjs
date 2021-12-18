@@ -1,40 +1,33 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+
+import { InputHTMLAttributes } from 'react';
 import styles from './ImpressionsRadio.module.scss';
 import Values from './Values';
 
-const ImpressionsRadio = (): React.ReactElement => {
-  const radios = Values.map((radio) => {
-    return (
-      <label
-        key={radio.key}
-        // className={[
-        //   styles.label,
-        //   styles[
-        //     `label${radio.key.charAt(0).toUpperCase()}${radio.key.slice(1)}`
-        //   ],
-        // ].join(' ')}
+const ImpressionsRadio = (
+  props: InputHTMLAttributes<HTMLInputElement>
+): React.ReactElement => {
+  const radios = Values.map((radio) => (
+    <label key={radio.key}>
+      <input
+        className={styles.radio}
+        type='radio'
+        name='impression'
+        value={radio.key}
+        {...props}
+      />
+      <span
+        className={[
+          styles.radioText,
+          styles[
+            `radioText${radio.key.charAt(0).toUpperCase()}${radio.key.slice(1)}`
+          ],
+        ].join(' ')}
       >
-        {/* {radio.value} */}
-        <input
-          className={styles.radio}
-          type='radio'
-          name='impressions'
-          value={radio.key}
-        />
-        <span
-          className={[
-            styles.radioText,
-            styles[
-              `radioText${radio.key.charAt(0).toUpperCase()}${radio.key.slice(
-                1
-              )}`
-            ],
-          ].join(' ')}
-        >
-          {radio.value}
-        </span>
-      </label>
-    );
-  });
+        {radio.value}
+      </span>
+    </label>
+  ));
 
   return <div className={styles.impressionsRadio}>{radios}</div>;
 };

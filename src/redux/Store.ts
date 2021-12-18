@@ -12,6 +12,7 @@ import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 import CurrentRoom from './CurrentRoom/CurrentRoom';
 import currentRoomComments from './CurrentRoomComments/CurrentRoomComments';
+import review from './Review/Review';
 
 export interface SagaStore extends Store {
   sagaTask?: Task;
@@ -24,6 +25,7 @@ const makeStore = () => {
       Authentication,
       filters,
       rooms,
+      review,
       Pagination,
       signInCardReducer,
       Registration,
