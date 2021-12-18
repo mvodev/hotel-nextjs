@@ -1,37 +1,54 @@
 import { ReactElement } from 'react';
+import { useSelector } from 'react-redux';
+import { AppState } from 'src/redux/Store';
 import Review from './Review/Review';
-import type { ReviewsType } from './Types';
 import { getDeclension } from '../../utils/Utils';
 import style from './Reviews.module.sass';
 
-const Reviews = ({ title, reviews }: ReviewsType): ReactElement => {
-  const reviewsNumber = reviews.length;
+const Reviews = ({ title }: { title: string }): ReactElement => {
+  const reviewsCollection = useSelector(
+    (state: AppState) => state.currentRoomComments
+  );
+  const uid = useSelector((state: AppState) => state.Authentication.user.uid);
 
-  const getReviews = reviews.map((review) => (
-    <div className={style.reviewsItem} key={review.id}>
+  const reviewsNumber = reviewsCollection.length;
+  const reviews = reviewsCollection.map((review) => (
+    <div className={style.reviewsItem} key={review.commentID}>
       <Review
-        id={review.id}
+        commentID={review.commentID}
         avatar={review.avatar}
         userName={review.userName}
-        publicationDate={review.publicationDate}
+        publicationDate={new Date(review.publicationDate.seconds * 1000)}
         text={review.text}
-        likesNumber={review.likesNumber}
-        liked={review.liked}
+        likesNumber={review.likedBy.length}
+        liked={uid ? review.likedBy.includes(uid) : false}
+        score={review.score}
       />
     </div>
   ));
 
+  const reviewsContent =
+    reviewsNumber > 0 ? (
+      <>
+        <p className={style.reviewsNumberOfReviews}>
+          {`${reviewsNumber} ${getDeclension(reviewsNumber, [
+            'отзыв',
+            'отзыва',
+            'отзывов',
+          ])}`}
+        </p>
+        <div className={style.reviewsContent}>{reviews}</div>{' '}
+      </>
+    ) : (
+      <div className={style.reviewsContent}>
+        <div className={style.reviewsItem}>Отзывов пока нет</div>
+      </div>
+    );
+
   return (
     <section className={style.reviews}>
       <h2 className={style.reviewsTitle}>{title}</h2>
-      <p className={style.reviewsNumberOfReviews}>
-        {`${reviewsNumber} ${getDeclension(reviewsNumber, [
-          'отзыв',
-          'отзыва',
-          'отзывов',
-        ])}`}
-      </p>
-      <div className={style.reviewsContent}>{getReviews}</div>
+      {reviewsContent}
     </section>
   );
 };

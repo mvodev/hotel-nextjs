@@ -1,0 +1,48 @@
+@import '../../styles/vars.sass';
+
+.impressionIndicator {
+  position: relative;
+  display: inline-block;
+  padding: 8px;
+  font-size: 10px;
+  color: $color-main-fg;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 1px;
+    -webkit-mask: linear-gradient($color-main-bg 0 0) content-box,
+      linear-gradient($color-main-bg 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+  }
+
+  &Perfect {
+    &:before {
+      background: $gradient-perfect;
+    }
+  }
+
+  &Good {
+    &:before {
+      background: $gradient-good;
+    }
+  }
+
+  &Satisfactory {
+    &:before {
+      background: $gradient-satisfactory;
+    }
+  }
+
+  &Poor {
+    &:before {
+      background: $gradient-poor;
+    }
+  }
+}
