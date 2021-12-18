@@ -2029,7 +2029,8 @@ const Index = (): ReactElement => (
     //     userName: 'addCommentAndUpdateInpressions test',
     //   }
     // )
-    firebaseAPI.getComments()
+    //    firebaseAPI.getComments()
+    firebaseAPI.removeLikeFromComment('OIrngLITsgiMDXVT9pOc','0n0juvZREvSNDNYJvS2rQjcf3Ei1')
     )}
   </Layout>
 );

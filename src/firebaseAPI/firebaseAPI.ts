@@ -110,8 +110,9 @@ class FirebaseAPI {
   public addComment = async (commentData: CommentInputType) => {
     const dataToSave = {
       ...commentData,
-      avatar: '/images/avatar-user-1.webp',publicationDate:new Date(),
-      likedBy:[]
+      avatar: '/images/avatar-user-1.webp',
+      publicationDate:new Date(),
+      likedBy:[],
     }
     addDoc(collection(this.db, 'comments'), dataToSave);
   }
@@ -142,9 +143,9 @@ class FirebaseAPI {
       return new FirebaseError('INVALID_ARGUMENT', 'No comment for this argument in database');
     }
     const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
-    if (dataToSave.likedBy.includes(uidWhoLikedComment)) {
+    if (!dataToSave.likedBy.includes(uidWhoLikedComment)) {
       dataToSave.likedBy.push(uidWhoLikedComment);
-      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
+      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
     }
     return true;
   }
@@ -158,7 +159,7 @@ class FirebaseAPI {
     const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
     if (dataToSave.likedBy.includes(uidUserToRemove)) {
       dataToSave.likedBy = dataToSave.likedBy.filter((elem) => elem !== uidUserToRemove);
-      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
+      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
     }
     return true;
   }
