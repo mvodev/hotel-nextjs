@@ -107,12 +107,15 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'rooms'), roomData);
   };
 
-  public addComment = async (commentData: CommentInputType) => {
+  public addComment = async (commentData: CommentInputType, avatarPath?:string) => {
     const dataToSave = {
       ...commentData,
       avatar: '/images/avatar-user-1.webp',
       publicationDate:new Date(),
       likedBy:[],
+    }
+    if( avatarPath && avatarPath.length > 0){
+      dataToSave.avatar = avatarPath;
     }
     addDoc(collection(this.db, 'comments'), dataToSave);
   }

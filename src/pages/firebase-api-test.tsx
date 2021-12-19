@@ -2030,8 +2030,15 @@ const Index = (): ReactElement => (
     //   }
     // )
     //    firebaseAPI.getComments()
-    firebaseAPI.removeLikeFromComment('OIrngLITsgiMDXVT9pOc','0n0juvZREvSNDNYJvS2rQjcf3Ei1')
-    )}
+    // firebaseAPI.removeLikeFromComment('OIrngLITsgiMDXVT9pOc','0n0juvZREvSNDNYJvS2rQjcf3Ei1')
+    firebaseAPI.addComment({
+      uid:'test',
+      roomID:'test',
+      score: 'perfect',
+      text:'test',
+      userName:'test',
+    }))  
+  }
   </Layout>
 );
 
