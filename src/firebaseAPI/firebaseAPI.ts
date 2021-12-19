@@ -224,6 +224,35 @@ class FirebaseAPI {
         ? ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
         : null
     );
+
+    public roomIsBookedByUser({
+      roomID,
+      uid,
+    }: {
+      roomID: string;
+      uid: string;
+    }): Promise<boolean> {
+      const bookingQuery = query(
+        collectionGroup(this.db, 'bookingList'),
+        where('uid', '==', uid),
+        where('roomID', '==', roomID)
+      );
+      return getDocs(bookingQuery).then((result) => {
+        const currenDate = Math.floor(Date.now() / 1000);
+  
+        const bookingData = result.docs.filter((item) => {
+          const bookingDates: Timestamp[] = item.data().dates;
+  
+          return bookingDates.length > 0
+            ? bookingDates.filter((date: Timestamp) =>
+                date ? date.seconds < currenDate : false
+              )
+            : false;
+        });
+  
+        return bookingData.length > 0;
+      });
+    }
 }
 
 const firebaseAPI = new FirebaseAPI();

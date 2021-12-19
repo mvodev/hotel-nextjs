@@ -1,6 +1,10 @@
 import { AnyAction } from 'redux';
 import DefaultState from './DefaultState';
-import CurrentRoomState, { SET_CURRENT_ROOM, SET_ROOM_LOADING } from './Types';
+import CurrentRoomState, {
+  SET_CURRENT_ROOM,
+  SET_ROOM_BOOKED_BY_USER,
+  SET_ROOM_LOADING,
+} from './Types';
 
 const initialState = {
   ...DefaultState,
@@ -24,6 +28,8 @@ const CurrentRoom = (
           };
     case SET_ROOM_LOADING:
       return { ...state, isLoading: action.payload };
+    case SET_ROOM_BOOKED_BY_USER:
+      return { ...state, isRoomBookedByUser: action.payload };
     default:
       return state;
   }

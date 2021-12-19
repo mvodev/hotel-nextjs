@@ -22,6 +22,8 @@ const Room = ({ id }: { id: string }): ReactElement => {
   const [isDataRequested, setDataRequested] = useState(false);
 
   const roomID = useSelector((state: AppState) => state.CurrentRoom.roomID);
+  const room = useSelector((state: AppState) => state.CurrentRoom);
+  console.log(room);
   const isLoading = useSelector(
     (state: AppState) => state.CurrentRoom.isLoading
   );
