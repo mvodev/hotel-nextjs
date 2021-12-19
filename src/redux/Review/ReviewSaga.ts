@@ -1,34 +1,43 @@
-import { ForkEffect, put, takeEvery } from '@redux-saga/core/effects';
+import { call, ForkEffect, put, takeEvery } from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
-import { UserType } from 'src/firebaseAPI/Types';
+import { CommentInputType } from 'src/firebaseAPI/Types';
 import { FirebaseError } from 'firebase/app';
-import { SET_REVIEW_SUBMITTING, SUBMIT_REVIEW } from './Types';
+import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
+import {
+  SET_REVIEW_FORM_RESET,
+  SET_REVIEW_SUBMITTING,
+  SUBMIT_REVIEW,
+} from './Types';
+import { ROOM_COMMENTS_TO_STATE } from '../CurrentRoomComments/Types';
 
-async function addComment(values: any): Promise<UserType | FirebaseError> {
-  // const response: UserType | FirebaseError = await firebaseAPI.signUp({
-  //   ...data,
-  //   birthday: stringToDate(data.birthday),
-  // }};
+async function addComment(
+  values: CommentInputType
+): Promise<boolean | FirebaseError> {
+  const response: boolean | FirebaseError =
+    await firebaseAPI.addCommentAndUpdateImpressions({
+      ...values,
+    });
 
   return response;
 }
 
 function* workerSaga(values: AnyAction) {
-  yield put({ type: SET_REVIEW_SUBMITTING, payload: true });
-  // const response: Promise<UserType | FirebaseError> = yield call(
-  //   userRegistration,
-  //   data.payload
+  // yield put({ type: SET_REVIEW_SUBMITTING, payload: true });
+  // const response: Promise<boolean | FirebaseError> = yield call(
+  //   addComment,
+  //   values.payload
   // );
-  yield put({ type: SET_REVIEW_SUBMITTING, payload: false });
+  // yield put({ type: SET_REVIEW_SUBMITTING, payload: false });
 
-  // if (response instanceof FirebaseError) {
-  //   yield createErrorWindowSaga(response);
-  // } else {
-  //   yield put({ type: REGISTRATION_SUCCESS });
-  //   yield delay(5000);
-  //   Cookie.set('userData', JSON.stringify({ ...response }));
-  //   yield put({ type: SET_AUTHENTICATED, payload: true });
-  //   yield put({ type: SET_USER, payload: { ...response } });
+  // if (response && !(response instanceof FirebaseError)) {
+  //   yield put({
+  //     type: ROOM_COMMENTS_TO_STATE,
+  //     payload: { roomID: values.payload.roomID },
+  //   });
+  //   yield put({
+  //     type: SET_REVIEW_FORM_RESET,
+  //     payload: true,
+  //   });
   // }
 }
 
