@@ -4,7 +4,7 @@ import CurrentRoomState, { SET_CURRENT_ROOM, SET_ROOM_LOADING } from './Types';
 
 const initialState = {
   ...DefaultState,
-  isLoading: false,
+  isLoading: true,
 };
 
 const CurrentRoom = (
