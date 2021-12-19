@@ -236,11 +236,6 @@ class FirebaseAPI {
     );
 
   public addCommentAndUpdateImpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {
-    // const dataToSave = {
-    //   ...commentData,
-    //   avatar: '/images/avatar-user-1.webp',publicationDate:new Date(),
-    //   likedBy:[]
-    // }
     this.addComment(commentData);
     const roomRef = doc(this.db, 'rooms', commentData.roomID);
     const roomSnap = await getDoc(roomRef);
