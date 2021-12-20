@@ -1,8 +1,8 @@
-import { Field, FieldMetaState, Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { SET_REVIEW_FORM_RESET, SUBMIT_REVIEW } from 'src/redux/Review/Types';
 import { AppState } from 'src/redux/Store';
 import { useEffect, useRef } from 'react';
+import { useField, useForm } from 'react-final-form-hooks';
 import styles from './ReviewForm.module.scss';
 import Button from '../Button/Button';
 import ImpressionsRadio from './ImpressionsRadio/ImpressionsRadio';
@@ -18,16 +18,7 @@ const ReviewForm = (): React.ReactElement | null => {
   const { isSubmitting, isReset } = {
     ...useSelector((state: AppState) => state.review),
   };
-  const formRef = useRef<HTMLFormElement>(null);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (isReset && formRef.current) {
-      const form = formRef.current;
-      form.reset();
-      dispatch({ type: SET_REVIEW_FORM_RESET, payload: false });
-    }
-  });
 
   const handleFormSubmit = (values: ReviewData) => {
     const reviewData = {
@@ -40,52 +31,55 @@ const ReviewForm = (): React.ReactElement | null => {
     dispatch({ type: SUBMIT_REVIEW, payload: reviewData });
   };
 
-  const validationBlock = (meta: FieldMetaState<any>) =>
-    meta.error &&
-    meta.touched && <span className={styles.error}>{meta.error}</span>;
+  const { form, handleSubmit } = useForm({
+    onSubmit: handleFormSubmit,
+    validate,
+  });
+
+  const review = useField('review', form);
+  const impression = useField('impression', form);
+
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (isReset) {
+      form.restart();
+      formRef.current?.reset();
+      dispatch({ type: SET_REVIEW_FORM_RESET, payload: false });
+    }
+  });
 
   return isRoomBookedByUser ? (
     <section className={styles.reviewForm}>
       <h2 className={styles.title}>Оставьте свой отзыв об этом номере</h2>
-      <Form onSubmit={handleFormSubmit} validate={validate}>
-        {({ handleSubmit }) => (
-          <form className={styles.form} onSubmit={handleSubmit} ref={formRef}>
-            <Field name='review'>
-              {({ input, meta }) => (
-                <>
-                  <textarea
-                    className={styles.textarea}
-                    placeholder='Ваш отзыв'
-                    {...input}
-                  />
-                  {validationBlock(meta)}
-                </>
-              )}
-            </Field>
 
-            <Field name='impression' type='radio'>
-              {({ input, meta }) => (
-                <>
-                  <ImpressionsRadio
-                    name={input.name}
-                    onChange={input.onChange}
-                  />
-                  {validationBlock(meta)}
-                </>
-              )}
-            </Field>
-
-            <div className={styles.submitContainer}>
-              <Button
-                type='submit'
-                theme='filled'
-                text='Оставить отзыв'
-                isDisabled={isSubmitting}
-              />
-            </div>
-          </form>
+      <form className={styles.form} onSubmit={handleSubmit} ref={formRef}>
+        <textarea
+          {...review.input}
+          className={styles.textarea}
+          placeholder='Ваш отзыв'
+        />
+        {review.meta.touched && review.meta.error && (
+          <span className={styles.error}>{review.meta.error}</span>
         )}
-      </Form>
+
+        <ImpressionsRadio
+          name={impression.input.name}
+          onChange={impression.input.onChange}
+        />
+        {impression.meta.touched && impression.meta.error && (
+          <span className={styles.error}>{impression.meta.error}</span>
+        )}
+
+        <div className={styles.submitContainer}>
+          <Button
+            type='submit'
+            theme='filled'
+            text='Оставить отзыв'
+            isDisabled={isSubmitting}
+          />
+        </div>
+      </form>
     </section>
   ) : null;
 };

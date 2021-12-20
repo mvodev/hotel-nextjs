@@ -239,12 +239,12 @@ class FirebaseAPI {
       where('roomID', '==', roomID)
     );
     return getDocs(bookingQuery).then((result) => {
-      const currenDate = Math.floor(Date.now() / 1000);
+      const currentDate = Math.floor(Date.now() / 1000);
       const isBooked = result.docs.some((item) => {
         const bookingDates: Timestamp[] = item.data().dates;
         return bookingDates.length > 0
           ? bookingDates.some((date: Timestamp) =>
-            date ? date.seconds < currenDate : false
+            date ? date.seconds < currentDate : false
           )
           : false;
       });
