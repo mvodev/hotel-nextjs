@@ -1,5 +1,4 @@
-import { call, ForkEffect, put, takeLatest } from '@redux-saga/core/effects';
-import { useSelector } from 'react-redux';
+import { call, ForkEffect, put, select, takeLatest } from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import { ReturnedRoomType } from 'src/firebaseAPI/Types';
@@ -12,9 +11,8 @@ async function getCurrentRoom(id: string): Promise<ReturnedRoomType | null> {
   return response;
 }
 
-async function roomIsBookedByUser(roomID: string): Promise<boolean> {
-  const uid = useSelector((state: AppState) => (state.Authentication.user.uid))
-  const response = await firebaseAPI.roomIsBookedByUser({roomID, uid});
+async function roomIsBookedByUser({ roomID, uid }: { roomID: string, uid: string }): Promise<boolean> {
+  const response = await firebaseAPI.roomIsBookedByUser({ roomID, uid });
   return response;
 }
 
@@ -26,6 +24,12 @@ function* workerSaga({ payload }: AnyAction) {
     payload
   );
 
+  const uid: string = yield select((state: AppState) => state.Authentication.user.uid);
+  const isRoomBookedByUser: Promise<boolean> = yield call(
+    roomIsBookedByUser,
+    { roomID: payload, uid }
+  );
+
   yield put({
     type: ROOM_COMMENTS_TO_STATE,
     payload: { roomID: payload },
@@ -34,7 +38,7 @@ function* workerSaga({ payload }: AnyAction) {
   if (roomResponse) {
     yield put({
       type: SET_CURRENT_ROOM,
-      payload: JSON.stringify(roomResponse),
+      payload: JSON.stringify({ ...roomResponse, isRoomBookedByUser }),
     });
   } else {
     yield put({ type: SET_CURRENT_ROOM, payload: null });

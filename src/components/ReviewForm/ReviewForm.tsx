@@ -9,9 +9,12 @@ import ImpressionsRadio from './ImpressionsRadio/ImpressionsRadio';
 import ReviewData from './Types';
 import validate from './validate';
 
-const ReviewForm = (): React.ReactElement => {
+const ReviewForm = (): React.ReactElement | null => {
   const roomID = useSelector((state: AppState) => state.CurrentRoom.roomID);
   const user = useSelector((state: AppState) => state.Authentication.user);
+  const isRoomBookedByUser = useSelector(
+    (state: AppState) => state.CurrentRoom.isRoomBookedByUser
+  );
   const { isSubmitting, isReset } = {
     ...useSelector((state: AppState) => state.review),
   };
@@ -41,7 +44,7 @@ const ReviewForm = (): React.ReactElement => {
     meta.error &&
     meta.touched && <span className={styles.error}>{meta.error}</span>;
 
-  return (
+  return isRoomBookedByUser ? (
     <section className={styles.reviewForm}>
       <h2 className={styles.title}>Оставьте свой отзыв об этом номере</h2>
       <Form onSubmit={handleFormSubmit} validate={validate}>
@@ -84,7 +87,7 @@ const ReviewForm = (): React.ReactElement => {
         )}
       </Form>
     </section>
-  );
+  ) : null;
 };
 
 export default ReviewForm;
