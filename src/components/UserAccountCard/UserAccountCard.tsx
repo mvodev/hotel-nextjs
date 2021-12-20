@@ -15,10 +15,6 @@ const UserAccount = (): ReactElement => {
   const userName = useSelector((state: AppState) => state.Authentication.user.name) as string;
   const userSurname = useSelector((state: AppState) => state.Authentication.user.surname) as string;
   const userEmail = useSelector((state:AppState) => state.Authentication.user.email) as string;
-
-  useEffect(() => {
-    console.log(userEmail)
-  })
   
   const handleFormSubmit = (values: FormData) => {
     if (values.name && values.name !== userName) {
@@ -76,7 +72,10 @@ const UserAccount = (): ReactElement => {
             <Field name="email">
                 {({ input, meta }) => (
                 <>
-                    <TextField {...input} placeholder={userEmail} />
+                    <TextField {...input} 
+                      placeholder={userEmail}
+                      autoComplete="off"
+                    />
                     {validationBlock(meta)}
                 </>
                 )}
@@ -97,7 +96,7 @@ const UserAccount = (): ReactElement => {
                 )}
             </Field>
 
-            <div className={styles.registrationButtonContainer}>
+            <div className={styles.buttonContainer}>
               <Button
                 theme="filled"
                 //isDisabled={submitting}

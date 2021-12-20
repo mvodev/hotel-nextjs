@@ -3,14 +3,14 @@
 .userAccountCard {
   box-sizing: border-box;
   width: 100%;
-  max-width: 380px;
-  padding: 30px;
-  margin: 20px;
+  max-width: 350px;
+  padding: 15px;
   background: white;
 
   .title {
     @include h1();
     margin-bottom: 20px;
+    text-align: center;
   }
 
   .form {
@@ -19,33 +19,15 @@
     gap: 10px;
   }
 
-  .groupTitle {
-    @include h3();
-    margin: 5px 0;
-    line-height: 14px;
-  }
-
-  .group {
-    margin-top: 5px;
-  }
-
   .fieldTitle {
+    @include h3();
+    margin-top: 15px;
     margin-bottom: 0;
   }
 
-  .registrationButtonContainer {
-    margin: 13px 0;
-  }
-
-  .signInButtonContainer {
-    min-width: 100px;
-  }
-
-  .signInSection {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .buttonContainer {
+    margin-top: 25px;
+    margin-bottom: 0;
   }
 
   .error {
