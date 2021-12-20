@@ -1,4 +1,5 @@
 import { Timestamp } from '@firebase/firestore';
+import { FirebaseError } from '@firebase/util';
 
 type UserDataType = {
   email: string,
@@ -186,10 +187,16 @@ type ReturnedRoomType = {
   haveShampoo: boolean;
 };
 
+type CancelBookingResult = {
+  canceled: boolean,
+  error?: FirebaseError
+}
+
 export type {
   UserDataType,
   UserType,
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
+  CancelBookingResult,
 };

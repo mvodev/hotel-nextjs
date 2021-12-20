@@ -21,7 +21,7 @@ import {
   updateDoc
 } from 'firebase/firestore';
 import { async, FirebaseError } from "@firebase/util";
-import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType } from './Types';
+import { UserDataType, UserType, RoomType, FiltersAPIType, ReturnedRoomType, CancelBookingResult } from './Types';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -68,7 +68,7 @@ class FirebaseAPI {
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             ...user.data(),
-          })
+          } as UserType)
         )
       )
       .catch((error: FirebaseError) => error);
@@ -84,7 +84,7 @@ class FirebaseAPI {
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             ...userData.data(),
-          })
+          } as UserType)
         )
       )
       .catch((error: FirebaseError): FirebaseError => error);
@@ -120,24 +120,38 @@ class FirebaseAPI {
     })
   };
 
-  public cancelBooking = (
+  public cancelBooking = async (
     bookingID: string, 
     roomID: string,
     dates: [number, number]
-  ): void => {
-    deleteDoc(doc(this.db, 'bookingList', bookingID));
-    const docRef = doc(this.db, 'rooms', roomID);
-    getDoc(docRef)
-      .then((doc) => {
-        const room  = doc.data();
-        const newBookedDays = room.bookedDays.filter((item) => (
-          (item.seconds * 1000 < dates[0]) || ((item.seconds * 1000 > dates[1])) 
-        ));
-        
-        updateDoc(docRef, { bookedDays: newBookedDays });
+  ): Promise<CancelBookingResult> => (
+    deleteDoc(doc(this.db, 'bookingList', bookingID))
+      .then(() => {
+        const docRef = doc(this.db, 'rooms', roomID);
+        return getDoc(docRef)
+          .then((doc) => {
+            const room  = doc.data() as ReturnedRoomType;
+            const newBookedDays = room.bookedDays.filter((item) => (
+              (item.seconds * 1000 < dates[0]) || ((item.seconds * 1000 > dates[1])) 
+            ));
+            
+            return updateDoc(docRef, { bookedDays: newBookedDays })
+              .then(() => ({ canceled: true }))
+              .catch((e) => ({
+                canceled: false,
+                error: e
+              }))
+          })
+          .catch((e) => ({
+            canceled: false,
+            error: e
+          }))
       })
-
-  }
+      .catch((e) => ({
+        canceled: false,
+        error: e
+      }))
+  )
 }
 
 const firebaseAPI = new FirebaseAPI();
