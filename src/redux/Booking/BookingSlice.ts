@@ -15,9 +15,7 @@ const bookingSlice = createSlice({
   initialState,
   reducers: {
     setList: (state, action: PayloadAction<BookingList[]>) => {
-      state.list = action.payload.sort(
-        (a, b) => b.dates[1].seconds - a.dates[1].seconds
-      );
+      state.list = action.payload.sort((a, b) => b.end - a.end);
     },
     setRooms: (state, action: PayloadAction<BookedRoom[]>) => {
       state.rooms = action.payload;
@@ -28,11 +26,22 @@ const bookingSlice = createSlice({
   },
 });
 
-export const { setList, setRooms, toggleFetchingStatus } =
-  bookingSlice.actions;
+export const { setList, setRooms, toggleFetchingStatus } = bookingSlice.actions;
 
 export const selectBookingList = (state: AppState): BookingList[] =>
   state.booking.list;
+
+export const selectActiveBookingSize = (state: AppState): number =>
+  state.booking.list.filter((i) => i.end > new Date().getTime()).length;
+
+export const selectActiveRoomSize = (state: AppState): number =>
+  [
+    ...new Set(
+      state.booking.list
+        .slice(0, selectActiveBookingSize(state))
+        .map((i) => i.roomID)
+    ),
+  ].length;
 
 export const selectBookedRooms = (state: AppState): BookedRoom[] =>
   state.booking.rooms;

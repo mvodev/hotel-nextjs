@@ -187,6 +187,7 @@ type ReturnedRoomType = {
 };
 
 type BookingType = {
+  id: string;
   dates: Timestamp[];
   userID: string;
   roomID: string;

@@ -1,0 +1,70 @@
+@use 'sass:color'
+
+@import @styles/mixins
+@import @styles/vars
+@import @components/ContextMenu/ContextMenu.module
+
+$light-green: color.adjust($color-secondary, $alpha: -0.6)
+
+@mixin card-item
+  text-indent: 15px
+
+  &Active
+    background-color: $light-green
+
+    &:hover
+      background-color: color.adjust($color-secondary, $alpha: -0.2)
+
+.bookingCard
+  display: flex
+  flex-direction: column
+  grid-gap: 20px
+  padding: 40px 30px 30px
+  max-width: 382px
+  background-color: #fff
+  border-radius: 4px
+  color: $color-main-fg
+  border: $card-border
+  box-shadow: $shadow-box
+
+.container
+  display: flex
+  flex-direction: column
+  grid-gap: 5px
+
+.title
+  +font-type($color: $color-title-fg, $size: 24px)
+  margin: 0 0 2px 0
+  
+.subTitle
+  +font-bold-type
+  margin: 0
+
+.dropdownContainer
+  max-width: 320px
+
+.dropdownItem
+  @extend %item
+  +card-item
+  height: 35px
+
+.bookingList
+  margin: 0 0 10px
+  max-width: 320px
+  border: 1px solid $color-unclaimed-fg
+  border-radius: 4px
+
+.bookingButton
+  @extend %item
+  height: 44px
+  font-size: 1rem
+
+  &Selected
+    background-color: $light-green
+
+  &:hover
+    background-color: $light-green
+
+  &:disabled
+    background-color: color.adjust($color-title-fg, $alpha: -0.92)
+    cursor: not-allowed

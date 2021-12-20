@@ -1,0 +1,36 @@
+@use 'sass:color'
+
+@import @styles/vars
+
+.contextMenu
+  margin: 0
+  padding: 0
+  display: flex
+  flex-direction: column
+
+.itemContainer
+  display: grid
+  justify-items: stretch
+  font-size: 1.3rem
+
+%item
+  margin: 0
+  padding: 0
+  width: 100%
+  cursor: pointer
+  text-align: left
+  outline: none
+  border: none
+  background: transparent
+  height: 2.2em
+  text-indent: 1.4em
+  display: flex
+  align-items: center
+  text-decoration: none
+  color: $color-main-fg
+  
+  &:focus
+    box-shadow: $focus-box
+
+  &:hover
+    background-color: color.adjust($color-title-fg, $alpha: -0.92)

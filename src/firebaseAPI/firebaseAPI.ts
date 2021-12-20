@@ -141,10 +141,14 @@ class FirebaseAPI {
       )
     );
 
-    return bookingDocs.docs.map((d) => d.data() as BookingType);
+    return bookingDocs.docs.map(
+      (d) => ({ ...d.data(), id: d.id } as BookingType)
+    );
   };
 
-  public getBookedRooms = async (booking: BookingType[] = []) => {
+  public getBookedRooms = async (
+    booking: Pick<BookingType, 'roomID'>[] = []
+  ) => {
     const roomIDs = [...new Set(booking.map((i) => i.roomID))];
     const roomDocs = await Promise.all(
       roomIDs.map((id) => getDoc(doc(this.db, 'rooms', id)))

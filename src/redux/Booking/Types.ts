@@ -1,6 +1,6 @@
 import { ReturnedRoomType, BookingType } from 'src/firebaseAPI/Types';
 
-type BookingList = BookingType;
+type BookingList = Omit<BookingType, 'dates'> & { start: number; end: number };
 
 type BookedRoom = ReturnedRoomType;
 
