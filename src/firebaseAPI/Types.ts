@@ -1,4 +1,5 @@
 import { Timestamp } from '@firebase/firestore';
+import { FirebaseError } from '@firebase/util';
 
 type UserDataType = {
   email: string,
@@ -20,6 +21,11 @@ type ImpressionsType = {
 type UserType = {
   uid: string;
   email: string | null;
+  name: string,
+  surname: string,
+  photo?: string,
+  gender: 'man' | 'woman',
+  birthday: Date
 };
 
 type CommentType = {
@@ -216,6 +222,11 @@ type ReturnedRoomType = {
   haveShampoo: boolean;
 };
 
+type SignInResult = {
+  isSignOut: boolean,
+  error?: FirebaseError
+}
+
 export type {
   UserDataType,
   UserType,
@@ -225,4 +236,5 @@ export type {
   CommentType,
   ImpressionsType,
   CommentInputType,
+  SignInResult,
 };

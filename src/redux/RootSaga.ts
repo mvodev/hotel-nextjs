@@ -5,9 +5,12 @@ import { all, call, CallEffect, spawn } from '@redux-saga/core/effects';
 import { Saga } from '@redux-saga/types';
 import watchAuthenticationSaga, {
   watchUserLogOutSaga,
+  watchChangeUserName,
+  watchChangeUserSurname,
 } from './Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 import watchSubmitSignInSaga from './SignInCard/AuthenticationSaga';
+import { watchChangePassword, watchChangeEmail } from './SignInCard/AuthenticationSaga';
 import filtersWatcher from './Filters/FiltersSaga';
 import { watchUpdateRooms } from './Rooms/RoomsSaga';
 import appWatcher from './App/AppSaga';
@@ -44,6 +47,10 @@ function* RootSaga(): Generator<any, any, any> {
     watchAddLikeSaga,
     watchRemoveLikeSaga,
     watchRoomCommentsToStateSaga,
+    watchChangeUserName, 
+    watchChangeUserSurname,
+    watchChangePassword,
+    watchChangeEmail,
   ];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));

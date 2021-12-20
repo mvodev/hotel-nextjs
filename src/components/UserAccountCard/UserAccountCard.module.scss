@@ -1,0 +1,54 @@
+@import '@styles/mixins';
+
+.userAccountCard {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 380px;
+  padding: 30px;
+  margin: 20px;
+  background: white;
+
+  .title {
+    @include h1();
+    margin-bottom: 20px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .groupTitle {
+    @include h3();
+    margin: 5px 0;
+    line-height: 14px;
+  }
+
+  .group {
+    margin-top: 5px;
+  }
+
+  .fieldTitle {
+    margin-bottom: 0;
+  }
+
+  .registrationButtonContainer {
+    margin: 13px 0;
+  }
+
+  .signInButtonContainer {
+    min-width: 100px;
+  }
+
+  .signInSection {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .error {
+    color: red;
+  }
+}
