@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
-import { RootState } from 'src/redux/reduces';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { AppState } from 'src/redux/Store';
 import Layout from '../components/Layout';
 import Carousel from '../components/Carousel/Carousel';
 import SignInCard from '../components/SignInCard/SignInCard';
@@ -12,7 +12,7 @@ const SignIn = (): React.ReactElement => {
   const router = useRouter();
 
   const { isAuthenticated } = {
-    ...useSelector((state: RootState) => state.Authentication),
+    ...useSelector((state: AppState) => state.Authentication),
   };
 
   useEffect(()=>{

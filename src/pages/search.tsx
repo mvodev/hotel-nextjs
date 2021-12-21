@@ -8,6 +8,7 @@ import { StateType } from '../redux/Rooms/Types';
 import RecalculateRating from '../utils/RecalculateRating';
 
 const Search = (): JSX.Element => {
+
   const roomCards = useSelector((state: StateType) => state.rooms.rooms);
   const searchItems = roomCards.length
     ? roomCards.map((item) => {
