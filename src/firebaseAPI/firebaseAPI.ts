@@ -20,6 +20,7 @@ import {
   where,
   Timestamp,
   orderBy,
+  updateDoc,
 } from 'firebase/firestore';
 import { FirebaseError } from '@firebase/util';
 import {
@@ -28,9 +29,9 @@ import {
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
-  CommentType,
   ImpressionsType,
   CommentInputType,
+  CommentOutputType
 } from './Types';
 
 const firebaseConfig = {
@@ -108,38 +109,34 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'rooms'), roomData);
   };
 
-  public addComment = async (commentData: CommentInputType) => {
-    addDoc(collection(this.db, 'comments'), commentData);
-  };
+  public addComment = async (commentData: CommentInputType, avatarPath?: string) => {
+    const dataToSave = {
+      ...commentData,
+      avatar: '/images/avatar-user-1.webp',
+      publicationDate: new Date(),
+      likedBy: [],
+    }
+    if (avatarPath && avatarPath.length > 0) {
+      dataToSave.avatar = avatarPath;
+    }
+    addDoc(collection(this.db, 'comments'), dataToSave);
+  }
 
-  public getComments = (): Promise<Array<CommentType> | FirebaseError> =>
-    getDocs(collection(this.db, 'comments'))
-      .then((result) => {
-        const comments: Array<CommentType> = [];
-        result.forEach((res) => {
-          comments.push({
-            ...res.data(),
-            commentID: res.ref.id,
-          } as CommentType);
-        });
-        return comments;
-      })
-      .catch((error: FirebaseError): FirebaseError => error);
+  public getComments = (): Promise<Array<CommentOutputType> | FirebaseError> => getDocs(collection(this.db, 'comments'))
+    .then((result) => {
+      const comments: Array<CommentOutputType> = [];
+      result.forEach((res) => {
+        comments.push({ ...res.data(), commentID: res.ref.id } as CommentOutputType);
+      });
+      return comments;
+    }).catch((error: FirebaseError): FirebaseError => error);
 
-  public getCommentsByUID = async (
-    uid: string
-  ): Promise<Array<CommentType> | FirebaseError> => {
-    const comments = query(
-      collectionGroup(this.db, 'comments'),
-      where('uid', '==', uid)
-    );
+  public getCommentsByUID = async (uid: string): Promise<Array<CommentOutputType> | FirebaseError> => {
+    const comments = query(collectionGroup(this.db, 'comments'), where('uid', '==', uid));
     const querySnapshot = await getDocs(comments);
-    const commentsByUID: Array<CommentType> = [];
+    const commentsByUID: Array<CommentOutputType> = [];
     querySnapshot.forEach((res) => {
-      commentsByUID.push({
-        ...res.data(),
-        commentID: res.ref.id,
-      } as CommentType);
+      commentsByUID.push({ ...res.data(), commentID: res.ref.id } as CommentOutputType);
     });
     return commentsByUID;
   };
@@ -156,10 +153,10 @@ class FirebaseAPI {
         'No comment for this argument in database'
       );
     }
-    const dataToSave: CommentInputType = commentSnap.data() as CommentInputType;
+    const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
     if (!dataToSave.likedBy.includes(uidWhoLikedComment)) {
       dataToSave.likedBy.push(uidWhoLikedComment);
-      await setDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
+      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
     }
     return true;
   };
@@ -176,31 +173,26 @@ class FirebaseAPI {
         'No comment for this argument in database'
       );
     }
-    const dataToSave: CommentInputType = commentSnap.data() as CommentInputType;
+    const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
     if (dataToSave.likedBy.includes(uidUserToRemove)) {
-      dataToSave.likedBy = dataToSave.likedBy.filter(
-        (elem) => elem !== uidUserToRemove
-      );
-      await setDoc(doc(this.db, 'comments', commentSnap.ref.id), dataToSave);
+      dataToSave.likedBy = dataToSave.likedBy.filter((elem) => elem !== uidUserToRemove);
+      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
     }
     return true;
   };
 
   public getCommentsByRoomID = async (
     roomID: string
-  ): Promise<Array<CommentType> | FirebaseError> => {
+  ): Promise<Array<CommentOutputType> | FirebaseError> => {
     const comments = query(
       collectionGroup(this.db, 'comments'),
       where('roomID', '==', roomID),
       orderBy('publicationDate', 'desc')
     );
     const querySnapshot = await getDocs(comments);
-    const commentsByUID: Array<CommentType> = [];
+    const commentsByUID: Array<CommentOutputType> = [];
     querySnapshot.forEach((res) => {
-      commentsByUID.push({
-        ...res.data(),
-        commentID: res.ref.id,
-      } as CommentType);
+      commentsByUID.push({ ...res.data(), commentID: res.ref.id } as CommentOutputType);
     });
     return commentsByUID;
   };
@@ -219,7 +211,7 @@ class FirebaseAPI {
     const querySnapshot = await getDocs(comments);
     // eslint-disable-next-line consistent-return
     querySnapshot.forEach((res) => {
-      switch ((res.data() as CommentType).score) {
+      switch ((res.data() as CommentOutputType).score) {
         case 'perfect':
           result.perfect += 1;
           break;
@@ -297,6 +289,21 @@ class FirebaseAPI {
       });
       return isBooked;
     });
+  }
+
+  public addCommentAndUpdateImpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {
+    this.addComment(commentData);
+    const roomRef = doc(this.db, 'rooms', commentData.roomID);
+    const roomSnap = await getDoc(roomRef);
+    if (!roomSnap.exists()) {
+      return new FirebaseError('INVALID_ARGUMENT', 'No room for this argument in database');
+    }
+    const dataToSave: RoomType = (roomSnap.data() as RoomType);
+    dataToSave.impressions[commentData.score] += 1;
+    await updateDoc(doc(this.db, 'rooms', roomSnap.ref.id), {
+      impressions: dataToSave.impressions
+    });
+    return true;
   }
 }
 

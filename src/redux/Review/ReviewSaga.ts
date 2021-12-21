@@ -22,23 +22,23 @@ async function addComment(
 }
 
 function* workerSaga(values: AnyAction) {
-  // yield put({ type: SET_REVIEW_SUBMITTING, payload: true });
-  // const response: Promise<boolean | FirebaseError> = yield call(
-  //   addComment,
-  //   values.payload
-  // );
-  // yield put({ type: SET_REVIEW_SUBMITTING, payload: false });
+  yield put({ type: SET_REVIEW_SUBMITTING, payload: true });
+  const response: Promise<boolean | FirebaseError> = yield call(
+    addComment,
+    values.payload
+  );
+  yield put({ type: SET_REVIEW_SUBMITTING, payload: false });
 
-  // if (response && !(response instanceof FirebaseError)) {
-  //   yield put({
-  //     type: ROOM_COMMENTS_TO_STATE,
-  //     payload: { roomID: values.payload.roomID },
-  //   });
-  //   yield put({
-  //     type: SET_REVIEW_FORM_RESET,
-  //     payload: true,
-  //   });
-  // }
+  if (response && !(response instanceof FirebaseError)) {
+    yield put({
+      type: ROOM_COMMENTS_TO_STATE,
+      payload: { roomID: values.payload.roomID },
+    });
+    yield put({
+      type: SET_REVIEW_FORM_RESET,
+      payload: true,
+    });
+  }
 }
 
 function* watchReviewSubmitSaga(): Generator<ForkEffect<never>, void, unknown> {
