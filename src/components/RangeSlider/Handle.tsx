@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
 import styles from './RangeSlider.module.sass';
 import type { TypeHandleProps } from './Types';
@@ -11,6 +12,7 @@ const Handle = ({
   const trigger = useRef(false);
   const shift = useRef(0);
   const offset = useRef(0);
+  const dispatch = useDispatch();
 
   const onPointerDown = (e: React.PointerEvent<HTMLElement>) => {
     const handle = e.target;
@@ -33,6 +35,10 @@ const Handle = ({
     }
   };
 
+  const onPointerUp = (): void => {
+    dispatch({ type: 'UPDATE_ROOMS', payload: 1 })
+  } 
+
   return (
     <button
       className={styles.handle}
@@ -43,6 +49,7 @@ const Handle = ({
         trigger.current = false;
       }}
       onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
       style={{ left: `${position * 100}%` }}
       tabIndex={-1}
     />
