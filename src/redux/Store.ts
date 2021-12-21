@@ -12,6 +12,7 @@ import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 import booking from './Booking/BookingSlice';
 import CurrentRoom from './CurrentRoom/CurrentRoom';
+import modalWindiw from './ModalWindow/ModalWindow';
 import currentRoomComments from './CurrentRoomComments/CurrentRoomComments';
 
 export interface SagaStore extends Store {
@@ -31,26 +32,11 @@ const makeStore = () => {
       roomCardsStatus,
       booking,
       CurrentRoom,
+      modalWindiw,
       currentRoomComments,
     },
     middleware: [
-      ...getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [
-            'rooms/writeRooms',
-            'SET-PAGINATION',
-            'app/mount',
-            'UPDATE_ROOMS',
-            'filters/setRules',
-            'filters/setAvailability',
-            'filters/setAdditionalConvenience',
-            'filters/setPrice',
-            'filters/setGuests',
-            'filters/setDates',
-            'filters/setConveniences',
-          ],
-        },
-      }),
+      ...getDefaultMiddleware(),
       sagaMiddleware,
     ],
   });

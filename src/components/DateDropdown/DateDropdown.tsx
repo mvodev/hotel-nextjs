@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { selectDates, setDates } from 'src/redux/Filters/FiltersSlice';
@@ -7,13 +7,20 @@ import DatePicker from '../DatePicker/DatePicker';
 import DateDropdownType from './Types';
 
 import style from './DateDropdown.module.sass';
+import { CHECK_BOOKING_BLOCKED } from 'src/redux/CurrentRoom/Types';
 
 const DateDropdown = ({
   titles = ['прибытие', 'выезд'],
-  modifier = "double",
+  modifier = 'double',
   isSmall = false,
+  from = 'filtersCard',
+  disabledDates = [],
 }: DateDropdownType): JSX.Element => {
-  const value = useSelector(selectDates);
+  const dates = useSelector(selectDates);
+  const value: [Date, Date] | [null, null] = (dates[0] !== null) 
+    ? (dates.map((item) => new Date(item)) as [Date, Date])
+    : [null, null] 
+  
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -68,15 +75,27 @@ const DateDropdown = ({
     </div>
   );
 
-  const handleChangeDate = (dates: [Date, Date]) => 
-    dispatch(setDates(dates.map((d) => d.getTime()) as [number, number]));
+  const handleChangeDate = (dates: [Date, Date]) => {
+    const newDates = (dates.map((item) => item.getTime()) as [number, number])
+    dispatch(setDates(newDates));
+    if (from === 'bookingCard') dispatch({ type: CHECK_BOOKING_BLOCKED })
+  }
 
-  const handleControlPanelUsed = (buttonType: string): void => {
-    if (buttonType === 'clean') {
-      dispatch(setDates([null, null]));
-      setIsOpen(false);
-    } else setIsOpen(false);
-  };
+  const handleControlPanelUsedByFiltersCard = (buttonType: string) => {
+    if (buttonType === 'clean') dispatch(setDates([null, null]));
+    dispatch({ type: 'UPDATE_ROOMS', payload: 1 });
+    setIsOpen(false);  
+  }
+
+  const handleControlPanelUsedByNotFiltersCard = (buttonType: string) => {
+    if (buttonType === 'clean') dispatch(setDates([null, null]));
+    setIsOpen(false);
+  }
+
+  const handleControlPanelUsed = (from === 'filtersCard')
+    ? handleControlPanelUsedByFiltersCard
+    : handleControlPanelUsedByNotFiltersCard
+
 
   const dropdownClass = `${style.dateDropdown} ${
     modifier === 'single' ? style.dateDropdownSingle : ''
@@ -102,6 +121,7 @@ const DateDropdown = ({
           onChangeDate={handleChangeDate}
           onControlPanelUsed={handleControlPanelUsed}
           isSmall={isSmall}
+          disabledDates = {disabledDates}
         />
       </div>
     </div>

@@ -29,6 +29,7 @@ function* workerSignInSaga(form: SignInFormReducerType) {
     yield put(setError(false));
     yield put(setSubmitting(false));
     yield put(setModalWindow(true));
+    Cookie.set('userData', JSON.stringify({ ...result }));
     yield delay(5000);
     Cookie.set('userData', JSON.stringify({ ...result }));
     yield put(setAuthenticated(true));
@@ -36,9 +37,9 @@ function* workerSignInSaga(form: SignInFormReducerType) {
       type: SET_USER,
       payload: {
         ...result,
-        birthday: timestampToDateString(result.birthday),
-      },
-    });
+        birthday:timestampToDateString((result).birthday),
+    }});
+    yield put(setModalWindow(false));
   }
 }
 

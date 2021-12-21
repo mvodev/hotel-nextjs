@@ -7,6 +7,7 @@ import { selectFilters } from '../Filters/FiltersSlice';
 import { SET_PAGINATION } from '../Pagination/Types';
 import { ActionType, UpdateRoomsResultType } from './Types';
 import { writeRooms } from './Rooms';
+import { json } from 'stream/consumers';
 
 export function* updateRooms(action: ActionType) {
   try {

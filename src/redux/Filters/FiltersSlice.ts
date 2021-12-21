@@ -92,8 +92,8 @@ export const {
 
 export const selectFilters = (state: AppState): Filters => state.filters;
 
-export const selectDates = (state: AppState): (Date | null)[] =>
-  state.filters.dates.map((d) => (typeof d === 'number' ? new Date(d) : null));
+export const selectDates = (state: AppState): [number, number] | [null, null] =>
+  state.filters.dates;
 
 export const selectGuests = (state: AppState): Guests => state.filters.guests;
 

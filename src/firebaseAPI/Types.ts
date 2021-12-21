@@ -192,7 +192,7 @@ type ReturnedRoomType = {
   price: number;
   roomNumber: number;
   isLux: boolean;
-  bookedDays: Timestamp[];
+  bookedDays: number[];
   maxGuests: number;
   discount: number;
   serviceFee: number;
@@ -228,7 +228,57 @@ type BookingType = {
 type CancelBookingResult = {
   canceled: boolean,
   error?: FirebaseError
-}
+};
+
+type ReturnedRoomTypeWithTimestamp = {
+  roomID: string;
+  gallery: string[];
+  information: {
+    icon: string;
+    title: string;
+    description: string;
+  }[];
+  impressions: {
+    perfect: number;
+    good: number;
+    satisfactory: number;
+    poor: number;
+  };
+  rules: string[];
+  cancellation: string;
+  price: number;
+  roomNumber: number;
+  isLux: boolean;
+  bookedDays: Timestamp[];
+  maxGuests: number;
+  discount: number;
+  serviceFee: number;
+  additionalServicesFee: number;
+
+  maySmoking: boolean;
+  mayWithPets: boolean;
+  mayInviteGuests: boolean;
+
+  wideСorridor: boolean;
+  assistantForDisabled: boolean;
+
+  bedrooms: number;
+  beds: number;
+  bathrooms: number;
+
+  haveBreakfast: boolean;
+  haveDesk: boolean;
+  haveFeedingChair: boolean;
+  haveCrib: boolean;
+  haveTV: boolean;
+  haveShampoo: boolean;
+};
+
+type BookDataType = {
+  userID: string,
+  roomID: string,
+  dates: [Date, Date],
+};
 
 export type {
   UserDataType,
@@ -238,6 +288,8 @@ export type {
   ReturnedRoomType,
   BookingType,
   CancelBookingResult,
+  BookDataType,
+  ReturnedRoomTypeWithTimestamp,
   CommentType,
   ImpressionsType,
   CommentInputType,
