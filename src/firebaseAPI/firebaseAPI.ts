@@ -36,7 +36,6 @@ import {
   CommentInputType,
   CommentOutputType
 } from './Types';
-import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
 
 
 const firebaseConfig = {

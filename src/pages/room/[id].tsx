@@ -5,7 +5,6 @@ import Reviews from 'src/components/Reviews/Reviews';
 import Impressions from 'src/components/Impressions/Impressions';
 import AboutRoom from 'src/components/AboutRoom/AboutRoom';
 import TotalCostCard from 'src/components/TotalCostCard/TotalCostCard';
-import totalCostCardDefaultProps from 'src/components/TotalCostCard/DefaultProps';
 import BulletList from 'src/components/BulletList/BulletList';
 import styles from '@styles/pages/details.module.scss';
 import Layout from 'src/components/Layout';
@@ -14,13 +13,9 @@ import { GET_CURRENT_ROOM } from 'src/redux/CurrentRoom/Types';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'src/redux/Store';
 import { NextPageContext } from 'next';
-<<<<<<< HEAD
 import Spin from 'src/components/Spin/Spin';
-=======
-import Preloader from 'src/components/Preloader/Preloader';
 import ModalWindow from 'src/components/ModalWindow/ModalWindow';
 import { switchModelWindow } from 'src/redux/ModalWindow/ModalWindow';
->>>>>>> 21b532fb3f3267ef548c2eab2daae29cd97e8e28
 
 const Room = ({ id }: { id: string }): ReactElement => {
   const router = useRouter();

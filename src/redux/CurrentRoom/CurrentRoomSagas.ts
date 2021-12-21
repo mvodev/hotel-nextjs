@@ -1,4 +1,10 @@
-import { call, ForkEffect, put, select, takeLatest } from '@redux-saga/core/effects';
+import {
+  call,
+  ForkEffect,
+  put,
+  select,
+  takeLatest,
+} from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import { selectDates, selectGuests } from '../Filters/FiltersSlice';
@@ -20,7 +26,13 @@ async function getCurrentRoom(id: string): Promise<ReturnedRoomType | null> {
   return response;
 }
 
-async function roomIsBookedByUser({ roomID, uid }: { roomID: string, uid: string }): Promise<boolean> {
+async function roomIsBookedByUser({
+  roomID,
+  uid,
+}: {
+  roomID: string;
+  uid: string;
+}): Promise<boolean> {
   const response = await firebaseAPI.roomIsBookedByUser({ roomID, uid });
   return response;
 }
@@ -33,11 +45,13 @@ function* workerSaga({ payload }: AnyAction) {
     payload
   );
 
-  const uid: string = yield select((state: AppState) => state.Authentication.user.uid);
-  const isRoomBookedByUser: Promise<boolean> = yield call(
-    roomIsBookedByUser,
-    { roomID: payload, uid }
+  const uid: string = yield select(
+    (state: AppState) => state.Authentication.user.uid
   );
+  const isRoomBookedByUser: Promise<boolean> = yield call(roomIsBookedByUser, {
+    roomID: payload,
+    uid,
+  });
 
   yield put({
     type: ROOM_COMMENTS_TO_STATE,
@@ -47,7 +61,7 @@ function* workerSaga({ payload }: AnyAction) {
   if (roomResponse) {
     yield put({
       type: SET_CURRENT_ROOM,
-      payload: roomResponse,
+      payload: { ...roomResponse, isRoomBookedByUser },
     });
   } else {
     yield put({ type: SET_CURRENT_ROOM, payload: null });
@@ -59,20 +73,22 @@ function* workerSaga({ payload }: AnyAction) {
 function* checkBookingBloked() {
   const guests: Guests = yield select(selectGuests);
   const dates: Dates = yield select(selectDates);
-  const maxGuests: number = yield select((state: AppState) => state.CurrentRoom.maxGuests);
-  const bookedDates: number[] = yield select((state: AppState) => state.CurrentRoom.bookedDays);
-  const filtredBookedDays = (dates[0] !== null) 
-    ? bookedDates.filter((item) => (
-      (item >= dates[0]) && (item <= dates[1])
-    ))
-    : []
-  const isBookingBloked = (
-    (dates[0] === null) 
-    || (guests.adult + guests.child === 0) 
-    || (filtredBookedDays.length > 0)
-    || (guests.adult + guests.child > maxGuests)
-  )
-  yield put({ type: SET_IS_BOOKING_BLOCKED, payload: isBookingBloked })
+  const maxGuests: number = yield select(
+    (state: AppState) => state.CurrentRoom.maxGuests
+  );
+  const bookedDates: number[] = yield select(
+    (state: AppState) => state.CurrentRoom.bookedDays
+  );
+  const filtredBookedDays =
+    dates[0] !== null
+      ? bookedDates.filter((item) => item >= dates[0] && item <= dates[1])
+      : [];
+  const isBookingBloked =
+    dates[0] === null ||
+    guests.adult + guests.child === 0 ||
+    filtredBookedDays.length > 0 ||
+    guests.adult + guests.child > maxGuests;
+  yield put({ type: SET_IS_BOOKING_BLOCKED, payload: isBookingBloked });
 }
 
 function* watchGetCurrentRoomSaga(): Generator<
@@ -84,9 +100,9 @@ function* watchGetCurrentRoomSaga(): Generator<
 }
 
 function* watchCheckBookingBloked(): Generator<
-ForkEffect<never>,
-void,
-unknown
+  ForkEffect<never>,
+  void,
+  unknown
 > {
   yield takeLatest(CHECK_BOOKING_BLOCKED, checkBookingBloked);
 }
