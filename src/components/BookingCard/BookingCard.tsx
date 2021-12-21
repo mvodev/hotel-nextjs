@@ -29,9 +29,6 @@ const BookingCard = (): JSX.Element => {
   const activeRoom = useSelector(selectActiveRoom) || rooms[0];
   const [isOpen, toggleOpenStatus] = useState(false);
   const activeBooking = useSelector(selectActiveBooking);
-  // const [activeBooking, changeActiveBooking] = useState<BookingList | null>(
-  //   null
-  // );
   const filterByNumber = (b: BookingList) => b.roomID === activeRoom?.roomID;
   const bookingByNumber = booking.filter(filterByNumber);
   const activeBookingSizeByNumber = booking
