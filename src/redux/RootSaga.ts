@@ -12,6 +12,12 @@ import filtersWatcher from './Filters/FiltersSaga';
 import { watchUpdateRooms } from './Rooms/RoomsSaga';
 import appWatcher from './App/AppSaga';
 import watchBookingUpdate from './Booking/BookingSaga';
+import watchGetCurrentRoomSaga from './CurrentRoom/CurrentRoomSagas';
+import {
+  watchAddLikeSaga,
+  watchRemoveLikeSaga,
+  watchRoomCommentsToStateSaga,
+} from './CurrentRoomComments/CurrentRoomCommentsSagas';
 
 function* startSaga(
   saga: Saga<any>
@@ -36,6 +42,10 @@ function* RootSaga(): Generator<any, any, any> {
     watchAuthenticationSaga,
     watchUserLogOutSaga,
     watchBookingUpdate,
+    watchGetCurrentRoomSaga,
+    watchAddLikeSaga,
+    watchRemoveLikeSaga,
+    watchRoomCommentsToStateSaga,
   ];
 
   const retrySagas = yield sagas.map((saga) => spawn(startSaga, saga));
