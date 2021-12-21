@@ -280,14 +280,19 @@ class FirebaseAPI {
       where('userID', '==', uid),
       where('roomID', '==', roomID)
     );
+
     return getDocs(bookingQuery).then((result) => {
+      if (uid === null) {
+        return false;
+      }
+
       const currentDate = Math.floor(Date.now() / 1000);
       const isBooked = result.docs.some((item) => {
         const bookingDates: Timestamp[] = item.data().dates;
         return bookingDates.length > 0
           ? bookingDates.some((date: Timestamp) =>
-              date ? date.seconds < currentDate : false
-            )
+            date ? date.seconds < currentDate : false
+          )
           : false;
       });
       return isBooked;
