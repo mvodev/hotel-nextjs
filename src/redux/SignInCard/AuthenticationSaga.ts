@@ -29,9 +29,8 @@ function* workerSignInSaga(form: SignInFormReducerType) {
     yield put(setError(false));
     yield put(setSubmitting(false));
     yield put(setModalWindow(true));
-    Cookie.set('userData', JSON.stringify({ ...result }));
     yield delay(5000);
-    Cookie.set('userData', JSON.stringify({ ...result }));
+    Cookie.set('signInData', JSON.stringify(form.payload));
     yield put(setAuthenticated(true));
     yield put({
       type: SET_USER,
@@ -49,3 +48,4 @@ function* watchSubmitSignInSaga() {
 }
 
 export default watchSubmitSignInSaga;
+

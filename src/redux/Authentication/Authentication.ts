@@ -3,6 +3,8 @@ import AuthenticationState, {
   RESET_USER_DATA,
   SET_AUTHENTICATED,
   SET_USER,
+  SET_USER_NAME,
+  SET_USER_SURNAME,
 } from './Types';
 
 const initialState = {
@@ -11,6 +13,7 @@ const initialState = {
     uid: null,
     name: null,
     surname: null,
+    email: null
   },
 };
 
@@ -28,6 +31,16 @@ const Authentication = (
       return {
         ...state,
         user: action.payload,
+      };
+    case SET_USER_NAME:
+      return {
+        ...state,
+        user: {...state.user, name: action.payload},
+      };
+    case SET_USER_SURNAME:
+      return {
+        ...state,
+        user: {...state.user, surname: action.payload},
       };
     case RESET_USER_DATA:
       return initialState;
