@@ -9,7 +9,7 @@ const ModalWindow = ({
   handleCloseClick,
 }: ModalWindowProps): React.ReactElement | null => {
   const cardImage = image ? (
-    <img className={styles.image} src={`./images/${image}`} alt="" />
+    <img className={styles.image} src={`/images/${image}`} alt="" />
   ) : null;
 
   const modalWindow = isEnabled ? (

@@ -56,7 +56,10 @@ const Filters = (): JSX.Element => {
         <CheckboxButtons
           title="правила дома"
           items={useSelector(selectRules)}
-          handleItemChange={(items) => dispatch(setRules(items))}
+          handleItemChange={(items) => {
+            dispatch(setRules(items));
+            dispatch({ type: 'UPDATE_ROOMS', payload: 1 });
+          }}
         />
       </div>
       <div className={style.filtersAvailability}>
@@ -64,7 +67,10 @@ const Filters = (): JSX.Element => {
           title="доступность"
           isRich
           items={useSelector(selectAvailability)}
-          handleItemChange={(items) => dispatch(setAvailability(items))}
+          handleItemChange={(items) => {
+            dispatch(setAvailability(items));
+            dispatch({ type: 'UPDATE_ROOMS', payload: 1 });
+          }}
         />
       </div>
       <div className={style.filtersConveniences}>
@@ -79,9 +85,10 @@ const Filters = (): JSX.Element => {
         <ExpandableList text='дополнительные удобства'>
           <CheckboxButtons
             items={useSelector(selectAdditionalConvenience)}
-            handleItemChange={(items) =>
-              dispatch(setAdditionalConvenience(items))
-            }
+            handleItemChange={(items) => {
+              dispatch(setAdditionalConvenience(items));
+              dispatch({ type: 'UPDATE_ROOMS', payload: 1 });
+            }}
           />
         </ExpandableList>
       </div>

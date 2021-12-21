@@ -11,6 +11,7 @@ import Registration from './Registration/Registration';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
 import CurrentRoom from './CurrentRoom/CurrentRoom';
+import modalWindiw from './ModalWindow/ModalWindow';
 import currentRoomComments from './CurrentRoomComments/CurrentRoomComments';
 import review from './Review/Review';
 
@@ -31,26 +32,11 @@ const makeStore = () => {
       Registration,
       roomCardsStatus,
       CurrentRoom,
+      modalWindiw,
       currentRoomComments,
     },
     middleware: [
-      ...getDefaultMiddleware({
-        serializableCheck: {
-          ignoredActions: [
-            'rooms/writeRooms',
-            'SET-PAGINATION',
-            'app/mount',
-            'UPDATE_ROOMS',
-            'filters/setRules',
-            'filters/setAvailability',
-            'filters/setAdditionalConvenience',
-            'filters/setPrice',
-            'filters/setGuests',
-            'filters/setDates',
-            'filters/setConveniences',
-          ],
-        },
-      }),
+      ...getDefaultMiddleware(),
       sagaMiddleware,
     ],
   });

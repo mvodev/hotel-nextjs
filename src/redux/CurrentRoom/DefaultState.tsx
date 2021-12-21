@@ -1,7 +1,9 @@
 const DefaultState = {
   isLoading: false,
-  isBookBlock: false,
   isRoomBookedByUser: false,
+  inBookingProcess: false,
+  isBooked: false,
+  isBookingBlocked: false,
   roomID: '',
   gallery: ['', '', ''],
   information: [],

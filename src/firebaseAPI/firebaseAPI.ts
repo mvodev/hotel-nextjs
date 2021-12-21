@@ -22,7 +22,10 @@ import {
   orderBy,
   updateDoc,
 } from 'firebase/firestore';
+
 import { FirebaseError } from '@firebase/util';
+import { AddBookResultType } from 'src/redux/AddBook/Types';
+import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
 import {
   UserDataType,
   UserType,
@@ -33,6 +36,8 @@ import {
   CommentInputType,
   CommentOutputType
 } from './Types';
+import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -235,8 +240,8 @@ class FirebaseAPI {
     filters: FiltersAPIType,
     page: number,
     itemsOnPage: number
-  ) => {
-    const data = {
+  ): Promise<UpdateRoomsResultType> => {
+    const data = { 
       filters,
       page,
       itemsOnPage,
@@ -251,13 +256,30 @@ class FirebaseAPI {
     ).then((result) => result.json());
   };
 
+  public addBook = async (bookData: BookDataType): Promise<AddBookResultType> => {
+    return  await fetch(
+      'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/addBook',
+      {
+        method: 'POST',
+        body: JSON.stringify(bookData)
+      }
+    )
+    .then((result) => {
+      return result.json()
+    })
+  };
+  
   public getCurrentRoom = async (
     id: string
   ): Promise<ReturnedRoomType | null> =>
-    getDoc(doc(this.db, 'rooms', id)).then((room) =>
-      room.data()
-        ? ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
-        : null
+    getDoc(doc(this.db, 'rooms', id)).then((room) => {
+      if (room.data()) {
+        const result = ({ ...room.data(), roomID: room.id } as ReturnedRoomTypeWithTimestamp) 
+        const bookedDays = result.bookedDays.map((item) => item.seconds * 1000)
+        return {...result, bookedDays}  
+      }
+      return null
+    }
     );
 
   public roomIsBookedByUser({
