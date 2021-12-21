@@ -1,8 +1,9 @@
 import { call, put, takeEvery, select, delay} from 'redux-saga/effects';
 
+import { AppState } from 'src/redux/Store';
+
 import { setModalWindiwData, switchModelWindow } from '../ModalWindow/ModalWindow';
 import firebaseAPI from '../../firebaseAPI/firebaseAPI';
-import { AppState } from '../Store';
 import type { AddBookActionType, AddBookResultType } from './Types';
 import { GET_CURRENT_ROOM, SET_IN_BOOKING_PROCESS, SET_IS_BOOKED, SET_IS_BOOKING_BLOCKED } from '../CurrentRoom/Types';
 

@@ -3,7 +3,10 @@ import { call, put, select, take } from 'redux-saga/effects';
 import { AppState } from 'src/redux/Store';
 import { SET_USER } from 'src/redux/Authentication/Types';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
-import type { BookingType, ReturnedRoomType } from 'src/firebaseAPI/Types';
+import type {
+  BookingType,
+  ReturnedRoomTypeWithTimestamp,
+} from 'src/firebaseAPI/Types';
 import {
   setList,
   setRooms,
@@ -20,10 +23,12 @@ export function* updateBookedRooms(): Generator {
     { context: firebaseAPI, fn: firebaseAPI.getBookedRooms },
     list as BookingList[]
   );
-  const bookedRooms = yield (rooms as ReturnedRoomType[]).map((r) => ({
-    ...r,
-    bookedDays: r.bookedDays.map((bd) => bd.seconds * 1000),
-  }));
+  const bookedRooms = yield (rooms as ReturnedRoomTypeWithTimestamp[]).map(
+    (r) => ({
+      ...r,
+      bookedDays: r.bookedDays.map((bd) => bd.seconds * 1000),
+    })
+  );
   yield put(setRooms(bookedRooms as BookedRoom[]));
 }
 

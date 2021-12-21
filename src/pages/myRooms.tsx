@@ -47,7 +47,8 @@ const MyRooms = (): JSX.Element => {
         rating: RecalculateRating(room.impressions),
         price: room.price,
         reviewsCount: Object.values(room.impressions).reduce(
-          (acc, v) => acc + (v || 0), 0
+          (acc, v) => acc + (v || 0),
+          0
         ),
       }}
     />
