@@ -16,10 +16,11 @@ import {
   getDocs,
   collection,
   query,
+  deleteDoc,
+  updateDoc,
   collectionGroup,
   where,
 } from 'firebase/firestore';
-
 import { FirebaseError } from '@firebase/util';
 import { AddBookResultType } from 'src/redux/AddBook/Types';
 import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
@@ -29,13 +30,14 @@ import {
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
-  BookDataType,
+  CancelBookingResult,
   CommentType, 
   ImpressionsType, 
   CommentInputType,
-  ReturnedRoomTypeWithTimestamp
+  BookDataType,
+  ReturnedRoomTypeWithTimestamp,
 } from './Types';
-import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
+
 
 
 const firebaseConfig = {
@@ -83,7 +85,7 @@ class FirebaseAPI {
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             ...user.data(),
-          })
+          } as UserType)
         )
       )
       .catch((error: FirebaseError) => error);
@@ -99,7 +101,7 @@ class FirebaseAPI {
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             ...userData.data(),
-          })
+          } as UserType)
         )
       )
       .catch((error: FirebaseError): FirebaseError => error);
@@ -226,6 +228,40 @@ class FirebaseAPI {
       .then((result) => result.json())
   };
 
+
+  public cancelBooking = async (
+    bookingID: string, 
+    roomID: string,
+    dates: [number, number]
+  ): Promise<CancelBookingResult> => (
+    deleteDoc(doc(this.db, 'bookingList', bookingID))
+      .then(() => {
+        const docRef = doc(this.db, 'rooms', roomID);
+        return getDoc(docRef)
+          .then((doc) => {
+            const room  = doc.data() as ReturnedRoomTypeWithTimestamp;
+            const newBookedDays = room.bookedDays.filter((item) => (
+              (item.seconds * 1000 < dates[0]) || ((item.seconds * 1000 > dates[1])) 
+            ));
+            
+            return updateDoc(docRef, { bookedDays: newBookedDays })
+              .then(() => ({ canceled: true }))
+              .catch((e) => ({
+                canceled: false,
+                error: e
+              }))
+          })
+          .catch((e) => ({
+            canceled: false,
+            error: e
+          }))
+      })
+      .catch((e) => ({
+        canceled: false,
+        error: e
+      }))
+  )
+
   public addBook = async (bookData: BookDataType): Promise<AddBookResultType> => {
     return  await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/addBook',
@@ -251,6 +287,7 @@ class FirebaseAPI {
       return null
     }
     );
+
 }
 
 const firebaseAPI = new FirebaseAPI();
