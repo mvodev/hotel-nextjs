@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {
+  setActiveBooking,
+  setActiveRoom,
   selectBookingList,
   selectActiveBookingSize,
   selectActiveRoomSize,
   selectBookedRooms,
   selectFetching,
+  selectActiveBooking,
+  selectActiveRoom,
 } from 'src/redux/Booking/BookingSlice';
 import type { BookingList } from 'src/redux/Booking/Types';
 import Dropdown from 'src/components/Dropdown/Dropdown';
@@ -16,16 +20,18 @@ import Button from 'src/components/Button/Button';
 import style from './BookingCard.module.sass';
 
 const BookingCard = (): JSX.Element => {
+  const dispatch = useDispatch();
   const isFetching = useSelector(selectFetching);
   const rooms = useSelector(selectBookedRooms);
   const activeRoomSize = useSelector(selectActiveRoomSize);
   const booking = useSelector(selectBookingList);
   const activeBookingSize = useSelector(selectActiveBookingSize);
-  const [activeRoom, changeActiveRoomNumber] = useState(rooms[0]);
+  const activeRoom = useSelector(selectActiveRoom) || rooms[0];
   const [isOpen, toggleOpenStatus] = useState(false);
-  const [activeBooking, changeActiveBooking] = useState<BookingList | null>(
-    null
-  );
+  const activeBooking = useSelector(selectActiveBooking);
+  // const [activeBooking, changeActiveBooking] = useState<BookingList | null>(
+  //   null
+  // );
   const filterByNumber = (b: BookingList) => b.roomID === activeRoom?.roomID;
   const bookingByNumber = booking.filter(filterByNumber);
   const activeBookingSizeByNumber = booking
@@ -33,12 +39,12 @@ const BookingCard = (): JSX.Element => {
     .filter(filterByNumber).length;
 
   useEffect(() => {
-    changeActiveRoomNumber(
-      rooms.find((r) => r.roomID === activeRoom?.roomID) ? activeRoom : rooms[0]
-    );
+    if (!rooms.find((r) => r.roomID === activeRoom?.roomID)) {
+      dispatch(setActiveRoom(rooms[0]));
+    }
 
     if (isFetching) {
-      changeActiveBooking(null);
+      dispatch(setActiveBooking(null));
     }
 
     const handleWindowClick = (e: MouseEvent) => {
@@ -53,7 +59,7 @@ const BookingCard = (): JSX.Element => {
     return () => {
       window.removeEventListener('click', handleWindowClick);
     };
-  }, [activeRoom, rooms, isFetching]);
+  }, [activeRoom, rooms, isFetching, dispatch]);
 
   return (
     <article className={style.bookingCard}>
@@ -75,10 +81,10 @@ const BookingCard = (): JSX.Element => {
                 ].join(' ')}
                 onClick={() => {
                   if (r.roomID !== activeBooking?.roomID) {
-                    changeActiveBooking(null);
+                    dispatch(setActiveBooking(null));
                   }
                   toggleOpenStatus(false);
-                  changeActiveRoomNumber(r);
+                  dispatch(setActiveRoom(r));
                 }}
               >
                 {r.roomNumber}
@@ -99,7 +105,7 @@ const BookingCard = (): JSX.Element => {
                   style.bookingButton,
                   b.id === activeBooking?.id ? style.bookingButtonSelected : '',
                 ].join(' ')}
-                onClick={() => changeActiveBooking(b)}
+                onClick={() => dispatch(setActiveBooking(b))}
                 disabled={idx >= activeBookingSizeByNumber}
               >
                 {[b.start, b.end]
@@ -113,9 +119,9 @@ const BookingCard = (): JSX.Element => {
       <Button
         text="отменить бронирование"
         theme="filled"
-        isDisabled={!activeBooking?.id || isFetching}
+        isDisabled={!activeBooking || isFetching}
         onClick={() => {
-          console.log(activeBooking);
+          dispatch({ type: 'CANCEL_BOOKING', payload: activeBooking })
         }}
       />
     </article>

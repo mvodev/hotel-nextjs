@@ -16,7 +16,6 @@ import {
   getDocs,
   collection,
   query,
-<<<<<<< HEAD
   where,
   orderBy,
   OrderByDirection,
@@ -233,7 +232,7 @@ class FirebaseAPI {
     const bookingDocs = await getDocs(
       query(
         collection(this.db, 'bookingList'),
-        where('userID', '==', null),
+        where('userID', '==', uid),
         orderBy(field, direction)
       )
     );

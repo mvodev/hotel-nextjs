@@ -3,12 +3,13 @@ import { call, put, select, take } from 'redux-saga/effects';
 import { AppState } from 'src/redux/Store';
 import { SET_USER } from 'src/redux/Authentication/Types';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
-import type { BookingType } from 'src/firebaseAPI/Types';
+import type { BookingType, ReturnedRoomType } from 'src/firebaseAPI/Types';
 import {
   setList,
   setRooms,
   toggleFetchingStatus,
   selectBookingList,
+  update,
 } from 'src/redux/Booking/BookingSlice';
 
 import type { BookingList, BookedRoom } from './Types';
@@ -19,7 +20,11 @@ export function* updateBookedRooms(): Generator {
     { context: firebaseAPI, fn: firebaseAPI.getBookedRooms },
     list as BookingList[]
   );
-  yield put(setRooms(rooms as BookedRoom[]));
+  const bookedRooms = yield (rooms as ReturnedRoomType[]).map((r) => ({
+    ...r,
+    bookedDays: r.bookedDays.map((bd) => bd.seconds * 1000),
+  }));
+  yield put(setRooms(bookedRooms as BookedRoom[]));
 }
 
 export function* updateBookingList(): Generator {
@@ -50,7 +55,7 @@ function* updateFetchingStatus(status: boolean): Generator {
 
 function* watchBookingUpdate(): Generator {
   while (true) {
-    yield take(SET_USER);
+    yield take([SET_USER, update.type]);
     yield call(updateFetchingStatus, true);
     yield call(updateBookingList);
     yield call(updateBookedRooms);

@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import RecalculateRating from 'src/utils/RecalculateRating';
 import {
+  setActiveBooking,
+  setActiveRoom,
   selectActiveRoomSize,
   selectBookedRooms,
   selectFetching,
+  selectActiveRoom,
 } from 'src/redux/Booking/BookingSlice';
 import type { BookedRoom } from 'src/redux/Booking/Types';
 import Layout from 'src/components/Layout';
@@ -18,6 +21,7 @@ import roomCardStyles from '@components/RoomCard/RoomCard.module.scss';
 import style from '@styles/pages/myRooms.module.sass';
 
 const MyRooms = (): JSX.Element => {
+  const dispatch = useDispatch();
   const main = useRef<HTMLDivElement>(null);
   const menu = useRef<HTMLDivElement>(null);
   const [isMenuShown, toggleMenuVisibility] = useState(false);
@@ -28,8 +32,9 @@ const MyRooms = (): JSX.Element => {
   const activeRooms = rooms.slice(0, activeRoomSize);
   const unactiveRooms = rooms.slice(activeRoomSize);
   const isFetching = useSelector(selectFetching);
+  const activeRoom = useSelector(selectActiveRoom) || rooms[0];
+  const activeID = useRef('');
   const isTransition = useRef(false);
-  const activeRoomID = useRef('');
   const router = useRouter();
   const getRoomCard = (room: BookedRoom) => (
     <RoomCard
@@ -52,7 +57,8 @@ const MyRooms = (): JSX.Element => {
     const handleBeforeRouteChange = (url: string) => {
       if (url.match(/^\/room\/.+$/) && !isTransition.current) {
         toggleMenuVisibility(true);
-        activeRoomID.current = url.replace(/\/.*\//, '');
+        activeID.current = url.replace(/\/.*\//, '');
+        dispatch(setActiveBooking(null));
         router.events.emit('routeChangeError');
         throw 'Abort route change. Please ignore this error.';
       }
@@ -147,7 +153,15 @@ const MyRooms = (): JSX.Element => {
                 type="button"
                 className={style.contextMenuItem}
                 onClick={() => {
+                  if (activeID.current !== activeRoom.roomID) {
+                    dispatch(
+                      setActiveRoom(
+                        rooms.find((r) => r.roomID === activeID.current)
+                      )
+                    );
+                  }
                   toggleCardVisibility(true);
+                  toggleMenuVisibility(false);
                   window.scrollTo(0, 0);
                 }}
               >
@@ -158,7 +172,7 @@ const MyRooms = (): JSX.Element => {
                 className={style.contextMenuItem}
                 onClick={() => {
                   isTransition.current = true;
-                  router.push(`/room/${activeRoomID.current}`);
+                  router.push(`/room/${activeRoom.roomID}`);
                 }}
               >
                 Детали номера
