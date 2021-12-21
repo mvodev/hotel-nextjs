@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import getPosInSpellCasesArray from 'src/utils/Utils';
 import DateDropdown from 'src/components/DateDropdown/DateDropdown';
 import DropdownGuests from 'src/components/DropdownGuests/DropdownGuests';
@@ -52,8 +51,7 @@ const TotalCostCard = (): JSX.Element => {
 
   if (isBooked) {
     dispatch({ type: SET_IS_BOOKED, payload: false })
-    router.push('/search');
-    
+    router.push('/myRooms');
   }
 
   const handleFormSubmit = () => {

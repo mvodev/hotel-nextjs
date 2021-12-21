@@ -184,7 +184,7 @@ const MyRooms = (): JSX.Element => {
         <div
           className={[
             style.cardContainer,
-            isCardShown ? style.cardContainerVisible : '',
+            (isCardShown && rooms.length !== 0) ? style.cardContainerVisible : '',
           ].join(' ')}
         >
           <BookingCard />
