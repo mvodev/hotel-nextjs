@@ -68,8 +68,8 @@ const UserSection = (): React.ReactElement => {
             item: `${user.name} ${user.surname}`,
             link: '/',
             hiddenItems: [
-              { id: 1, item: 'Выход', link: '/', callback: handleExitClick },
-              { id: 2, item: 'Мои номера', link: '/myRooms' },
+              { id: 1, item: 'Мои номера', link: '/myRooms' },
+              { id: 2, item: 'Выход', link: '/', callback: handleExitClick },
             ],
           }}
         />
