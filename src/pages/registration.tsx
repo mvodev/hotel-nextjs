@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Carousel from 'src/components/Carousel/Carousel';
 import RegistrationCard from 'src/components/RegistrationCard/RegistrationCard';
-import Preloader from 'src/components/Preloader/Preloader';
+import Spin from 'src/components/Spin/Spin';
 import { AppState } from 'src/redux/Store';
 import Layout from '../components/Layout';
 import styles from '../styles/pages/registration.module.scss';
@@ -20,11 +21,15 @@ const Registration = (): React.ReactElement => {
 
   if (userData.isAuthenticated) {
     router.push('/');
-    content = <Preloader />;
+    content = (
+      <div className={styles.spinContainer}>
+        <Spin />
+      </div>
+    );
   }
 
   return (
-    <Layout title="registration page" pageClass={styles.registration}>
+    <Layout title='registration page' pageClass={styles.registration}>
       {content}
     </Layout>
   );
