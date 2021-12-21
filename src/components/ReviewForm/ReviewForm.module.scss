@@ -12,6 +12,7 @@
 
 .textarea {
   @include text-field();
+  padding: 10px 5px;
   min-width: 100%;
   min-height: 100px;
 }
