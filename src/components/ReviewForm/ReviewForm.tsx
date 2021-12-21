@@ -57,7 +57,7 @@ const ReviewForm = (): React.ReactElement | null => {
         <textarea
           {...review.input}
           className={styles.textarea}
-          placeholder='Ваш отзыв'
+          placeholder="Ваш отзыв"
         />
         {review.meta.touched && review.meta.error && (
           <span className={styles.error}>{review.meta.error}</span>
@@ -73,9 +73,9 @@ const ReviewForm = (): React.ReactElement | null => {
 
         <div className={styles.submitContainer}>
           <Button
-            type='submit'
-            theme='filled'
-            text='Оставить отзыв'
+            type="submit"
+            theme="filled"
+            text="Оставить отзыв"
             isDisabled={isSubmitting}
           />
         </div>

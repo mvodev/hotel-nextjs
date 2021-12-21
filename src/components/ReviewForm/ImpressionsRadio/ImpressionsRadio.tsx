@@ -11,8 +11,8 @@ const ImpressionsRadio = (
     <label key={radio.key} className={styles.radioContainer}>
       <input
         className={styles.radio}
-        type='radio'
-        name='impression'
+        type="radio"
+        name="impression"
         value={radio.key}
         {...props}
       />
