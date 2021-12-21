@@ -21,7 +21,9 @@ import {
   collectionGroup,
   where,
 } from 'firebase/firestore';
-import { FirebaseError } from "@firebase/util";
+import { FirebaseError } from '@firebase/util';
+import { AddBookResultType } from 'src/redux/AddBook/Types';
+import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
 import {
   UserDataType,
   UserType,
@@ -31,8 +33,12 @@ import {
   CancelBookingResult,
   CommentType, 
   ImpressionsType, 
-  CommentInputType
+  CommentInputType,
+  BookDataType,
+  ReturnedRoomTypeWithTimestamp,
 } from './Types';
+
+
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -205,8 +211,8 @@ class FirebaseAPI {
     filters: FiltersAPIType,
     page: number,
     itemsOnPage: number
-  ) => {
-    const data = {
+  ): Promise<UpdateRoomsResultType> => {
+    const data = { 
       filters,
       page,
       itemsOnPage
@@ -222,6 +228,7 @@ class FirebaseAPI {
       .then((result) => result.json())
   };
 
+
   public cancelBooking = async (
     bookingID: string, 
     roomID: string,
@@ -232,7 +239,7 @@ class FirebaseAPI {
         const docRef = doc(this.db, 'rooms', roomID);
         return getDoc(docRef)
           .then((doc) => {
-            const room  = doc.data() as ReturnedRoomType;
+            const room  = doc.data() as ReturnedRoomTypeWithTimestamp;
             const newBookedDays = room.bookedDays.filter((item) => (
               (item.seconds * 1000 < dates[0]) || ((item.seconds * 1000 > dates[1])) 
             ));
@@ -255,13 +262,30 @@ class FirebaseAPI {
       }))
   )
 
+  public addBook = async (bookData: BookDataType): Promise<AddBookResultType> => {
+    return  await fetch(
+      'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/addBook',
+      {
+        method: 'POST',
+        body: JSON.stringify(bookData)
+      }
+    )
+    .then((result) => {
+      return result.json()
+    })
+  };
+  
   public getCurrentRoom = async (
     id: string
   ): Promise<ReturnedRoomType | null> =>
-    getDoc(doc(this.db, 'rooms', id)).then((room) =>
-      room.data()
-        ? ({ ...room.data(), roomID: room.id } as ReturnedRoomType)
-        : null
+    getDoc(doc(this.db, 'rooms', id)).then((room) => {
+      if (room.data()) {
+        const result = ({ ...room.data(), roomID: room.id } as ReturnedRoomTypeWithTimestamp) 
+        const bookedDays = result.bookedDays.map((item) => item.seconds * 1000)
+        return {...result, bookedDays}  
+      }
+      return null
+    }
     );
 
 }
