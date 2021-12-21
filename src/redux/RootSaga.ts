@@ -7,14 +7,18 @@ import watchAuthenticationSaga, {
   watchUserLogOutSaga,
   watchChangeUserName,
   watchChangeUserSurname,
+  watchChangePassword, 
+  watchChangeEmail
 } from './Authentication/AuthenticationSagas';
 import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 import watchSubmitSignInSaga from './SignInCard/AuthenticationSaga';
-import { watchChangePassword, watchChangeEmail } from './SignInCard/AuthenticationSaga';
-import filtersWatcher from './Filters/FiltersSaga';
 import { watchUpdateRooms } from './Rooms/RoomsSaga';
 import appWatcher from './App/AppSaga';
-import watchGetCurrentRoomSaga from './CurrentRoom/CurrentRoomSagas';
+import { watchAddBook } from './AddBook/AddBookSaga';
+import {
+  watchGetCurrentRoomSaga,
+  watchCheckBookingBloked
+} from './CurrentRoom/CurrentRoomSagas';
 import {
   watchAddLikeSaga,
   watchRemoveLikeSaga,
@@ -36,14 +40,15 @@ function* startSaga(
 
 function* RootSaga(): Generator<any, any, any> {
   const sagas: Saga<any>[] = [
-    filtersWatcher,
     watchUpdateRooms,
     appWatcher,
     watchSubmitSignInSaga,
     watchRegistrationSubmitSaga,
     watchAuthenticationSaga,
     watchUserLogOutSaga,
+    watchAddBook,
     watchGetCurrentRoomSaga,
+    watchCheckBookingBloked,
     watchAddLikeSaga,
     watchRemoveLikeSaga,
     watchRoomCommentsToStateSaga,

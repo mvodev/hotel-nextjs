@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/redux/reduces';
 import { USER_LOG_OUT } from 'src/redux/Authentication/Types';
+import { AppState } from 'src/redux/Store';
 import NavbarItem from '../NavbarItem/NavbarItem';
 import Button from '../Button/Button';
 import styles from './UserSection.module.scss';
@@ -10,7 +10,7 @@ import styles from './UserSection.module.scss';
 const UserSection = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector(
-    (state: RootState) => state.Authentication
+    (state: AppState) => state.Authentication
   );
 
   const [screenWidth, setWidth] = useState(0);
@@ -66,7 +66,8 @@ const UserSection = (): React.ReactElement => {
             item: `${user.name} ${user.surname}`,
             link: '/',
             hiddenItems: [
-              { id: 1, item: 'Выход', link: '/', callback: handleExitClick },
+              { id: 1, item: 'Личный кабинет', link: '/user-account'},
+              { id: 2, item: 'Выход', link: '/', callback: handleExitClick },
             ],
           }}
         />

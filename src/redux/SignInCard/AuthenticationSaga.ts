@@ -6,8 +6,8 @@ import firebaseAPI from '../../firebaseAPI/firebaseAPI';
 import { UserType } from '../../firebaseAPI/Types';
 import { setAuthenticated } from '../Authentication/AuthenticationActions';
 import { setModalWindow, setError, setSubmitting } from './SignInCardActions';
-import { SET_EMAIL, SUBMIT_SIGN_IN_FORM } from './Types';
-import { ResultType, SET_USER } from '../Authentication/Types';
+import { SUBMIT_SIGN_IN_FORM } from './Types';
+import { SET_USER } from '../Authentication/Types';
 import { timestampToDateString } from '../../utils/Utils';
 
 type SignInFormReducerType = {
@@ -36,9 +36,9 @@ function* workerSignInSaga(form: SignInFormReducerType) {
       type: SET_USER,
       payload: {
         ...result,
-        birthday: timestampToDateString(result.birthday),
-      },
-    });
+        birthday:timestampToDateString((result).birthday),
+    }});
+    yield put(setModalWindow(false));
   }
 }
 
@@ -47,29 +47,5 @@ function* watchSubmitSignInSaga() {
   yield takeEvery(SUBMIT_SIGN_IN_FORM, workerSignInSaga);
 }
 
-function* changeEmail(action: { type: string, payload: string }) {
-  const result: ResultType = yield call(firebaseAPI.changeEmail, action.payload);
-  if(result.changed) {
-    yield put({ type: SET_EMAIL, payload: action.payload });
-  } else {
-    console.log(result.error);
-  } 
-}
-
-function* watchChangeEmail() {
-  yield takeEvery('CHANGE_EMAIL', changeEmail);
-}
-
-function* changePassword(action: { type: string, payload: string }) {
-  const result: ResultType = yield call(firebaseAPI.changePassword, action.payload);
-  if(!result.changed) {
-    console.log(result.error);
-  } 
-}
-
-function* watchChangePassword() {
-  yield takeEvery('CHANGE_PASSWORD', changePassword);
-}
-
-export { watchChangePassword, watchChangeEmail };
 export default watchSubmitSignInSaga;
+

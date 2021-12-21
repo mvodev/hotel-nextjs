@@ -3,6 +3,7 @@ import { ForkEffect, put, call, takeEvery } from '@redux-saga/core/effects';
 import Cookie from 'js-cookie';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
 import { SignInResult, UserType } from 'src/firebaseAPI/Types';
+import { SET_EMAIL } from '../SignInCard/Types';
 import {
   RESET_USER_DATA,
   SET_AUTHENTICATED,
@@ -82,9 +83,39 @@ function* changeUserSurname(action: { type: string, payload: {id: string, userSu
   }
 }
 
+function* changeEmail(action: { type: string, payload: string }) {
+  const result: ResultType = yield call(firebaseAPI.changeEmail, action.payload);
+  if(result.changed) {
+    yield put({ type: SET_EMAIL, payload: action.payload });
+  } else {
+    console.log(result.error);
+  } 
+}
+
+function* watchChangeEmail() {
+  yield takeEvery('CHANGE_EMAIL', changeEmail);
+}
+
 function* watchChangeUserSurname() {
   yield takeEvery('CHANGE_USER_SURNAME', changeUserSurname);
 }
 
+function* changePassword(action: { type: string, payload: string }) {
+  const result: ResultType = yield call(firebaseAPI.changePassword, action.payload);
+  if(!result.changed) {
+    console.log(result.error);
+  } 
+}
+
+function* watchChangePassword() {
+  yield takeEvery('CHANGE_PASSWORD', changePassword);
+}
+
 export default watchAuthenticationSaga;
-export { watchUserLogOutSaga, watchChangeUserName, watchChangeUserSurname };
+export { 
+  watchUserLogOutSaga,
+  watchChangeUserName,
+  watchChangeUserSurname,
+  watchChangeEmail,
+  watchChangePassword,
+};

@@ -33,11 +33,11 @@ const SearchRoomCard = (): JSX.Element => {
           <h1 className={styles.title}>Найдём номера под ваши пожелания</h1>
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formItem}>
-              <DateDropdown />
+              <DateDropdown from='searchCard'/>
             </div>
             <div className={styles.formItem}>
               <h3 className={styles.formItemTitle}>гости</h3>
-              <DropdownGuests />
+              <DropdownGuests from='searchCard'/>
             </div>
             <div className={styles.buttonContainer}>
               <Button

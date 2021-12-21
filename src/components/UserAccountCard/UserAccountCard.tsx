@@ -1,6 +1,7 @@
 import { ReactElement, useEffect } from "react";
 import { Field, FieldMetaState, Form } from 'react-final-form';
 import { useDispatch, useSelector } from "react-redux";
+import { User } from "src/redux/Authentication/Types";
 import { AppState } from "src/redux/Store";
 import Button from "../Button/Button";
 import TextField from "../TextField/TextField";
@@ -11,25 +12,24 @@ import validate from './validate';
 const UserAccount = (): ReactElement => {
   const dispatch = useDispatch();
 
-  const uid = useSelector((state: AppState) => state.Authentication.user.uid) as string;
-  const userName = useSelector((state: AppState) => state.Authentication.user.name) as string;
-  const userSurname = useSelector((state: AppState) => state.Authentication.user.surname) as string;
-  const userEmail = useSelector((state:AppState) => state.Authentication.user.email) as string;
+  const {uid, name, surname, email } = useSelector(
+    (state: AppState) => state.Authentication.user
+  ) as User;
   
   const handleFormSubmit = (values: FormData) => {
-    if (values.name && values.name !== userName) {
+    if (values.name && values.name !== name) {
       dispatch({ type: 'CHANGE_USER_NAME', payload: {
         id: uid,
         userName: values.name 
       }});
     }
-    if (values.surname && values.surname !== userSurname) {
+    if (values.surname && values.surname !== surname) {
       dispatch({ type: 'CHANGE_USER_SURNAME', payload: {
         id: uid,
         userSurname: values.surname 
       }});
     }
-    if (values.email && values.email !== userEmail) {
+    if (values.email && values.email !== email) {
       dispatch({ type: 'CHANGE_EMAIL', payload: values.email });
     }
     if (values.password) {
@@ -54,7 +54,7 @@ const UserAccount = (): ReactElement => {
             <Field name="name">
               {({ input }) => (
                 <>
-                  <TextField {...input} placeholder={userName} />
+                  <TextField {...input} placeholder={name as string} />
                 </>
               )}
             </Field>
@@ -63,7 +63,7 @@ const UserAccount = (): ReactElement => {
             <Field name="surname">
               {({ input }) => (
                 <>
-                  <TextField {...input} placeholder={userSurname} />
+                  <TextField {...input} placeholder={surname as string} />
                 </>
               )}
             </Field>
@@ -73,7 +73,7 @@ const UserAccount = (): ReactElement => {
                 {({ input, meta }) => (
                 <>
                     <TextField {...input} 
-                      placeholder={userEmail}
+                      placeholder={email as string}
                       autoComplete="off"
                     />
                     {validationBlock(meta)}
