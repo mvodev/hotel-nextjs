@@ -9,31 +9,44 @@ import Button from 'src/components/Button/Button';
 import styles from './TotalCostCard.module.sass';
 import TypeTotalCostCardProps from './Types';
 import { AppState } from 'src/redux/Store';
-import { CHECK_BOOKING_BLOCKED, SET_IS_BOOKED } from 'src/redux/CurrentRoom/Types';
+import {
+  CHECK_BOOKING_BLOCKED,
+  SET_IS_BOOKED,
+} from 'src/redux/CurrentRoom/Types';
 
 const TotalCostCard = (): JSX.Element => {
-  const router = useRouter()
+  const router = useRouter();
   const dispatch = useDispatch();
-  const isBookingBlocked = useSelector((state: AppState) => state.CurrentRoom.isBookingBlocked);
+  const isBookingBlocked = useSelector(
+    (state: AppState) => state.CurrentRoom.isBookingBlocked
+  );
   const isBooked = useSelector((state: AppState) => state.CurrentRoom.isBooked);
-  const inBookingProcess = useSelector((state: AppState) => state.CurrentRoom.inBookingProcess);
+  const inBookingProcess = useSelector(
+    (state: AppState) => state.CurrentRoom.inBookingProcess
+  );
 
   const dates = useSelector((state: AppState) => state.filters.dates);
 
-  const roomNumber = useSelector((state: AppState) => state.CurrentRoom.roomNumber);
+  const roomNumber = useSelector(
+    (state: AppState) => state.CurrentRoom.roomNumber
+  );
   const isLuxury = useSelector((state: AppState) => state.CurrentRoom.isLux);
   const costPerDay = useSelector((state: AppState) => state.CurrentRoom.price);
   const discount = useSelector((state: AppState) => state.CurrentRoom.discount);
-  const serviceFee = useSelector((state: AppState) => state.CurrentRoom.serviceFee);
-  const fee = useSelector((state: AppState) => state.CurrentRoom.additionalServicesFee);
-  const bookedDays = useSelector((state: AppState) => state.CurrentRoom.bookedDays);
+  const serviceFee = useSelector(
+    (state: AppState) => state.CurrentRoom.serviceFee
+  );
+  const fee = useSelector(
+    (state: AppState) => state.CurrentRoom.additionalServicesFee
+  );
+  const bookedDays = useSelector(
+    (state: AppState) => state.CurrentRoom.bookedDays
+  );
 
-  dispatch({ type: CHECK_BOOKING_BLOCKED })
+  dispatch({ type: CHECK_BOOKING_BLOCKED });
 
   const DAY = 24 * 60 * 60 * 1000;
-  const nDays = (dates[0] !== null)
-    ? Math.ceil((dates[1] - dates[0]) / DAY)
-    : 0
+  const nDays = dates[0] !== null ? Math.ceil((dates[1] - dates[0]) / DAY) : 0;
 
   const preTotal = costPerDay * nDays;
 
@@ -50,16 +63,17 @@ const TotalCostCard = (): JSX.Element => {
       .replace(/\s(?!\d)/, '');
 
   if (isBooked) {
-    dispatch({ type: SET_IS_BOOKED, payload: false })
+    dispatch({ type: SET_IS_BOOKED, payload: false });
     router.push('/myRooms');
   }
 
   const handleFormSubmit = () => {
-    dispatch({ type: 'ADD_BOOK' })
-  }
+    dispatch({ type: 'ADD_BOOK' });
+  };
 
   return (
-    <Form onSubmit={handleFormSubmit}
+    <Form
+      onSubmit={handleFormSubmit}
       render={({ handleSubmit }) => (
         <form className={styles.totalCostCard} onSubmit={handleSubmit}>
           <div className={styles.container}>
@@ -80,7 +94,7 @@ const TotalCostCard = (): JSX.Element => {
               <DateDropdown
                 titles={['прибытие', 'выезд']}
                 modifier="double"
-                from='bookingCard'
+                from="bookingCard"
                 disabledDates={bookedDays}
               />
             </div>
@@ -89,7 +103,7 @@ const TotalCostCard = (): JSX.Element => {
               <DropdownGuests
                 placeholder="Сколько гостей"
                 opened={false}
-                from='bookingCard'
+                from="bookingCard"
               />
             </div>
             <div className={styles.costTable}>
@@ -103,7 +117,9 @@ const TotalCostCard = (): JSX.Element => {
                 </span>
               </div>
               <div className={styles.costTableInfo} title="info" />
-              <div className={styles.costTableCost}>{formatInRubles(preTotal)}</div>
+              <div className={styles.costTableCost}>
+                {formatInRubles(preTotal)}
+              </div>
               <div className={styles.costTableServiceDescription}>
                 {`Сбор за услуги: скидка ${formatInRubles(discount)}`}
               </div>
@@ -119,14 +135,16 @@ const TotalCostCard = (): JSX.Element => {
               <span className={styles.totalCaption}>Итого</span>
               <div className={styles.totalDashedLine} />
               <span className={styles.totalCost}>
-                {formatInRubles(preTotal - discount + fee + serviceFee)}
+                {formatInRubles(
+                  Math.max(preTotal - discount + fee + serviceFee, 0)
+                )}
               </span>
             </div>
-            <Button 
-              text="ЗАБРОНИРОВАТЬ" 
-              type="submit" 
-              theme="filled" 
-              isDisabled={isBookingBlocked || inBookingProcess} 
+            <Button
+              text="ЗАБРОНИРОВАТЬ"
+              type="submit"
+              theme="filled"
+              isDisabled={isBookingBlocked || inBookingProcess}
             />
           </div>
         </form>
