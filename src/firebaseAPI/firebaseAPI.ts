@@ -22,6 +22,8 @@ import {
   query,
   collectionGroup,
   where,
+  Timestamp,
+  orderBy,
   updateDoc,
 } from 'firebase/firestore';
 import { FirebaseError } from '@firebase/util';
@@ -130,14 +132,14 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'rooms'), roomData);
   };
 
-  public addComment = async (commentData: CommentInputType, avatarPath?:string) => {
+  public addComment = async (commentData: CommentInputType, avatarPath?: string) => {
     const dataToSave = {
       ...commentData,
       avatar: '/images/avatar-user-1.webp',
-      publicationDate:new Date(),
-      likedBy:[],
+      publicationDate: new Date(),
+      likedBy: [],
     }
-    if( avatarPath && avatarPath.length > 0){
+    if (avatarPath && avatarPath.length > 0) {
       dataToSave.avatar = avatarPath;
     }
     addDoc(collection(this.db, 'comments'), dataToSave);
@@ -162,11 +164,17 @@ class FirebaseAPI {
     return commentsByUID;
   };
 
-  public addLikeToComment = async (commentID: string, uidWhoLikedComment: string): Promise<boolean | FirebaseError> => {
+  public addLikeToComment = async (
+    commentID: string,
+    uidWhoLikedComment: string
+  ): Promise<boolean | FirebaseError> => {
     const commentRef = doc(this.db, 'comments', commentID);
     const commentSnap = await getDoc(commentRef);
     if (!commentSnap.exists()) {
-      return new FirebaseError('INVALID_ARGUMENT', 'No comment for this argument in database');
+      return new FirebaseError(
+        'INVALID_ARGUMENT',
+        'No comment for this argument in database'
+      );
     }
     const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
     if (!dataToSave.likedBy.includes(uidWhoLikedComment)) {
@@ -174,13 +182,19 @@ class FirebaseAPI {
       await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
     }
     return true;
-  }
+  };
 
-  public removeLikeFromComment = async (commentID: string, uidUserToRemove: string): Promise<boolean | FirebaseError> => {
+  public removeLikeFromComment = async (
+    commentID: string,
+    uidUserToRemove: string
+  ): Promise<boolean | FirebaseError> => {
     const commentRef = doc(this.db, 'comments', commentID);
     const commentSnap = await getDoc(commentRef);
     if (!commentSnap.exists()) {
-      return new FirebaseError('INVALID_ARGUMENT', 'No comment for this argument in database');
+      return new FirebaseError(
+        'INVALID_ARGUMENT',
+        'No comment for this argument in database'
+      );
     }
     const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
     if (dataToSave.likedBy.includes(uidUserToRemove)) {
@@ -188,10 +202,16 @@ class FirebaseAPI {
       await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
     }
     return true;
-  }
+  };
 
-  public getCommentsByRoomID = async (roomID: string): Promise<Array<CommentOutputType> | FirebaseError> => {
-    const comments = query(collectionGroup(this.db, 'comments'), where('roomID', '==', roomID));
+  public getCommentsByRoomID = async (
+    roomID: string
+  ): Promise<Array<CommentOutputType> | FirebaseError> => {
+    const comments = query(
+      collectionGroup(this.db, 'comments'),
+      where('roomID', '==', roomID),
+      orderBy('publicationDate', 'desc')
+    );
     const querySnapshot = await getDocs(comments);
     const commentsByUID: Array<CommentOutputType> = [];
     querySnapshot.forEach((res) => {
@@ -206,8 +226,11 @@ class FirebaseAPI {
       good: 0,
       satisfactory: 0,
       poor: 0,
-    }
-    const comments = query(collectionGroup(this.db, 'comments'), where('roomID', '==', roomID));
+    };
+    const comments = query(
+      collectionGroup(this.db, 'comments'),
+      where('roomID', '==', roomID)
+    );
     const querySnapshot = await getDocs(comments);
     // eslint-disable-next-line consistent-return
     querySnapshot.forEach((res) => {
@@ -229,7 +252,7 @@ class FirebaseAPI {
       }
     });
     return result;
-  }
+  };
 
   public getRooms = async (
     filters: FiltersAPIType,
@@ -239,8 +262,8 @@ class FirebaseAPI {
     const data = { 
       filters,
       page,
-      itemsOnPage
-    }
+      itemsOnPage,
+    };
     // eslint-disable-next-line @typescript-eslint/return-await
     return await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/getRooms',
@@ -248,8 +271,7 @@ class FirebaseAPI {
         method: 'POST',
         body: JSON.stringify(data),
       }
-    )
-      .then((result) => result.json())
+    ).then((result) => result.json());
   };
 
   public addBook = async (bookData: BookDataType): Promise<AddBookResultType> => {
@@ -277,6 +299,37 @@ class FirebaseAPI {
       return null
     }
     );
+
+  public roomIsBookedByUser({
+    roomID,
+    uid,
+  }: {
+    roomID: string;
+    uid: string;
+  }): Promise<boolean> {
+    const bookingQuery = query(
+      collectionGroup(this.db, 'bookingList'),
+      where('userID', '==', uid),
+      where('roomID', '==', roomID)
+    );
+
+    return getDocs(bookingQuery).then((result) => {
+      if (uid === null) {
+        return false;
+      }
+
+      const currentDate = Math.floor(Date.now() / 1000);
+      const isBooked = result.docs.some((item) => {
+        const bookingDates: Timestamp[] = item.data().dates;
+        return bookingDates.length > 0
+          ? bookingDates.some((date: Timestamp) =>
+            date ? date.seconds < currentDate : false
+          )
+          : false;
+      });
+      return isBooked;
+    });
+  }
 
   public changeUserName = async (
     id: string,
@@ -320,7 +373,7 @@ class FirebaseAPI {
         error: e
       }))
     } else {
-      return { changed: false, error: 'Пользователь не авторизирован'}
+      return { changed: false, error: 'Пользователь не авторизован'}
     }
   }
 
@@ -338,7 +391,7 @@ class FirebaseAPI {
         error: e
       }))
     } else {
-      return { changed: false, error: 'Пользователь не авторизирован'}
+      return { changed: false, error: 'Пользователь не авторизован'}
     }
   }
 
@@ -350,9 +403,9 @@ class FirebaseAPI {
       return new FirebaseError('INVALID_ARGUMENT', 'No room for this argument in database');
     }
     const dataToSave: RoomType = (roomSnap.data() as RoomType);
-    dataToSave.impressions[commentData.score]+=1;
+    dataToSave.impressions[commentData.score] += 1;
     await updateDoc(doc(this.db, 'rooms', roomSnap.ref.id), {
-      impressions:dataToSave.impressions
+      impressions: dataToSave.impressions
     });
     return true;
   }

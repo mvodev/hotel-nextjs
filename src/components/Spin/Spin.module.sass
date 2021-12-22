@@ -1,0 +1,21 @@
+@use 'sass:math'
+@use 'sass:color'
+
+@import @styles/vars
+
+$size: 1em
+
+.spin
+  width: $size
+  height: $size
+  border: math.div($size, 15) solid color.adjust($color-title-fg, $alpha: -0.88)
+  border-bottom-color: $color-primary
+  border-radius: 50%
+  animation: 3s linear infinite spiner
+
+@keyframes spiner
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+  

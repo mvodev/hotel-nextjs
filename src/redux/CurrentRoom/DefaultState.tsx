@@ -1,5 +1,6 @@
 const DefaultState = {
   isLoading: false,
+  isRoomBookedByUser: false,
   inBookingProcess: false,
   isBooked: false,
   isBookingBlocked: false,

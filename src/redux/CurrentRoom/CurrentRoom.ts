@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 import DefaultState from './DefaultState';
 import CurrentRoomState, {
   SET_CURRENT_ROOM,
+  SET_ROOM_BOOKED_BY_USER,
   SET_ROOM_LOADING,
   SET_IS_BOOKING_BLOCKED,
   SET_IS_BOOKED,
@@ -10,7 +11,7 @@ import CurrentRoomState, {
 
 const initialState = {
   ...DefaultState,
-  isLoading: false,
+  isLoading: true,
 };
 
 const CurrentRoom = (
@@ -31,6 +32,9 @@ const CurrentRoom = (
 
     case SET_ROOM_LOADING:
       return { ...state, isLoading: action.payload };
+
+    case SET_ROOM_BOOKED_BY_USER:
+      return { ...state, isRoomBookedByUser: action.payload };
 
     case SET_IS_BOOKING_BLOCKED:
       return { ...state, isBookingBlocked: action.payload };

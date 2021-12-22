@@ -86,3 +86,11 @@
     }
   }
 }
+
+.spinContainer {
+  width: 100%;
+  display: flex;
+  padding: 50px 10px;
+  justify-content: center;
+  font-size: min(20vh, 130px);
+}
