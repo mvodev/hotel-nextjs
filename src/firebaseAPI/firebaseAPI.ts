@@ -20,20 +20,26 @@ import {
   getDocs,
   collection,
   query,
-  collectionGroup,
   where,
-  Timestamp,
   orderBy,
+  OrderByDirection,
+  deleteDoc,
+  Timestamp,
   updateDoc,
+  collectionGroup,
 } from 'firebase/firestore';
 import { FirebaseError } from '@firebase/util';
 import { AddBookResultType } from 'src/redux/AddBook/Types';
 import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
+import { ResultType } from 'src/redux/Authentication/Types';
+
 import {
   UserDataType,
   UserType,
   RoomType,
   FiltersAPIType,
+  BookingType,
+  CancelBookingResult,
   ReturnedRoomType,
   ImpressionsType,
   CommentInputType,
@@ -41,9 +47,6 @@ import {
   BookDataType,
   ReturnedRoomTypeWithTimestamp
 } from './Types';
-
-import { ResultType } from 'src/redux/Authentication/Types';
-import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -132,34 +135,50 @@ class FirebaseAPI {
     addDoc(collection(this.db, 'rooms'), roomData);
   };
 
-  public addComment = async (commentData: CommentInputType, avatarPath?: string) => {
+  public addComment = async (
+    commentData: CommentInputType,
+    avatarPath?: string
+  ) => {
     const dataToSave = {
       ...commentData,
       avatar: '/images/avatar-user-1.webp',
       publicationDate: new Date(),
       likedBy: [],
-    }
+    };
     if (avatarPath && avatarPath.length > 0) {
       dataToSave.avatar = avatarPath;
     }
     addDoc(collection(this.db, 'comments'), dataToSave);
-  }
+  };
 
-  public getComments = (): Promise<Array<CommentOutputType> | FirebaseError> => getDocs(collection(this.db, 'comments'))
-    .then((result) => {
-      const comments: Array<CommentOutputType> = [];
-      result.forEach((res) => {
-        comments.push({ ...res.data(), commentID: res.ref.id } as CommentOutputType);
-      });
-      return comments;
-    }).catch((error: FirebaseError): FirebaseError => error);
+  public getComments = (): Promise<Array<CommentOutputType> | FirebaseError> =>
+    getDocs(collection(this.db, 'comments'))
+      .then((result) => {
+        const comments: Array<CommentOutputType> = [];
+        result.forEach((res) => {
+          comments.push({
+            ...res.data(),
+            commentID: res.ref.id,
+          } as CommentOutputType);
+        });
+        return comments;
+      })
+      .catch((error: FirebaseError): FirebaseError => error);
 
-  public getCommentsByUID = async (uid: string): Promise<Array<CommentOutputType> | FirebaseError> => {
-    const comments = query(collectionGroup(this.db, 'comments'), where('uid', '==', uid));
+  public getCommentsByUID = async (
+    uid: string
+  ): Promise<Array<CommentOutputType> | FirebaseError> => {
+    const comments = query(
+      collectionGroup(this.db, 'comments'),
+      where('uid', '==', uid)
+    );
     const querySnapshot = await getDocs(comments);
     const commentsByUID: Array<CommentOutputType> = [];
     querySnapshot.forEach((res) => {
-      commentsByUID.push({ ...res.data(), commentID: res.ref.id } as CommentOutputType);
+      commentsByUID.push({
+        ...res.data(),
+        commentID: res.ref.id,
+      } as CommentOutputType);
     });
     return commentsByUID;
   };
@@ -176,10 +195,14 @@ class FirebaseAPI {
         'No comment for this argument in database'
       );
     }
-    const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
+    const dataToSave: CommentOutputType =
+      commentSnap.data() as CommentOutputType;
     if (!dataToSave.likedBy.includes(uidWhoLikedComment)) {
       dataToSave.likedBy.push(uidWhoLikedComment);
-      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
+      await updateDoc(
+        doc(this.db, 'comments', commentSnap.ref.id),
+        dataToSave as CommentInputType
+      );
     }
     return true;
   };
@@ -196,10 +219,16 @@ class FirebaseAPI {
         'No comment for this argument in database'
       );
     }
-    const dataToSave: CommentOutputType = (commentSnap.data() as CommentOutputType);
+    const dataToSave: CommentOutputType =
+      commentSnap.data() as CommentOutputType;
     if (dataToSave.likedBy.includes(uidUserToRemove)) {
-      dataToSave.likedBy = dataToSave.likedBy.filter((elem) => elem !== uidUserToRemove);
-      await updateDoc(doc(this.db, 'comments', commentSnap.ref.id), (dataToSave as CommentInputType));
+      dataToSave.likedBy = dataToSave.likedBy.filter(
+        (elem) => elem !== uidUserToRemove
+      );
+      await updateDoc(
+        doc(this.db, 'comments', commentSnap.ref.id),
+        dataToSave as CommentInputType
+      );
     }
     return true;
   };
@@ -215,7 +244,10 @@ class FirebaseAPI {
     const querySnapshot = await getDocs(comments);
     const commentsByUID: Array<CommentOutputType> = [];
     querySnapshot.forEach((res) => {
-      commentsByUID.push({ ...res.data(), commentID: res.ref.id } as CommentOutputType);
+      commentsByUID.push({
+        ...res.data(),
+        commentID: res.ref.id,
+      } as CommentOutputType);
     });
     return commentsByUID;
   };
@@ -259,7 +291,7 @@ class FirebaseAPI {
     page: number,
     itemsOnPage: number
   ): Promise<UpdateRoomsResultType> => {
-    const data = { 
+    const data = {
       filters,
       page,
       itemsOnPage,
@@ -274,31 +306,99 @@ class FirebaseAPI {
     ).then((result) => result.json());
   };
 
-  public addBook = async (bookData: BookDataType): Promise<AddBookResultType> => {
-    return  await fetch(
+  public getBookingList = async (
+    uid = '',
+    field: 'dates' | 'totalCost' = 'dates',
+    direction: OrderByDirection = 'desc'
+  ) => {
+    const bookingDocs = await getDocs(
+      query(
+        collection(this.db, 'bookingList'),
+        where('userID', '==', uid),
+        orderBy(field, direction)
+      )
+    );
+
+    return bookingDocs.docs.map(
+      (d) => ({ ...d.data(), id: d.id } as BookingType)
+    );
+  };
+
+  public getBookedRooms = async (
+    booking: Pick<BookingType, 'roomID'>[] = []
+  ) => {
+    const roomIDs = [...new Set(booking.map((i) => i.roomID))];
+    const roomDocs = await Promise.all(
+      roomIDs.map((id) => getDoc(doc(this.db, 'rooms', id)))
+    );
+
+    return roomDocs.map((roomDoc, idx) => ({
+      ...(roomDoc.data() as RoomType),
+      roomID: roomIDs[idx],
+    }));
+  };
+
+  public cancelBooking = async (
+    bookingID: string,
+    roomID: string,
+    dates: [number, number]
+  ): Promise<CancelBookingResult> =>
+    deleteDoc(doc(this.db, 'bookingList', bookingID))
+      .then(() => {
+        const docRef = doc(this.db, 'rooms', roomID);
+        return getDoc(docRef)
+          .then((doc) => {
+            const room = doc.data() as ReturnedRoomTypeWithTimestamp;
+            const newBookedDays = room.bookedDays.filter(
+              (item) =>
+                item.seconds * 1000 < dates[0] || item.seconds * 1000 > dates[1]
+            );
+
+            return updateDoc(docRef, { bookedDays: newBookedDays })
+              .then(() => ({ canceled: true }))
+              .catch((e) => ({
+                canceled: false,
+                error: e,
+              }));
+          })
+          .catch((e) => ({
+            canceled: false,
+            error: e,
+          }));
+      })
+      .catch((e) => ({
+        canceled: false,
+        error: e,
+      }));
+
+  public addBook = async (
+    bookData: BookDataType
+  ): Promise<AddBookResultType> => {
+    return await fetch(
       'https://europe-west3-breaking-code-ebe74.cloudfunctions.net/addBook',
       {
         method: 'POST',
-        body: JSON.stringify(bookData)
+        body: JSON.stringify(bookData),
       }
-    )
-    .then((result) => {
-      return result.json()
-    })
+    ).then((result) => {
+      return result.json();
+    });
   };
-  
+
   public getCurrentRoom = async (
     id: string
   ): Promise<ReturnedRoomType | null> =>
     getDoc(doc(this.db, 'rooms', id)).then((room) => {
       if (room.data()) {
-        const result = ({ ...room.data(), roomID: room.id } as ReturnedRoomTypeWithTimestamp) 
-        const bookedDays = result.bookedDays.map((item) => item.seconds * 1000)
-        return {...result, bookedDays}  
+        const result = {
+          ...room.data(),
+          roomID: room.id,
+        } as ReturnedRoomTypeWithTimestamp;
+        const bookedDays = result.bookedDays.map((item) => item.seconds * 1000);
+        return { ...result, bookedDays };
       }
-      return null
-    }
-    );
+      return null;
+    });
 
   public roomIsBookedByUser({
     roomID,
@@ -400,7 +500,10 @@ class FirebaseAPI {
     const roomRef = doc(this.db, 'rooms', commentData.roomID);
     const roomSnap = await getDoc(roomRef);
     if (!roomSnap.exists()) {
-      return new FirebaseError('INVALID_ARGUMENT', 'No room for this argument in database');
+      return new FirebaseError(
+        'INVALID_ARGUMENT',
+        'No room for this argument in database'
+      );
     }
     const dataToSave: RoomType = (roomSnap.data() as RoomType);
     dataToSave.impressions[commentData.score] += 1;
@@ -408,7 +511,7 @@ class FirebaseAPI {
       impressions: dataToSave.impressions
     });
     return true;
-  }
+  };
 }
 
 const firebaseAPI = new FirebaseAPI();

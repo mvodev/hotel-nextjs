@@ -15,7 +15,7 @@ const SlidesSection = ({
         className={slideClasses}
         key={slide}
         src={`./images/${slide}`}
-        alt='room'
+        alt="room"
       />
     );
   });

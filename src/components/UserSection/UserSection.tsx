@@ -22,6 +22,8 @@ const UserSection = (): React.ReactElement => {
   useEffect(() => {
     window.addEventListener('resize', updateWidth);
     updateWidth();
+
+    return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
   const handleExitClick = (): void => {
@@ -66,8 +68,9 @@ const UserSection = (): React.ReactElement => {
             item: `${user.name} ${user.surname}`,
             link: '/',
             hiddenItems: [
-              { id: 1, item: 'Личный кабинет', link: '/user-account'},
-              { id: 2, item: 'Выход', link: '/', callback: handleExitClick },
+              { id: 1, item: 'Личный кабинет', link: '/user-account' },
+              { id: 2, item: 'Мои номера', link: '/myRooms' },
+              { id: 3, item: 'Выход', link: '/', callback: handleExitClick },
             ],
           }}
         />

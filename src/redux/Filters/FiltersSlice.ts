@@ -27,22 +27,13 @@ const filtersSlice = createSlice({
   initialState,
   reducers: {
     setFilters: (state, action: PayloadAction<Filters>) => {
-      const {
-        dates,
-        guests,
-        price,
-        rules,
-        availability,
-        conveniences,
-        additionalConvenience,
-      } = action.payload;
-      state.dates = dates;
-      state.guests = guests;
-      state.price = price;
-      state.rules = rules;
-      state.availability = availability;
-      state.conveniences = conveniences;
-      state.additionalConvenience = additionalConvenience;
+      state.dates = action.payload.dates;
+      state.guests = action.payload.guests;
+      state.price = action.payload.price;
+      state.rules = action.payload.rules;
+      state.availability = action.payload.availability;
+      state.conveniences = action.payload.conveniences;
+      state.additionalConvenience = action.payload.additionalConvenience;
     },
     setDates: (state, action: PayloadAction<Dates>) => {
       state.dates = action.payload;
@@ -99,10 +90,6 @@ export const {
   setAdditionalConvenience,
 } = filtersSlice.actions;
 
-export const filtersActions = {
-  update: { type: 'filters/update' },
-};
-
 export const selectFilters = (state: AppState): Filters => state.filters;
 
 export const selectDates = (state: AppState): [number, number] | [null, null] =>
@@ -115,13 +102,15 @@ export const selectPrice = (state: AppState): Price => state.filters.price;
 export const selectRules = (state: AppState): CheckboxButtonItemType[] =>
   Object.values(state.filters.rules);
 
-export const selectAvailability = (state: AppState): Required<CheckboxButtonItemType>[] =>
+export const selectAvailability = (
+  state: AppState
+): Required<CheckboxButtonItemType>[] =>
   Object.values(state.filters.availability);
 
 export const selectConveniences = (state: AppState): DropdownRoomValue[] => {
   const { bedrooms, beds, bathrooms } = state.filters.conveniences;
   return [bedrooms, beds, bathrooms];
-}
+};
 
 export const selectAdditionalConvenience = (
   state: AppState

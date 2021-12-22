@@ -15,8 +15,8 @@ const Carousel = ({
   useEffect(() => {
     timer.current = window.setTimeout(() => changeIndex(getNext()), delay);
 
-    return (() => clearTimeout(timer.current));
-  })
+    return () => clearTimeout(timer.current);
+  });
 
   return (
     <div className={styles.carousel}>

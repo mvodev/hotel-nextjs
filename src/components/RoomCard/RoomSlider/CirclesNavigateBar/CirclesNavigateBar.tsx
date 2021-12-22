@@ -24,8 +24,8 @@ const CirclesNavigateBar = ({
       <button
         key={circleIndex}
         className={circleClasses}
-        type='button'
-        aria-label='slide switch'
+        type="button"
+        aria-label="slide switch"
         onClick={(event: React.MouseEvent) =>
           handleButtonClick(event, circleIndex)
         }

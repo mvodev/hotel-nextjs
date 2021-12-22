@@ -10,6 +10,7 @@ import filters from './Filters/FiltersSlice';
 import Registration from './Registration/Registration';
 import roomCardsStatus from './RoomCardsStatus/RoomCardsStatusSlice';
 import signInCardReducer from './SignInCard/SignInCardReducer';
+import booking from './Booking/BookingSlice';
 import CurrentRoom from './CurrentRoom/CurrentRoom';
 import modalWindiw from './ModalWindow/ModalWindow';
 import currentRoomComments from './CurrentRoomComments/CurrentRoomComments';
@@ -31,6 +32,7 @@ const makeStore = () => {
       signInCardReducer,
       Registration,
       roomCardsStatus,
+      booking,
       CurrentRoom,
       modalWindiw,
       currentRoomComments,
