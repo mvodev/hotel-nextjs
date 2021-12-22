@@ -1,5 +1,6 @@
 import { Timestamp } from '@firebase/firestore';
 import { FirebaseError } from '@firebase/util';
+import { RoomsType } from 'src/redux/Rooms/Types';
 
 type UserDataType = {
   email: string;
@@ -12,11 +13,11 @@ type UserDataType = {
 };
 
 type ImpressionsType = {
-  perfect:number,
-  good:number,
-  satisfactory:number,
-  poor:number,
-}
+  perfect: number;
+  good: number;
+  satisfactory: number;
+  poor: number;
+};
 
 type UserType = {
   uid: string;
@@ -24,24 +25,24 @@ type UserType = {
 };
 
 type CommentOutputType = {
-  commentID:string;
+  commentID: string;
   uid: string;
-  roomID:string;
+  roomID: string;
   score: 'perfect' | 'good' | 'satisfactory' | 'poor';
-  text:string;
+  text: string;
   avatar: string;
   userName: string;
   publicationDate: Timestamp;
-  likedBy:Array<string>;
-}
+  likedBy: Array<string>;
+};
 
 type CommentInputType = {
   uid: string;
-  roomID:string;
+  roomID: string;
   score: 'perfect' | 'good' | 'satisfactory' | 'poor';
-  text:string;
+  text: string;
   userName: string;
-}
+};
 
 type RoomType = {
   gallery: string[];
@@ -84,6 +85,16 @@ type RoomType = {
   haveCrib: boolean;
   haveTV: boolean;
   haveShampoo: boolean;
+};
+
+type ReturnedRoomType = Omit<RoomType, 'bookedDays'> & {
+  roomID: string;
+  bookedDays: number[];
+};
+
+type ReturnedRoomTypeWithTimestamp = Omit<RoomsType, 'bookedDays'> & {
+  roomID: string;
+  bookedDays: Timestamp[];
 };
 
 type FiltersAPIType = {
@@ -170,50 +181,6 @@ type FiltersAPIType = {
   };
 };
 
-type ReturnedRoomType = {
-  roomID: string;
-  gallery: string[];
-  information: {
-    icon: string;
-    title: string;
-    description: string;
-  }[];
-  impressions: {
-    perfect: number;
-    good: number;
-    satisfactory: number;
-    poor: number;
-  };
-  rules: string[];
-  cancellation: string;
-  price: number;
-  roomNumber: number;
-  isLux: boolean;
-  bookedDays: number[];
-  maxGuests: number;
-  discount: number;
-  serviceFee: number;
-  additionalServicesFee: number;
-
-  maySmoking: boolean;
-  mayWithPets: boolean;
-  mayInviteGuests: boolean;
-
-  wideСorridor: boolean;
-  assistantForDisabled: boolean;
-
-  bedrooms: number;
-  beds: number;
-  bathrooms: number;
-
-  haveBreakfast: boolean;
-  haveDesk: boolean;
-  haveFeedingChair: boolean;
-  haveCrib: boolean;
-  haveTV: boolean;
-  haveShampoo: boolean;
-};
-
 type BookingType = {
   id: string;
   dates: Timestamp[];
@@ -223,58 +190,14 @@ type BookingType = {
 };
 
 type CancelBookingResult = {
-  canceled: boolean,
-  error?: FirebaseError
-};
-
-type ReturnedRoomTypeWithTimestamp = {
-  roomID: string;
-  gallery: string[];
-  information: {
-    icon: string;
-    title: string;
-    description: string;
-  }[];
-  impressions: {
-    perfect: number;
-    good: number;
-    satisfactory: number;
-    poor: number;
-  };
-  rules: string[];
-  cancellation: string;
-  price: number;
-  roomNumber: number;
-  isLux: boolean;
-  bookedDays: Timestamp[];
-  maxGuests: number;
-  discount: number;
-  serviceFee: number;
-  additionalServicesFee: number;
-
-  maySmoking: boolean;
-  mayWithPets: boolean;
-  mayInviteGuests: boolean;
-
-  wideСorridor: boolean;
-  assistantForDisabled: boolean;
-
-  bedrooms: number;
-  beds: number;
-  bathrooms: number;
-
-  haveBreakfast: boolean;
-  haveDesk: boolean;
-  haveFeedingChair: boolean;
-  haveCrib: boolean;
-  haveTV: boolean;
-  haveShampoo: boolean;
+  canceled: boolean;
+  error?: FirebaseError;
 };
 
 type BookDataType = {
-  userID: string,
-  roomID: string,
-  dates: [Date, Date],
+  userID: string;
+  roomID: string;
+  dates: [Date, Date];
 };
 
 export type {
