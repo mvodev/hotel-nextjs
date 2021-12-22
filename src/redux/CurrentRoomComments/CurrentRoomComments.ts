@@ -1,13 +1,13 @@
 import { AnyAction } from 'redux';
-import { CommentType } from 'src/firebaseAPI/Types';
+import { CommentInputType } from 'src/firebaseAPI/Types';
 import { SET_ROOM_COMMENTS } from './Types';
 
-const initialState: CommentType[] = [];
+const initialState: CommentInputType[] = [];
 
 const currentRoomComments = (
-  state: CommentType[] = initialState,
+  state: CommentInputType[] = initialState,
   action: AnyAction
-): CommentType[] => {
+): CommentInputType[] => {
   switch (action.type) {
     case SET_ROOM_COMMENTS:
       return JSON.parse(action.payload);
