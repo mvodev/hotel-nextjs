@@ -54,16 +54,16 @@ const Room = ({ id }: { id: string }): ReactElement => {
           <section className={styles.detailsDescription}>
             <article className={styles.detailsInfo}>
               <AboutRoom />
-              <Impressions header='Впечатления от номера' />
+              <Impressions header="Впечатления от номера" />
             </article>
             <article className={styles.detailsReview}>
-              <Reviews title='Отзывы посетителей номера' />
+              <Reviews title="Отзывы посетителей номера" />
             </article>
             <article className={styles.detailsRules}>
               <div className={styles.detailsRulesWrapper}>
-                <BulletList title='Правила' type='rules' />
+                <BulletList title="Правила" type="rules" />
               </div>
-              <BulletList title='Отмена' type='cancellation' />
+              <BulletList title="Отмена" type="cancellation" />
             </article>
           </section>
           <section className={styles.detailsForm}>
@@ -75,7 +75,7 @@ const Room = ({ id }: { id: string }): ReactElement => {
   );
 
   return (
-    <Layout title='room details' pageClass='details'>
+    <Layout title="room details" pageClass="details">
       {isLoading ? (
         <div className={styles.spinContainer}>
           <Spin />

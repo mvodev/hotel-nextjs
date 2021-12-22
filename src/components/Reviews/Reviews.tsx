@@ -38,7 +38,7 @@ const Reviews = ({ title }: { title: string }): ReactElement => {
             'отзывов',
           ])}`}
         </p>
-        <div className={style.reviewsContent}>{reviews}</div>{' '}
+        <div className={style.reviewsContent}>{reviews}</div>
       </>
     ) : (
       <div className={style.reviewsContent}>
