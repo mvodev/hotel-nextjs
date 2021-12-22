@@ -6,3 +6,11 @@
   min-height: 100vh;
   padding: 0 10px;
 }
+
+.spinContainer {
+  width: 100%;
+  display: flex;
+  padding: 50px 10px;
+  justify-content: center;
+  font-size: min(20vh, 130px);
+}

@@ -2,7 +2,7 @@ import { FirebaseError } from '@firebase/util';
 import { call, ForkEffect, put, takeLatest } from '@redux-saga/core/effects';
 import { AnyAction } from 'redux';
 import firebaseAPI from 'src/firebaseAPI/firebaseAPI';
-import { CommentType } from 'src/firebaseAPI/Types';
+import { CommentOutputType } from 'src/firebaseAPI/Types';
 import {
   ADD_LIKE,
   REMOVE_LIKE,
@@ -12,7 +12,7 @@ import {
 
 async function getRoomComments(
   roomID: string
-): Promise<Array<CommentType> | FirebaseError> {
+): Promise<Array<CommentOutputType> | FirebaseError> {
   const response = await firebaseAPI.getCommentsByRoomID(roomID);
 
   return response;
@@ -59,7 +59,7 @@ function* workerRemoveLikeSaga({ payload }: AnyAction) {
 }
 
 function* workerRoomCommentsToStateSaga({ payload }: AnyAction) {
-  const comments: Promise<Array<CommentType> | FirebaseError> = yield call(
+  const comments: Promise<Array<CommentOutputType> | FirebaseError> = yield call(
     getRoomComments,
     payload.roomID
   );
