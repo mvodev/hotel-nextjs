@@ -90,29 +90,31 @@ const BookingCard = (): JSX.Element => {
           />
         </div>
       </div>
-      <div className={style.container}>
-        <h3 className={style.subTitle}>Дата бронирования</h3>
-        <div className={style.bookingList}>
-          <ContextMenu
-            childs={bookingByNumber.map((b, idx) => (
-              <button
-                key={b.id}
-                type="button"
-                className={[
-                  style.bookingButton,
-                  b.id === activeBooking?.id ? style.bookingButtonSelected : '',
-                ].join(' ')}
-                onClick={() => dispatch(setActiveBooking(b))}
-                disabled={idx >= activeBookingSizeByNumber}
-              >
-                {[b.start, b.end]
-                  .map((d) => new Date(d).toLocaleDateString('ru-RU'))
-                  .join(' \u{2014} ')}
-              </button>
-            ))}
-          />
+      {bookingByNumber.length !== 0 &&
+        <div className={style.container}>
+          <h3 className={style.subTitle}>Дата бронирования</h3>
+          <div className={style.bookingList}>
+            <ContextMenu
+              childs={bookingByNumber.map((b, idx) => (
+                <button
+                  key={b.id}
+                  type="button"
+                  className={[
+                    style.bookingButton,
+                    b.id === activeBooking?.id ? style.bookingButtonSelected : '',
+                  ].join(' ')}
+                  onClick={() => dispatch(setActiveBooking(b))}
+                  disabled={idx >= activeBookingSizeByNumber}
+                >
+                  {[b.start, b.end]
+                    .map((d) => new Date(d).toLocaleDateString('ru-RU'))
+                    .join(' \u{2014} ')}
+                </button>
+              ))}
+            />
+          </div>
         </div>
-      </div>
+      }
       <Button
         text="отменить бронирование"
         theme="filled"

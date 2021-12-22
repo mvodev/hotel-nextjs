@@ -1,6 +1,5 @@
 import { Timestamp } from '@firebase/firestore';
 import { FirebaseError } from '@firebase/util';
-import { RoomsType } from 'src/redux/Rooms/Types';
 
 type UserDataType = {
   email: string;
@@ -97,7 +96,7 @@ type ReturnedRoomType = Omit<RoomType, 'bookedDays'> & {
   bookedDays: number[];
 };
 
-type ReturnedRoomTypeWithTimestamp = Omit<RoomsType, 'bookedDays'> & {
+type ReturnedRoomTypeWithTimestamp = Omit<RoomType, 'bookedDays'> & {
   roomID: string;
   bookedDays: Timestamp[];
 };
