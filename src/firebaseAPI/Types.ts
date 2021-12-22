@@ -22,6 +22,11 @@ type ImpressionsType = {
 type UserType = {
   uid: string;
   email: string | null;
+  name: string,
+  surname: string,
+  photo?: string,
+  gender: 'man' | 'woman',
+  birthday: Date
 };
 
 type CommentOutputType = {
@@ -194,6 +199,11 @@ type CancelBookingResult = {
   error?: FirebaseError;
 };
 
+type SignInResult = {
+  isSignOut: boolean,
+  error?: FirebaseError
+};
+
 type BookDataType = {
   userID: string;
   roomID: string;
@@ -213,4 +223,5 @@ export type {
   CommentOutputType,
   ImpressionsType,
   CommentInputType,
+  SignInResult,
 };

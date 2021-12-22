@@ -4,6 +4,7 @@ import SignInCardState, {
   SUBMIT_SIGN_IN_FORM,
   SET_ERROR,
   SET_AUTHENTICATION_SUCCESS,
+  SET_EMAIL,
 } from './Types';
 
 const initialState:SignInCardState = {
@@ -42,6 +43,11 @@ const signInCardReducer = (
       return {
         ...state,
         success: action.payload,
+      };
+    case SET_EMAIL:
+      return {
+        ...state,
+        email: action.payload,
       };
     default:
       return state;

@@ -5,6 +5,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   UserCredential,
+  updateEmail,
+  updatePassword,
+  User,
+  signOut,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -23,11 +27,11 @@ import {
   updateDoc,
   collectionGroup,
 } from 'firebase/firestore';
-
 import { FirebaseError } from '@firebase/util';
 import { AddBookResultType } from 'src/redux/AddBook/Types';
 import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
 import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
+import { ResultType } from 'src/redux/Authentication/Types';
 
 import {
   UserDataType,
@@ -40,6 +44,8 @@ import {
   ImpressionsType,
   CommentInputType,
   CommentOutputType,
+  BookDataType,
+  ReturnedRoomTypeWithTimestamp
 } from './Types';
 
 const firebaseConfig = {
@@ -83,12 +89,11 @@ class FirebaseAPI {
       })
       .then((userCredential: UserCredential) =>
         getDoc(doc(this.db, 'userData', userCredential.user.uid)).then(
-          (user) =>
-            ({
-              uid: userCredential.user.uid,
-              email: userCredential.user.email,
-              ...user.data(),
-            } as UserType)
+          (user) => ({
+            uid: userCredential.user.uid,
+            email: userCredential.user.email,
+            ...user.data(),
+          } as UserType)
         )
       )
       .catch((error: FirebaseError) => error);
@@ -100,15 +105,26 @@ class FirebaseAPI {
     signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential: UserCredential) =>
         getDoc(doc(this.db, 'userData', userCredential.user.uid)).then(
-          (userData) =>
-            ({
-              uid: userCredential.user.uid,
-              email: userCredential.user.email,
-              ...userData.data(),
-            } as UserType)
+          (userData) => ({
+            uid: userCredential.user.uid,
+            email: userCredential.user.email,
+            ...userData.data(),
+          } as UserType)
         )
       )
       .catch((error: FirebaseError): FirebaseError => error);
+
+  public signOut = async (): Promise<{
+    isSignOut: boolean,
+    error?: FirebaseError
+  }> => (
+    signOut(this.auth)
+      .then(() => ({ isSignOut: true }))
+      .catch((e) => ({
+        isSignOut: false,
+        error: e
+      }))
+  )
 
   public getFilters = (): Promise<FiltersAPIType | FirebaseError> =>
     getDoc(doc(this.db, 'filters', 'filters'))
@@ -383,9 +399,71 @@ class FirebaseAPI {
       return null;
     });
 
-  public addCommentAndUpdateImpressions = async (
-    commentData: CommentInputType
-  ): Promise<boolean | FirebaseError> => {
+  public changeUserName = async (
+    id: string,
+    userName: string
+  ): Promise<ResultType> => (
+    await updateDoc(doc(this.db, 'userData', id), { name: userName })
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+  )
+
+  public changeUserSurname = async (
+    id: string,
+    userSurname: string
+  ): Promise<ResultType> => (
+    await updateDoc(doc(this.db, 'userData', id), { surname: userSurname })
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+  )
+
+  public changeEmail = async (
+    userEmail: string
+  ): Promise<ResultType> => {
+    const user = this.auth.currentUser;
+    if (user !== null) {
+      return await updateEmail(user, userEmail)
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+    } else {
+      return { changed: false, error: 'Пользователь не авторизирован'}
+    }
+  }
+
+  public changePassword = async (
+    password: string
+  ): Promise<ResultType> => {
+    const user = this.auth.currentUser;
+    if (user !== null) {
+      return await updatePassword(user, password)
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+    } else {
+      return { changed: false, error: 'Пользователь не авторизирован'}
+    }
+  }
+
+  public addCommentAndUpdateImpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {
     this.addComment(commentData);
     const roomRef = doc(this.db, 'rooms', commentData.roomID);
     const roomSnap = await getDoc(roomRef);
