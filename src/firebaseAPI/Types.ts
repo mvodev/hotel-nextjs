@@ -23,7 +23,7 @@ type UserType = {
   email: string | null;
 };
 
-type CommentType = {
+type CommentOutputType = {
   commentID:string;
   uid: string;
   roomID:string;
@@ -40,10 +40,7 @@ type CommentInputType = {
   roomID:string;
   score: 'perfect' | 'good' | 'satisfactory' | 'poor';
   text:string;
-  avatar: string;
   userName: string;
-  publicationDate: Date;
-  likedBy:Array<string>;
 }
 
 type RoomType = {
@@ -290,7 +287,7 @@ export type {
   CancelBookingResult,
   BookDataType,
   ReturnedRoomTypeWithTimestamp,
-  CommentType,
+  CommentOutputType,
   ImpressionsType,
   CommentInputType,
 };

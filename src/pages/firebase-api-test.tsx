@@ -20,4 +20,30 @@ const Index = (): ReactElement => {
   return <Layout title='landing page' pageClass='landing'></Layout>;
 };
 
+const Index = (): ReactElement => (
+  // eslint-disable-next-line react/jsx-no-comment-textnodes
+  <Layout title='landing page' pageClass='landing'>
+    // eslint-disable-next-line no-console
+    {console.log(
+    //   firebaseAPI.addCommentAndUpdateImpressions({
+    //     uid:'',
+    //     roomID:'1GIK6z75Unitldt5NBiH',
+    //     score: 'perfect',
+    //     text:'addCommentAndUpdateInpressions test',
+    //     userName: 'addCommentAndUpdateInpressions test',
+    //   }
+    // )
+    //    firebaseAPI.getComments()
+    // firebaseAPI.removeLikeFromComment('OIrngLITsgiMDXVT9pOc','0n0juvZREvSNDNYJvS2rQjcf3Ei1')
+    firebaseAPI.addComment({
+      uid:'test',
+      roomID:'test',
+      score: 'perfect',
+      text:'test',
+      userName:'test',
+    }))  
+  }
+  </Layout>
+);
+
 export default Index;
