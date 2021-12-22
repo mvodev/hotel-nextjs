@@ -5,6 +5,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   UserCredential,
+  updateEmail,
+  updatePassword,
+  User,
+  signOut,
 } from 'firebase/auth';
 import {
   getFirestore,
@@ -22,7 +26,6 @@ import {
   orderBy,
   updateDoc,
 } from 'firebase/firestore';
-
 import { FirebaseError } from '@firebase/util';
 import { AddBookResultType } from 'src/redux/AddBook/Types';
 import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
@@ -34,9 +37,13 @@ import {
   ReturnedRoomType,
   ImpressionsType,
   CommentInputType,
-  CommentOutputType
+  CommentOutputType,
+  BookDataType,
+  ReturnedRoomTypeWithTimestamp
 } from './Types';
 
+import { ResultType } from 'src/redux/Authentication/Types';
+import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBCKidrAaH_xAzc-QdlLrY-hkUHqJeijIA',
@@ -83,7 +90,7 @@ class FirebaseAPI {
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             ...user.data(),
-          })
+          } as UserType)
         )
       )
       .catch((error: FirebaseError) => error);
@@ -99,10 +106,22 @@ class FirebaseAPI {
             uid: userCredential.user.uid,
             email: userCredential.user.email,
             ...userData.data(),
-          })
+          } as UserType)
         )
       )
       .catch((error: FirebaseError): FirebaseError => error);
+
+  public signOut = async (): Promise<{
+    isSignOut: boolean,
+    error?: FirebaseError
+  }> => (
+    signOut(this.auth)
+      .then(() => ({ isSignOut: true }))
+      .catch((e) => ({
+        isSignOut: false,
+        error: e
+      }))
+  )
 
   public getFilters = (): Promise<FiltersAPIType | FirebaseError> =>
     getDoc(doc(this.db, 'filters', 'filters'))
@@ -310,6 +329,70 @@ class FirebaseAPI {
       });
       return isBooked;
     });
+  }
+
+  public changeUserName = async (
+    id: string,
+    userName: string
+  ): Promise<ResultType> => (
+    await updateDoc(doc(this.db, 'userData', id), { name: userName })
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+  )
+
+  public changeUserSurname = async (
+    id: string,
+    userSurname: string
+  ): Promise<ResultType> => (
+    await updateDoc(doc(this.db, 'userData', id), { surname: userSurname })
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+  )
+
+  public changeEmail = async (
+    userEmail: string
+  ): Promise<ResultType> => {
+    const user = this.auth.currentUser;
+    if (user !== null) {
+      return await updateEmail(user, userEmail)
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+    } else {
+      return { changed: false, error: 'Пользователь не авторизован'}
+    }
+  }
+
+  public changePassword = async (
+    password: string
+  ): Promise<ResultType> => {
+    const user = this.auth.currentUser;
+    if (user !== null) {
+      return await updatePassword(user, password)
+      .then(() => ({
+        changed: true
+      }))
+      .catch((e) => ({
+        changed: false,
+        error: e
+      }))
+    } else {
+      return { changed: false, error: 'Пользователь не авторизован'}
+    }
   }
 
   public addCommentAndUpdateImpressions = async (commentData: CommentInputType): Promise<boolean | FirebaseError> => {

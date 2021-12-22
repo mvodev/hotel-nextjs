@@ -1,0 +1,36 @@
+@import '@styles/mixins';
+
+.userAccountCard {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  background: white;
+
+  .title {
+    @include h1();
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fieldTitle {
+    @include h3();
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+
+  .buttonContainer {
+    margin-top: 25px;
+    margin-bottom: 0;
+  }
+
+  .error {
+    color: red;
+  }
+}
