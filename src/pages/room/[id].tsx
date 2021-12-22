@@ -5,7 +5,6 @@ import Reviews from 'src/components/Reviews/Reviews';
 import Impressions from 'src/components/Impressions/Impressions';
 import AboutRoom from 'src/components/AboutRoom/AboutRoom';
 import TotalCostCard from 'src/components/TotalCostCard/TotalCostCard';
-import totalCostCardDefaultProps from 'src/components/TotalCostCard/DefaultProps';
 import BulletList from 'src/components/BulletList/BulletList';
 import styles from '@styles/pages/details.module.scss';
 import Layout from 'src/components/Layout';
@@ -14,7 +13,7 @@ import { GET_CURRENT_ROOM } from 'src/redux/CurrentRoom/Types';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from 'src/redux/Store';
 import { NextPageContext } from 'next';
-import Preloader from 'src/components/Preloader/Preloader';
+import Spin from 'src/components/Spin/Spin';
 import ModalWindow from 'src/components/ModalWindow/ModalWindow';
 import { switchModelWindow } from 'src/redux/ModalWindow/ModalWindow';
 
@@ -24,21 +23,22 @@ const Room = ({ id }: { id: string }): ReactElement => {
   const [isDataRequested, setDataRequested] = useState(false);
   
   const roomID = useSelector((state: AppState) => state.CurrentRoom.roomID);
+
   const isLoading = useSelector(
     (state: AppState) => state.CurrentRoom.isLoading
   );
   const modalWindow = useSelector((state: AppState) => state.modalWindiw);
 
-  if (!isDataRequested) {
-    dispatch({ type: GET_CURRENT_ROOM, payload: id });
-    setDataRequested(true);
-  }
-
   useEffect(() => {
+    if (!isDataRequested) {
+      dispatch({ type: GET_CURRENT_ROOM, payload: id });
+      setDataRequested(true);
+    }
+
     if (!isLoading && roomID === '') {
       router.push('/404');
     }
-  });
+  }, [isDataRequested, isLoading, roomID, dispatch, id, router]);
 
   const pageContent = (
     <>
@@ -76,7 +76,13 @@ const Room = ({ id }: { id: string }): ReactElement => {
 
   return (
     <Layout title="room details" pageClass="details">
-      {isLoading ? <Preloader /> : pageContent}
+      {isLoading ? (
+        <div className={styles.spinContainer}>
+          <Spin />
+        </div>
+      ) : (
+        pageContent
+      )}
     </Layout>
   );
 };

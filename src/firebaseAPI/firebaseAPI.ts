@@ -24,13 +24,13 @@ import {
   orderBy,
   OrderByDirection,
   deleteDoc,
+  Timestamp,
   updateDoc,
   collectionGroup,
 } from 'firebase/firestore';
 import { FirebaseError } from '@firebase/util';
 import { AddBookResultType } from 'src/redux/AddBook/Types';
 import { UpdateRoomsResultType } from 'src/redux/Rooms/Types';
-import { Timestamp } from '@grpc/grpc-js/build/src/generated/google/protobuf/Timestamp';
 import { ResultType } from 'src/redux/Authentication/Types';
 
 import {
@@ -238,7 +238,8 @@ class FirebaseAPI {
   ): Promise<Array<CommentOutputType> | FirebaseError> => {
     const comments = query(
       collectionGroup(this.db, 'comments'),
-      where('roomID', '==', roomID)
+      where('roomID', '==', roomID),
+      orderBy('publicationDate', 'desc')
     );
     const querySnapshot = await getDocs(comments);
     const commentsByUID: Array<CommentOutputType> = [];
@@ -399,6 +400,37 @@ class FirebaseAPI {
       return null;
     });
 
+  public roomIsBookedByUser({
+    roomID,
+    uid,
+  }: {
+    roomID: string;
+    uid: string;
+  }): Promise<boolean> {
+    const bookingQuery = query(
+      collectionGroup(this.db, 'bookingList'),
+      where('userID', '==', uid),
+      where('roomID', '==', roomID)
+    );
+
+    return getDocs(bookingQuery).then((result) => {
+      if (uid === null) {
+        return false;
+      }
+
+      const currentDate = Math.floor(Date.now() / 1000);
+      const isBooked = result.docs.some((item) => {
+        const bookingDates: Timestamp[] = item.data().dates;
+        return bookingDates.length > 0
+          ? bookingDates.some((date: Timestamp) =>
+            date ? date.seconds < currentDate : false
+          )
+          : false;
+      });
+      return isBooked;
+    });
+  }
+
   public changeUserName = async (
     id: string,
     userName: string
@@ -441,7 +473,7 @@ class FirebaseAPI {
         error: e
       }))
     } else {
-      return { changed: false, error: 'Пользователь не авторизирован'}
+      return { changed: false, error: 'Пользователь не авторизован'}
     }
   }
 
@@ -459,7 +491,7 @@ class FirebaseAPI {
         error: e
       }))
     } else {
-      return { changed: false, error: 'Пользователь не авторизирован'}
+      return { changed: false, error: 'Пользователь не авторизован'}
     }
   }
 
@@ -473,10 +505,10 @@ class FirebaseAPI {
         'No room for this argument in database'
       );
     }
-    const dataToSave: RoomType = roomSnap.data() as RoomType;
+    const dataToSave: RoomType = (roomSnap.data() as RoomType);
     dataToSave.impressions[commentData.score] += 1;
     await updateDoc(doc(this.db, 'rooms', roomSnap.ref.id), {
-      impressions: dataToSave.impressions,
+      impressions: dataToSave.impressions
     });
     return true;
   };

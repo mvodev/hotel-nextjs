@@ -26,6 +26,7 @@ import {
   watchRemoveLikeSaga,
   watchRoomCommentsToStateSaga,
 } from './CurrentRoomComments/CurrentRoomCommentsSagas';
+import watchReviewSubmitSaga from './Review/ReviewSaga';
 
 function* startSaga(
   saga: Saga<any>
@@ -56,6 +57,7 @@ function* RootSaga(): Generator<any, any, any> {
     watchRemoveLikeSaga,
     watchRoomCommentsToStateSaga,
     watcCancelBooking,
+    watchReviewSubmitSaga,
     watchChangeUserName, 
     watchChangeUserSurname,
     watchChangePassword,
