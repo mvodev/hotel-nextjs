@@ -2,21 +2,21 @@ import { Timestamp } from '@firebase/firestore';
 import { FirebaseError } from '@firebase/util';
 
 type UserDataType = {
-  email: string,
-  password: string,
-  name: string,
-  surname: string,
-  photo?: string,
-  gender: 'man' | 'woman',
-  birthday: Date
-}
+  email: string;
+  password: string;
+  name: string;
+  surname: string;
+  photo?: string;
+  gender: 'man' | 'woman';
+  birthday: Date;
+};
 
 type ImpressionsType = {
-  perfect:number,
-  good:number,
-  satisfactory:number,
-  poor:number,
-}
+  perfect: number;
+  good: number;
+  satisfactory: number;
+  poor: number;
+};
 
 type UserType = {
   uid: string;
@@ -29,24 +29,24 @@ type UserType = {
 };
 
 type CommentOutputType = {
-  commentID:string;
+  commentID: string;
   uid: string;
-  roomID:string;
+  roomID: string;
   score: 'perfect' | 'good' | 'satisfactory' | 'poor';
-  text:string;
+  text: string;
   avatar: string;
   userName: string;
   publicationDate: Timestamp;
-  likedBy:Array<string>;
-}
+  likedBy: Array<string>;
+};
 
 type CommentInputType = {
   uid: string;
-  roomID:string;
+  roomID: string;
   score: 'perfect' | 'good' | 'satisfactory' | 'poor';
-  text:string;
+  text: string;
   userName: string;
-}
+};
 
 type RoomType = {
   gallery: string[];
@@ -89,6 +89,16 @@ type RoomType = {
   haveCrib: boolean;
   haveTV: boolean;
   haveShampoo: boolean;
+};
+
+type ReturnedRoomType = Omit<RoomType, 'bookedDays'> & {
+  roomID: string;
+  bookedDays: number[];
+};
+
+type ReturnedRoomTypeWithTimestamp = Omit<RoomType, 'bookedDays'> & {
+  roomID: string;
+  bookedDays: Timestamp[];
 };
 
 type FiltersAPIType = {
@@ -175,104 +185,29 @@ type FiltersAPIType = {
   };
 };
 
-type ReturnedRoomType = {
+type BookingType = {
+  id: string;
+  dates: Timestamp[];
+  userID: string;
   roomID: string;
-  gallery: string[];
-  information: {
-    icon: string;
-    title: string;
-    description: string;
-  }[];
-  impressions: {
-    perfect: number;
-    good: number;
-    satisfactory: number;
-    poor: number;
-  };
-  rules: string[];
-  cancellation: string;
-  price: number;
-  roomNumber: number;
-  isLux: boolean;
-  bookedDays: number[];
-  maxGuests: number;
-  discount: number;
-  serviceFee: number;
-  additionalServicesFee: number;
+  totalCost: number;
+};
 
-  maySmoking: boolean;
-  mayWithPets: boolean;
-  mayInviteGuests: boolean;
-
-  wideСorridor: boolean;
-  assistantForDisabled: boolean;
-
-  bedrooms: number;
-  beds: number;
-  bathrooms: number;
-
-  haveBreakfast: boolean;
-  haveDesk: boolean;
-  haveFeedingChair: boolean;
-  haveCrib: boolean;
-  haveTV: boolean;
-  haveShampoo: boolean;
+type CancelBookingResult = {
+  canceled: boolean;
+  error?: FirebaseError;
 };
 
 type SignInResult = {
   isSignOut: boolean,
   error?: FirebaseError
-}
-
-type ReturnedRoomTypeWithTimestamp = {
-  roomID: string;
-  gallery: string[];
-  information: {
-    icon: string;
-    title: string;
-    description: string;
-  }[];
-  impressions: {
-    perfect: number;
-    good: number;
-    satisfactory: number;
-    poor: number;
-  };
-  rules: string[];
-  cancellation: string;
-  price: number;
-  roomNumber: number;
-  isLux: boolean;
-  bookedDays: Timestamp[];
-  maxGuests: number;
-  discount: number;
-  serviceFee: number;
-  additionalServicesFee: number;
-
-  maySmoking: boolean;
-  mayWithPets: boolean;
-  mayInviteGuests: boolean;
-
-  wideСorridor: boolean;
-  assistantForDisabled: boolean;
-
-  bedrooms: number;
-  beds: number;
-  bathrooms: number;
-
-  haveBreakfast: boolean;
-  haveDesk: boolean;
-  haveFeedingChair: boolean;
-  haveCrib: boolean;
-  haveTV: boolean;
-  haveShampoo: boolean;
-}
+};
 
 type BookDataType = {
-  userID: string,
-  roomID: string,
-  dates: [Date, Date],
-}
+  userID: string;
+  roomID: string;
+  dates: [Date, Date];
+};
 
 export type {
   UserDataType,
@@ -280,10 +215,12 @@ export type {
   RoomType,
   FiltersAPIType,
   ReturnedRoomType,
+  BookingType,
+  CancelBookingResult,
+  BookDataType,
+  ReturnedRoomTypeWithTimestamp,
   CommentOutputType,
   ImpressionsType,
   CommentInputType,
   SignInResult,
-  ReturnedRoomTypeWithTimestamp,
-  BookDataType
 };

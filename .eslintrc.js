@@ -41,6 +41,7 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": "off",
     "react/prop-types": "off",
     "react/jsx-props-no-spreading": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "@typescript-eslint/no-throw-literal": "off",
   },
 };

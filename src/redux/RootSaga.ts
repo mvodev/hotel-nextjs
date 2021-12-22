@@ -14,6 +14,8 @@ import watchRegistrationSubmitSaga from './Registration/RegistrationSagas';
 import watchSubmitSignInSaga from './SignInCard/AuthenticationSaga';
 import { watchUpdateRooms } from './Rooms/RoomsSaga';
 import appWatcher from './App/AppSaga';
+import watchBookingUpdate from './Booking/BookingSaga';
+import watcCancelBooking from './CancelBooking/CancelBookingSaga';
 import { watchAddBook } from './AddBook/AddBookSaga';
 import {
   watchGetCurrentRoomSaga,
@@ -47,12 +49,14 @@ function* RootSaga(): Generator<any, any, any> {
     watchRegistrationSubmitSaga,
     watchAuthenticationSaga,
     watchUserLogOutSaga,
+    watchBookingUpdate,
     watchAddBook,
     watchGetCurrentRoomSaga,
     watchCheckBookingBloked,
     watchAddLikeSaga,
     watchRemoveLikeSaga,
     watchRoomCommentsToStateSaga,
+    watcCancelBooking,
     watchReviewSubmitSaga,
     watchChangeUserName, 
     watchChangeUserSurname,

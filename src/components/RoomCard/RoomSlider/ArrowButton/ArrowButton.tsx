@@ -19,7 +19,7 @@ const ArrowButton = ({
 
   return (
     <button
-      type='button'
+      type="button"
       className={styles.arrowButton}
       onClick={handleArrowButtonClick}
       tabIndex={-1}
