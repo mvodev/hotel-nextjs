@@ -45,9 +45,9 @@ const Search = (): JSX.Element => {
           </h1>
           <div className={styles.searchResult}>
             {searchItems}
-            <div className={styles.searchPagination}>
+          </div>
+          <div className={styles.searchPagination}>
               <Pagination />
-            </div>
           </div>
         </div>
       </section>
