@@ -173,7 +173,7 @@ const MyRooms = (): JSX.Element => {
                 className={style.contextMenuItem}
                 onClick={() => {
                   isTransition.current = true;
-                  router.push(`/room/${activeRoom.roomID}`);
+                  router.push(`/room/${activeID.current}`);
                 }}
               >
                 Детали номера
